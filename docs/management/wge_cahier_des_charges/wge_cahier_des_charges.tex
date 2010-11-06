@@ -1,0 +1,44 @@
+\documentclass[a4paper,10pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+
+% Title Page
+\title{Web Game Engine - Cahier des charges}
+\author{Ilyas Boutebal \and Maxime Colin \and Adrian Gaudebert \and Youness Hamri \and Van-Duc Nguyen}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Contexte}
+
+\section{Le Jeu vidéo}
+Le marché du jeu vidéo s’est beaucoup développé depuis l’arrivée de l’ancêtre Pong ou du célèbre Tetris. On joue aujourd’hui à des jeux de plus en plus beaux, demandant de plus en plus de ressources à nos machines. Mais on voit aussi d’autres utilisations du jeu vidéo arriver : le Serious Gaming, par exemple, est une branche en pleine expansion en ce moment. Le Social Gaming également, représenté activement par les nombreux jeux basés sur Facebook et ses possibilités en terme de diffusion.
+
+Si on s’essayait à une catégorisation rapide des jeux vidéo, voici ce qui pourrait ressortir : les jeux consoles, les jeux PC “classiques”, les jeux en ligne (MMO en tous genres compris). Dans cette dernière catégorie, on trouve beaucoup de types de jeux différents : les MMO dans le genre de World of Warcraft, les jeux multijoueur comme Counter Strike ou Team Fortress, les modes multi des jeux principalement solo, et les jeux par navigateur.
+
+\section{Les jeux par navigateur}
+Le jeu par navigateur, ou Browser Game en anglais, se joue par définition dans un navigateur Internet. On retrouve donc dans cette catégorie les jeux “Facebook” cités plus haut, la majorité des jeux en Flash, mais également un très grand nombre de jeux que nous appellerons les Jeux Web, puisqu’ils se basent sur les technologies du Web ouvert. Quelques exemples de jeux web relativement connus : Ogame, Travian, ou le français Hordes.
+
+Ces trois exemples ne sont cependant pas représentatifs de la diversité que l’on trouve dans les jeux web. Les jeux d’élevage virtuel, par exemple, sont extrêmement nombreux sur le Web. À quoi est due cette profusion de jeux web ? Majoritairement à la simplicité d’accès du développement web. Faire un jeu web, en soit, c’est développer un site web. Or, avec des technologies très répandues comme PHP, HTML et CSS, avec toutes les ressources que l’on trouve autour de ces dernières (il suffit de regarder les tutoriels du Site du Zéro pour s’en rendre compte), il est très simple pour une personne un peu motivée de créer son propre jeu web.
+
+Malheureusement, s’il est simple de créer un jeu web “basique”, les développeurs sont rapidement limités par les technologies qu’ils utilisent. Il est quasiment impossible de faire du temps réel avec PHP, le couple HTML / CSS n’est pas adapté à l’affichage d’effets spéciaux ou d’animations complexes, et si l’arrivée récente de frameworks JavaScript comme jQuery a permis de repousser un peu ces limites techniques, cela ne résout pas le problème.
+
+\section{Les technologies du web}
+Il existe une solution simple aux limitations techniques actuelles des technologies web : se tourner vers le futur et utiliser de nouvelles technologies, pas encore éprouvées, mais qui permettent d’aller beaucoup plus loin dans la création de nos jeux web.
+
+HTML 5, la nouvelle mouture du langage de description des pages web, apporte au développeur un très grand nombre de fonctionnalités clés : le temps réel dans le navigateur avec les WebSockets, les manipulations graphiques avancées avec le SVG et les Canvas, la vidéo et le son avec Video et Audio, et bien d’autres.
+
+La version 3 du langage CSS offre elle aussi d’alléchantes nouveautés : les animations, les transitions, les polices particulières, ainsi que tous les effets graphiques amplement simplifiés.
+
+\chapter{Le projet}
+
+\section{Objectifs}
+Toutes les avancées actuelles du web ouvrent indéniablement les portes à des jeux de plus en plus impressionnants, de plus en plus profonds, le tout se passant dans un navigateur ! Il faudra cependant du temps pour que les développeurs maîtrisent tout ceci, pour que des outils facilitant l’utilisation de ces technologies apparaissent, et donc pour que l’accès à toutes ces possibilités pour nos jeux devienne simple.
+
+Voici donc où se place ce projet : notre objectif est de fournir un outil complet, permettant de créer de façon simple et rapide un jeu profitant des dernières avancées en matière de technologie web.
+
+\end{document}          
