@@ -58,7 +58,39 @@ A compléter par Youness
 
 \subsection{Serveur}
 
-A compléter par Duc
+Le serveur sera la partie du moteur qui fera tourner les parties et permettra la communication et les interraction entre les joueurs. Il aura pour rôle de contrôler les parties, lier les clients et gérer leur actions. Il aura également le rôle d'arbitre dans une partie. 
+
+Le serveur sera séparer en deux grandes parties : Une partie Noyau et une partie Monde.
+
+>Diagramme6.png<
+
+Package Noyau
+
+La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendant du type de jeu implémenté. De plus, ce noyau doit permettre les interactions entre les règles et les modules de la partie Monde, quels que soient ces derniers. 
+
+La sous-partie communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
+
+La sous-partie protocole sera charger d'adapter les messages. C'est à dire encapsuler nos message dans le protocole choisi pour l'envoie de message et extraire le contenu d'un message reçu. Il fera le lien entre les messages sur le réseaux et les messages comprehensibles par le client et le serveur.
+
+La sous-partie règles sera charger de stocker et traiter les règles du jeu. Elle contiendra des fonctionnalités permetant de créer une base de règles. Ces règle pourront être ajouté et supprimé individuellement ou charger à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client.
+
+
+
+Package Monde
+
+La partie Monde est totalement dynamique : les modules qu'elle contient sont fonction du jeu à développer, et peuvent donc changer du tout au tout. Les modules de cette partie doivent donc pouvoir être appelés depuis le noyau sans avoir à faire autre chose que de la configuration. 
+
+Les modules présents dans cette partie implémentent des fonctionnalités du jeu. Ceux choisis ici sont donc ceux qui serviront, a priori, au jeu Fightly.
+
+Cette partie aura des fonctionnalités permettant de gérer une partie. Ces fonctionnalité concerneront le chargement et la sauvegarde d'une partie. Elle gera également la connexion et la déconnexion à une partie.
+
+Une sous-partie sera dédié à la gestion de la carte. Elle ne disposera que d'une seule fonctionnalité permettant de charger la carte à partir d'un fichier.
+
+Le serveur disposera de fonctionnalités pour gérer les unités des joueurs. Cette sous-partie permettra de créer, supprimer ou déplacer les unités.
+
+Le serveur devra également gérer les joueurs. Une sous-partie permmettra de créer et supprimer des joueurs dans une partie. Elle devra également gerer l'abandon d'un joueur durant une partie. C'est à dire retirer le joueur et ses unités de la partie.
+
+
 
 \subsection{Client}
 
