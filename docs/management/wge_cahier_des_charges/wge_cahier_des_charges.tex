@@ -46,12 +46,28 @@ A compléter par Maxime
 \section{Spécifications}
 
 \subsection{Fightly}
-Fightly est un jeu au tour par tour, par navigateur sur internet.
-Le jeu se déroule sur une carte composée de cases contigues, les joueurs se connectent, composent leurs unitées de soldats, les placent sur la carte et s'affrontent chacun son tour en manipulant et faisant déplacer leurs unités.
-Le but du projet est de fournir un moteur de jeu qui permet d'implémenter les fonctionnalités de tout ce qui est en lien avec le déroulement du jeu. A savoir, la gestion de la communication, des parties, des règles.
-Par ailleurs, il y aura un serveur dedié à l'authentification et la gestion des graphismes et dont on aura pas la charge. 
+Le projet dans sa version initiale consistait à développer
+un jeu au tour par tour, par navigateur sur internet appelé Fightly, mais plusieurs 
+raisons nous ont amener à ne pas prendre en compte des parties du jeu
+que nous avons estimé sortant du cadre du Master,
+notamment les aspects graphiques, vidéo, audio, forum de discutions et 
+l'initialisation des parties. Le projet est donc réduit à l'essentiel, 
+c'est à dire fournir un moteur de jeu qui permet d'implémenter les 
+fonctionnalités de tout ce qui est en lien avec le déroulement du jeu. 
+Autrement dit, on se limitera à la mécanique du jeu.\smallskip \smallskip
 
-Pour plus de détails sur Fightly, voici le lien disponible sur le forum du jeu \lien{http://fightly-dev-lqbs.fr/downloads/fightly_game-concept-document_2010-07-23.pdf}
+Fightly est un projet de jeu qui se déroule sur une carte choisie 
+au hasard parmi un ensemble de cartes précrées. Les cartes sont 
+composées de cases hexagonales contigues où chacune possède un type de terrain
+particulier ralentissant ainsi ou intérdisant les déplacement sur certains 
+types de terrains. 
+Les joueurs choisisent leurs unités de combats composées de fantassins, 
+archers et chevaliers ayant chacuns des caractéristiques et des capacités différentes.
+ils les placent sur la carte, et s'affrontent chacun son tour en les faisant 
+déplacer et attaquer suivant des règles de portée bien précises.
+
+Pour plus de détails sur Fightly, voici le lien disponible sur le forum du jeu.
+
 \subsection{Serveur}
 
 A compléter par Duc
