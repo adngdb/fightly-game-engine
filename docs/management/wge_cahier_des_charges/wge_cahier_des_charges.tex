@@ -41,11 +41,11 @@
 
       Toutes les avancées actuelles du web ouvrent indéniablement les portes à des jeux de plus en plus impressionnants, de plus en plus profonds, le tout se passant dans un navigateur ! Il faudra cependant du temps pour que les développeurs maîtrisent tout ceci, pour que des outils facilitant l’utilisation de ces technologies apparaissent, et donc pour que l’accès à toutes ces possibilités pour nos jeux devienne simple.
 
-    \subsection{Fightly}
+    \section{Fightly}
 
-      Le projet dans sa version initiale consistait à développer un jeu au tour par tour, par navigateur sur internet appelé Fightly, mais plusieurs raisons nous ont amener à ne pas prendre en compte des parties du jeu que nous avons estimé sortant du cadre du Master, notamment les aspects graphiques, vidéo, audio, forum de discutions et l'initialisation des parties. Le projet est donc réduit à l'essentiel, c'est à dire fournir un moteur de jeu qui permet d'implémenter les fonctionnalités de tout ce qui est en lien avec le déroulement du jeu. Autrement dit, on se limitera à la mécanique du jeu.
-
-      Fightly est un projet de jeu qui se déroule sur une carte choisie au hasard parmi un ensemble de cartes précrées. Les cartes sont composées de cases hexagonales contigues où chacune possède un type de terrain particulier ralentissant ainsi ou intérdisant les déplacement sur certains types de terrains. Les joueurs choisisent leurs unités de combats composées de fantassins, archers et chevaliers ayant chacuns des caractéristiques et des capacités différentes. Ils les placent sur la carte, et s'affrontent chacun son tour en les faisant déplacer et attaquer suivant des règles de portée bien précises.
+      L'idée d'origine de ce projet était de créer un jeu de stratégie au tour par tour, jouable par navigateur et profitant des dernières avancées technologiques dont nous avons parlé précédemment. Ce jeu s'appelle Fightly. Cependant, ce projet d'origine a été découpé en deux parties : on ne cherche plus, dans le projet tel que nous le présentons dans ce document, à développer le jeu Fightly, mais à créer un outil permettant de développer Fightly plus facilement. Avant de présenter nos objectifs principaux, il nous parait donc important de présenter rapidement le jeu Fightly, puisqu'il constitue un objectif secondaire. 
+      
+      Fightly est un jeu de stratégie au tour par tour dans lequel des joueurs s'affrontent en manipulant des unités. Les parties se déroulent sur des cartes à cases hexagonales, les unités s'y déplaçant en fonction du terrain et des stratégies des joueurs. Les joueurs choisissent au début de la partie leurs unités, composées de fantassins, archers ou chevaliers, chacunes ayant des caractéristiques et des capacités différentes. Le jeu se déroule en temps et en tours limités, le gagnant étant le dernier joueur en vie, ou à défaut celui ayant le plus de points. 
 
 
 
@@ -53,7 +53,7 @@
 
     \section{Objectifs}
 
-      Voici donc où se place ce projet : notre objectif est de fournir un outil complet, permettant de créer de façon simple et rapide un jeu profitant des dernières avancées en matière de technologie web. Il constitura un ensemble d'outils qui fournissent un cadre de développement et des fonctionnalités permettant d'implémenter tout ou partie d'un jeu.
+      Voici donc où se place ce projet : notre objectif est de fournir un outil complet, permettant de créer de façon simple et rapide un jeu profitant des dernières avancées en matière de technologie web. Il constituera un ensemble d'outils qui fournissent un cadre de développement et des fonctionnalités permettant d'implémenter tout ou partie d'un jeu.
 
       Le moteur sera prioritairement conçu pour des jeux de stratégie au tour par tour. On cherchera à le rendre aussi générique que possible, afin de permettre une grande diversité dans les types de jeux développables avec notre outil. On veillera aussi à faciliter l'extensibilité du projet, toujours dans le but d'offrir la possibilité d'en étendre facilement les fonctionnalités.
 
@@ -76,7 +76,9 @@
 
       Les diagrammes représentant les concepts de ces jeux, ains que des informations complémentaires, sont disponibles dans l'Annexe A. De ces jeux, nous avons donc trouvé un ensemble de concepts qui reviennent, et composent donc a priori la base de tout jeu de stratégie au tour par tour. Certains de ces éléments n'ont pas forcément le même nom selon le jeu, et des différences au niveau de l'implémentation peuvent apparaitre, mais on peut les généraliser en un concept plus global. 
 
-      Modélisation du gameplay
+      Voici donc le diagramme modélisant les concepts qui nous paraissent essentiels à la réalisation d'un jeu de stratégie au tour par tour : 
+      
+      \includegraphics[width=320px]{diagrammes/concept-fightly.png}
 
 
 
@@ -84,81 +86,81 @@
 
       \subsection{Moteur de jeu}
 
-	Le moteur de jeu se découpe en deux parties : côté serveur, on gère les règles du jeu, le gameplay, et les joueurs. 
+        Le moteur de jeu se découpe en deux parties : côté serveur, on gère les règles du jeu, le gameplay, et les joueurs. 
 
-	Côté client, on gère l'affichage et les actions utilisateur. 
+        Côté client, on gère l'affichage et les actions utilisateur. 
 
       \subsection{Serveur}
 
-	Le serveur sera la partie du moteur qui fera tourner les parties et permettra la communication et les interraction entre les joueurs. Il aura pour rôle de contrôler les parties, lier les clients et gérer leur actions. Il aura également le rôle d'arbitre dans une partie. 
+        Le serveur sera la partie du moteur qui fera tourner les parties et permettra la communication et les interraction entre les joueurs. Il aura pour rôle de contrôler les parties, lier les clients et gérer leur actions. Il aura également le rôle d'arbitre dans une partie. 
 
-	Le serveur sera séparer en deux grandes parties : Une partie Noyau et une partie Monde.
+        Le serveur sera séparer en deux grandes parties : Une partie Noyau et une partie Monde.
 
-	\includegraphics[width=320px]{img/server-organisation.png}
+        \includegraphics[width=320px]{img/server-organisation.png}
 
-	\subsubsection{Package Noyau}
+        \subsubsection{Package Noyau}
 
-	  La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendant du type de jeu implémenté. De plus, ce noyau doit permettre les interactions entre les règles et les modules de la partie Monde, quels que soient ces derniers. 
+          La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendant du type de jeu implémenté. De plus, ce noyau doit permettre les interactions entre les règles et les modules de la partie Monde, quels que soient ces derniers. 
 
-	  La sous-partie communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
+          La sous-partie communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
 
-	  La sous-partie protocole sera charger d'adapter les messages. C'est à dire encapsuler nos message dans le protocole choisi pour l'envoie de message et extraire le contenu d'un message reçu. Il fera le lien entre les messages sur le réseaux et les messages comprehensibles par le client et le serveur.
+          La sous-partie protocole sera charger d'adapter les messages. C'est à dire encapsuler nos message dans le protocole choisi pour l'envoie de message et extraire le contenu d'un message reçu. Il fera le lien entre les messages sur le réseaux et les messages comprehensibles par le client et le serveur.
 
-	  La sous-partie règles sera charger de stocker et traiter les règles du jeu. Elle contiendra des fonctionnalités permetant de créer une base de règles. Ces règle pourront être ajouté et supprimé individuellement ou charger à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client.
+          La sous-partie règles sera charger de stocker et traiter les règles du jeu. Elle contiendra des fonctionnalités permetant de créer une base de règles. Ces règle pourront être ajouté et supprimé individuellement ou charger à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client.
 
-	\subsubsection{Package Monde}
+        \subsubsection{Package Monde}
 
-	  La partie Monde est totalement dynamique : les modules qu'elle contient sont fonction du jeu à développer, et peuvent donc changer du tout au tout. Les modules de cette partie doivent donc pouvoir être appelés depuis le noyau sans avoir à faire autre chose que de la configuration. 
+          La partie Monde est totalement dynamique : les modules qu'elle contient sont fonction du jeu à développer, et peuvent donc changer du tout au tout. Les modules de cette partie doivent donc pouvoir être appelés depuis le noyau sans avoir à faire autre chose que de la configuration. 
 
-	  Les modules présents dans cette partie implémentent des fonctionnalités du jeu. Ceux choisis ici sont donc ceux qui serviront, a priori, au jeu Fightly.
+          Les modules présents dans cette partie implémentent des fonctionnalités du jeu. Ceux choisis ici sont donc ceux qui serviront, a priori, au jeu Fightly.
 
-	  Cette partie aura des fonctionnalités permettant de gérer une partie. Ces fonctionnalité concerneront le chargement et la sauvegarde d'une partie. Elle gera également la connexion et la déconnexion à une partie.
+          Cette partie aura des fonctionnalités permettant de gérer une partie. Ces fonctionnalité concerneront le chargement et la sauvegarde d'une partie. Elle gera également la connexion et la déconnexion à une partie.
 
-	  Une sous-partie sera dédié à la gestion de la carte. Elle ne disposera que d'une seule fonctionnalité permettant de charger la carte à partir d'un fichier.
+          Une sous-partie sera dédié à la gestion de la carte. Elle ne disposera que d'une seule fonctionnalité permettant de charger la carte à partir d'un fichier.
 
-	  Le serveur disposera de fonctionnalités pour gérer les unités des joueurs. Cette sous-partie permettra de créer, supprimer ou déplacer les unités.
+          Le serveur disposera de fonctionnalités pour gérer les unités des joueurs. Cette sous-partie permettra de créer, supprimer ou déplacer les unités.
 
-	  Le serveur devra également gérer les joueurs. Une sous-partie permmettra de créer et supprimer des joueurs dans une partie. Elle devra également gerer l'abandon d'un joueur durant une partie. C'est à dire retirer le joueur et ses unités de la partie.
+          Le serveur devra également gérer les joueurs. Une sous-partie permmettra de créer et supprimer des joueurs dans une partie. Elle devra également gerer l'abandon d'un joueur durant une partie. C'est à dire retirer le joueur et ses unités de la partie.
 
       \subsection{Client}
 
-	Le client doit gérer l'affichage (et éventuellement la gestion du son), la réception de données envoyées par le serveur, et les données entrées par le joueur (inputs) et l'envoi des demandes de modification des données (modification du monde).
+        Le client doit gérer l'affichage (et éventuellement la gestion du son), la réception de données envoyées par le serveur, et les données entrées par le joueur (inputs) et l'envoi des demandes de modification des données (modification du monde).
 
-	\subsubsection{Affichage}
+        \subsubsection{Affichage}
 
-	  Pour l’affichage, La partie client de notre moteur de jeux ne dispose que les données d’une partie de la carte, c’est la zone ou le périmètre des unités du joueur. A chaque déplacement d’unité, le client doit demander au serveur de charger la partie  correspondante de la carte.
+          Pour l’affichage, La partie client de notre moteur de jeux ne dispose que les données d’une partie de la carte, c’est la zone ou le périmètre des unités du joueur. A chaque déplacement d’unité, le client doit demander au serveur de charger la partie  correspondante de la carte.
 
-	  La carte est représentée sous forme de cellules (rectangulaire ou hexagonale) de plusieurs types (montagne, foret, chemin, mer …), chaque cellule a des propriétés (accessibilité : oui ou non par une unité par exemple).
+          La carte est représentée sous forme de cellules (rectangulaire ou hexagonale) de plusieurs types (montagne, foret, chemin, mer …), chaque cellule a des propriétés (accessibilité : oui ou non par une unité par exemple).
 
-	  Deuxième grand élément du jeu c’est les unités, le client dispose d’un ensemble de fonctionnalités capable de : Créer, déplacer et mettre a jour les propriétés de ces unité ainsi que la suppression d’une unité (après une éventuelle déconnexion).
+          Deuxième grand élément du jeu c’est les unités, le client dispose d’un ensemble de fonctionnalités capable de : Créer, déplacer et mettre a jour les propriétés de ces unité ainsi que la suppression d’une unité (après une éventuelle déconnexion).
 
-	\subsubsection{Input}
+        \subsubsection{Input}
 
-	  Cette partie s'occupe de la lecture des périphériques externes comme :
+          Cette partie s'occupe de la lecture des périphériques externes comme :
 
-	  - La Souris (lecture de l'état des boutons (clics) et de la position).
+          - La Souris (lecture de l'état des boutons (clics) et de la position).
 
-	  - Le Clavier (de l'état des boutons).
+          - Le Clavier (de l'état des boutons).
 
-	  Ces Inputs seront utilisés directement par les fonctionnalités de
+          Ces Inputs seront utilisés directement par les fonctionnalités de
 
-	\subsubsection{Communication}
+        \subsubsection{Communication}
 
-	  Le client doit être capable d’établir une connexion avec le serveur après l’identification du joueur, il peut également établir des connexions avec les autres clients pour échanger des messages (le Chat par exemple).
+          Le client doit être capable d’établir une connexion avec le serveur après l’identification du joueur, il peut également établir des connexions avec les autres clients pour échanger des messages (le Chat par exemple).
 
-	\subsubsection{Protocole}
+        \subsubsection{Protocole}
 
-	  Pour la communication des données, la partie « client » du moteur de jeux doit transformer les messages ou les requêtes dans un format donné (XML ou JSON par exemple) pour les envoyer au serveur, elle doit être capable aussi d’interpréter les messages qui viennent de ce dernier.
+          Pour la communication des données, la partie « client » du moteur de jeux doit transformer les messages ou les requêtes dans un format donné (XML ou JSON par exemple) pour les envoyer au serveur, elle doit être capable aussi d’interpréter les messages qui viennent de ce dernier.
 
-	  Un protocole de communication bidirectionnel sera utilisé par le client et le serveur (Websocket par exemple), ce protocole permet la notification au client d’un changement d’état du serveur ainsi que l’envoie de données en mode poussé au serveur.
+          Un protocole de communication bidirectionnel sera utilisé par le client et le serveur (Websocket par exemple), ce protocole permet la notification au client d’un changement d’état du serveur ainsi que l’envoie de données en mode poussé au serveur.
 
-	\subsubsection{Règles}
+        \subsubsection{Règles}
 
-	  Le client dispose d’une base de règles et une fonction, qui lui permettent de valider ou interdire des actions ou des requêtes demandées par le joueur. (par exemple le déplacement d’une unité vers une cellule inaccessible).
+          Le client dispose d’une base de règles et une fonction, qui lui permettent de valider ou interdire des actions ou des requêtes demandées par le joueur. (par exemple le déplacement d’une unité vers une cellule inaccessible).
 
-	\subsubsection{Monde}
+        \subsubsection{Monde}
 
-	  Dans cette partie du moteur, on trouve toutes les fonctions qui correspondent aux différentes actions. C'est elle qui se chargera de la modification du monde. On prend comme exemple le déplacement d’une unité ; quand on clique sur une unité, cela nous permet de voir tous les endroits (cellules) où on peut faire déplacer cette unité. Au deuxième clique l’unité est déplacé vers la cellule sélectionné, ensuite le client doit envoyer une demande de modification de position (x,y) de cette unité au serveur.
+          Dans cette partie du moteur, on trouve toutes les fonctions qui correspondent aux différentes actions. C'est elle qui se chargera de la modification du monde. On prend comme exemple le déplacement d’une unité ; quand on clique sur une unité, cela nous permet de voir tous les endroits (cellules) où on peut faire déplacer cette unité. Au deuxième clique l’unité est déplacé vers la cellule sélectionné, ensuite le client doit envoyer une demande de modification de position (x,y) de cette unité au serveur.
 
 
 
