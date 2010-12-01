@@ -43,9 +43,11 @@
 
     \section{Besoin}
     
-      Ce besoin est bien réel : le projet Fightly, par exemple, vise à créer un jeu de stratégie au tour par tour bénéficiant directement de ces avancées. La création d'un outil fournissant un ensemble de fonctionnalités de base, facilitant l'accès aux technologies Web récentes et simplifiant donc largement le développement d'un tel projet ne pourra que mener à une amélioration globale de ce jeu.
+      Ce besoin est bien réel : le projet Fightly\footnote{\url{http://fightly-dev.lqbs.fr/forum/}}, par exemple, vise à créer un jeu de stratégie au tour par tour bénéficiant directement de ces avancées. La création d'un outil fournissant un ensemble de fonctionnalités de base, facilitant l'accès aux technologies Web récentes et simplifiant donc largement le développement d'un tel projet ne pourra que mener à une amélioration globale de ce jeu.
 
       Fightly est un jeu de stratégie au tour par tour dans lequel des joueurs s'affrontent en manipulant des unités. Les parties se déroulent sur des cartes à cases hexagonales, les unités s'y déplaçant en fonction du terrain et des stratégies des joueurs. Les joueurs choisissent au début de la partie leurs unités, composées de fantassins, archers ou chevaliers, chacunes ayant des caractéristiques et des capacités différentes. Le jeu se déroule en temps et en tours limités, le gagnant étant le dernier joueur en vie, ou à défaut celui ayant le plus de points. 
+      
+      Il existe également le jeu Alonya\footnote{\url{http://alonya.eu/}}, qui reprend largement le concept des jeux Civilization en l'adaptant au Web (et en ajoutant quelques modifications bien sur). Ce jeu est actuellement en développement, et n'utilisera donc a priori pas notre moteur, mais l'existance d'un tel outil aurait certainement aidé la création d'Alonya. 
 
 
 
@@ -84,13 +86,11 @@
 
     \section{Spécifications}
 
-      \subsection{Moteur de jeu}
+      L'objectif de ce projet est de créer un moteur de jeu web : on utilisera donc naturellement une architecture Client / Serveur. 
 
-	L'objectif de ce projet est de créer un moteur de jeu web. On utilisera donc naturellement une architecture Client / Serveur. 
+      Côté serveur, on gère les règles du jeu, le gameplay, et les joueurs. 
 
-	Côté serveur, on gère les règles du jeu, le gameplay, et les joueurs. 
-
-	Côté client, on gère l'affichage et les actions utilisateur. 
+      Côté client, on gère l'affichage et les actions utilisateur. 
 
 
   \chapter{Conception}
