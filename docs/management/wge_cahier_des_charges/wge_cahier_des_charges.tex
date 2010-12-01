@@ -88,9 +88,11 @@
 
       L'objectif de ce projet est de créer un moteur de jeu web : on utilisera donc naturellement une architecture Client / Serveur. 
 
-      Côté serveur, on gère les règles du jeu, le gameplay, et les joueurs. 
+      La partie Serveur devra être mise en place sur un serveur dédié. Elle prendra en charge les règles du jeu, les parties et leur état (appelé le ``Monde''), les joueurs. Elle gérera également la communication avec les clients. Cette partie devra donc, la majorité du temps, recevoir des demandes d'action de la part d'un joueur, valider cette action par rapport aux règles et à l'état du Monde de la partie concernée, puis valider cette action et répercuter les changements induits chez tous les joueurs. On devra également gérer la mise en place d'une partie (par exemple, dans le jeu Fightly, il faut attendre d'autres joueurs, puis chaque joueur créé une armée, puis chaque joueur place son armée sur la carte, et enfin le jeu commence ``réellement'') et la fin d'une partie (calcul du gagnant, actions particulières en fonction du jeu). 
+      
+      Cependant, on ne s'occupera pas dans cette partie Serveur de tout ce qui correspondrait au rôle d'un serveur web classique. Par exemple, on n'assurera pas la distribution des fichiers statiques (c'est-à-dire HTML, CSS, JavaScript et images), ni la création et configuration des parties. On considère que, lorsqu'un joueur rejoint une partie, il a déjà tous les éléments nécessaires à sa gestion. Ceci implique donc qu'un deuxième serveur, gérant la distribution des fichiers statiques, soit mis en place : mais ce n'est pas une contrainte forte, puisqu'un jeu Web contiendra forcément un serveur Web, au moins pour une aide de jeu ou un forum. Notre moteur ne sera donc pas indépendant, mais s'intégrera à une application Web existante, sur laquelle il se basera pour fonctionner. 
 
-      Côté client, on gère l'affichage et les actions utilisateur. 
+      La partie Client correspond à ce qui est exécuté dans le navigateur du joueur. Cette application gérera donc l'affichage du jeu chez le joueur, ainsi que les interactions avec ce dernier. L'application cliente devra pouvoir communiquer avec le serveur, mais également avec d'autres clients (typiquement, les autres joueurs présents dans une partie en cours). En règle générale, cette partie enverra des demandes d'action au serveur, et appliquera en local les changements qui lui sont ordonnés par ce même serveur. 
 
 
   \chapter{Conception}
