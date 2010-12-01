@@ -112,27 +112,27 @@
 
       \subsection{Package Noyau}
 
-	La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendant du type de jeu implémenté. De plus, ce noyau doit permettre les interactions entre les règles et les modules de la partie Monde, quels que soient ces derniers. 
+        La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendant du type de jeu implémenté. De plus, ce noyau doit permettre les interactions entre les règles et les modules de la partie Monde, quels que soient ces derniers. 
 
-	La sous-partie communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
+        La sous-partie communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
 
-	La sous-partie protocole sera charger d'adapter les messages. C'est à dire encapsuler nos message dans le protocole choisi pour l'envoie de message et extraire le contenu d'un message reçu. Il fera le lien entre les messages sur le réseaux et les messages comprehensibles par le client et le serveur.
+        La sous-partie protocole sera charger d'adapter les messages. C'est à dire encapsuler nos message dans le protocole choisi pour l'envoie de message et extraire le contenu d'un message reçu. Il fera le lien entre les messages sur le réseaux et les messages comprehensibles par le client et le serveur.
 
-	La sous-partie règles sera charger de stocker et traiter les règles du jeu. Elle contiendra des fonctionnalités permetant de créer une base de règles. Ces règle pourront être ajouté et supprimé individuellement ou charger à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client.
+        La sous-partie règles sera charger de stocker et traiter les règles du jeu. Elle contiendra des fonctionnalités permetant de créer une base de règles. Ces règle pourront être ajouté et supprimé individuellement ou charger à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client.
 
       \subsection{Package Monde}
 
-	La partie Monde est totalement dynamique : les modules qu'elle contient sont fonction du jeu à développer, et peuvent donc changer du tout au tout. Les modules de cette partie doivent donc pouvoir être appelés depuis le noyau sans avoir à faire autre chose que de la configuration. 
+        La partie Monde est totalement dynamique : les modules qu'elle contient sont fonction du jeu à développer, et peuvent donc changer du tout au tout. Les modules de cette partie doivent donc pouvoir être appelés depuis le noyau sans avoir à faire autre chose que de la configuration. 
 
-	Les modules présents dans cette partie implémentent des fonctionnalités du jeu. Ceux choisis ici sont donc ceux qui serviront, a priori, au jeu Fightly.
+        Les modules présents dans cette partie implémentent des fonctionnalités du jeu. Ceux choisis ici sont donc ceux qui serviront, a priori, au jeu Fightly.
 
-	Cette partie aura des fonctionnalités permettant de gérer une partie. Ces fonctionnalité concerneront le chargement et la sauvegarde d'une partie. Elle gera également la connexion et la déconnexion à une partie.
+        Cette partie aura des fonctionnalités permettant de gérer une partie. Ces fonctionnalité concerneront le chargement et la sauvegarde d'une partie. Elle gera également la connexion et la déconnexion à une partie.
 
-	Une sous-partie sera dédié à la gestion de la carte. Elle ne disposera que d'une seule fonctionnalité permettant de charger la carte à partir d'un fichier.
+        Une sous-partie sera dédié à la gestion de la carte. Elle ne disposera que d'une seule fonctionnalité permettant de charger la carte à partir d'un fichier.
 
-	Le serveur disposera de fonctionnalités pour gérer les unités des joueurs. Cette sous-partie permettra de créer, supprimer ou déplacer les unités.
+        Le serveur disposera de fonctionnalités pour gérer les unités des joueurs. Cette sous-partie permettra de créer, supprimer ou déplacer les unités.
 
-	Le serveur devra également gérer les joueurs. Une sous-partie permmettra de créer et supprimer des joueurs dans une partie. Elle devra également gerer l'abandon d'un joueur durant une partie. C'est à dire retirer le joueur et ses unités de la partie.
+        Le serveur devra également gérer les joueurs. Une sous-partie permmettra de créer et supprimer des joueurs dans une partie. Elle devra également gerer l'abandon d'un joueur durant une partie. C'est à dire retirer le joueur et ses unités de la partie.
 
     \section{Client}
 
@@ -140,50 +140,63 @@
 
       \subsection{Affichage}
 
-	Pour l’affichage, La partie client de notre moteur de jeux ne dispose que les données d’une partie de la carte, c’est la zone ou le périmètre des unités du joueur. A chaque déplacement d’unité, le client doit demander au serveur de charger la partie  correspondante de la carte.
+        Pour l’affichage, La partie client de notre moteur de jeux ne dispose que les données d’une partie de la carte, c’est la zone ou le périmètre des unités du joueur. A chaque déplacement d’unité, le client doit demander au serveur de charger la partie  correspondante de la carte.
 
-	La carte est représentée sous forme de cellules (rectangulaire ou hexagonale) de plusieurs types (montagne, foret, chemin, mer …), chaque cellule a des propriétés (accessibilité : oui ou non par une unité par exemple).
+        La carte est représentée sous forme de cellules (rectangulaire ou hexagonale) de plusieurs types (montagne, foret, chemin, mer …), chaque cellule a des propriétés (accessibilité : oui ou non par une unité par exemple).
 
-	Deuxième grand élément du jeu c’est les unités, le client dispose d’un ensemble de fonctionnalités capable de : Créer, déplacer et mettre a jour les propriétés de ces unité ainsi que la suppression d’une unité (après une éventuelle déconnexion).
+        Deuxième grand élément du jeu c’est les unités, le client dispose d’un ensemble de fonctionnalités capable de : Créer, déplacer et mettre a jour les propriétés de ces unité ainsi que la suppression d’une unité (après une éventuelle déconnexion).
 
       \subsection{Input}
 
-	Cette partie s'occupe de la lecture des périphériques externes comme :
+        Cette partie s'occupe de la lecture des périphériques externes comme :
 
-	- La Souris (lecture de l'état des boutons (clics) et de la position).
+        - La Souris (lecture de l'état des boutons (clics) et de la position).
 
-	- Le Clavier (de l'état des boutons).
+        - Le Clavier (de l'état des boutons).
 
-	Ces Inputs seront utilisés directement par les fonctionnalités de
+        Ces Inputs seront utilisés directement par les fonctionnalités de
 
       \subsection{Communication}
 
-	Le client doit être capable d’établir une connexion avec le serveur après l’identification du joueur, il peut également établir des connexions avec les autres clients pour échanger des messages (le Chat par exemple).
+        Le client doit être capable d’établir une connexion avec le serveur après l’identification du joueur, il peut également établir des connexions avec les autres clients pour échanger des messages (le Chat par exemple).
 
       \subsection{Protocole}
 
-	Pour la communication des données, la partie « client » du moteur de jeux doit transformer les messages ou les requêtes dans un format donné (XML ou JSON par exemple) pour les envoyer au serveur, elle doit être capable aussi d’interpréter les messages qui viennent de ce dernier.
+        Pour la communication des données, la partie « client » du moteur de jeux doit transformer les messages ou les requêtes dans un format donné (XML ou JSON par exemple) pour les envoyer au serveur, elle doit être capable aussi d’interpréter les messages qui viennent de ce dernier.
 
-	Un protocole de communication bidirectionnel sera utilisé par le client et le serveur (Websocket par exemple), ce protocole permet la notification au client d’un changement d’état du serveur ainsi que l’envoie de données en mode poussé au serveur.
+        Un protocole de communication bidirectionnel sera utilisé par le client et le serveur (Websocket par exemple), ce protocole permet la notification au client d’un changement d’état du serveur ainsi que l’envoie de données en mode poussé au serveur.
 
       \subsection{Règles}
 
-	Le client dispose d’une base de règles et une fonction, qui lui permettent de valider ou interdire des actions ou des requêtes demandées par le joueur. (par exemple le déplacement d’une unité vers une cellule inaccessible).
+        Le client dispose d’une base de règles et une fonction, qui lui permettent de valider ou interdire des actions ou des requêtes demandées par le joueur. (par exemple le déplacement d’une unité vers une cellule inaccessible).
 
       \subsection{Monde}
 
-	Dans cette partie du moteur, on trouve toutes les fonctions qui correspondent aux différentes actions. C'est elle qui se chargera de la modification du monde. On prend comme exemple le déplacement d’une unité ; quand on clique sur une unité, cela nous permet de voir tous les endroits (cellules) où on peut faire déplacer cette unité. Au deuxième clique l’unité est déplacé vers la cellule sélectionné, ensuite le client doit envoyer une demande de modification de position (x,y) de cette unité au serveur.
-
-
-    \section{Choix technologiques}
-
-      Etudes techno
+        Dans cette partie du moteur, on trouve toutes les fonctions qui correspondent aux différentes actions. C'est elle qui se chargera de la modification du monde. On prend comme exemple le déplacement d’une unité ; quand on clique sur une unité, cela nous permet de voir tous les endroits (cellules) où on peut faire déplacer cette unité. Au deuxième clique l’unité est déplacé vers la cellule sélectionné, ensuite le client doit envoyer une demande de modification de position (x,y) de cette unité au serveur.
 
 
 
   \chapter{Livrables intermédiaires}
 
-    Todo
+    On fournira au client trois livrables intermédiaires au cours du projet
+    
+    \section{Veille technologique}
+    
+      On effectuera, dans une partie mesure, une veille technologique afin d'étudier l'existant et de déterminer quels sont les meilleurs choix de technologies à utiliser pour ce projet. 
+      
+      Date de rendu : 17 décembre 2010.
+      
+    \section{Dossier d'analyse}
+    
+      Il sera important d'écrire un dossier de conception détaillé, présentant tous les aspects techniques du projet, les problématiques et les solutions envisagées. Ce dossier servira de base au développement du projet, et devra être validé par le client. 
+      
+      Date de rendu : 7 janvier 2011.
+      
+    \section{Version de démonstration}
+    
+      On voudra, à la moitié de la phase de développement, fournir au client une version de démonstration au client. Cette application consistera en un simple client ``spectateur'', qui ne fera donc rien d'autre qu'afficher le Monde d'une partie. Le client pourra donc valider ou imputer nos choix à ce moment, et nous permettre de corriger certaines erreurs éventuelles avant la fin du projet. 
+      
+      Date de rendu : 19 janvier 2011. 
 
 
 
