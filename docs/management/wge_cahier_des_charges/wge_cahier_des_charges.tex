@@ -104,21 +104,19 @@
 
     \section{Serveur}
 
-      Le serveur sera la partie du moteur qui fera tourner les parties et permettra la communication et les interraction entre les joueurs. Il aura pour rôle de contrôler les parties, lier les clients et gérer leur actions. Il aura également le rôle d'arbitre dans une partie. 
+      Le serveur sera la partie du moteur qui fera tourner les parties et permettra la communication et les interactions entre les joueurs. Il aura pour rôle de contrôler les parties, lier les clients et gérer leur actions. Il aura également le rôle d'arbitre dans une partie. 
 
-      Le serveur sera séparer en deux grandes parties : Une partie Noyau et une partie Monde.
+      Le serveur sera séparé en deux grandes parties : une partie Noyau et une partie Monde.
 
       \includegraphics[width=320px]{img/server-organisation.png}
 
       \subsection{Package Noyau}
 
-        La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendant du type de jeu implémenté. De plus, ce noyau doit permettre les interactions entre les règles et les modules de la partie Monde, quels que soient ces derniers. 
+        La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendants du type de jeu implémenté. L'objectif principal de ce package est de faire le lien entre les actions du joueur et la représentation centralisée du Monde d'une partie. On trouve donc deux parties principales, une gérant les liens avec les clients, l'autre s'occupant des règles et du lien avec la gestion du Monde. 
 
-        La sous-partie communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
+        Le module communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
 
-        La sous-partie protocole sera charger d'adapter les messages. C'est à dire encapsuler nos message dans le protocole choisi pour l'envoie de message et extraire le contenu d'un message reçu. Il fera le lien entre les messages sur le réseaux et les messages comprehensibles par le client et le serveur.
-
-        La sous-partie règles sera charger de stocker et traiter les règles du jeu. Elle contiendra des fonctionnalités permetant de créer une base de règles. Ces règle pourront être ajouté et supprimé individuellement ou charger à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client.
+        Le module règles sera chargé de stocker et de traiter les règles du jeu. Il contiendra des fonctionnalités permetant de créer une base de règles. Ces règles pourront être ajoutées et supprimées individuellement ou chargées à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client, en fonction des règles connues et de l'état du Monde.
 
       \subsection{Package Monde}
 
@@ -166,14 +164,6 @@
 
         Un protocole de communication bidirectionnel sera utilisé par le client et le serveur (Websocket par exemple), ce protocole permet la notification au client d’un changement d’état du serveur ainsi que l’envoie de données en mode poussé au serveur.
 
-      \subsection{Règles}
-
-        Le client dispose d’une base de règles et une fonction, qui lui permettent de valider ou interdire des actions ou des requêtes demandées par le joueur. (par exemple le déplacement d’une unité vers une cellule inaccessible).
-
-      \subsection{Monde}
-
-        Dans cette partie du moteur, on trouve toutes les fonctions qui correspondent aux différentes actions. C'est elle qui se chargera de la modification du monde. On prend comme exemple le déplacement d’une unité ; quand on clique sur une unité, cela nous permet de voir tous les endroits (cellules) où on peut faire déplacer cette unité. Au deuxième clique l’unité est déplacé vers la cellule sélectionné, ensuite le client doit envoyer une demande de modification de position (x,y) de cette unité au serveur.
-
 
 
   \chapter{Livrables intermédiaires}
@@ -202,7 +192,15 @@
 
   \chapter{Livrables finaux}
 
-    Todo
+    À la fin du projet, on fournira au client les trois éléments suivants : 
+    
+    \begin{list}{-}{}
+      \item{Le code source complet de l'application développée ;}
+      \item{Une documentation technique, à destination des développeurs qui utiliseront le moteur, mais également à l'intention des développeurs qui contribueront par la suite au projet, celui-ci étant libre ;}
+      \item{Une démonstration technique du moteur.}
+    \end{list}
+    
+    Date de rendu : 4 février 2011.
 
 
 
