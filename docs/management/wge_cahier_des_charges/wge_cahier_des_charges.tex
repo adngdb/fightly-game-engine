@@ -4,6 +4,7 @@
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+
 \usepackage[colorlinks=true, urlcolor=blue, linkcolor=black]{hyperref}
 
 % Title Page
@@ -112,26 +113,29 @@
 
       \subsection{Package Noyau}
 
-        La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendants du type de jeu implémenté. L'objectif principal de ce package est de faire le lien entre les actions du joueur et la représentation centralisée du Monde d'une partie. On trouve donc deux parties principales, une gérant les liens avec les clients, l'autre s'occupant des règles et du lien avec la gestion du Monde. 
+        La partie Noyau du serveur gère les fonctionnalités de base du moteur. Elle contient un ensemble de modules qui sont a priori indépendants du type de jeu implémenté. L'objectif principal de ce package est de faire le lien entre les actions du joueur et la représentation centralisée du Monde\footnote{Rappel : on appelle ``le Monde'' l'ensemble des données représentant l'état d'une partie.} d'une partie. On trouve donc deux parties principales, une gérant les liens avec les clients, l'autre s'occupant des règles et du lien avec la gestion du Monde. 
 
-        Le module communication du serveur doit permettre d'envoyer et de recevoir des messages. Cette partie devra également accepter et gérer les connexions clients.
+        Le module communication du serveur prend en charge tous les échanges réseau avec les clients. Elle s'occupe d'accepter les nouvelles connexions, fait l'association entre client (au sens réseau) et joueur (au sens du jeu), et permet donc de recevoir des messages d'un joueur ainsi que de lui en envoyer. Ce module aura aussi à charge la gestion des déconnexions éventuelles de joueurs. 
 
-        Le module règles sera chargé de stocker et de traiter les règles du jeu. Il contiendra des fonctionnalités permetant de créer une base de règles. Ces règles pourront être ajoutées et supprimées individuellement ou chargées à partir d'un fichier de règle. La partie règle devra également valider (ou invalider) les requêtes du client, en fonction des règles connues et de l'état du Monde.
+        Le module règles sera chargé de stocker et de traiter les règles du jeu. Il contiendra des fonctionnalités permettant de créer une base de règles. Ces règles pourront être ajoutées ou supprimées individuellement ou chargées à partir d'un fichier de règles. La partie règle devra également valider (ou invalider) les actions demandées par les joueurs, en fonction des règles connues et de l'état du Monde.
 
       \subsection{Package Monde}
 
-        La partie Monde est totalement dynamique : les modules qu'elle contient sont fonction du jeu à développer, et peuvent donc changer du tout au tout. Les modules de cette partie doivent donc pouvoir être appelés depuis le noyau sans avoir à faire autre chose que de la configuration. 
+        La partie Monde est composée d'un ensemble de modules qui gèrent les fonctionnalités principales d'un jeu de stratégie au tour par tour. On y retrouvera donc les notions que l'on a dégagées des différents jeux étudiés (cf. partie 2.2 Les jeux de stratégie au tour par tour), et que l'on considère comme étant primordiales pour tout jeu STpT\footnote{STpT : Stratégie au Tour par Tour}. 
+        
+        Ce package devra être le plus générique et le plus extensible. On devra pouvoir modifier facilement le comportement des modules sans que cela n'affecte les autres. De plus, on devra pouvoir ajouter de nouvelles fonctionnalités, et les intégrer au moteur.
 
-        Les modules présents dans cette partie implémentent des fonctionnalités du jeu. Ceux choisis ici sont donc ceux qui serviront, a priori, au jeu Fightly.
+        Dans ce package Monde, on trouvera quatre modules principaux. Tout d'abord, un module représentera les parties, en permettant de les charger depuis un support de persistence. Il gérera également les tours, l'ordre des joueurs, et toute la configuration particulière qu'une partie peut avoir. 
+        
+        Le deuxième module concernera les joueurs : on les caractérisera pour les différencier, et chaque joueur possèdera un ensemble d'unités qui pourra manipuler. On stockera également les points gagnés par le joueur durant la partie. 
 
-        Cette partie aura des fonctionnalités permettant de gérer une partie. Ces fonctionnalité concerneront le chargement et la sauvegarde d'une partie. Elle gera également la connexion et la déconnexion à une partie.
+        Un troisième module sera dédié à la gestion de la carte. Celle-ci sera composée d'un ensemble de cases, chacune de ces cases étant caractérisée par plusieurs paramètres, comme l'accessibilité ou l'influence sur les unités qui s'y trouvent. 
 
-        Une sous-partie sera dédié à la gestion de la carte. Elle ne disposera que d'une seule fonctionnalité permettant de charger la carte à partir d'un fichier.
-
-        Le serveur disposera de fonctionnalités pour gérer les unités des joueurs. Cette sous-partie permettra de créer, supprimer ou déplacer les unités.
-
-        Le serveur devra également gérer les joueurs. Une sous-partie permmettra de créer et supprimer des joueurs dans une partie. Elle devra également gerer l'abandon d'un joueur durant une partie. C'est à dire retirer le joueur et ses unités de la partie.
-
+        Enfin, on aura un module pour représenter les unités. Une unité possèdera un ensemble de paramètres (par exemple, une valeur offensive, une valeur défensive, une vie... ), appartiendra à un unique joueur et sera à tout moment sur une seule case. Une unité détruite sera supprimée de la partie, et donc retirée de l'état du Monde. 
+        
+        On choisira d'implémenter ces différents modules de telle sorte qu'ils correspondent globalement aux besoins du jeu Fightly présenté précédemment. Ainsi, on aura des modules relativement générique, Fightly étant un jeu qui exploite des mécaniques de jeu très répandues. On fera cependant attention à être le moins spécifique possible, ou à faire en sorte que les parties spécifiques soient isolées et donc facilement interchangeables, afin de simplifier le passage à un autre type de jeu. 
+        
+        
     \section{Client}
 
       Le client doit gérer l'affichage (et éventuellement la gestion du son), la réception de données envoyées par le serveur, et les données entrées par le joueur (inputs) et l'envoi des demandes de modification des données (modification du monde).
