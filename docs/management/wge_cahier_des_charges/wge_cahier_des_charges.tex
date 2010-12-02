@@ -101,6 +101,14 @@
     \section{Architecture générale}
 
       Diagrammes UML
+      
+      Diagramme de classe du Serveur : 
+      
+      \includegraphics[width=320px]{diagrammes/moteur_serveur_classes.png}
+      
+      Diagramme de classe du Client : 
+      
+      \includegraphics[width=320px]{diagrammes/moteur_client_classes.png}
 
 
     \section{Serveur}
@@ -140,6 +148,10 @@
 
       Le client doit gérer l'affichage (et éventuellement la gestion du son), la réception de données envoyées par le serveur, et les données entrées par le joueur (inputs) et l'envoi des demandes de modification des données (modification du monde).
 
+      \subsection{Communication}
+
+        Le client doit être capable d’établir une connexion avec le serveur après l’identification du joueur, il peut également établir des connexions avec les autres clients pour échanger des messages (le Chat par exemple).
+
       \subsection{Affichage}
 
         Pour l’affichage, La partie client de notre moteur de jeux ne dispose que les données d’une partie de la carte, c’est la zone ou le périmètre des unités du joueur. A chaque déplacement d’unité, le client doit demander au serveur de charger la partie  correspondante de la carte.
@@ -157,17 +169,6 @@
         - Le Clavier (de l'état des boutons).
 
         Ces Inputs seront utilisés directement par les fonctionnalités de
-
-      \subsection{Communication}
-
-        Le client doit être capable d’établir une connexion avec le serveur après l’identification du joueur, il peut également établir des connexions avec les autres clients pour échanger des messages (le Chat par exemple).
-
-      \subsection{Protocole}
-
-        Pour la communication des données, la partie « client » du moteur de jeux doit transformer les messages ou les requêtes dans un format donné (XML ou JSON par exemple) pour les envoyer au serveur, elle doit être capable aussi d’interpréter les messages qui viennent de ce dernier.
-
-        Un protocole de communication bidirectionnel sera utilisé par le client et le serveur (Websocket par exemple), ce protocole permet la notification au client d’un changement d’état du serveur ainsi que l’envoie de données en mode poussé au serveur.
-
 
 
   \chapter{Livrables intermédiaires}
@@ -276,7 +277,13 @@
 
 	\section{Heroes of Might and Magic}
 	
+    Diagramme de classes présentant les principaux concepts du jeu : 
+    
 		\includegraphics[width=320px]{diagrammes/heroes_of_might_and_magic.png}
+
+    Diagramme d'activités présentant le déroulement global du jeu : 
+    
+    \includegraphics[width=320px]{diagrammes/sequence-homm.png}
 
 
 	\section{Battle for Wesnoth}
