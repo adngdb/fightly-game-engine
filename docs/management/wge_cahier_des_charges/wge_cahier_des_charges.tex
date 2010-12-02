@@ -213,6 +213,44 @@
     \section{Décomposition générale}
 
       Décomposition du projet en modules
+      
+      \begin{list}{-}{}
+        \item{Serveur}
+        \begin{list}{-}{}
+          \item{Noyau}
+          \begin{list}{-}{}
+            \item{Communication}
+            \item{Règles}
+          \end{list}
+          \item{Monde}
+          \begin{list}{-}{}
+            \item{Partie}
+            \item{Joueur}
+            \item{Carte}
+            \item{Unité}
+          \end{list}
+        \end{list}
+        
+        \item{Client}
+        \begin{list}{-}{}
+          \item{Affichage}
+          \item{Communication}
+          \item{Interactions}
+        \end{list}
+      \end{list}
+
+
+    \section{Responsabilités}
+    
+      La conduite du projet sera assurée par Adrian. Il aura par ailleurs à développer le module Affichage de la partie Client. 
+      
+      Maxime sera responsable de la partie Serveur, il devra donc en contrôler le bon avancement, la cohérence et la qualité au fur et à mesure du développement. Il sera également en charge du développement du module de Règles. 
+      
+      Le package Noyau du serveur sera sous la responsabilité de Duc, qui devra donc en assurer le suivi, et qui développera le module Communication de ce même noyau, ainsi que celui de la partie Client. 
+      
+      Le package Monde sera pris en charge par Youness. Il devra également développer les modules Partie, Joueur et Carte du Serveur. 
+      
+      Enfin, la partie Client sera sous la responsabilité de Ilyas, qui en développera également le module Interactions. Il développera aussi le module Unité du package Monde du serveur. 
 
 
     \section{Planning}
