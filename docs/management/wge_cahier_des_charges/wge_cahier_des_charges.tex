@@ -58,7 +58,7 @@
 
       Voici donc où se place ce projet : notre objectif est de fournir un outil complet, permettant de créer de façon simple et rapide un jeu profitant des dernières avancées en matière de technologie web. Il constituera un ensemble d'outils qui fournissent un cadre de développement et des fonctionnalités permettant d'implémenter tout ou partie d'un jeu.
 
-      Le moteur sera prioritairement conçu pour des jeux de stratégie au tour par tour. On cherchera à le rendre aussi générique que possible, afin de permettre une grande diversité dans les types de jeux développables avec notre outil. On veillera aussi à faciliter l'extensibilité du projet, toujours dans le but d'offrir la possibilité d'en étendre facilement les fonctionnalités.
+      Le moteur sera prioritairement conçu pour des jeux de stratégie au tour par tour. On cherchera à le rendre aussi générique que possible, afin de permettre à une large game de jeux d'en bénéficier. On veillera aussi à faciliter l'extensibilité du projet, toujours dans le but d'offrir la possibilité d'en étendre facilement les fonctionnalités.
 
       Un des objectifs secondaires du projet est d'utiliser des technologies récentes et innovantes. Si la compatibilité avec les différents navigateurs du marché doit être un facteur important, elle ne doit pas être une limitation dans le choix des outils à utiliser. 
 
@@ -87,9 +87,9 @@
 
     \section{Spécifications}
 
-      L'objectif de ce projet est de créer un moteur de jeu web : on utilisera donc naturellement une architecture Client / Serveur. 
+      Notre moteur de jeu sera orienté web, on utilisera donc naturellement une architecture Client / Serveur. 
 
-      La partie Serveur devra être mise en place sur un serveur dédié. Elle prendra en charge les règles du jeu, les parties et leur état (appelé le ``Monde''), les joueurs. Elle gérera également la communication avec les clients. Cette partie devra donc, la majorité du temps, recevoir des demandes d'action de la part d'un joueur, valider cette action par rapport aux règles et à l'état du Monde de la partie concernée, puis valider cette action et répercuter les changements induits chez tous les joueurs. On devra également gérer la mise en place d'une partie (par exemple, dans le jeu Fightly, il faut attendre d'autres joueurs, puis chaque joueur créé une armée, puis chaque joueur place son armée sur la carte, et enfin le jeu commence ``réellement'') et la fin d'une partie (calcul du gagnant, actions particulières en fonction du jeu). 
+      La partie Serveur devra être mise en place sur un serveur dédié. Elle prendra en charge les règles du jeu, les parties et leur état (appelé le ``Monde''), et les joueurs. Elle gérera également la communication avec les clients. Cette partie devra donc, la majorité du temps, recevoir des demandes d'action de la part d'un joueur, valider cette action par rapport aux règles et à l'état du Monde de la partie concernée, puis valider cette action et répercuter les changements induits chez tous les joueurs. On devra également gérer la mise en place d'une partie (par exemple, dans le jeu Fightly, il faut attendre d'autres joueurs, puis chaque joueur créé une armée, puis chaque joueur place son armée sur la carte, et enfin le jeu commence ``réellement'') et la fin d'une partie (calcul du gagnant, actions particulières en fonction du jeu). 
       
       Cependant, on ne s'occupera pas dans cette partie Serveur de tout ce qui correspondrait au rôle d'un serveur web classique. Par exemple, on n'assurera pas la distribution des fichiers statiques (c'est-à-dire HTML, CSS, JavaScript et images), ni la création et configuration des parties. On considère que, lorsqu'un joueur rejoint une partie, il a déjà tous les éléments nécessaires à sa gestion. Nous estimons que ces fonctionnalités ne rentrent pas dans le cadre d'un moteur de jeu, et qu'elles ne trouvent donc pas leur place dans ce projet. De plus, ce sont des fonctionnalités classiques, que de nombreux outils gèrent. On pourra donc facilement coupler notre moteur de jeu à un autre outil assurant toutes les fonctions. On pourra également envisager d'ajouter ces responsabilités au moteur par la suite. 
 
@@ -156,7 +156,7 @@
         
         Par exemple, on devra gérer le clic sur un bouton qui demande à finir le tour si le joueur est actif. Ou on enverra aux autres joueurs un message rédigé sur le chat de la partie. 
         
-        Comme pour la partie Affichage, on mettra en place des outils permettant d'interagir de manière poussée avec l'interface du jeu. On pourra par exemple vouloir déplacer une unité par un système de drag & drop. 
+        Comme pour la partie Affichage, on mettra en place des outils permettant d'interagir de manière poussée avec l'interface du jeu. On pourra par exemple vouloir déplacer une unité par un système de drag and drop. 
 
       \subsection{Communication}
 
@@ -257,15 +257,23 @@
 
 	\section{Civilization}
 
+    Diagramme de classes présentant les principaux concepts du jeu : 
+    
 		\includegraphics[width=320px]{diagrammes/concept_civilization.png}
 
+    Diagramme d'activités présentant le déroulement global du jeu : 
+    
 
 	\section{Dofus}
 	
+    Diagrammes de classes présentant les principaux concepts du jeu : 
+    
 		\includegraphics[width=320px]{diagrammes/classdiagram_dofus.png}
      
 		\includegraphics[width=320px]{diagrammes/concept_dofus.png}
 
+    Diagramme d'activités présentant le déroulement global du jeu : 
+    
 
 	\section{Heroes of Might and Magic}
 	
@@ -280,12 +288,20 @@
 
 	\section{Battle for Wesnoth}
 	
+    Diagramme de classes présentant les principaux concepts du jeu : 
+    
 		\includegraphics[width=320px]{diagrammes/Concept-Battle-of-Wesnoth.png}
 
+    Diagramme d'activités présentant le déroulement global du jeu : 
+    
 
 	\section{Fightly}
 	
+    Diagramme de classes présentant les principaux concepts du jeu : 
+    
 		\includegraphics[width=320px]{diagrammes/concept-fightly.png}
 
+    Diagramme d'activités présentant le déroulement global du jeu : 
+    
 
 \end{document}
