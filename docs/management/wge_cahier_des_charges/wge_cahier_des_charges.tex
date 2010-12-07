@@ -4,17 +4,22 @@
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{fullpage}
 
 \usepackage[colorlinks=true, urlcolor=blue, linkcolor=black]{hyperref}
 
-% Title Page
-\title{Web Game Engine - Cahier des charges}
-\author{Ilyas Boutebal \and Maxime Colin \and Adrian Gaudebert \and Youness Hamri \and Van-Duc Nguyen}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \begin{document}
-
-  \maketitle
+  
+  % Inclusion de la page de titre
+  \input{./wge_cahier_des_charges_title.tex}
+  
+  % Sommaire
   \tableofcontents
+
+  % Ajout d'une marge entre les paragraphes
+  \setlength{\parskip}{0.1in}
 
   \chapter{Contexte}
 
@@ -81,11 +86,11 @@
 
       Voici donc le diagramme modélisant les concepts qui nous paraissent essentiels à la réalisation d'un jeu de stratégie au tour par tour : 
       
-      \includegraphics[width=320px]{diagrammes/concept-fightly.png}
+      \includegraphics[width=420px]{diagrammes/concept-fightly.png}
       
       Voici également le diagramme d'activités représentant le déroulement classique d'une partie dans un jeu de STpT\footnote{STpT : Stratégie au Tour par Tour} : 
       
-      \includegraphics[width=320px]{diagrammes/moteuractivites.png}
+      \includegraphics[width=420px]{diagrammes/moteuractivites.png}
 
 
 
@@ -106,11 +111,11 @@
 
       Le diagramme suivant présente les principaux modules qui composeront la partie serveur de notre application. 
       
-      \includegraphics[width=320px]{diagrammes/moteur_serveur_classes.png}
+      \includegraphics[width=420px]{diagrammes/moteur_serveur_classes.png}
       
       Les modules de la partie cliente sont représentés dans le diagramme suivant. 
       
-      \includegraphics[width=320px]{diagrammes/moteur_client_classes.png}
+      \includegraphics[width=420px]{diagrammes/moteur_client_classes.png}
 
 
     \section{Serveur}
@@ -254,7 +259,7 @@
 
       Voici le planning prévisionnel des étapes de conception et de développement du projet : 
       
-      \includegraphics[width=320px]{img/planning.png}
+      \includegraphics[width=420px]{img/planning.png}
 
 
 \appendix
@@ -267,7 +272,7 @@
     
     Diagramme de classes présentant les principaux concepts du jeu : 
     
-		\includegraphics[width=320px]{diagrammes/concept_civilization.png}
+		\includegraphics[width=420px]{diagrammes/concept_civilization.png}
     
 
 	\section{Dofus}
@@ -276,15 +281,15 @@
 
     Diagramme de classes présentant les principaux concepts du jeu, version 1 : 
     
-		\includegraphics[width=320px]{diagrammes/classdiagram_dofus.png}
+		\includegraphics[width=420px]{diagrammes/classdiagram_dofus.png}
     
     Et version 2 :
      
-		\includegraphics[width=320px]{diagrammes/concept_dofus.png}
+		\includegraphics[width=420px]{diagrammes/concept_dofus.png}
 
     Diagramme d'activités présentant le déroulement global du jeu : 
     
-    \includegraphics[width=320px]{diagrammes/Dofus_ActivityDiagram.png}
+    \includegraphics[width=420px]{diagrammes/Dofus_ActivityDiagram.png}
     
 
 	\section{Heroes of Might and Magic}
@@ -293,11 +298,11 @@
 
     Diagramme de classes présentant les principaux concepts du jeu : 
     
-		\includegraphics[width=320px]{diagrammes/heroes_of_might_and_magic.png}
+		\includegraphics[width=420px]{diagrammes/heroes_of_might_and_magic.png}
 
     Diagramme d'activités présentant le déroulement global du jeu : 
     
-    \includegraphics[width=320px]{diagrammes/sequence-homm.png}
+    \includegraphics[width=420px]{diagrammes/sequence-homm.png}
     
 
 	\section{Battle for Wesnoth}
@@ -306,11 +311,11 @@
     
     Diagramme de classes présentant les principaux concepts du jeu : 
     
-		\includegraphics[width=320px]{diagrammes/Concept-Battle-of-Wesnoth.png}
+		\includegraphics[width=420px]{diagrammes/Concept-Battle-of-Wesnoth.png}
 
     Diagramme d'activités présentant le déroulement global du jeu : 
     
-    \includegraphics[width=320px]{diagrammes/Diagramme_Activites_BoW.png}
+    \includegraphics[width=420px]{diagrammes/Diagramme_Activites_BoW.png}
     
 
 	\section{Fightly}
@@ -319,11 +324,11 @@
 
     Diagramme de classes présentant les principaux concepts du jeu : 
     
-		\includegraphics[width=320px]{diagrammes/concept-fightly.png}
+		\includegraphics[width=420px]{diagrammes/concept-fightly.png}
 
     Diagramme d'activités présentant le déroulement global du jeu : 
     
-    \includegraphics[width=320px]{diagrammes/fightlyactivites.png}
+    \includegraphics[width=420px]{diagrammes/fightlyactivites.png}
     
 
 \end{document}
