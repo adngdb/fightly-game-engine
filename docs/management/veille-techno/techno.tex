@@ -5,6 +5,7 @@
 \usepackage[none]{hyphenat}
 \usepackage{listings}
 \usepackage{url}
+\usepackage{graphics}
 
 % Title Page
 \title{Communication}
@@ -23,6 +24,134 @@ Ce document présente les différentes technologies envisagées pour notre proje
 
 
 \chapter{Client}
+
+
+
+
+\section{HTML5}
+HTML5 est la dernière version de HTML, il introduit dans ses spécifications plusieurs 
+balises, 
+de nouveaux types et attributs pour les anciennes balises. 
+On pourrait implémenter la majorité des fonctionnalités qu'on souhaite en HTML, couplé 
+avec CSS et JavaScript, mais ce langage n'est pas fait pour nos besoins, et on va donc 
+chercher d'autres solutions plus adaptées. 
+
+\section{Canvas}
+Canvas est un composant de HTML5 qui permet d'effectuer des rendus dynamiques d'images 
+bitmap via des scripts.
+Canvas se résume donc en une zone de dessin dont la hauteur et la largeur sont définies 
+dans du code HTML. Du code javascript permet d'accéder à l'aire via une série complète de fonctions de dessins, 
+similaires aux autres API 2D, bien que permettant de générer dynamiquement des graphismes. Certaines personnes ont anticipé cet emploi de canvas en l'utilisant pour des graphiques, des animations et de la création d'images.
+Le composant canvas est plutôt récent et n'est pour le moment implémentée que par 
+quelques navigateurs: Firefox, Opéra, Safari, Konqueror, Google Chrome. 
+Internet Explorer est encore en retard là-dessus mais l'arrivée de IE 9 permettra
+ de le rattraper.
+
+\begin{itemize}
+  \item{Points forts}
+Dans un contexte hautement dynamique, la légèreté des images bitmap permet un traitement
+ plus rapide des graphiques.
+\item{Points faibles}
+ \begin{itemize}
+\item La qualité des graphiques baisse en fonction de la taille de l'écran.
+\item Très jeune âge.
+\end{itemize}
+\end{itemize}
+
+
+ Sources:
+\begin{itemize}
+\item \url{http://fr.wikipedia.org/wiki/Canvas_(HTML)}
+\item \url{https://developer.mozilla.org/fr/HTML/Canvas}
+\end{itemize} 
+	  
+
+\section{SVG}
+SVG est un format de données conçu pour décrire des ensembles de graphiques vectoriels. 
+Il est basé sur XML. Les coordonnées, dimensions et structures de ces graphiques 
+vectoriels sont indiqués sous forme numérique dans le document XML. 
+Les couleurs et les polices de caractères à utiliser sont gérées par 
+les feuilles de styles. 
+En plus de la gestion de formes basiques (rectangles, ellipses, etc.), SVG gère
+ des chemins (paths), qui utilisent les courbes de Bézier et qui permettent ainsi
+ d'obtenir presque n'importe quelle forme.  D'autres outils lui permettent de gérer 
+également le remplissage et la transparence des graphiques.
+
+\begin{itemize}
+\item Points forts
+\begin{itemize}
+\item Les graphiques vectoriels permettent de s'adapter aux différentes tailles d'écran, 
+i.e. graphiques de très bonne qualité en toute circonstance.
+\item Disponibilité de bibliothèques Javascript qui proposent des fonctionnalités de base 
+et permettent de faciliter le travail des développeurs (i.e. raphael.js).
+\item Il existe des logiciels graphiques qui permettent de modifier facilement chaque
+ forme, par exemple en déplaçant des points, ou en changeant la couleur des traits, etc.
+\end{itemize}
+\item Points Faibles
+\begin{itemize}
+\item Le revers de la médaille de la qualité du graphisme est évidemment la consommation 
+accrue de CPU (proportionnelle à la taille du graphique),
+\item Rendement très faible dans un contexte très dynamique.
+\item Ne permet pas de créer des points d'articulations, tels des nuds dans un graphe. 
+Bref, la notion de pointeur n'existe pas en SVG, ce qui rend la description de scènes 
+dynamiques complexe.
+\end{itemize} 
+\end{itemize} 
+
+Sources:\url{http://fr.wikipedia.org/wiki/Scalable_Vector_Graphics}
+
+\section{Flash}
+Les fichiers Flash, généralement appelés « animation Flash » portent l'extension .swf. 
+Ils peuvent être inclus dans une page web et lus par le plugin Flash du navigateur, ou 
+bien interprétés indépendamment dans le lecteur Flash Player. Flash est incontestablement 
+une des méthodes les plus populaires pour ajouter des animations et des objets
+ interactifs à une page web. 
+Cependant, si Flash est une technologie très adaptée à nos besoins, elle est propriétaire
+ et n'est donc pas compatible avec notre volonté de faire du « Web Ouvert ».
+ 
+Sources : 
+\begin{itemize}
+\item  \url{http://pro.clubic.com/creation-de-site-web/langage-programmation/actualite-334796-cs5-flash-canvas-html5.html}
+\item \url{http://fr.wikipedia.org/wiki/Adobe_Flash#Flash_et_le_.C2.AB_Web_.C2.BB}
+\end{itemize}
+
+\section{Comparatif}
+\includegraphics{bench.png}
+Le graphique ci-dessous nous donne un comparatif des quatre technologies dans 
+un contexte très dynamique.
+ 
+Le graphique ci-dessus donne un comparatif du rendement de ces quatre technologies sous 
+Firefox (résultat similaire pour les autres navigateurs) et le résultat est sans appel: 
+Flash l'emporte haut la main, canvas vient en deuxième position, HTML et SVG en dernière 
+position.
+
+  
+
+Le lien suivant donne un comparatif en image du rendement de ces technologies:
+ 
+\url{http://www.lafermeduweb.net/billet/un-bench-flash-vs-canvas-comparant-une-animation-de-particules-801.html}
+
+\section{Conclusion}
+Malgré la puissance de Flash, nous avons décidé de ne pas utiliser cette 
+technologie pour rester dans l'esprit de l'open source.
+Dans le contexte de notre moteur de jeux qui n'est pas très dynamique, le large panel 
+d'outils offert par SVG, grâce à son ancienneté et la qualité de ses graphiques,
+ nous incite à choisir cette technologie. De plus, elle est largement supportée par les navigateurs
+ (cf. Etude sur la compatibilité). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \chapter{Serveur}
