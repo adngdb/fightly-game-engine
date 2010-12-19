@@ -1,0 +1,55 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.11.17)  17 DEC 2010 20:02
+entering extended mode
+ %&-line parsing enabled.
+**techno.tex
+(./techno.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/report.cls
+Document Class: report 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size10.clo
+File: size10.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2006/05/05 v1.1b Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+
+
+! LaTeX Error: File `utf8x.def' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.128 \endinput
+               ^^M
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 234 strings out of 95086
+ 2606 string characters out of 1183254
+ 46858 words of memory out of 1500000
+ 3493 multiletter control sequences out of 10000+50000
+ 3640 words of font info for 14 fonts, out of 1200000 for 2000
+ 28 hyphenation exceptions out of 8191
+ 23i,0n,19p,150b,36s stack positions out of 5000i,500n,6000p,200000b,5000s
+!  ==> Fatal error occurred, no output PDF file produced!
