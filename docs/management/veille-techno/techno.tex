@@ -1,27 +1,28 @@
 \documentclass[a4paper,10pt]{report}
+
 \usepackage[utf8x]{inputenc}
 \usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
 \usepackage{fullpage}
-\usepackage[none]{hyphenat}
-\usepackage{listings}
-\usepackage{url}
-\usepackage{graphics}
 
-% Title Page
-\title{Communication}
-\author{Maxime COLIN}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=black]{hyperref}
 
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \begin{document}
-\maketitle
 
-\begin{abstract}
-Ce document présente les différentes technologies envisagées pour notre projet.
-\end{abstract}
+  % Inclusion de la page de titre
+  \input{./wge_veille_technologique_title.tex}
+  
+  % Sommaire
+  \tableofcontents
 
+  % Ajout d'une marge entre les paragraphes
+  \setlength{\parskip}{0.1in}
 
 \chapter{Compatibilité}
-Le HTML5, CSS3 …  sont des nouveautés à suivre ces temps-ci, et les navigateurs commencent à s’y adapter, mais à quel point ?
+Le HTML5 et CSS3 sont des nouveautés à suivre ces temps-ci, et les navigateurs commencent à s’y adapter, mais à quel point ?
 
 Voici quelques sites qui permettent de tester son navigateur, et de faire un petit bilan sur ce qui fonctionne, sur quel navigateur etc…
 
@@ -32,41 +33,38 @@ caniuse.com: Dans ce site on trouve des tableaux récapitulatifs en fonction des
 FindMeByIP.com : C’est une application Web gratuite qui permet de déterminer quelles sont les caractéristiques valides des différents navigateurs, en particulier concernant : HTML5 et CSS3. L’outil analyse et fournit les informations concernant la compatibilité de chaque navigateur.
 
 Pour conclure, quelques tableaux qui montrent la compatibilité de plusieurs navigateurs sur différents OS avec les différentes technologies.
-\textbf{Propriétés CSS3}
-\begin{center}
- \includegraphics[bb=0 0 491 131]{img/CSS-Prop.jpg}
- % CSS-Prop.jpg: 655x174 pixel, 96dpi, 17.33x4.60 cm, bb=0 0 491 131
-\end{center}
-\textbf{Applications Web HTML5}
-\begin{center}
- \includegraphics[bb=0 0 491 131]{img/HTML5-WebApp.jpg}
- % CSS-Prop.jpg: 655x174 pixel, 96dpi, 17.33x4.60 cm, bb=0 0 491 131
-\end{center}
-\textbf{Graphisme & contenu imbriqué HTML5  « Embedded Content »}
-\begin{center}
- \includegraphics[bb=0 0 491 131]{img/Graphics.jpg}
- % CSS-Prop.jpg: 655x174 pixel, 96dpi, 17.33x4.60 cm, bb=0 0 491 131
-\end{center}
 
-Donc la question qui se pose est : faut-il utiliser ces nouvelles technos (HTML5, CSS3, CANVAS, … dès aujourd'hui ?
+\section{Propriétés CSS3}
+
+\includegraphics[width=420px]{img/CSS-Prop.jpg}
+
+\section{Applications Web HTML5}
+
+ \includegraphics[width=420px]{img/HTML5-WebApp.jpg}
+
+\section{Graphisme et contenu imbriqué HTML5}
+
+ \includegraphics[width=420px]{img/Graphics.jpg}
+
+
+Donc la question qui se pose est : faut-il utiliser ces nouvelles technos (HTML5, CSS3, canvas... ) dès aujourd'hui ?
 Je pense que oui parce que :
--       Les balises HTML5 sont déjà en partie supportées par les navigateurs récents: Firefox, Safari, Chrome...
--       Le HTML5 Canvas permet de créer des applications dynamiques / animées / de type flash ... sans flash!
--       La lecture native de contenu media vidéo et audio dans la plus part des navigateurs.
--       On peut utiliser « Chrome Frame » pour rendre compatible l'HTML5 sur les vieux navigateurs comme IE6, IE7.
--       Les propriétés CSS3 sont déjà en partie supportées par plusieurs navigateurs récents comme Firefox, Safari, Chrome...
+\begin{itemize}
+  \item Les balises HTML5 sont déjà en partie supportées par les navigateurs récents: Firefox, Safari, Chrome...
+  \item Le HTML5 Canvas permet de créer des applications dynamiques / animées / de qualité équivalente à Flash... sans Flash!
+  \item La lecture native de contenu media vidéo et audio dans la plupart des navigateurs.
+  \item On peut utiliser « Chrome Frame » pour rendre compatible l'HTML5 sur les vieux navigateurs comme IE6, IE7.
+  \item Les propriétés CSS3 sont déjà en partie supportées par plusieurs navigateurs récents comme Firefox, Safari, Chrome...
+\end{itemize}
 
 \chapter{Client}
-
-
-
 
 \section{HTML5}
 HTML5 est la dernière version de HTML, il introduit dans ses spécifications plusieurs 
 balises, 
 de nouveaux types et attributs pour les anciennes balises. 
 On pourrait implémenter la majorité des fonctionnalités qu'on souhaite en HTML, couplé 
-avec CSS et JavaScript, mais ce langage n'est pas fait pour nos besoins, et on va donc 
+avec CSS et JavaScript, mais ce langage n'est pas conçus pour nos besoins, et on va donc 
 chercher d'autres solutions plus adaptées. 
 
 \section{Canvas}
@@ -82,13 +80,14 @@ Internet Explorer est encore en retard là-dessus mais l'arrivée de IE 9 permet
 
 \begin{itemize}
   \item{Points forts}
-Dans un contexte hautement dynamique, la légèreté des images bitmap permet un traitement
- plus rapide des graphiques.
-\item{Points faibles}
- \begin{itemize}
-\item La qualité des graphiques baisse en fonction de la taille de l'écran.
-\item Très jeune âge.
-\end{itemize}
+  \begin{itemize}
+    \item Dans un contexte hautement dynamique, la légèreté des images bitmap permet un traitement plus rapide des graphiques.
+  \end{itemize}
+  \item{Points faibles}
+  \begin{itemize}
+    \item La qualité des graphiques baisse en fonction de la taille de l'écran.
+    \item Très jeune âge.
+  \end{itemize}
 \end{itemize}
 
 
@@ -125,13 +124,13 @@ et permettent de faciliter le travail des développeurs (i.e. raphael.js).
 \item Le revers de la médaille de la qualité du graphisme est évidemment la consommation 
 accrue de CPU (proportionnelle à la taille du graphique),
 \item Rendement très faible dans un contexte très dynamique.
-\item Ne permet pas de créer des points d'articulations, tels des nuds dans un graphe. 
+\item Ne permet pas de créer des points d'articulations, tels des noeuds dans un graphe. 
 Bref, la notion de pointeur n'existe pas en SVG, ce qui rend la description de scènes 
 dynamiques complexe.
 \end{itemize} 
 \end{itemize} 
 
-Sources:\url{http://fr.wikipedia.org/wiki/Scalable_Vector_Graphics}
+Sources : \url{http://fr.wikipedia.org/wiki/Scalable_Vector_Graphics}
 
 \section{Flash}
 Les fichiers Flash, généralement appelés « animation Flash » portent l'extension .swf. 
@@ -143,57 +142,130 @@ Cependant, si Flash est une technologie très adaptée à nos besoins, elle est 
  et n'est donc pas compatible avec notre volonté de faire du « Web Ouvert ».
  
 Sources : 
+
 \begin{itemize}
-\item  \url{http://pro.clubic.com/creation-de-site-web/langage-programmation/actualite-334796-cs5-flash-canvas-html5.html}
-\item \url{http://fr.wikipedia.org/wiki/Adobe_Flash#Flash_et_le_.C2.AB_Web_.C2.BB}
+  \item \url{http://pro.clubic.com/creation-de-site-web/langage-programmation/actualite-334796-cs5-flash-canvas-html5.html}
+  \item \url{http://fr.wikipedia.org/wiki/Adobe_Flash#Flash_et_le_.C2.AB_Web_.C2.BB}
 \end{itemize}
 
 \section{Comparatif}
-\includegraphics{bench.png}
-Le graphique ci-dessous nous donne un comparatif des quatre technologies dans 
+
+  \includegraphics[width=420px]{img/bench.png}
+
+  Le graphique ci-dessous nous donne un comparatif des quatre technologies dans 
 un contexte très dynamique.
  
 Le graphique ci-dessus donne un comparatif du rendement de ces quatre technologies sous 
 Firefox (résultat similaire pour les autres navigateurs) et le résultat est sans appel: 
 Flash l'emporte haut la main, canvas vient en deuxième position, HTML et SVG en dernière 
-position.
-
-  
-
-Le lien suivant donne un comparatif en image du rendement de ces technologies:
- 
-\url{http://www.lafermeduweb.net/billet/un-bench-flash-vs-canvas-comparant-une-animation-de-particules-801.html}
+position. Le lien suivant donne un comparatif en image du rendement de ces technologies : \url{http://www.lafermeduweb.net/billet/un-bench-flash-vs-canvas-comparant-une-animation-de-particules-801.html}
 
 \section{Conclusion}
 Malgré la puissance de Flash, nous avons décidé de ne pas utiliser cette 
 technologie pour rester dans l'esprit de l'open source.
-Dans le contexte de notre moteur de jeux qui n'est pas très dynamique, le large panel 
+Dans le contexte de notre moteur de jeux qui n'est pas très dynamique puisqu'au tour par tour, le large panel 
 d'outils offert par SVG, grâce à son ancienneté et la qualité de ses graphiques,
  nous incite à choisir cette technologie. De plus, elle est largement supportée par les navigateurs
- (cf. Etude sur la compatibilité). .
-
-
-
-
-
-
-
-
-
-
-
-
-
+ (cf. Etude sur la compatibilité).
 
 
 
 \chapter{Serveur}
 
+  \section{Twisted}
+  
+Twisted est un moteur réseau événementiel (event-driven networking engine) écrit en Python et sous licence MIT Free Software licence. Il contient un serveur Web, de nombreux client chat, de serveur chat, de serveur mail, etc. Twisted supporte TCP, UDP, SSL/TLS, multicast, Unix domain sockets, un grand nombre de protocoles dont HTTP, NNTP, IMAP, SSH, IRC, FTP, et beaucoup d'autres.
+Le code source complet contient de nombreux Hooks pour le contenu dynamique.
+Écrit en Python, un langage de haut niveau, Twisted offre la sécurité et la stabilité grâce à la classe la plus commune de sécurité réseau, le "buffer-overflow", et au mécanisme de Python pour gérer des erreurs. 
+Servant les sites web à la haute circulation, le serveur web Twisted.web est configuré facilement.
+Plusieurs APIs intégrées permettent aux développeurs de développer rapidement des nouveaux protocoles et des nouveaux services.
+
+  \section{Tornado}
+  
+Tornado est la version open source du serveur web de FriendFeed, racheté par Facebook. C’est un serveur d’application web asynchrone et non-bloquant,  écrit en Python. Il peut traiter de nombreuses connections simultanées (les services Web en temps réel).
+Tornado contient plusieurs modules : web, escape, database, template, httpclient, auth, locale, option... Le module le plus important est le module web qui inclut la plupart des fonctionnalités principales de Tornado. Les autres modules sont les outils pour assister ce module.
+Parmi les frameworks web Python, Tornado est le plus rapide.
+
+  \section{Serveur Comet}
+  
+Ce sont les techniques permettant à un serveur web d'envoyer des informations au navigateur web sans que celui-ci l'ait explicitement demandé.  Il dépend des composants inclus par défaut dans les navigateurs web, tel que JavaScript. 
+Cette approche diffère amplement du modèle classique du web où le navigateur demande un page web complète à chaque fois.
+Des méthodes spécifiques implémentant Comet tombent dans deux catégories principales :
+\begin{itemize}
+ \item Streaming : Hidden IFrame, XMLHttpRequest
+ \item AJAX avec long polling : XMLHttpRequest long polling, Script tag long polling.
+\end{itemize}
+
+  \section{AJAX Push Engine Project}
+  
+APE est une technologie permettant d'échanger des données entre des milliers d'utilisateurs via un navigateur web, sans recharger tout la page web. C'est un serveur Comet. APE n’utilise que les standards du web (avec AJAX), il est donc compatible avec tous les navigateurs web sur les ordinateurs et bien sur les appareils mobiles.
+APE est divisé en 2 parties distinctes : la partie la plus centrale est le serveur APE  étant le serveur epoll-driven HTTP streaming. Et la partie APE JavaScript Framework envoie et reçoit les actions du côté client grâce aux protocoles APE.
+
+Serveur APE : étant un serveur COMET et écrit en C, le serveur APE implémente les méthodes POST et GEST du protocole HTTP. Il est utilisé uniquement pour AJAX Push.
+
+APE JavaScript Framework : reçoit des informations envoyées par le serveur (RAW), gère les données, et renvoie les commandes d’utilisateurs (CMD).
+
+L’avantage de APE le plus important est la vitesse du chargement. Il est entièrement adapté pour les connexions lentes telles que EDGE ou 3G.
+
+  \section{Ruby Event Machine}
+  
+Eventmachine est une bibliothèque de programmation pour Ruby, C++, et Java. Il fournit de l'event-driven I/O en utilisant le reactor pattern.  Le reactor pattern décrit un gestionnaire de service qui reçoit les événements et les envoie pour enregistrer. L’avantage du reactor pattern est la séparation entre répartition d’événements et l’application logique qui gère les événements, sans compliquer le code avec le multithreading.
+Fondamentalement, eventmachine (EM) s'occupe de toutes ces choses au bas niveau: l'écoute sur les sockets, la création de connexions réseau, la gestion de TIMERS et des simultanéités. 
+
+Eventmachine est conçu pour satisfaire simultanément 2 besoins principaux:
+L’expansion, les performances et la stabilité. 
+Une API qui élimine la complexité de la haute performance de programmation réseau, permettant aux ingénieurs de se concentrer sur leur logique d'application.
+L'idée de base : au lieu d'attendre une réponse du réseau, EventMachine utilise ce temps pour traiter d'autres demandes. Il peut gérer 5000-10000 connexions simultanées avec un seul processus Ruby. 
+
+  \section{Node.js}
+  
+Node.js est un framework Javascript qui s'exécute côté serveur, il est construit sur le moteur V8 (compilation à la volée), le très performant moteur JavaScript open source soutenu par Google et utilisé par le navigateur Chrome. Il permet de réaliser des applications web non-bloquantes, temps-réel (asynchrone), performantes, scalables.
+Node.js utilise une boucle d'événements (event loop) au lieu de threads, et peut gérer des millions de connexions simultanées. Chaque opération I/O dans Node.js est asynchrone, ce qui signifie que le serveur peut continuer à traiter les demandes entrantes pendant que l’opération I/O se déroule.
+Node.js fonctionne sur Linux, Mac OS X, FreeBSD. Windows ne supporte pas encore Node.js complètement. 
+
+Les avantages du langage JavaScript:
+\begin{itemize}
+ \item Le nombre de programmeur JavaScript est géant et il continue à augmenter.
+ \item JavaScript est soutenu par presque tous les navigateurs (même sur les appareils mobiles).
+ \item Il est en train de devenir l'une des langues les plus populaires
+\end{itemize}
+
+Les avantages du Node.js:
+\begin{itemize}
+ \item JavaScript est fait pour l'évènementiel: la programmation par callback est familière aux développeurs d'applications AJAX et, pour se faire, la syntaxe des fonctions anonymes et le support des closures est adapté.
+ \item Node est construit sur Javascript: de part sa présence dans les navigateurs, c'est peut-être le language le plus programmé au monde et bénéficie de 15 ans d'expérience.
+ \item Node se stabilise: l'API de Node gagne en maturité et est proche de se finaliser.
+ \item Node est simple et petit: la documentation se promène d'un seul regard et permet de rapidement connaitre ses fonctionnalités.
+ \item Node est rapide: le moteur V8 et l'architecture non bloquante en font l'une des architectures les plus puissantes du marché, spécialement pour les requêtes longues et intensives en I/O.
+\end{itemize}
+
+  \section{Conclusion}
+  
+En fait, tous ces technologies de serveur ont des avantages qui permettent de realiser des serveurs web non-bloquant, asynchrones, performants et scalables. 
+
+En premier lieu, on sait qu'on ne voudra pas utiliser Ruby Event Machine, car il est écrit dans des langages dont nous n'avons pas les compétences. On préfèrera donc utiliser soit Python, soit JavaScript. 
+
+APE Project pourrait être un choix judicieux si on choisi également de ne pas utiliser les WebSockets : il fournit une alternative élégante et fonctionnelle. 
+
+Node.js a l'avantage d'utiliser le langage JavaScript, qui est également le langage côté client. L'utiliser permettrait donc de ne maitriser qu'un seul langage, et donc de gagner en efficacité sur le projet. De plus, il semble très bien adapté à nos besoins. 
+
+Les serveurs Twisted et Tornado se distinguent peu au niveau des fonctionnalités dont nous avons besoin pour ce projet. 
+
+  \section{Sources}
+
+    \begin{itemize}
+    \item \url{http://twistedmatrix.com}
+    \item \url{http://www.tornadoweb.org/documentation}
+    \item \url{http://en.wikipedia.org/wiki/Comet_(programming)}
+    \item \url{http://www.ape-project.org/ajax-push.html}
+    \item \url{http://nodejs.org/}
+    \end{itemize}
+
 
 \chapter{Communication}
 
 Cette partie concerne les technologies de communication client/serveur et 
-client/client. Les différentes pistes retenu sont les WebSockets, Ahax, 
+client/client. Les différentes pistes retenu sont les WebSockets, Ajax, 
 Opera Unite.
 
   \section{WebSocket}
@@ -202,23 +274,22 @@ Opera Unite.
 
 WebSocket est une technologie fournissant un canal de communication bidirectionnel 
 et fullduplex à travers un socket TCP. Il a été conçu pour être implémenté dans 
-les navigateurs et serveurs web, mais il peut être utilisé n'importe quelle 
+les navigateurs et serveurs web, mais il peut être utilisé dans n'importe quelle 
 application client ou serveur. L'API WebSocket est en phase de standardisation 
 par le W3C et le protocole par IETF.
 
-
 Un tel canal de communication permet :
+
 \begin{itemize}
   \item la notification au client d'une modification d'état du serveur
-  \item l'envoie de données du serveur au client sans que celui ci n'ai à faire de requête
+  \item l'envoi de données du serveur au client sans que celui ci n'ait à faire de requête.
 \end{itemize}
-
 
     \subsection{Implémentation et support coté client}
 
 Le protocoles WebSocket est implémenté dans les navigateurs Chrome 4, Safari 5, 
 Firefox 4 et Opera 11. Son support est néanmoins désactivé dans Firefox 4 et 
-Opera 11 pour de raison de sécurité. Il est possible de l'activé via dans les 
+Opera 11 pour des raisons de sécurité. Il est possible de l'activer via dans les 
 paramètres des deux navigateurs. Internet Explorer ne supporte pas WebSocket.
 
 
@@ -226,37 +297,36 @@ paramètres des deux navigateurs. Internet Explorer ne supporte pas WebSocket.
 
 Le protocole nécessite également d'être implémenté côté serveur pour être 
 utilisé. Il existe plusieurs implémentations côté serveur de WebSocket, 
-dans différents langages (Java, Python, PHP, Javascript, ...) et sous 
-différentes formes (extension apache, serveur entier, script, ...).
-
+dans différents langages (Java, Python, PHP, Javascript...) et sous 
+différentes formes (extension apache, serveur entier, script...).
 
 Quelques implémentations :
+
 \begin{itemize}
   \item GNU WebSocket4J, une implémentation du protocole WebSocket en Java. 
-  \item pywebsocket3, une implémentation en Python sous la forme d'une extension pour le serveur  Apache.
+  \item pywebsocket3, une implémentation en Python sous la forme d'une extension pour le serveur Apache.
   \item jWebSocket, implémentation Java côté serveur et JavaScript/HTML5 côté client.
   \item Implémentation de WebSocket avec node.js
 \end{itemize}
-
 
     \subsection{Sécurité}
 
 WebSocket comporte à l'heure actuel une faille de sécurité dans la phase 
 de ``handshacke'' permettant de remplacer un fichier javascript par un malware. 
-La faille se situe au niveau de l'API elle même. C'est pourquoi son support 
-est désactivé par défaut Firefox 4 et Opera 11 jusqu'à ce que la faille 
-soit comblé.
+La faille se situe au niveau de l'API elle-même. C'est pourquoi son support 
+est désactivé par défaut sous Firefox 4 et Opera 11 jusqu'à ce que la faille 
+soit fixée.
 
 
   \section{Ajax}
 
     \subsection{Présentation}
 
-Ajax (Asynchronous Javascript and XML) est un rassemblement de different outils 
-et méthode de conception permettent de construire des application web dynamique 
-basé sur différentes technologies web côté client.
+Ajax (Asynchronous Javascript and XML) est un rassemblement de differents outils 
+et méthodes de conception permettant de construire des application web dynamiques
+basées sur différentes technologies web côté client.
 
-Ajax est une combinaison de technologie telle que JavaScript, CSS, XML, DOM et 
+Ajax est une combinaison de technologies telles que JavaScript, XML, DOM et 
 XMLHttpRequest dans le but de réaliser des applications Web qui offrent une 
 maniabilité et un confort d'utilisation supérieur à ce qui se faisait jusqu'alors.
 
@@ -299,12 +369,13 @@ navigateur Opera.
   \section{Conclusion}
 
 En conclusion, la technologie WebSocket semble la plus intéressante pour notre projet.
-Elle semble adapté à nos besoins. Néanmoins le fait que le protocoles soit 
+Elle semble adaptée à nos besoins. Néanmoins le fait que le protocole soit 
 encore en phase de développement et le fait qu'il soit désactivé par défaut 
 sur certains navigateurs pourrait poser problème.
 
 Ajax semble également correspondre à certaines de nos attentes, mais dispose de plus
-de restriction au niveau communication client/serveur.
+de restrictions au niveau communication client/serveur.
+
 
 \chapter{Formats de données}
 
@@ -410,15 +481,8 @@ de l’accessibilité du web.
 
   \section{Conclusion}
 
-JSON et XML sont les deux format qui semble les plus adaptés à nos besoin. 
+JSON et XML sont les deux format qui semblent les plus adaptés à nos besoin. 
 JSON à un avantage au niveau de son interprétation par Javascript, une 
 technologie certainement clé dans ce projet.
-
-\chapter{Webographie}
-
-  \section{Delicious}
-
-Mon compte delicious : \url{http://www.delicious.com/binome.lyon/wge}
-
 
 \end{document}
