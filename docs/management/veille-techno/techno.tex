@@ -172,63 +172,106 @@ d'outils offert par SVG, grâce à son ancienneté et la qualité de ses graphiq
 
 \chapter{Serveur}
 
-  \section{Twisted}
-  
-Twisted est un moteur réseau événementiel (event-driven networking engine) écrit en Python et sous licence MIT Free Software licence. Il contient un serveur Web, de nombreux client chat, de serveur chat, de serveur mail, etc. Twisted supporte TCP, UDP, SSL/TLS, multicast, Unix domain sockets, un grand nombre de protocoles dont HTTP, NNTP, IMAP, SSH, IRC, FTP, et beaucoup d'autres.
-Le code source complet contient de nombreux Hooks pour le contenu dynamique.
-Écrit en Python, un langage de haut niveau, Twisted offre la sécurité et la stabilité grâce à la classe la plus commune de sécurité réseau, le "buffer-overflow", et au mécanisme de Python pour gérer des erreurs. 
-Servant les sites web à la haute circulation, le serveur web Twisted.web est configuré facilement.
-Plusieurs APIs intégrées permettent aux développeurs de développer rapidement des nouveaux protocoles et des nouveaux services.
-
-  \section{Tornado}
-  
-Tornado est la version open source du serveur web de FriendFeed, racheté par Facebook. C’est un serveur d’application web asynchrone et non-bloquant,  écrit en Python. Il peut traiter de nombreuses connections simultanées (les services Web en temps réel).
-Tornado contient plusieurs modules : web, escape, database, template, httpclient, auth, locale, option... Le module le plus important est le module web qui inclut la plupart des fonctionnalités principales de Tornado. Les autres modules sont les outils pour assister ce module.
-Parmi les frameworks web Python, Tornado est le plus rapide.
-
-  \section{Serveur Comet}
-  
-Ce sont les techniques permettant à un serveur web d'envoyer des informations au navigateur web sans que celui-ci l'ait explicitement demandé.  Il dépend des composants inclus par défaut dans les navigateurs web, tel que JavaScript. 
-Cette approche diffère amplement du modèle classique du web où le navigateur demande un page web complète à chaque fois.
-Des méthodes spécifiques implémentant Comet tombent dans deux catégories principales :
+  \section{TWISTED}
+Twisted est un moteur réseau événementiel (event-driven networking engine) écrit en Python et sous licence MIT Free Software licence. Il contient un serveur Web, de nombreux client chat, de serveur chat, de serveur mail, et etc. Twisted supporte TCP, UDP, SSL/TLS, multicast, Unix domain sockets, un grand nombre de protocoles dont HTTP, NNTP, IMAP, SSH, IRC, FTP, et beaucoup d'autres.
 \begin{itemize}
- \item Streaming : Hidden IFrame, XMLHttpRequest
- \item AJAX avec long polling : XMLHttpRequest long polling, Script tag long polling.
+\item Le code source complet contient de nombreux Hooks pour le contenu dynamique.
+\item Écrit en Python, un langage de haut niveau, Twisted offre la sécurité et la stabilité grâce à la classe la plus commune de réseau sécurité, le "buffer-overflow", et au mécanisme de Python pour gérer des erreurs. 
+\item Servant les sites web à la haute circulation, le serveur web Twisted.web est configuré facilement.
+\item Plusieurs APIs intégrés permettent aux développeurs de développer rapidement des nouveaux protocoles et des nouveaux services.
+\item Simplement pour développer le client et serveur avec une même base de code (base-code).
 \end{itemize}
 
-  \section{AJAX Push Engine Project}
-  
-APE est une technologie permettant d'échanger des données entre des milliers d'utilisateurs via un navigateur web, sans recharger tout la page web. C'est un serveur Comet. APE n’utilise que les standards du web (avec AJAX), il est donc compatible avec tous les navigateurs web sur les ordinateurs et bien sur les appareils mobiles.
-APE est divisé en 2 parties distinctes : la partie la plus centrale est le serveur APE  étant le serveur epoll-driven HTTP streaming. Et la partie APE JavaScript Framework envoie et reçoit les actions du côté client grâce aux protocoles APE.
 
-Serveur APE : étant un serveur COMET et écrit en C, le serveur APE implémente les méthodes POST et GEST du protocole HTTP. Il est utilisé uniquement pour AJAX Push.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.7, bb=0 0 251 314]{img/Twisted.png}     
+\end{figure} 
 
-APE JavaScript Framework : reçoit des informations envoyées par le serveur (RAW), gère les données, et renvoie les commandes d’utilisateurs (CMD).
+Lorsque le Serveur reçoit une requête de Client, il crée un objet Request et l’envoie au système de ressources qui détermine l’objet Resource approprié à l’URL demandé par le Client.
 
-L’avantage de APE le plus important est la vitesse du chargement. Il est entièrement adapté pour les connexions lentes telles que EDGE ou 3G.
+  \section{TORNADO}
+Tornado est la version open source de serveur web de FriendFeed racheté par Facebook. C’est un serveur d’application web asynchrone et non-blocking,  écrit en Python. Il peut traiter de nombreuses connections simultanée (les services Web en temps réel).
 
-  \section{Ruby Event Machine}
-  
-Eventmachine est une bibliothèque de programmation pour Ruby, C++, et Java. Il fournit de l'event-driven I/O en utilisant le reactor pattern.  Le reactor pattern décrit un gestionnaire de service qui reçoit les événements et les envoie pour enregistrer. L’avantage du reactor pattern est la séparation entre répartition d’événements et l’application logique qui gère les événements, sans compliquer le code avec le multithreading.
-Fondamentalement, eventmachine (EM) s'occupe de toutes ces choses au bas niveau: l'écoute sur les sockets, la création de connexions réseau, la gestion de TIMERS et des simultanéités. 
+
+Tornado contient plusieurs modules : web, escape, database, template, httpclient, auth, locale, option,… Le module le plus important est le module web qui inclut la plupart des fonctionnalités principales de Tornado. Les autres modules sont les outils pour assister ce module.
+
+
+Parmi les frameworks web Python, Tornade est le plus rapide.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.7, bb=0 0 601 175]{img/Tornado.png} 
+\end{figure} 
+
+  \section{COMET}
+Ce sont les techniques permettant à un serveur web d'envoyer des informations au navigateur web sans que celui-ci l'ait explicitement demandé.  Il dépend des composants inclus par défaut dans les navigateurs web, tel que JavaScript. Cette approche diffère amplement du modèle classique du web où le navigateur demande un page web complet pour chaque fois.
+
+Des méthodes spécifiques implémentant Comet tombe dans 2 major catégories:
+\begin{itemize}
+\item Streaming : Hidden IFrame, XMLHttpRequest
+\item AJAX avec long polling : XMLHttpRequest long polling, Script tag long polling.
+\end{itemize}
+
+  \section{AJAX PUSH ENGINE PROJECT}
+APE est une technologie permettant d'échanger des données entre des milliers d'utilisateurs via un navigateur web, sans recharger tout la page web.. APE n’utilise que les standards du web (avec AJAX), alors il est compatible avec tous les navigateurs web sur les ordinateurs et bien sur les appareils mobiles.
+
+
+APE est devisé en 2 parties distinctes : La partie la plus centrale est le serveur APE  étant le serveur epoll-driven HTTP streaming. Et la partie APE JavaScript Framework envoie et reçoit les actions du côté client grâce aux les protocoles APE.
+
+\begin{itemize}
+
+ \item \textbf{Serveur APE:} étant un serveur COMET et écrit en C, le serveur APE implémente les méthodes POST et GEST du protocole HTTP. Il est utilisé uniquement pour AJAX Push.
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.6, bb=0 0 497 136]{img/APEServeur.png} 
+  \end{figure} 
+ \item \textbf{APE JavaScript Framework:} reçoit des informations envoyées par le serveur (RAW), gère les données, et renvoie les commandes d’utilisateurs (CMD).
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.6, bb=0 0 500 127]{img/APEFramework.png} 
+  \end{figure} 
+\end{itemize}
+
+
+L’advantage de l’APE le plus important est la vitesse du chargement. Il est entièrement adapté pour les connexions lentes telles que EDGE ou 3G.
+
+  \section{RUBY EVENT MACHINE}
+Eventmachine est une bibliothèque de programmation pour Ruby, C++, et Java. Il fournit event-driven I/O en utilisant le reactor pattern.  Le reactor pattern décrit un gestionnaire de service qui reçoit les événements et les envoie pour enregistrer. L’avantage du reactor pattern est la séparation entre répartition d’événements et l’application logique qui gère les événements, sans compliquer le code avec le multithreading.
+
+
+Fondamentalement, eventmachine (EM) s'occupe de toutes ces choses au bas niveau: l'écoute sur les sockets, la création de connexions réseau, la gestion de TIMERS  et des simultanéités. 
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.7, bb=0 0 414 415]{img/RubyEM.png} 
+  \end{figure}
+
 
 Eventmachine est conçu pour satisfaire simultanément 2 besoins principaux:
-L’expansion, les performances et la stabilité. 
-Une API qui élimine la complexité de la haute performance de programmation réseau, permettant aux ingénieurs de se concentrer sur leur logique d'application.
-L'idée de base : au lieu d'attendre une réponse du réseau, EventMachine utilise ce temps pour traiter d'autres demandes. Il peut gérer 5000-10000 connexions simultanées avec un seul processus Ruby. 
+\begin{itemize}
+ \item L’expansion, les performances et la stabilité
+ \item Une API qui élimine la complexité de la haute performance de programmation réseau, permettant aux ingénieurs de se concentrer sur leur logique d'application.
+\end{itemize}
 
-  \section{Node.js}
-  
+
+L'idée de base: Au lieu d'attendre une réponse du réseau, EventMachine utilise ce temps pour traiter d'autres demandes. Il peut gérer 5000-10000 connexions simultanées avec un seul processus Ruby. 
+
+  \section{NODE.JS}
 Node.js est un framework Javascript qui s'exécute côté serveur, il est construit sur le moteur V8 (compilation à la volée), le très performant moteur JavaScript open source soutenu par Google et utilisé par le navigateur Chrome. Il permet de réaliser des applications web non-bloquantes, temps-réel (asynchrone), performantes, scalables.
+
+
 Node.js utilise une boucle d'événements (event loop) au lieu de threads, et peut gérer des millions de connexions simultanées. Chaque opération I/O dans Node.js est asynchrone, ce qui signifie que le serveur peut continuer à traiter les demandes entrantes pendant que l’opération I/O se déroule.
-Node.js fonctionne sur Linux, Mac OS X, FreeBSD. Windows ne supporte pas encore Node.js complètement. 
+
+
+Node.js fonctionne sur Linux, Mac OS X, FreeBSD. Windows ne supporte pas encore Node.js complètement.
+
 
 Les avantages du langage JavaScript:
 \begin{itemize}
  \item Le nombre de programmeur JavaScript est géant et il continue à augmenter.
  \item JavaScript est soutenu par presque tous les navigateurs (même sur les appareils mobiles).
- \item Il est en train de devenir l'une des langues les plus populaires
+ \item Il est en train de devenir l'une des langues les plus populaires.
 \end{itemize}
+
 
 Les avantages du Node.js:
 \begin{itemize}
@@ -236,11 +279,10 @@ Les avantages du Node.js:
  \item Node est construit sur Javascript: de part sa présence dans les navigateurs, c'est peut-être le language le plus programmé au monde et bénéficie de 15 ans d'expérience.
  \item Node se stabilise: l'API de Node gagne en maturité et est proche de se finaliser.
  \item Node est simple et petit: la documentation se promène d'un seul regard et permet de rapidement connaitre ses fonctionnalités.
- \item Node est rapide: le moteur V8 et l'architecture non bloquante en font l'une des architectures les plus puissantes du marché, spécialement pour les requêtes longues et intensives en I/O.
+ \item Node est rapide: le moteur V8 et l'architecture non bloquante en font l'une des architectures les plus puissantes du marché, spécialement pour les requêtes longues et intensives en I/O. 
 \end{itemize}
 
-  \section{Conclusion}
-  
+  \section{CONCLUSION}
 En fait, tous ces technologies de serveur ont des avantages qui permettent de realiser des serveurs web non-bloquant, asynchrones, performants et scalables. 
 
 En premier lieu, on sait qu'on ne voudra pas utiliser Ruby Event Machine, car il est écrit dans des langages dont nous n'avons pas les compétences. On préfèrera donc utiliser soit Python, soit JavaScript. 
@@ -251,7 +293,9 @@ Node.js a l'avantage d'utiliser le langage JavaScript, qui est également le lan
 
 Les serveurs Twisted et Tornado se distinguent peu au niveau des fonctionnalités dont nous avons besoin pour ce projet. 
 
-  \section{Sources}
+
+
+  \paragraph{Sources}
 
     \begin{itemize}
     \item \url{http://twistedmatrix.com}
@@ -260,6 +304,8 @@ Les serveurs Twisted et Tornado se distinguent peu au niveau des fonctionnalité
     \item \url{http://www.ape-project.org/ajax-push.html}
     \item \url{http://nodejs.org/}
     \end{itemize}
+
+
 
 
 \chapter{Communication}
