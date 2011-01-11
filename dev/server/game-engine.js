@@ -1,5 +1,5 @@
 var sys = require("sys"),
-    ws  = require('./vendor/node-websocket-server/lib/ws/server');
+    ws  = require("websocket-server");
 
 function log(data){
   sys.log("\033[0;32m"+data+"\033[0m");
