@@ -1,23 +1,29 @@
+var comm = require("./communication");
 
-function Client(connectionData, server) {
+exports.Client = function(connectionData, serverNode) {
     this.conn = connectionData;
-    this.server = server;
+    this.server = serverNode;
 
-    conn.addListener("message", function(msg)
+    connectionData.addListener("message", function(msg)
     {
-        this.onMessage(msg);
+        //onMessage(msg);
+	console.log("Message received: " + msg);
+	comm.Communication.manageMessage(connectionData, serverNode, msg);
     });
 
-    client.addListener("close", function()
+    connectionData.addListener("close", function()
     {
-        this.onClose();
+        console.log("Connection " + connectionData.id + "closed");
     });
 }
 
-Client.prototype = {
+/*
+exports.Client.prototype = {
     send: function(message) {
         server.send(conn.id, message);
     },
     onMessage: function(msg) {
-    },
+	console.log("Message received: " + msg);
+    }
 }
+*/
