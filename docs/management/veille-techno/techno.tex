@@ -48,11 +48,11 @@ Pour conclure, quelques tableaux qui montrent la compatibilité de plusieurs nav
 
 
 Donc la question qui se pose est : faut-il utiliser ces nouvelles technos (HTML5, CSS3, canvas... ) dès aujourd'hui ?
-Je pense que oui parce que :
+Nous pensons que oui parce que :
 \begin{itemize}
   \item Les balises HTML5 sont déjà en partie supportées par les navigateurs récents: Firefox, Safari, Chrome...
-  \item Le HTML5 Canvas permet de créer des applications dynamiques / animées / de qualité équivalente à Flash... sans Flash!
-  \item La lecture native de contenu media vidéo et audio dans la plupart des navigateurs.
+  \item Le HTML5 Canvas permet de créer des applications dynamiques / animées / de qualité équivalente à Flash... sans Flash !
+  \item La lecture native de contenu media, vidéo et audio, dans la plupart des navigateurs.
   \item On peut utiliser « Chrome Frame » pour rendre compatible l'HTML5 sur les vieux navigateurs comme IE6, IE7.
   \item Les propriétés CSS3 sont déjà en partie supportées par plusieurs navigateurs récents comme Firefox, Safari, Chrome...
 \end{itemize}
@@ -78,18 +78,18 @@ quelques navigateurs: Firefox, Opéra, Safari, Konqueror, Google Chrome.
 Internet Explorer est encore en retard là-dessus mais l'arrivée de IE 9 permettra
  de le rattraper.
 
+\subsection{Points forts}
+
 \begin{itemize}
-  \item{Points forts}
-  \begin{itemize}
-    \item Dans un contexte hautement dynamique, la légèreté des images bitmap permet un traitement plus rapide des graphiques.
-  \end{itemize}
-  \item{Points faibles}
-  \begin{itemize}
-    \item La qualité des graphiques baisse en fonction de la taille de l'écran.
-    \item Très jeune âge.
-  \end{itemize}
+  \item Dans un contexte hautement dynamique, la légèreté des images bitmap permet un traitement plus rapide des graphiques.
 \end{itemize}
 
+\subsection{Points faibles}
+
+\begin{itemize}
+  \item La qualité des graphiques baisse en fonction de la taille de l'écran.
+  \item Très jeune âge.
+\end{itemize}
 
  Sources:
 \begin{itemize}
@@ -109,26 +109,27 @@ En plus de la gestion de formes basiques (rectangles, ellipses, etc.), SVG gère
  d'obtenir presque n'importe quelle forme.  D'autres outils lui permettent de gérer 
 également le remplissage et la transparence des graphiques.
 
+\subsection{Points forts}
+
 \begin{itemize}
-\item Points forts
-\begin{itemize}
-\item Les graphiques vectoriels permettent de s'adapter aux différentes tailles d'écran, 
-i.e. graphiques de très bonne qualité en toute circonstance.
-\item Disponibilité de bibliothèques Javascript qui proposent des fonctionnalités de base 
-et permettent de faciliter le travail des développeurs (i.e. raphael.js).
-\item Il existe des logiciels graphiques qui permettent de modifier facilement chaque
- forme, par exemple en déplaçant des points, ou en changeant la couleur des traits, etc.
+  \item Les graphiques vectoriels permettent de s'adapter aux différentes tailles d'écran, 
+  i.e. graphiques de très bonne qualité en toute circonstance.
+  \item Disponibilité de bibliothèques Javascript qui proposent des fonctionnalités de base 
+  et permettent de faciliter le travail des développeurs (i.e. raphael.js).
+  \item Il existe des logiciels graphiques qui permettent de modifier facilement chaque
+  forme, par exemple en déplaçant des points, ou en changeant la couleur des traits, etc.
 \end{itemize}
-\item Points Faibles
+
+\subsection{Points faibles}
+
 \begin{itemize}
-\item Le revers de la médaille de la qualité du graphisme est évidemment la consommation 
-accrue de CPU (proportionnelle à la taille du graphique),
-\item Rendement très faible dans un contexte très dynamique.
-\item Ne permet pas de créer des points d'articulations, tels des noeuds dans un graphe. 
-Bref, la notion de pointeur n'existe pas en SVG, ce qui rend la description de scènes 
-dynamiques complexe.
-\end{itemize} 
-\end{itemize} 
+  \item Le revers de la médaille de la qualité du graphisme est évidemment la consommation 
+  accrue de CPU (proportionnelle à la taille du graphique),
+  \item Rendement très faible dans un contexte très dynamique.
+  \item Ne permet pas de créer des points d'articulations, tels des noeuds dans un graphe. 
+  Bref, la notion de pointeur n'existe pas en SVG, ce qui rend la description de scènes 
+  dynamiques complexe.
+\end{itemize}
 
 Sources : \url{http://fr.wikipedia.org/wiki/Scalable_Vector_Graphics}
 
@@ -152,16 +153,17 @@ Sources :
 
 Crafty.js est un framework JavaScript pour les jeux vidéos, dont le but est de fournir un ensemble de briques de bases et d'être très modulable. Il se base pour cela sur le modèle Composant / Entité\footnote{Cf. \url{http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy} ou \url{http://www.gamearchitect.net/Articles/GameObjects1.html}} : chaque objet du jeu est une entité, et chaque entité est composée d'un ensemble de composants. Les différents composants de l'application contiennent les fonctionnalités du jeu. On aura par exemple une entité Unité qui aura pour composants ``2D, draw, health, clickable''. 
 
-\subsection{Avantages}
+Utiliser Crafty dans ce projet apporte plusieurs avantages : tout d'abord, on bénéficie d'une structure de base pour le code côté client, Crafty.js étant un framework qui fournit une structure et des fonctionnalités utiles à notre projet. Le modèle Composant / Entité présenté ci-dessus présente de nombreux intérêts, et nous permettra d'étendre de manière simple notre code, en créant de nouveaux composants. Ensuite, Crafty nous permettra, dans un premier temps au moins, de ne pas nous occuper de fonctionnalités comme l'affichage, afin de nous concentrer sur des éléments plus important (le gameplay par exemple). 
+
+\subsection{Points forts}
 
 \begin{itemize}
   \item Fourni un grand nombre de fonctionnalités nécessaires à notre moteur
   \item Architecture modulaire et extensible (possibilité d'ajouter, de manière simple, nos propres fonctionnalités)
-  \item License libre (double license GPL et MIT)
+  \item Licence libre (double licence GPL et MIT)
 \end{itemize}
 
-
-\subsection{Inconvénients}
+\subsection{Points faibles}
 
 \begin{itemize}
  \item Pas de prise en charge native de SVG (uniquement canvas et DOM), mais possibilité d'étendre
@@ -189,11 +191,13 @@ d'outils offert par SVG, grâce à son ancienneté et la qualité de ses graphiq
  nous incite à choisir cette technologie. De plus, elle est largement supportée par les navigateurs
  (cf. Etude sur la compatibilité).
 
+L'outil Crafty.js nous parait également approprié afin de gagner du temps lors du développement. Nous choisissons donc de l'utiliser avec pour but d'y implémenter la gestion du SVG.
+
 
 
 \chapter{Serveur}
 
-  \section{TWISTED}
+  \section{Twisted}
 Twisted est un moteur réseau événementiel (event-driven networking engine) écrit en Python et sous licence MIT Free Software licence. Il contient un serveur Web, de nombreux client chat, de serveur chat, de serveur mail, et etc. Twisted supporte TCP, UDP, SSL/TLS, multicast, Unix domain sockets, un grand nombre de protocoles dont HTTP, NNTP, IMAP, SSH, IRC, FTP, et beaucoup d'autres.
 \begin{itemize}
 \item Le code source complet contient de nombreux Hooks pour le contenu dynamique.
@@ -211,7 +215,7 @@ Twisted est un moteur réseau événementiel (event-driven networking engine) é
 
 Lorsque le Serveur reçoit une requête de Client, il crée un objet Request et l’envoie au système de ressources qui détermine l’objet Resource approprié à l’URL demandé par le Client.
 
-  \section{TORNADO}
+  \section{Tornado}
 Tornado est la version open source de serveur web de FriendFeed racheté par Facebook. C’est un serveur d’application web asynchrone et non-blocking,  écrit en Python. Il peut traiter de nombreuses connections simultanée (les services Web en temps réel).
 
 
@@ -224,7 +228,7 @@ Parmi les frameworks web Python, Tornade est le plus rapide.
   \includegraphics[scale=0.7, bb=0 0 601 175]{img/Tornado.png} 
 \end{figure} 
 
-  \section{COMET}
+  \section{Comet}
 Ce sont les techniques permettant à un serveur web d'envoyer des informations au navigateur web sans que celui-ci l'ait explicitement demandé.  Il dépend des composants inclus par défaut dans les navigateurs web, tel que JavaScript. Cette approche diffère amplement du modèle classique du web où le navigateur demande un page web complet pour chaque fois.
 
 Des méthodes spécifiques implémentant Comet tombe dans 2 major catégories:
@@ -233,7 +237,7 @@ Des méthodes spécifiques implémentant Comet tombe dans 2 major catégories:
 \item AJAX avec long polling : XMLHttpRequest long polling, Script tag long polling.
 \end{itemize}
 
-  \section{AJAX PUSH ENGINE PROJECT}
+  \section{AJAX Push Engine Project}
 APE est une technologie permettant d'échanger des données entre des milliers d'utilisateurs via un navigateur web, sans recharger tout la page web.. APE n’utilise que les standards du web (avec AJAX), alors il est compatible avec tous les navigateurs web sur les ordinateurs et bien sur les appareils mobiles.
 
 
@@ -256,7 +260,7 @@ APE est devisé en 2 parties distinctes : La partie la plus centrale est le ser
 
 L’advantage de l’APE le plus important est la vitesse du chargement. Il est entièrement adapté pour les connexions lentes telles que EDGE ou 3G.
 
-  \section{RUBY EVENT MACHINE}
+  \section{Ruby Event Machine}
 Eventmachine est une bibliothèque de programmation pour Ruby, C++, et Java. Il fournit event-driven I/O en utilisant le reactor pattern.  Le reactor pattern décrit un gestionnaire de service qui reçoit les événements et les envoie pour enregistrer. L’avantage du reactor pattern est la séparation entre répartition d’événements et l’application logique qui gère les événements, sans compliquer le code avec le multithreading.
 
 
@@ -276,7 +280,7 @@ Eventmachine est conçu pour satisfaire simultanément 2 besoins principaux:
 
 L'idée de base: Au lieu d'attendre une réponse du réseau, EventMachine utilise ce temps pour traiter d'autres demandes. Il peut gérer 5000-10000 connexions simultanées avec un seul processus Ruby. 
 
-  \section{NODE.JS}
+  \section{Node.js}
 Node.js est un framework Javascript qui s'exécute côté serveur, il est construit sur le moteur V8 (compilation à la volée), le très performant moteur JavaScript open source soutenu par Google et utilisé par le navigateur Chrome. Il permet de réaliser des applications web non-bloquantes, temps-réel (asynchrone), performantes, scalables.
 
 
@@ -294,7 +298,7 @@ Les avantages du langage JavaScript:
 \end{itemize}
 
 
-Les avantages du Node.js:
+Les avantages de Node.js:
 \begin{itemize}
  \item JavaScript est fait pour l'évènementiel: la programmation par callback est familière aux développeurs d'applications AJAX et, pour se faire, la syntaxe des fonctions anonymes et le support des closures est adapté.
  \item Node est construit sur Javascript: de part sa présence dans les navigateurs, c'est peut-être le language le plus programmé au monde et bénéficie de 15 ans d'expérience.
@@ -303,7 +307,8 @@ Les avantages du Node.js:
  \item Node est rapide: le moteur V8 et l'architecture non bloquante en font l'une des architectures les plus puissantes du marché, spécialement pour les requêtes longues et intensives en I/O. 
 \end{itemize}
 
-  \section{CONCLUSION}
+  \section{Conclusion}
+
 En fait, tous ces technologies de serveur ont des avantages qui permettent de realiser des serveurs web non-bloquant, asynchrones, performants et scalables. 
 
 En premier lieu, on sait qu'on ne voudra pas utiliser Ruby Event Machine, car il est écrit dans des langages dont nous n'avons pas les compétences. On préfèrera donc utiliser soit Python, soit JavaScript. 
@@ -551,5 +556,18 @@ de l’accessibilité du web.
 JSON et XML sont les deux format qui semblent les plus adaptés à nos besoin. 
 JSON à un avantage au niveau de son interprétation par Javascript, une 
 technologie certainement clé dans ce projet.
+
+\chapter{Choix technologiques}
+
+  Au terme de cette étude, nous avons fait les choix suivants : 
+
+  \begin{itemize}
+   \item Client : SVG + Crafty.js
+   \item Serveur : Node.js
+   \item Communication : WebSocket + JSON
+  \end{itemize}
+
+  Ces choix impliquent que l'on programmera exclusivement en JavaScript (avec Node.js côté serveur), avec bien sur du HTML et CSS côté client. De plus, nous utiliserons certainement certains outils (modules, bibliothèques... ) répondant à nos besoins, si ceux-ci existent déjà, sont éprouvés et peuvent être isolés dans notre application, afin de rester globalement indépendant à ces outils. 
+
 
 \end{document}
