@@ -1,30 +1,30 @@
-var sys = require('sys');
+var sys = require('sys'),
+    gf = require('./world/game-factory.js'),
+    pf = require('./world/player-factory.js');
 
-var components = {},
-    entities = {},
-    games = {};
-
-exports.log = function(data) {
-    sys.log("\033[0;32m"+data+"\033[0m");
-};
-var log = this.log;
+var games = [];
 
 exports.WGE = function() {
+
+    this.playerFactory = null;
+    this.gameFactory = null;
+
     this.init();
 };
 
 exports.WGE.prototype = {
     init: function() {
-        log("GameEngine: init()");
+        sys.log("GameEngine: init()");
+
+        // Factories
+        this.gameFactory = new gf.GameFactory();
+        this.playerFactory = new pf.PlayerFactory();
+
         return this;
     },
 
     start: function() {
-        log("GameEngine: start()");
+        sys.log("GameEngine: start()");
         return this;
     },
-
-    getGames: function() {
-        return this.games;
-    }
 }
