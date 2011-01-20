@@ -1,8 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
                     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script>$(document).ready(function() {
+    Logger = { log: function(msg) {
+            //$('#log').append('<li>'+msg+'</li>');
+        }
+    };
+});</script>
 <script type="text/javascript" src="crafty.js"></script>
 <script type="text/javascript" src="clickable.js"></script>
 <script type="text/javascript" src="game.js"></script>
@@ -11,6 +17,6 @@
 
 </head>
 <body>
-
+    <ul id="log"></ul>
 </body>
 </html>
