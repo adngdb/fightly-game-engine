@@ -1,4 +1,5 @@
 var sys = require('sys'),
+    server = require('./network/server.js'),
     gf = require('./world/game-factory.js'),
     pf = require('./world/player-factory.js');
 
@@ -8,6 +9,8 @@ exports.WGE = function() {
 
     this.playerFactory = null;
     this.gameFactory = null;
+
+    this.server = new server.Server();
 
     this.init();
 };
