@@ -148,6 +148,27 @@ Sources :
   \item \url{http://fr.wikipedia.org/wiki/Adobe_Flash#Flash_et_le_.C2.AB_Web_.C2.BB}
 \end{itemize}
 
+\section{Crafty.js}
+
+Crafty.js est un framework JavaScript pour les jeux vidéos, dont le but est de fournir un ensemble de briques de bases et d'être très modulable. Il se base pour cela sur le modèle Composant / Entité\footnote{Cf. \url{http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy} ou \url{http://www.gamearchitect.net/Articles/GameObjects1.html}} : chaque objet du jeu est une entité, et chaque entité est composée d'un ensemble de composants. Les différents composants de l'application contiennent les fonctionnalités du jeu. On aura par exemple une entité Unité qui aura pour composants ``2D, draw, health, clickable''. 
+
+\subsection{Avantages}
+
+\begin{itemize}
+  \item Fourni un grand nombre de fonctionnalités nécessaires à notre moteur
+  \item Architecture modulaire et extensible (possibilité d'ajouter, de manière simple, nos propres fonctionnalités)
+  \item License libre (double license GPL et MIT)
+\end{itemize}
+
+
+\subsection{Inconvénients}
+
+\begin{itemize}
+ \item Pas de prise en charge native de SVG (uniquement canvas et DOM), mais possibilité d'étendre
+ \item Framework très récent (actuellement en version 0.2) et maintenu par un seul développeur
+\end{itemize}
+
+
 \section{Comparatif}
 
   \includegraphics[width=420px]{img/bench.png}
