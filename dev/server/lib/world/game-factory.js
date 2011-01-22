@@ -2,10 +2,10 @@
 
 var game = require("./game.js");
 
-function GameFactory() {
+exports.GameFactory = function() {
 }
 
-GameFactory.prototype = {
+exports.GameFactory.prototype = {
 
     create: function(id) {
         var myGame = new game.Game();
