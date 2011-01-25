@@ -32,6 +32,8 @@ exports.GameEngine.prototype = {
 
     /**
      * Initialize the GameEngine.
+     *
+     * @return this.
      */
     init: function() {
         sys.log("GameEngine: init()");
@@ -47,6 +49,8 @@ exports.GameEngine.prototype = {
 
     /**
      * Start the GameEngine.
+     *
+     * @return this.
      */
     start: function() {
         sys.log("GameEngine: start()");
