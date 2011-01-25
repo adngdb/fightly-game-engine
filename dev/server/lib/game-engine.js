@@ -57,4 +57,4 @@ exports.GameEngine.prototype = {
         return this;
     },
 
-}
+};
