@@ -1,27 +1,38 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ **********************************************************************/
+
 var sys = require('sys'),
-    server = require('./network/server.js'),
-    gf = require('./world/game-factory.js'),
-    pf = require('./world/player-factory.js');
+    server_ = require('./network/server.js'),
+    gameFactory_ = require('./world/game-factory.js'),
+    playerFactory_ = require('./world/player-factory.js');
 
-var games = [];
-
-exports.WGE = function() {
+exports.GameEngine = function() {
 
     this.playerFactory = null;
     this.gameFactory = null;
 
-    this.server = new server.Server();
+    this.server = null;
+
+    this.games = [];
+    this.players = [];
 
     this.init();
 };
 
-exports.WGE.prototype = {
+exports.GameEngine.prototype = {
+
     init: function() {
         sys.log("GameEngine: init()");
 
+        this.server = new server_.Server();
+
         // Factories
-        this.gameFactory = new gf.GameFactory();
-        this.playerFactory = new pf.PlayerFactory();
+        this.gameFactory = new gameFactory_.GameFactory();
+        this.playerFactory = new playerFactory_.PlayerFactory();
 
         return this;
     },
@@ -30,4 +41,5 @@ exports.WGE.prototype = {
         sys.log("GameEngine: start()");
         return this;
     },
+
 }
