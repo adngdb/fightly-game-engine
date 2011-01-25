@@ -10,6 +10,11 @@ var sys = require('sys'),
     gameFactory_ = require('./world/game-factory.js'),
     playerFactory_ = require('./world/player-factory.js');
 
+/**
+ * Class GameEngine
+ *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
+ */
 exports.GameEngine = function() {
 
     this.playerFactory = null;
@@ -25,6 +30,9 @@ exports.GameEngine = function() {
 
 exports.GameEngine.prototype = {
 
+    /**
+     * Initialize the GameEngine.
+     */
     init: function() {
         sys.log("GameEngine: init()");
 
@@ -37,6 +45,9 @@ exports.GameEngine.prototype = {
         return this;
     },
 
+    /**
+     * Start the GameEngine.
+     */
     start: function() {
         sys.log("GameEngine: start()");
         return this;
