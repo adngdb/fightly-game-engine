@@ -1,11 +1,11 @@
 // Game class
 
-var mapFile = require("./map.js");
+var map_= require("./map.js");
 
 exports.Game = function() {
     this.id = -1;
     this.players = [];
-    this.map = new mapFile.Map();
+    this.map = new map_.Map();
 }
 
 exports.Game.prototype = {

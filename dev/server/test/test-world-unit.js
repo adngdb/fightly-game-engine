@@ -1,4 +1,4 @@
-var unitFile = require("../lib/world/unit.js");
+var unit_ = require("../lib/world/unit.js");
 
 exports["test-unit"] = function (test) {
 
