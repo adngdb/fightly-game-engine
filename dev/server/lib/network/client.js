@@ -1,29 +1,34 @@
-var comm = require("./communication");
+var sys = require("sys"),
+    am = require("./action-manager");
 
 exports.Client = function(connectionData, serverNode) {
-    this.conn = connectionData;
-    this.server = serverNode;
 
-    connectionData.addListener("message", function(msg)
+    //in many cases: "this" is a DOM object
+    var me = this;
+    me.conn = connectionData;
+    me.server = serverNode;
+    
+    
+    me.conn.addListener("message", function(msg)
     {
-        //onMessage(msg);
-	console.log("Message received: " + msg);
-	comm.Communication.manageMessage(connectionData, serverNode, msg);
+        me.onMessage(me.conn, me.server, msg);
     });
 
-    connectionData.addListener("close", function()
+    me.conn.addListener("close", function()
     {
-        console.log("Connection " + connectionData.id + "closed");
+        sys.log("Connection " + me.conn.id + "closed");
     });
 }
 
-/*
+
 exports.Client.prototype = {
-    send: function(message) {
-        server.send(conn.id, message);
+/*    send: function(message) {
+        this.server.send(this.conn.id, message);
     },
-    onMessage: function(msg) {
-	console.log("Message received: " + msg);
+*/
+    onMessage: function(connectionData, server, msg) {
+	sys.log("Message received: " + msg);
+	am.ActionManager.manageMessage(connectionData, server, msg);
     }
 }
-*/
+
