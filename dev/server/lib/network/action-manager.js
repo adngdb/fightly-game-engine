@@ -1,4 +1,4 @@
-exports.ActionManager = function() {};
+exports.ActionManager = function() { };
 
 exports.ActionManager.server = null;
 
