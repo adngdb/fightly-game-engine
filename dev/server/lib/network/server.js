@@ -20,7 +20,7 @@ exports.Server.prototype = {
     },
 
     onConnect : function(connectionData) {
-    sys.log("New connection: " + connectionData.id);
+        sys.log("New connection: " + connectionData.id);
         new client.Client(connectionData, this.server);
     }
 }
