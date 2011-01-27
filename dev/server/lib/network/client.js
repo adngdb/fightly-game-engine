@@ -20,13 +20,13 @@ exports.Client = function(connectionData, serverNode) {
 
 exports.Client.prototype = {
 
-    send: function(message) {
-        this.server.send(this.conn.id, message);
+    send: function(msg) {
+        this.server.send(this.conn.id, msg);
     },
 
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
-        actionManager_.ActionManager.manageMessage(this.conn, this.server, msg);
+        actionManager_.ActionManager.manageMessage(this.conn, msg);
     },
 }
 
