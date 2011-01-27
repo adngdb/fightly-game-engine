@@ -54,6 +54,7 @@ exports.GameEngine.prototype = {
      */
     start: function() {
         sys.log("GameEngine: start()");
+        this.server.listen(3401);
         return this;
     },
 

@@ -6,22 +6,22 @@ var sys = require("sys"),
 exports.Server = function() {
     this.server = ws.createServer();
     actionManager.ActionManager.server = this.server;
-	
+
     var me = this;
     this.server.addListener("connection", function(connectionData){
-	me.onConnect(connectionData);
+    me.onConnect(connectionData);
     });
 }
 
 exports.Server.prototype = {
     listen : function(port){
-	this.server.listen(port);
-	sys.log("Server created. Listening on port 3400.");
+    this.server.listen(port);
+    sys.log("Server created. Listening on port "+port+".");
     },
-    
+
     onConnect : function(connectionData) {
-	sys.log("New connection: " + connectionData.id);   
-    	new client.Client(connectionData, this.server);
+    sys.log("New connection: " + connectionData.id);
+        new client.Client(connectionData, this.server);
     }
 }
 
