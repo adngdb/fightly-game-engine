@@ -2,18 +2,18 @@ var sys = require("sys"),
     actionManager_ = require("./action-manager.js");
 
 exports.Client = function(connectionData, serverNode) {
-
-    //in many cases: "this" is a DOM object
-    var me = this;
+    
     this.conn = connectionData;
     this.server = serverNode;
 
+    //in many cases: "this" is a DOM object
+    var me = this;
     this.conn.addListener("message", function(msg) {
         me.onMessage(msg);
     });
 
     this.conn.addListener("close", function() {
-        sys.log("Connection " + me.conn.id + "closed");
+        sys.log("Connection " + me.conn.id + "has closed");
     });
 }
 

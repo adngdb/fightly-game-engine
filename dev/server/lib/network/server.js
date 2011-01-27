@@ -1,21 +1,29 @@
 var sys = require("sys"),
     ws  = require("websocket-server"),
-    client = require('./client');
+    client = require("./client"),
+    actionManager = require("./action-manager");
 
-function log(data){
-    sys.log("\033[0;32m"+data+"\033[0m");
+exports.Server = function() {
+    this.server = ws.createServer();
+    actionManager.ActionManager.server = this.server;
+	
+    var me = this;
+    this.server.addListener("connection", function(connectionData){
+	me.onConnect(connectionData);
+    });
 }
 
-var server = ws.createServer();
-server.listen(3400);
-
-server.addListener("connection", function(connectionData)
-{
-    log("New connection: " + connectionData.id);
+exports.Server.prototype = {
+    listen : function(port){
+	this.server.listen(port);
+	sys.log("Server created. Listening on port 3400.");
+    },
     
-    new client.Client(connectionData, server);
-   
-});
+    onConnect : function(connectionData) {
+	sys.log("New connection: " + connectionData.id);   
+    	new client.Client(connectionData, this.server);
+    }
+}
 
-log("Server created. Listening on port 3400. ");
+
 

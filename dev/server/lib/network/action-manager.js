@@ -1,31 +1,33 @@
-exports.ActionManager = function(server) {
-    this.server = server;
+exports.ActionManager = function() {
+    //this.server = server;
 };
 
-//static methode
-exports.ActionManager.manageMessage = function(msg) {
-    var objectJSON = JSON.parse(msg);
-    console.log(objectJSON.action);
+exports.ActionManager.server = null;
+
+exports.ActionManager.parseMessage = function(msg){
+    return JSON.parse(msg);
+}
+
+exports.ActionManager.manageMessage = function(connection, server, msg) {
+    var objectJSON = exports.ActionManager.parseMessage(msg);
 
     if(objectJSON.action == "login") {
         //create a new player whose username is objectJSON.params.name
-        //this.server.broadcast("Hi " + objectJSON.params.name);
+	exports.ActionManager.server.broadcast("Hi " + objectJSON.params.name);
     }
     else if(objectJSON.action == "logout") {
         //closed connection
-        //this.server.send(connection.id, "Goodbye " + objectJSON.params.name);
-        //conn.close();
+        exports.ActionManager.server.send(connection.id, "Goodbye " + objectJSON.params.name);
+        connection.close();
     }
     else {
         //play game: move,...
-        exports.ActionManager.playGame(connection, server, msg);
+        exports.ActionManager.playGame(connection, server, objectJSON);
     }
 }
 
 
-exports.ActionManager.playGame = function(conn, server, msg) {
-    //read the message and parse it to JSON object
-    var objectJSON = JSON.parse(msg);
+exports.ActionManager.playGame = function(conn, server, objectJSON) {    
 
     //check action with rule base
 
