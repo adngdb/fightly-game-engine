@@ -9,14 +9,14 @@ exports.Server = function() {
 
     var me = this;
     this.server.addListener("connection", function(connectionData){
-    me.onConnect(connectionData);
+        me.onConnect(connectionData);
     });
 }
 
 exports.Server.prototype = {
     listen : function(port){
-    this.server.listen(port);
-    sys.log("Server created. Listening on port "+port+".");
+        this.server.listen(port);
+        sys.log("Server created. Listening on port " + port + ".");
     },
 
     onConnect : function(connectionData) {
