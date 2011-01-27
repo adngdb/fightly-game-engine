@@ -9,7 +9,7 @@ ComManager = function(ge) {
     this.ge = ge;
 
     this._ws = null;
-    this.serverLocation = 'ws://localhost:3400';
+    this.serverLocation = 'ws://localhost:3401';
 };
 
 ComManager.prototype = {
@@ -36,6 +36,7 @@ ComManager.prototype = {
 
     _onClose: function() {
         // close game
+        alert("On close");
         this._ws = null;
     },
 
