@@ -1,6 +1,4 @@
-exports.ActionManager = function() {
-    //this.server = server;
-};
+exports.ActionManager = function() {};
 
 exports.ActionManager.server = null;
 
