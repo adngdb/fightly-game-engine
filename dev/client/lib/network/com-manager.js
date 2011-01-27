@@ -3,8 +3,15 @@
  * Fightly - Web Game Engine
  * http://fightly.com
  *
+ * License: see LICENSE.txt
+ *
  **********************************************************************/
 
+/**
+ * Class ComManager
+ *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
+ */
 ComManager = function(ge) {
     this.ge = ge;
 
