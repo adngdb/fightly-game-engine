@@ -26,7 +26,7 @@ exports.Client.prototype = {
 
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
-        actionManager_.ActionManager.manageMessage(this.conn, this.server, msg);
+        actionManager_.ActionManager.manageMessage(this.conn, msg);
     },
 }
 

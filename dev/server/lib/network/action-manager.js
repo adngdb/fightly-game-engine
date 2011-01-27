@@ -6,7 +6,7 @@ exports.ActionManager.parseMessage = function(msg){
     return JSON.parse(msg);
 }
 
-exports.ActionManager.manageMessage = function(connection, server, msg) {
+exports.ActionManager.manageMessage = function(connection, msg) {
     var objectJSON = exports.ActionManager.parseMessage(msg);
 
     if(objectJSON.action == "login") {
@@ -20,12 +20,12 @@ exports.ActionManager.manageMessage = function(connection, server, msg) {
     }
     else {
         //play game: move,...
-        exports.ActionManager.playGame(connection, server, objectJSON);
+        exports.ActionManager.playGame(connection, objectJSON);
     }
 }
 
 
-exports.ActionManager.playGame = function(conn, server, objectJSON) {    
+exports.ActionManager.playGame = function(conn, objectJSON) {    
 
     //check action with rule base
 
