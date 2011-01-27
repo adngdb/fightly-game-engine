@@ -3,8 +3,15 @@
  * Fightly - Web Game Engine
  * http://fightly.com
  *
+ * License: see LICENSE.txt
+ *
  **********************************************************************/
 
+/**
+ * Class GameEngine
+ *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
+ */
 GameEngine = function() {
     this.com = null;
 };
