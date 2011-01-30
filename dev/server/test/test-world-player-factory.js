@@ -6,7 +6,6 @@ exports["test-create"] = function (test) {
 
         test.equal(player.name, "tata");
         test.equal(player.id, 1);
-
         test.done();
 }
 
