@@ -6,3 +6,4 @@ exports["test-world-game-factory-create"] = function(test) {
         test.equal(createdGame.id,123);
         test.done();
 }
+

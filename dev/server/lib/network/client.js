@@ -1,32 +1,35 @@
 var sys = require("sys"),
     actionManager_ = require("./action-manager.js");
 
-exports.Client = function(connectionData, serverNode) {
+exports.Client = function(connection) {
     
-    this.conn = connectionData;
-    this.server = serverNode;
+    this.conn = connection;
 
     //in many cases: "this" is a DOM object
     var me = this;
-    this.conn.addListener("message", function(msg) {
+    this.conn.on("message", function(msg) {
         me.onMessage(msg);
     });
 
-    this.conn.addListener("close", function() {
-        sys.log("Connection " + me.conn.id + "has closed");
+    this.conn.addListener("disconnect", function() {
+        me.onDisconnect();
     });
 }
-
+ 
 
 exports.Client.prototype = {
 
     send: function(msg) {
-        this.server.send(this.conn.id, msg);
+        this.conn.send(msg);
     },
 
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
         actionManager_.ActionManager.manageMessage(this.conn, msg);
     },
+
+    onDisconnect: function() {
+	sys.log("Connection " + this.conn.sessionId + " has closed");
+    }
 }
 

@@ -8,11 +8,12 @@ exports["test-game-players"] = function(test) {
         test.done();
 }
 
-exports["test-game-map"] = function(test) {
+
+exports["test-game-toJSON"] = function(test) {
 
         var gm = new game_.Game();
-        var l = gm.map.length ;
-        test.equal(l, -1);
+        var str = "{" + "\"id\"" + ":-1,"+"\"players\"" + ":[]," + "\"map\""+ ":null}" ;
+        test.equal(str,gm.toJSON());
         test.done();
 }
 

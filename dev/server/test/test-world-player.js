@@ -8,4 +8,10 @@ exports["test-new-player"] = function (test) {
         test.done();
     }
 
+exports["test-player-toJSON"] = function (test) {
 
+        var pl = new player_.Player();
+        var str = "{" + "\"id\"" + ":-1,"+"\"name\""+":null,"+"\"turn\""+":-1,"+"\"units\""+":[]}" ;
+        test.equal(str,pl.toJSON());
+        test.done();
+}
