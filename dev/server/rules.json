@@ -1,0 +1,13 @@
+{
+	"rules" : {
+		"moveUnit" : {
+			"if" : [
+				{ "call" : "condition" },
+				{ "call" : "toto" }
+			],
+			"do" : [
+				{ "call" : "conclusion" , "on" : "param" }
+			]
+		}
+	}
+}
