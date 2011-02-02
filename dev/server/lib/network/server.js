@@ -1,31 +1,29 @@
 var sys = require("sys"),
-    ws  = require("websocket-server"),
+    http = require('http'),
+    io = require('socket.io'),
+
     client = require("./client"),
     actionManager = require("./action-manager");
 
 exports.Server = function() {
-    this.server = ws.createServer();
-    actionManager.ActionManager.server = this.server;
-
+    this.server = http.createServer(function(req, res){});
+    this.socket = io.listen(this.server);
+	
     var me = this;
-    this.server.addListener("connection", function(connectionData){
-        me.onConnect(connectionData);
+    this.socket.on('connection', function(conn){
+	me.onConnect(conn);
     });
 }
 
 exports.Server.prototype = {
     listen : function(port){
-        this.server.listen(port);
-        sys.log("Server created. Listening on port " + port + ".");
+	this.server.listen(port);
+	sys.log("Server created. Listening on port " + port + ".");
     },
-
-    onConnect : function(connectionData) {
-        sys.log("New connection: " + connectionData.id);
-        new client.Client(connectionData, this.server);
+    
+    onConnect : function(connection) {
+	sys.log("New connection: " + connection.sessionId);   
+    	new client.Client(connection);
     }
 }
-
-
-
-
 
