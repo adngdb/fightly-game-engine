@@ -1,9 +1,9 @@
 var sys = require('sys'),
-    ge = require('../lib/game-engine.js');
+    gameEngine_ = require('../lib/game-engine.js');
 
 exports['log'] = function (test) {
     sys.log("Test");
-    var wge = new ge.WGE();
-    wge.start();
+    var ge = new gameEngine_.GameEngine();
+    ge.start();
     test.done();
 };
