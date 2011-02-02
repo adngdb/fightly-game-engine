@@ -1,7 +1,5 @@
 exports.ActionManager = function() { };
 
-exports.ActionManager.server = null;
-
 exports.ActionManager.parseMessage = function(msg){
     return JSON.parse(msg);
 }
@@ -11,12 +9,12 @@ exports.ActionManager.manageMessage = function(connection, msg) {
 
     if(objectJSON.action == "login") {
         //create a new player whose username is objectJSON.params.name
-	exports.ActionManager.server.broadcast("Hi " + objectJSON.params.name);
+	connection.send("Hi " + objectJSON.params.name);
     }
     else if(objectJSON.action == "logout") {
         //closed connection
-        exports.ActionManager.server.send(connection.id, "Goodbye " + objectJSON.params.name);
-        connection.close();
+        connection.send("Goodbye " + objectJSON.params.name);
+        //connection.close();
     }
     else {
         //play game: move,...
@@ -30,7 +28,7 @@ exports.ActionManager.playGame = function(conn, objectJSON) {
     //check action with rule base
 
     //excute action (return JSON message)
-    console.log(conn.id + " play: " + objectJSON.action + " "
+    console.log(conn.sessionId + " play: " + objectJSON.action + " "
         + objectJSON.params.direction + " "
         + objectJSON.params.distance + "cells");
 }

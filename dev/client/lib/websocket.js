@@ -13,40 +13,37 @@ window.onload = function() {
 
 var socket;
 client = {
-    _ws: null,
+    
     load: function() {
-        var location = 'ws://localhost:3400';
-        this._ws = new WebSocket(location);
-	socket = this._ws;
-        this._ws.onopen = this._onopen;
-        this._ws.onmessage = this._onmessage;
-        this._ws.onclose = this._onclose;
-    },
+	
+        // Create SocketIO instance, connect
+	socket = new io.Socket('localhost',{
+	  port: 8080
+	});
+	socket.connect();
+        // Add a connect listener
+	socket.on('connect',function() {
+	  alert('Client has connected to the server!');
+	});
+	// Add a connect listener
+	socket.on('message',function(data) {
+	  alert('Received a message from the server: ' + data);
+	});
+	// Add a disconnect listener
+	socket.on('disconnect',function() {
+	  alert('The client has disconnected!');
+	});
 
-    _onopen: function() {
-        alert('Socket ouvert !');
-    },
-    _onclose: function() {
-        alert('Socket fermé !');
-        this._ws = null;
-    },
-    _onmessage: function(m) {
-        alert(m.data);
     }
-
-    /*		
-    sendMessage() {
-	//get a JSONText just for example
-        var JSONObject = { 'action' : 'login', 
-			   'params' : {'name' : 'aduc', 'pass' : ''}
-			 };
-	var JSONText = JSON.stringify(JSONObject);
-	this.send(JSONText);	
-	alert(JSONText);
-    }
-    */   
-  
+   
+/*
+    // Sends a message to the server via sockets
+    function sendMessageToServer(message) {
+	  socket.send(message);
+    }    
+*/  
 }
+
 
 function logIn(){
 	//get a JSONText just for example
@@ -80,5 +77,6 @@ function doSomething(){
 }
 function sendMessage(JSONText) {
 	
-	client._ws.send(JSONText);
+	socket.send(JSONText);
 }   
+
