@@ -14,11 +14,14 @@
  */
 GameEngine = function() {
     this.com = null;
+    this.mb = null;
 };
 
 GameEngine.prototype = {
 
     init: function() {
+        this.mb = new MessageBuilder();
+
         this.com = new ComManager(this);
         this.com.init();
         return this;
