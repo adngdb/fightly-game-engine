@@ -96,6 +96,7 @@ exports.ActionManager.prototype = {
 	createData("new", "game", object_data);
     },
 
+
 }
 
 /*
