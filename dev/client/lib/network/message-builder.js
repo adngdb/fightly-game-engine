@@ -8,23 +8,17 @@
  **********************************************************************/
 
 /**
- * Class ActionManager
+ * Class MessageBuilder
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
-ActionManager = function() {
+MessageBuilder = function() {
 };
 
-ActionManager.prototype = {
+MessageBuilder.prototype = {
 
-    parse: function(message) {
-        return JSON.parse(message);
-    },
-
-    manageMessage: function(message) {
-        var data = this.parse(message);
-
-        return this;
+    createAuthenticationLogin: function() {
+        return null;
     },
 
 };
