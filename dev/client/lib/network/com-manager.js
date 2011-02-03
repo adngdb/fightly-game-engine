@@ -15,16 +15,19 @@
 ComManager = function(ge) {
     this.ge = ge;
 
-    this._ws = null;
-    this._socket = null;
-    this.serverLocation = 'ws://localhost:3401';
+    this.mp = null;
+
     this.host = 'localhost';
     this.port = 3401;
+
+    this._socket = null;
 };
 
 ComManager.prototype = {
 
     init: function() {
+        this.mp = new MessageParser(this.ge);
+
         this._socket = new io.Socket(this.host, { port: this.port });
         this._socket.connect();
         this._socket.on('connect', this._onOpen);
@@ -37,13 +40,11 @@ ComManager.prototype = {
     },
 
     _onMessage: function(msg) {
-        // received msg.data
+        this.mp.parse(msg);
     },
 
     _onClose: function() {
-        // close game
         alert("On close");
-        this._ws = null;
     },
 
     send: function(message) {
