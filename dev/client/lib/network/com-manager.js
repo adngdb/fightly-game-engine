@@ -16,21 +16,20 @@ ComManager = function(ge) {
     this.ge = ge;
 
     this._ws = null;
+    this._socket = null;
     this.serverLocation = 'ws://localhost:3401';
+    this.host = 'localhost';
+    this.port = 3401;
 };
 
 ComManager.prototype = {
 
     init: function() {
-
-        if (!window.WebSocket) {
-            alert('Your browser doesn\'t support WebSocket.');
-            return;
-        }
-        this._ws = new WebSocket(this.serverLocation);
-        this._ws.onopen = this._onOpen;
-        this._ws.onmessage = this._onMessage;
-        this._ws.onclose = this._onClose;
+        this._socket = new io.Socket(this.host, { port: this.port });
+        this._socket.connect();
+        this._socket.on('connect', this._onOpen);
+        this._socket.on('message', this._onMessage);
+        this._socket.on('disconnect', this._onClose);
     },
 
     _onOpen: function() {
@@ -48,7 +47,7 @@ ComManager.prototype = {
     },
 
     send: function(message) {
-        this._ws.send(message);
+        this._socket.send(message);
     },
 
 };
