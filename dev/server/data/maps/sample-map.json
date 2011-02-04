@@ -1,0 +1,147 @@
+{
+    "height": 10,
+    "width" : 10,
+    "cells" : [
+        [
+            {"type" : "plains"   , "x": 0 , "y" : 0},
+            {"type" : "mountain" , "x": 0 , "y" : 1},
+            {"type" : "plains"   , "x": 0 , "y" : 2},
+            {"type" : "plains"   , "x": 0 , "y" : 3},
+            {"type" : "mountain" , "x": 0 , "y" : 4},
+            {"type" : "plains"   , "x": 0 , "y" : 5},
+            {"type" : "plains"   , "x": 0 , "y" : 6},
+            {"type" : "plains"   , "x": 0 , "y" : 7},
+            {"type" : "swamp"    , "x": 0 , "y" : 8},
+            {"type" : "plains"   , "x": 0 , "y" : 9},
+
+        ],
+
+        [
+            {"type" : "plains"   , "x": 1 , "y" : 0},
+            {"type" : "plains"   , "x": 1 , "y" : 1},
+            {"type" : "plains"   , "x": 1 , "y" : 2},
+            {"type" : "plains"   , "x": 1 , "y" : 3},
+            {"type" : "mountain" , "x": 1 , "y" : 4},
+            {"type" : "plains"   , "x": 1 , "y" : 5},
+            {"type" : "plains"   , "x": 1 , "y" : 6},
+            {"type" : "plains"   , "x": 1 , "y" : 7},
+            {"type" : "swamp"    , "x": 1 , "y" : 8},
+            {"type" : "plains"   , "x": 1 , "y" : 9},
+
+        ],
+
+        [
+            {"type" : "mountain" , "x": 2 , "y" : 0},
+            {"type" : "plains"   , "x": 2 , "y" : 1},
+            {"type" : "plains"   , "x": 2 , "y" : 2},
+            {"type" : "swamp"    , "x": 2 , "y" : 3},
+            {"type" : "mountain" , "x": 2 , "y" : 4},
+            {"type" : "plains"   , "x": 2 , "y" : 5},
+            {"type" : "swamp"    , "x": 2 , "y" : 6},
+            {"type" : "plains"   , "x": 2 , "y" : 7},
+            {"type" : "plains"   , "x": 2 , "y" : 8},
+            {"type" : "plains"   , "x": 2 , "y" : 9},
+
+        ],
+
+          [
+            {"type" : "mountain" , "x": 3 , "y" : 0},
+            {"type" : "plains"   , "x": 3 , "y" : 1},
+            {"type" : "mounain"  , "x": 3 , "y" : 2},
+            {"type" : "plains"   , "x": 3 , "y" : 3},
+            {"type" : "plains"   , "x": 3 , "y" : 4},
+            {"type" : "swamp"    , "x": 3 , "y" : 5},
+            {"type" : "plains"   , "x": 3 , "y" : 6},
+            {"type" : "plains"   , "x": 3 , "y" : 7},
+            {"type" : "plains"   , "x": 3 , "y" : 8},
+            {"type" : "plains"   , "x": 3 , "y" : 9},
+
+        ],
+
+        [
+            {"type" : "plains"   , "x": 4 , "y" : 0},
+            {"type" : "plains"   , "x": 4 , "y" : 1},
+            {"type" : "plains"   , "x": 4 , "y" : 2},
+            {"type" : "swamp"    , "x": 4 , "y" : 3},
+            {"type" : "mountain" , "x": 4 , "y" : 4},
+            {"type" : "plains"   , "x": 4 , "y" : 5},
+            {"type" : "plains"   , "x": 4 , "y" : 6},
+            {"type" : "mountain" , "x": 4 , "y" : 7},
+            {"type" : "plains"   , "x": 4 , "y" : 8},
+            {"type" : "plains"   , "x": 4 , "y" : 9},
+
+        ],
+
+        [
+            {"type" : "plains"   , "x": 5 , "y" : 0},
+            {"type" : "plains"   , "x": 5 , "y" : 1},
+            {"type" : "plains"   , "x": 5 , "y" : 2},
+            {"type" : "plains"   , "x": 5 , "y" : 3},
+            {"type" : "plains"   , "x": 5 , "y" : 4},
+            {"type" : "plains"   , "x": 5 , "y" : 5},
+            {"type" : "plains"   , "x": 5 , "y" : 6},
+            {"type" : "plains"   , "x": 5 , "y" : 7},
+            {"type" : "plains"   , "x": 5 , "y" : 8},
+            {"type" : "plains"   , "x": 5 , "y" : 9},
+
+        ],
+
+         [
+            {"type" : "mountain" , "x": 6 , "y" : 0},
+            {"type" : "plains"   , "x": 6 , "y" : 1},
+            {"type" : "plains"   , "x": 6 , "y" : 2},
+            {"type" : "plains"   , "x": 6 , "y" : 3},
+            {"type" : "plains"   , "x": 6 , "y" : 4},
+            {"type" : "plains"   , "x": 6 , "y" : 5},
+            {"type" : "plains"   , "x": 6 , "y" : 6},
+            {"type" : "plains"   , "x": 6 , "y" : 7},
+            {"type" : "plains"    , "x": 6 , "y" : 8},
+            {"type" : "plains"   , "x": 6 , "y" : 9},
+
+        ],
+
+         [
+            {"type" : "plains"   , "x": 7 , "y" : 0},
+            {"type" : "plains"   , "x": 7 , "y" : 1},
+            {"type" : "plains"   , "x": 7 , "y" : 2},
+            {"type" : "mountain" , "x": 7 , "y" : 3},
+            {"type" : "plains"   , "x": 7 , "y" : 4},
+            {"type" : "plains"   , "x": 7 , "y" : 5},
+            {"type" : "plains"   , "x": 7 , "y" : 6},
+            {"type" : "plains"   , "x": 7 , "y" : 7},
+            {"type" : "plains"   , "x": 7 , "y" : 8},
+            {"type" : "plains"   , "x": 7 , "y" : 9},
+
+        ],
+
+         [
+            {"type" : "swamp"    , "x": 8 , "y" : 0},
+            {"type" : "plains"   , "x": 8 , "y" : 1},
+            {"type" : "plains"   , "x": 8 , "y" : 2},
+            {"type" : "plains"   , "x": 8 , "y" : 3},
+            {"type" : "plains"   , "x": 8 , "y" : 4},
+            {"type" : "plains"   , "x": 8 , "y" : 5},
+            {"type" : "plains"   , "x": 8 , "y" : 6},
+            {"type" : "plains"   , "x": 8 , "y" : 7},
+            {"type" : "plains"   , "x": 8 , "y" : 8},
+            {"type" : "plains"   , "x": 8 , "y" : 9},
+
+        ],
+
+        [
+            {"type" : "plains"   , "x": 9 , "y" : 0},
+            {"type" : "plains"   , "x": 9 , "y" : 1},
+            {"type" : "plains"   , "x": 9 , "y" : 2},
+            {"type" : "mountain" , "x": 9 , "y" : 3},
+            {"type" : "mountain" , "x": 9 , "y" : 4},
+            {"type" : "swamp"    , "x": 9 , "y" : 5},
+            {"type" : "plains"   , "x": 9 , "y" : 6},
+            {"type" : "plains"   , "x": 9 , "y" : 7},
+            {"type" : "plains"   , "x": 9 , "y" : 8},
+            {"type" : "plains"   , "x": 9 , "y" : 9},
+
+        ]
+
+    ]
+
+}
