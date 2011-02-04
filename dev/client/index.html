@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--
 /***********************************************************************
  *
@@ -8,20 +9,19 @@
  *
  **********************************************************************/
  -->
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Web Game Engine</title>
+        <title>Fightly Web Game Engine</title>
 
-        <link href="" rel="stylesheet" media="screen" />
+        <!--link href="" rel="stylesheet" media="screen" /-->
     </head>
 
     <body>
-	<script src="http://cdn.socket.io/stable/socket.io.js"></script>
-        <script src="lib/websocket.js"></script>
-	<input type="button" id="idLogIn" value="Log In"/></br>
-	<input type="button" id="idPlay" value="do something..."/></br>
-	<input type="button" id="idLogOut" value="Log Out"/>	
+        <script src="http://cdn.socket.io/stable/socket.io.js"></script>
+        <script src="lib/network/message-parser.js"></script>
+        <script src="lib/network/message-builder.js"></script>
+        <script src="lib/network/com-manager.js"></script>
+        <script src="lib/game-engine.js"></script>
     </body>
 </html>
