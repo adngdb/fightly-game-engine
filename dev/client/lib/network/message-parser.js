@@ -13,7 +13,7 @@
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
 MessageParser = function(ge) {
-    this.ge = ge;
+    this.ge = ge;   // GameEngine
 };
 
 MessageParser.prototype = {
