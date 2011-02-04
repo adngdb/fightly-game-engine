@@ -14,22 +14,30 @@ exports.GameFactory = function() {
     this.mapFactory = null;
     this.cellFactory = null;
     this.unitFactory = null;
-
+    this.config = {
+        "nbMaxPlayer": 2,
+    };
 }
 
 exports.GameFactory.prototype = {
 
     create: function(id) {
+
         var myGame = new game_.Game();
 
         myGame.id = id;
         myGame.map = this.mapFactory.create();
-
         myGame.playerFactory = this.playerFactory;
         myGame.mapFactory = this.mapFactory;
         myGame.unitFactory = this.unitFactory;
 
         return myGame;
+    },
+
+    setConfig : function(nbMaxPlayer) {
+
+        this.config.nbMaxPlayer = nbMaxPlayer;
+
     },
 
 }

@@ -45,16 +45,12 @@ exports.MapFactory.prototype = {
         var mapObject = JSON.parse(file_);
         myMap.width = mapObject.width;
         myMap.height = mapObject.height;
-        //myMap.cells = mapObject.cells;
 
         for (var i = 0; i < myMap.width; i++) {
             myMap.cells[i] = [];
             for (var j = 0; j < myMap.height; j++) {
                 var cell = mapObject.cells[i][j];
                 myMap.cells[i][j] = this.cellFactory.create(cell.type, cell.x, cell.y);
-                //~ myMap.cells[i][j].x = mapObject.cells[i][j].x;
-                //~ myMap.cells[i][j].y = mapObject.cells[i][j].y;
-                //~ myMap.cells[i][j].type = mapObject.cells[i][j].type;
             }
         }
         return myMap;
