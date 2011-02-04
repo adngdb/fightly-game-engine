@@ -8,9 +8,6 @@ exports.Game = function() {
     this.map = null;
 }
 
-var game_= require("./game.js");
-var newGame = new game_.Game();
-
 exports.Game.prototype = {
     //add a new player
     addPlayer : function(player){
@@ -26,9 +23,5 @@ exports.Game.prototype = {
         };
 
         return JSON.stringify(data);
-    },
-
-    toJSON : function() {
-        return JSON.stringify(newGame);
     },
 }

@@ -2,7 +2,7 @@
 
 
 exports.Cell = function() {
-    this.type = null;
+    this.type = null; // plains, mountain, swamp
     this.x = -1;
     this.y = -1;
 }
