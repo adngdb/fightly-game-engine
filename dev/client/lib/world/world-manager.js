@@ -68,13 +68,13 @@ WorldManager.prototype = {
         this.game.map.cells[newCell.x][newCell.y] = newCell;
     },
 */
-    unitData: function(data) {
+    unitCreate: function(data) {
         var obj = JSON.parse(data);
         // obj = {idOfPlayer,unit}
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i][id] == obj[owner]){
-				 this.game.players[i][units].push(obj);
+			if(this.game.players[i].id == obj.owner){
+				 this.game.players[i].units.push(obj);
 				 i = this.game.players.length;
 				}
 			i++;
@@ -85,14 +85,12 @@ WorldManager.prototype = {
         var obj = JSON.parse(data);        
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i][id] == obj[owner]){
-				
+			if(this.game.players[i].id == obj.owner){				
 			var j = 0;
-			while(j<this.game.players[i][units].length){
-				if(this.game.players[i][units][j][id] == obj[id]){				 
-					
-					updateValues(game.players[i][units][j], obj);
-				 	j = this.game.players[i][units].length;					
+			while(j<this.game.players[i].units.length){
+				if(this.game.players[i].units[j].id == obj.id){
+					this.updateValues(this.game.players[i].units[j], obj);
+				 	j = this.game.players[i].units.length;
 					}
 				j++;
 				}
