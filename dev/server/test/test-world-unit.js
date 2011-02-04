@@ -5,7 +5,7 @@ var player_ = require("../lib/world/player.js");
 exports["test-unit-toJSON"] = function (test) {
 
         var st = new unit_.Unit();
-        st.owner = new player_.Player();
+        st.owner = new player_.Player(); // RMQ (ilyas) Pourquoi tu met un objet Player dans "owner" alors qu'on a besoin seulement de l'Id ou le nom du plyer ; st.owner = new player_.Player().id c'est mieu non ?!!
 
         var str = "{" + "\"id\"" + ":-1,"+"\"name\""+":null,"+ "\"owner\""+":-1," +"\"type\""+":null,"+"\"attack\""+":null,"+"\"defense\""+":null,"+"\"view\""+":null,"+"\"move\""+":null,"+"\"properties\""+":[]}" ;
         test.equal(str,st.toJSON());
