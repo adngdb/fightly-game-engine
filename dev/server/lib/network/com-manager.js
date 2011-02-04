@@ -1,3 +1,12 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
 var sys = require("sys"),
     http = require('http'),
     io = require('socket.io'),

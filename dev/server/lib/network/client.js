@@ -1,3 +1,12 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
 var sys = require("sys");
 
 exports.Client = function(connection, server) {
@@ -15,7 +24,7 @@ exports.Client = function(connection, server) {
         me.onDisconnect();
     });
 }
- 
+
 
 exports.Client.prototype = {
 
@@ -29,7 +38,7 @@ exports.Client.prototype = {
     },
 
     onDisconnect: function() {
-	sys.log("Connection " + this.conn.sessionId + " has closed");
+    sys.log("Connection " + this.conn.sessionId + " has closed");
     }
 }
 

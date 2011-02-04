@@ -1,12 +1,19 @@
-exports.MessageBuilder = function() {
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
+exports.MessageBuilder = function() {
 };
 
 exports.MessageBuilder.prototype = {
 
     /**
-     *
-     *   Base functions to send message (Server -> Client)
+     * Base functions to send message (Server -> Client)
      */
     createMessage: function(method, data) {
         var msg = {
@@ -43,10 +50,8 @@ exports.MessageBuilder.prototype = {
     },
 
     /**
-     *
-     *   Authentification
+     * Authentication
      */
-
     createAuthentificationQuery: function() {
         this.createQuery("login");
     },
@@ -63,4 +68,4 @@ exports.MessageBuilder.prototype = {
         this.createData("new", "Game", object_data);
     },
 
-}
+};
