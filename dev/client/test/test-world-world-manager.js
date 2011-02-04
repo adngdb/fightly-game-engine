@@ -119,3 +119,40 @@ WorldManagerTest.prototype.testPlayerUpdate = function() {
 
   jstestdriver.console.log("+ testPlayerUpdate [OK]");
 };
+
+WorldManagerTest.prototype.testUnitCreate = function() {
+
+  var worldmanager = new WorldManager();
+  var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]},{"id":"2","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
+  worldmanager.gameData(jsontext);
+  
+  var unitJsonText = '{"id":1,"name":"alpha","owner":2,"type":"monstre","attack":2,"defence":3,"view":5,"move":"null","properties":["prop1","prop2"]}';
+  worldmanager.unitCreate(unitJsonText);
+  assertEquals("alpha", worldmanager.game.players[1].units[0].name);
+  assertEquals("monstre", worldmanager.game.players[1].units[0].type);
+  assertEquals("2", worldmanager.game.players[1].units[0].attack);
+
+  jstestdriver.console.log("+ testUnitCreate [OK]");
+};
+
+WorldManagerTest.prototype.testUnitUpdate = function() {
+
+  var worldmanager = new WorldManager();
+  var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]},{"id":"2","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
+  worldmanager.gameData(jsontext);
+  
+  var unitJsonText = '{"id":1,"name":"alpha","owner":2,"type":"monstre","attack":2,"defence":3,"view":5,"move":"null","properties":["prop1","prop2"]}';
+  worldmanager.unitCreate(unitJsonText);
+  
+  unitJsonText2 = '{"id":1,"owner":2,"attack":3,"defence":4,"view":6,"properties":["prop1","prop2","prop3"]}';
+  worldmanager.unitUpdate(unitJsonText2);
+  
+  assertEquals("alpha", worldmanager.game.players[1].units[0].name);
+  assertEquals("monstre", worldmanager.game.players[1].units[0].type);
+  assertEquals("3", worldmanager.game.players[1].units[0].attack);
+  assertEquals("4", worldmanager.game.players[1].units[0].defence);
+  assertEquals("6", worldmanager.game.players[1].units[0].view);
+  assertEquals("prop3", worldmanager.game.players[1].units[0].properties[2]);
+
+  jstestdriver.console.log("+ testUnitUpdate [OK]");
+};
