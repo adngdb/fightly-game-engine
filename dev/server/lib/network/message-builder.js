@@ -1,8 +1,8 @@
-exports.ActionManager = function() {
+exports.MessageBuilder = function() {
 
 };
 
-exports.ActionManager.prototype = {
+exports.MessageBuilder.prototype = {
 
     /**
      *
