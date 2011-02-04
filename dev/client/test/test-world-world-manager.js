@@ -30,7 +30,8 @@ WorldManagerTest.prototype.testUpdateValues = function() {
 WorldManagerTest.prototype.testGameData = function() {
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);
+  worldmanager.gameData(data);
   assertEquals("-1", worldmanager.game.id);
   assertEquals("1", worldmanager.game.players[0].id);
   assertEquals("player1", worldmanager.game.players[0].name);
@@ -47,11 +48,13 @@ WorldManagerTest.prototype.testGameData = function() {
 WorldManagerTest.prototype.testGameUpdate = function() {
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);
+  worldmanager.gameData(data);
   assertEquals("30", worldmanager.game.players[0].turn);
   
   jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"29","units":[]}],"map":{"length":"40","width":"100","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameUpdate(jsontext);
+  data = JSON.parse(jsontext);
+  worldmanager.gameUpdate(data);
   assertEquals("29", worldmanager.game.players[0].turn);
   assertEquals("40", worldmanager.game.map.length);
   assertEquals("100", worldmanager.game.map.width);
@@ -63,7 +66,9 @@ WorldManagerTest.prototype.testMapUpdate = function() {
 
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);
+  
+  worldmanager.gameData(data);
   assertEquals("-1", worldmanager.game.map.length);
   assertEquals("-1", worldmanager.game.map.width);
   assertEquals("null", worldmanager.game.map.cells[0].type);
@@ -71,7 +76,8 @@ WorldManagerTest.prototype.testMapUpdate = function() {
   assertEquals("-1", worldmanager.game.map.cells[0].y);
 
   jsontext = '{"length":"40","width":"100","cells":[{"type":"null","x":"0","y":"0"}]}';
-  worldmanager.mapUpdate(jsontext);
+  data = JSON.parse(jsontext);
+  worldmanager.mapUpdate(data);
   assertEquals("40", worldmanager.game.map.length);
   assertEquals("100", worldmanager.game.map.width);
   assertEquals("null", worldmanager.game.map.cells[0].type);
@@ -85,13 +91,15 @@ WorldManagerTest.prototype.testPlayerData = function() {
 
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);  
+  worldmanager.gameData(data);
   assertEquals("1", worldmanager.game.players[0].id);
   assertEquals("player1", worldmanager.game.players[0].name);
   assertEquals("30", worldmanager.game.players[0].turn);
 
   jsontext = '{"id":"2","name":"player2","turn":"30","units":[]}';
-  worldmanager.playerData(jsontext);
+  data = JSON.parse(jsontext);
+  worldmanager.playerData(data);
   assertEquals("2", worldmanager.game.players[1].id);
   assertEquals("player2", worldmanager.game.players[1].name);
   assertEquals("30", worldmanager.game.players[1].turn);
@@ -103,17 +111,20 @@ WorldManagerTest.prototype.testPlayerUpdate = function() {
 
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);
+  worldmanager.gameData(data);
   assertEquals("1", worldmanager.game.players[0].id);
   assertEquals("30", worldmanager.game.players[0].turn);
 
   jsontext = '{"id":"2","name":"player2","turn":"30","units":[]}';
-  worldmanager.playerData(jsontext);
+  data = JSON.parse(jsontext);
+  worldmanager.playerData(data);
   assertEquals("2", worldmanager.game.players[1].id);
   assertEquals("30", worldmanager.game.players[1].turn);
   
   jsontext = '{"id":"2","name":"player2","turn":"29","units":[]}';
-  worldmanager.playerUpdate(jsontext);
+  data = JSON.parse(jsontext);
+  worldmanager.playerUpdate(data);
   assertEquals("2", worldmanager.game.players[1].id);
   assertEquals("29", worldmanager.game.players[1].turn);
 
@@ -124,10 +135,12 @@ WorldManagerTest.prototype.testUnitCreate = function() {
 
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]},{"id":"2","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);
+  worldmanager.gameData(data);
   
-  var unitJsonText = '{"id":1,"name":"alpha","owner":2,"type":"monstre","attack":2,"defence":3,"view":5,"move":"null","properties":["prop1","prop2"]}';
-  worldmanager.unitCreate(unitJsonText);
+  var jsontext = '{"id":1,"name":"alpha","owner":2,"type":"monstre","attack":2,"defence":3,"view":5,"move":"null","properties":["prop1","prop2"]}';
+  data = JSON.parse(jsontext);
+  worldmanager.unitCreate(data);
   assertEquals("alpha", worldmanager.game.players[1].units[0].name);
   assertEquals("monstre", worldmanager.game.players[1].units[0].type);
   assertEquals("2", worldmanager.game.players[1].units[0].attack);
@@ -139,13 +152,16 @@ WorldManagerTest.prototype.testUnitUpdate = function() {
 
   var worldmanager = new WorldManager();
   var jsontext = '{"id":"-1","players":[{"id":"1","name":"player1","turn":"30","units":[]},{"id":"2","name":"player1","turn":"30","units":[]}],"map":{"length":"-1","width":"-1","cells":[{"type":"null","x":"-1","y":"-1"}]}}';
-  worldmanager.gameData(jsontext);
+  var data = JSON.parse(jsontext);
+  worldmanager.gameData(data);
   
-  var unitJsonText = '{"id":1,"name":"alpha","owner":2,"type":"monstre","attack":2,"defence":3,"view":5,"move":"null","properties":["prop1","prop2"]}';
-  worldmanager.unitCreate(unitJsonText);
+  var jsontext = '{"id":1,"name":"alpha","owner":2,"type":"monstre","attack":2,"defence":3,"view":5,"move":"null","properties":["prop1","prop2"]}';
+  data = JSON.parse(jsontext);
+  worldmanager.unitCreate(data);
   
-  unitJsonText2 = '{"id":1,"owner":2,"attack":3,"defence":4,"view":6,"properties":["prop1","prop2","prop3"]}';
-  worldmanager.unitUpdate(unitJsonText2);
+  jsontext = '{"id":1,"owner":2,"attack":3,"defence":4,"view":6,"properties":["prop1","prop2","prop3"]}';
+  data = JSON.parse(jsontext);
+  worldmanager.unitUpdate(data);
   
   assertEquals("alpha", worldmanager.game.players[1].units[0].name);
   assertEquals("monstre", worldmanager.game.players[1].units[0].type);
