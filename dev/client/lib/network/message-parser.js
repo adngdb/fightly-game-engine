@@ -69,8 +69,13 @@ MessageParser.prototype = {
     },
 
     parseNewData: function(object, data) {
-        if (object == "Authentication") {
-            this.gameEngine.onAuthenticationConfirm(data.username, data.valid);
+        switch (object) {
+            case "Authentication":
+                this.gameEngine.onAuthenticationConfirm(data.username, data.valid);
+                break;
+            case "Game":
+                this.gameEngine.newGame(data);
+                break;
         }
         return this;
     },
