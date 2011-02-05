@@ -20,6 +20,8 @@ MessageParser.prototype = {
 
     parse: function(message) {
         var obj = JSON.parse(message);
+        log('MessageParser.parse: '+obj);
+
         switch (obj.type) {
             case "query":
                 this.parseQuery(obj.data);
@@ -37,6 +39,8 @@ MessageParser.prototype = {
     },
 
     parseQuery: function(data) {
+        log('MessageParser.parseQuery: '+data);
+
         switch (data.response_type) {
             case "login":
                 this.ge.onAuthenticationQuery();
