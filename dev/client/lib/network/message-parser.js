@@ -37,6 +37,11 @@ MessageParser.prototype = {
     },
 
     parseQuery: function(data) {
+        switch (data.response_type) {
+            case "login":
+                this.ge.onAuthenticationQuery();
+                break;
+        }
         return this;
     },
 
