@@ -17,6 +17,8 @@ GameEngine = function() {
     this.messageBuilder = null;
     this.displayer = null;
 
+    this.world = null;
+
     this.player = null;
 
     this._handlers = [];
@@ -30,7 +32,8 @@ GameEngine.prototype = {
      */
     init: function() {
         this.messageBuilder = new MessageBuilder();
-        this.displayer = new Displayer();
+        this.world = new WorldManager();
+        this.displayer = new Displayer(this.world);
 
         this.comManager = new ComManager(this);
         return this;
@@ -77,6 +80,10 @@ GameEngine.prototype = {
     joinGame: function() {
         var gameId = this.displayer.getGameId();
         this.comManager.send( this.messageBuilder.createJoinGameAction(gameId) );
+    },
+
+    newGame: function(data) {
+        this.world.gameData(data);
     },
 
 };
