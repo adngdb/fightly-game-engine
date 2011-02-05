@@ -16,4 +16,9 @@ Displayer = function() {
 };
 
 Displayer.prototype = {
+
+    getUserLogin: function() {
+        return prompt("Username", "player");
+    },
+
 };
