@@ -13,9 +13,14 @@
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
 Displayer = function() {
+    this.loggerElt = $('#log');
 };
 
 Displayer.prototype = {
+
+    log: function(msg) {
+        this.loggerElt.append('<li>'+msg+'</li>');
+    },
 
     getUserLogin: function() {
         return prompt("Username", "player");
