@@ -52,7 +52,12 @@ exports.MessageParser.prototype = {
         return this;
     },
 
-    parseAction: function(data, clientId) {
+    parseAction: function(action, clientId) {
+        switch (action.name) {
+            case "join-game":
+                this.gameEngine.onJoinGame(action.data.game_id, clientId);
+                break;
+        }
         return this;
     },
 
