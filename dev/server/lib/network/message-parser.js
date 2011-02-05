@@ -7,19 +7,23 @@
  *
  **********************************************************************/
 
+var util = require('util');
+
 /**
  * Class MessageParser
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
 exports.MessageParser = function(ge) {
-    this.ge = ge; // GameEngine
+    this.gameEngine = ge; // GameEngine
 };
 
 exports.MessageParser.prototype = {
 
     parse: function(message, clientId) {
         var obj = JSON.parse(message);
+        util.log('MessageParser.parse');
+
         switch (obj.type) {
             case "query":
                 this.parseQuery(obj.data, clientId);
@@ -44,6 +48,7 @@ exports.MessageParser.prototype = {
     },
 
     parseLogin: function(data, clientId) {
+        this.gameEngine.onLogin(data.username, clientId);
         return this;
     },
 
