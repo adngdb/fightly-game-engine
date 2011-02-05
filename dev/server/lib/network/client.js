@@ -12,6 +12,8 @@ var sys = require("sys");
 exports.Client = function(connection, server, gameEngine) {
 
     this.conn = connection;
+    this.id = this.conn.sessionId;
+
     this.server = server;
     this.messageParser = gameEngine.messageParser;
 
@@ -33,11 +35,11 @@ exports.Client.prototype = {
 
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
-        this.messageParser.parse(msg);
+        this.messageParser.parse(msg, this.id);
     },
 
     onDisconnect: function() {
-        sys.log("Connection " + this.conn.sessionId + " has closed");
+        sys.log("Connection " + this.id + " has closed");
     },
 };
 
