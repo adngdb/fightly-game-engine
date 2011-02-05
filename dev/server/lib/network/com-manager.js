@@ -36,7 +36,7 @@ exports.ComManager.prototype = {
 
     onConnect : function(connection) {
         sys.log("New connection: " + connection.sessionId);
-        new client_.Client(connection, this);
+        new client_.Client(connection, this, this.gameEngine);
     },
 
 }
