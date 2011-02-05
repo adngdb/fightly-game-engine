@@ -62,6 +62,10 @@ GameEngine.prototype = {
         this.comManager.send(this.messageBuilder.createAuthenticationLogin(login));
     },
 
+    onAuthenticationConfirm: function(username, valid) {
+        // TODO
+    },
+
 };
 
 var gameEngineInstance = new GameEngine().init().start();
