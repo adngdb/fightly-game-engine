@@ -1,9 +1,18 @@
-var sys = require("sys"),
-    actionManager_ = require("./action-manager.js");
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
-exports.Client = function(connection) {
-    
+var sys = require("sys");
+
+exports.Client = function(connection, server) {
+
     this.conn = connection;
+    this.server = server;
 
     //in many cases: "this" is a DOM object
     var me = this;
@@ -15,7 +24,7 @@ exports.Client = function(connection) {
         me.onDisconnect();
     });
 }
- 
+
 
 exports.Client.prototype = {
 
@@ -25,11 +34,11 @@ exports.Client.prototype = {
 
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
-        actionManager_.ActionManager.manageMessage(this.conn, msg);
+        this.server.actionManager.manageMessage(this.conn, msg);
     },
 
     onDisconnect: function() {
-	sys.log("Connection " + this.conn.sessionId + " has closed");
+    sys.log("Connection " + this.conn.sessionId + " has closed");
     }
 }
 

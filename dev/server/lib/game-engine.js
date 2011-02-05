@@ -8,7 +8,7 @@
  **********************************************************************/
 
 var sys = require('sys'),
-    server_ = require('./network/server.js'),
+    comManager_ = require('./network/com-manager.js'),
     gameFactory_ = require('./world/game-factory.js'),
     playerFactory_ = require('./world/player-factory.js');
 
@@ -22,7 +22,7 @@ exports.GameEngine = function() {
     this.playerFactory = null;
     this.gameFactory = null;
 
-    this.server = null;
+    this.comManager = null;
 
     this.games = [];
     this.players = [];
@@ -40,7 +40,7 @@ exports.GameEngine.prototype = {
     init: function() {
         sys.log("GameEngine: init()");
 
-        this.server = new server_.Server();
+        this.comManager = new comManager_.ComManager();
 
         // Factories
         this.gameFactory = new gameFactory_.GameFactory();
@@ -56,7 +56,7 @@ exports.GameEngine.prototype = {
      */
     start: function() {
         sys.log("GameEngine: start()");
-        this.server.listen(8080);
+        this.comManager.listen(3401);
         return this;
     },
 

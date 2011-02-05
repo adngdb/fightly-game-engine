@@ -1,5 +1,16 @@
-exports.WorldManager = function() {
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
+
+WorldManager = function() {
     this.game = null;
+    thisGame = this;
 };
 
 WorldManager.prototype = {
@@ -23,7 +34,7 @@ WorldManager.prototype = {
 
     gameUpdate: function(data) {
         var obj = JSON.parse(data);
-        updateValues(this.game, obj);
+        thisGame.updateValues(this.game, obj);
     },
 
     mapData: function(data) {
@@ -32,7 +43,7 @@ WorldManager.prototype = {
 
 	mapUpdate: function(data) {
         var obj = JSON.parse(data);
-        updateValues(this.game.map, obj);
+        this.updateValues(this.game.map, obj);
     },
     
     playerData: function(data) {
@@ -43,27 +54,27 @@ WorldManager.prototype = {
         var obj = JSON.parse(data);
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i][id] == obj[id]){
-				 updateValues(this.game.players[i], obj);
+			if(this.game.players[i].id == obj.id){
+				 this.updateValues(this.game.players[i], obj);
 				 i = this.game.players.length;
 				}
 			i++;
 			}
     },
-
+/*
     cellUpdate: function(data) {
         var newCell = JSON.parse(data);
         // Err !! celles un tableau de cell (y a pas 2 dimensions)
         this.game.map.cells[newCell.x][newCell.y] = newCell;
     },
-
-    unitData: function(data) {
+*/
+    unitCreate: function(data) {
         var obj = JSON.parse(data);
         // obj = {idOfPlayer,unit}
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i][id] == obj[owner]){
-				 this.game.players[i][units].push(obj);
+			if(this.game.players[i].id == obj.owner){
+				 this.game.players[i].units.push(obj);
 				 i = this.game.players.length;
 				}
 			i++;
@@ -74,14 +85,12 @@ WorldManager.prototype = {
         var obj = JSON.parse(data);        
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i][id] == obj[owner]){
-				
+			if(this.game.players[i].id == obj.owner){				
 			var j = 0;
-			while(j<this.game.players[i][units].length){
-				if(this.game.players[i][units][j][id] == obj[id]){				 
-					
-					updateValues(game.players[i][units][j], obj);
-				 	j = this.game.players[i][units].length;					
+			while(j<this.game.players[i].units.length){
+				if(this.game.players[i].units[j].id == obj.id){
+					this.updateValues(this.game.players[i].units[j], obj);
+				 	j = this.game.players[i].units.length;
 					}
 				j++;
 				}
