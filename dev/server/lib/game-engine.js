@@ -7,7 +7,7 @@
  *
  **********************************************************************/
 
-var sys = require('sys'),
+var util = require('util'),
     comManager_ = require('./network/com-manager.js'),
     messageParser_ = require('./network/message-parser.js'),
     messageBuilder_ = require('./network/message-builder.js'),
@@ -42,7 +42,7 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     init: function() {
-        sys.log("GameEngine: init()");
+        util.log("GameEngine: init()");
 
         this.comManager = new comManager_.ComManager(this);
         this.messageBuilder = new messageBuilder_.MessageBuilder();
@@ -61,13 +61,32 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     start: function() {
-        sys.log("GameEngine: start()");
+        util.log("GameEngine: start()");
         this.comManager.listen(3401);
         return this;
     },
 
+    //---> Network functions
+
+    sendPlayer: function(player, message) {
+        this.comManager.send(player.id, message);
+    },
+
+    sendGame: function(game, message) {
+        this.comManager.send(game.getPlayersIds, message);  // TODO Game.getPlayersIds
+    },
+
     onConnectionOpen: function(client) {
-        this.client.send(this.messageBuilder.createAuthenticationQuery());
+        util.log('GameEngine.onConnectionOpen');
+        client.send(this.messageBuilder.createAuthenticationQuery());
+    },
+
+    onLogin: function(username, clientId) {
+        var player = new Player(id);
+        player.login = username;
+        this.players.push(player);
+        this.sendPlayer(player, this.messageBuilder.createAuthenticationData(username, true));
+        return this;
     },
 
 };
