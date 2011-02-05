@@ -76,4 +76,10 @@ MessageBuilder.prototype = {
         return this.createLogin(login, data);
     },
 
+    createJoinGameAction: function(gameId) {
+        var data = {};
+        data.game_id = gameId;
+        return this.createAction("join-game", data);
+    },
+
 };
