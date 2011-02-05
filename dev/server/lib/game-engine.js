@@ -70,15 +70,20 @@ exports.GameEngine.prototype = {
 
     sendPlayer: function(player, message) {
         this.comManager.send(player.id, message);
+        return this;
     },
 
     sendGame: function(game, message) {
         this.comManager.send(game.getPlayersIds, message);  // TODO Game.getPlayersIds
+        return this;
     },
+
+    //---> Events functions
 
     onConnectionOpen: function(client) {
         util.log('GameEngine.onConnectionOpen');
         client.send(this.messageBuilder.createAuthenticationQuery());
+        return this;
     },
 
     onLogin: function(username, clientId) {
@@ -86,6 +91,23 @@ exports.GameEngine.prototype = {
         player.login = username;
         this.players.push(player);
         this.sendPlayer(player, this.messageBuilder.createAuthenticationData(username, true));
+        return this;
+    },
+
+    onJoinGame: function(gameId, clientId) {
+        // TODO
+        // alert players that the game changed
+
+        var game = this.games[gameId];
+        if (typeof game != "undefined" && game != null) {
+            game.addPlayer(this.players[clientId]);
+        }
+        // this game doesn't exist yet: create it
+        else {
+            game = this.gameFactory.create(gameId);
+            game.addPlayer(this.players[clientId]);
+            this.games[gameId] = game;
+        }
         return this;
     },
 
