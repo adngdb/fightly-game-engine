@@ -10,6 +10,7 @@
 var sys = require('sys'),
     comManager_ = require('./network/com-manager.js'),
     messageParser_ = require('./network/message-parser.js'),
+    messageBuilder_ = require('./network/message-builder.js'),
     gameFactory_ = require('./world/game-factory.js'),
     playerFactory_ = require('./world/player-factory.js');
 
@@ -24,6 +25,7 @@ exports.GameEngine = function() {
     this.gameFactory = null;
 
     this.comManager = null;
+    this.messageBuilder = null;
     this.messageParser = null;
 
     this.games = [];
@@ -43,6 +45,7 @@ exports.GameEngine.prototype = {
         sys.log("GameEngine: init()");
 
         this.comManager = new comManager_.ComManager(this);
+        this.messageBuilder = new messageBuilder_.MessageBuilder();
         this.messageParser = new messageParser_.MessageParser(this);
 
         // Factories
@@ -61,6 +64,10 @@ exports.GameEngine.prototype = {
         sys.log("GameEngine: start()");
         this.comManager.listen(3401);
         return this;
+    },
+
+    onConnectionOpen: function(client) {
+        this.client.send(this.messageBuilder.createAuthenticationQuery());
     },
 
 };
