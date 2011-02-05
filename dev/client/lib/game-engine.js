@@ -84,6 +84,7 @@ GameEngine.prototype = {
 
     newGame: function(data) {
         this.world.gameData(data);
+        this.displayer.displayGame();
     },
 
 };
