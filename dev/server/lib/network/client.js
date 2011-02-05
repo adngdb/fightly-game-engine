@@ -13,7 +13,7 @@ exports.Client = function(connection, server, gameEngine) {
 
     this.conn = connection;
     this.server = server;
-    this.gameEngine = gameEngine;
+    this.messageParser = gameEngine.messageParser;
 
     this.conn.on("message", function(msg) {
         this.onMessage(msg);
@@ -22,7 +22,7 @@ exports.Client = function(connection, server, gameEngine) {
     this.conn.addListener("disconnect", function() {
         this.onDisconnect();
     }.bind(this));
-}
+};
 
 
 exports.Client.prototype = {
@@ -33,11 +33,11 @@ exports.Client.prototype = {
 
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
-        this.server.actionManager.manageMessage(this.conn, msg);
+        this.messageParser.parse(msg);
     },
 
     onDisconnect: function() {
         sys.log("Connection " + this.conn.sessionId + " has closed");
     },
-}
+};
 
