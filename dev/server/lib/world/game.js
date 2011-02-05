@@ -9,6 +9,11 @@
 
 var map_= require("./map.js");
 
+/**
+ * Class Game
+ * @authors Youness HAMRI - youness.hamri@gmail.com / duc ....
+ * */
+
 exports.Game = function() {
 
     this.id = null;
@@ -20,10 +25,9 @@ exports.Game = function() {
     this.playerFactory = null;
     this.unitFactory = null;
 
-    this.actionManager = null;
-
     // Configuration
-    this.nbMaxPlayers = 2;
+    this.nbMaxPlayers = -1;
+    this.nbMaxTurns = -1;
 
     //play in turn
     this.currentPlayer = null;
@@ -32,15 +36,22 @@ exports.Game = function() {
 
 exports.Game.prototype = {
 
-    //prend user en paramètre et instancie un player
-
+    /**
+     * Adds a new player to current game from an user .
+     * @param user.
+     * @return player.
+     */
     addPlayer: function(user) {
-        var pl = this.playerFactory.createFromUser(user);
-        this.players.push(pl);
+        var player = this.playerFactory.createFromUser(user);
+        this.players.push(player);
         this.checkState();
-        return pl;
+        return player;
     },
 
+    /**
+     * Set to false a play attribute of player.
+     * @param PlayerId (a player identity)
+     */
     removePlayer: function(playerId) {
         for (var i=0 ; i<this.players.length ; i++) {
             if(this.players[i].id == playerId) {
@@ -50,6 +61,10 @@ exports.Game.prototype = {
         }
     },
 
+    /**
+     * Get a game list of players identities.
+     * @return PlayersIds
+     */
     getPlayersIds: function() {
 
         var playersIds = [];
@@ -59,6 +74,10 @@ exports.Game.prototype = {
         return playersIds;
     },
 
+    /**
+     * Launchs the game when a maximum number of players is reached
+     * @return this
+     */
     checkState: function() {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
@@ -66,6 +85,10 @@ exports.Game.prototype = {
         return this;
     },
 
+    /**
+     * Downloads one map from a data map file
+     * @param file
+     */
     downloadMapFromFile: function(file) {
         this.map = mapFactory.createFromFile(file);
     },
@@ -79,7 +102,14 @@ exports.Game.prototype = {
         };
     },
 
-    //play in turn
+
+    //--->play in turn
+
+    /**
+     * Get a player by attribut "turn"
+     * @param turn Turn of player
+     * @return player
+     */
     getPlayerByTurn: function(turn) {
         var player = null;
         for (var i=0 ; i<this.players.length ; i++) {
@@ -92,6 +122,11 @@ exports.Game.prototype = {
         return player;
     },
 
+    /**
+     * Get player who has next turn
+     * @param currentTurn Turn of current player
+     * @return player
+     */
     getNextPlayer: function(currentTurn) {
         var nextPlayer = null;
         do {
@@ -107,6 +142,9 @@ exports.Game.prototype = {
         return nextPlayer;
     },
 
+    /**
+     * Change turn to the next player (according to Timer)
+     */
     nextTurn: function() {
         var currentTurn = this.currentPlayer.turn;
         this.currentPlayer = this.getNextPlayer(currentTurn);
@@ -116,18 +154,28 @@ exports.Game.prototype = {
         this.startTimer();
     },
 
+    /**
+     * Start Timer for playing in turn
+     */
     startTimer: function() {
         this.interval = setInterval(function() {
-            clearInterval(this.interval);
             this.nextTurn();
+            clearInterval(this.interval);
         }.bind(this), 5000);
     },
 
+    /**
+     * Change turn to the next player (immediately)
+     */
     changeTurn: function() {
         clearInterval(this.interval);
         this.nextTurn();
     },
 
+    /**
+     * Start playing in turn
+     * Player whose turn is 0 will be the first
+     */
     startPlaying: function() {
         this.currentPlayer = this.getPlayerByTurn(0);
         console.log("This is turn of player 0");
@@ -135,11 +183,20 @@ exports.Game.prototype = {
         this.startTimer();
     },
 
+    /**
+     * Stop playing
+     *
+     */
     stopPlaying: function() {
         clearInterval(this.interval);
         setTurn(-1);
     },
 
+    /**
+     * Get a player by attribut "id"
+     * @param id Id of player
+     * @return player
+     */
     getPlayerById: function(id) {
         var player = null;
         for (var i=0 ; i<this.players.length ; i++) {
@@ -152,6 +209,19 @@ exports.Game.prototype = {
         return player;
     },
 
+    /**
+     * Alias for getPlayerById
+     * @see getPlayerById
+     */
+    getPlayer: function(id) {
+        return this.getPlayerById(id);
+    },
+
+    /**
+     * Get a unit by attribut "id" in game
+     * @param id Id of unit
+     * @return unit
+     */
     getUnitById: function(id) {
         for(var i=0; i<this.players.length; i++) {
             for(var j=0; j<this.players[i].units.length; j++) {
@@ -164,6 +234,20 @@ exports.Game.prototype = {
         return null;
     },
 
+    /**
+     * Alias for getUnitById
+     * @see getUnitById
+     */
+    getUnit: function(id) {
+        return this.getUnitById(id);
+    },
+
+    /**
+     * Get a cell by coodinates x and y
+     * @param x Coordinate x of this cell
+     * @param y Coordinate y of this cell
+     * @return cell
+     */
     getCell: function(x, y) {
         var cell = null;
         for (var i=0 ; i<this.map.cells.length ; i++) {
@@ -173,6 +257,6 @@ exports.Game.prototype = {
             }
         }
 
-        return player;
+        return cell;
     },
 };

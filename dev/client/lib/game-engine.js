@@ -32,13 +32,13 @@ GameEngine.prototype = {
      * @return this
      */
     init: function() {
+        this.comManager = new ComManager(this);
+
         this.messageBuilder = new MessageBuilder();
         this.world = new WorldManager();
         this.eventManager = new EventManager(this.world, this.comManager, this.messageBuilder);
 
         this.displayer = new Displayer(this.world, this.eventManager);
-
-        this.comManager = new ComManager(this);
 
         return this;
     },
@@ -64,17 +64,17 @@ GameEngine.prototype = {
     //---> Triggers
 
     /**
-     * Call a event 
+     * Call a event
      * @param event Name of event
      * @return this
      */
     trigger: function(event) {
-	if(this._handlers[event]) {
+    if(this._handlers[event]) {
             this._handlers[event].apply(this, arguments);
-	}
-	else {
-	    log("Event: " + event + " is unregistered.");
-	}
+    }
+    else {
+        log("Event: " + event + " is unregistered.");
+    }
     },
 
     /**
@@ -84,13 +84,13 @@ GameEngine.prototype = {
      * @return this
      */
     addListener: function(event, callback) {
-	if(typeof(callback) == "function"){
+    if(typeof(callback) == "function"){
             this._handlers[event] = callback;
-	}
-	else {
-	    log("Need a function to listen this event");
-	}
-	    
+    }
+    else {
+        log("Need a function to listen this event");
+    }
+
         return this;
     },
 

@@ -101,13 +101,20 @@ exports["test-game-startPlaying"] = function(test) {
 		var currentTurn = 0;
 		
 		game.startPlaying();
-		var interval = setInterval(function() {
-		    //test.equal(game.currentPlayer.turn , currentTurn);
-		    console.log("gameTurn: " + game.currentPlayer.turn + "--- currentTurn: " + currentTurn);
-		    console.log(game.currentPlayer.turn == currentTurn);
+		test.equal(game.currentPlayer.turn , currentTurn);		    
+		
+		var startInterval = setInterval(function() {		    
 		    currentTurn++;
 		    if(currentTurn > 2)
-				currentTurn = 0;
+				currentTurn = 0;				
+		    test.equal(game.currentPlayer.turn , currentTurn);		    
 		}, 5000);
+		
+		
+		var stopInterval = setInterval(function() {		    
+		    test.done();
+		    clearInterval(startInterval);
+		    clearInterval(stopInterval);
+		}, 30000);
 		
 }

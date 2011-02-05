@@ -7,6 +7,10 @@
  *
  **********************************************************************/
 
+/**
+ * Class Unit
+ * @authors Youness HAMRI - youness.hamri@gmail.com
+ **/
 
 exports.Unit = function() {
 
@@ -24,20 +28,23 @@ exports.Unit = function() {
     this.range = null;
 }
 
-
-
-var unit_ = require("./unit.js");
-var newUnit = new unit_.Unit();
-
-
 exports.Unit.prototype = {
-    //add a new properties to unit
 
+    /**
+     * Adds a new properties to unit.
+     * @param property.
+     * @return this.
+     */
     addProperty : function(property) {
         this.properties.push(property);
         return this;
     },
 
+    /**
+     * Removes one property from a properties list.
+     * @param property.
+     * @return this.
+     */
     removeProperty : function(property) {
 
         var i=0;
@@ -53,6 +60,11 @@ exports.Unit.prototype = {
         return this;
     },
 
+    /**
+     * checks whether a property is present in the list of properties
+     * @param property.
+     * @return true when a properties list contains a property and return false otherwise .
+     */
     hasProperty : function(property) {
 
         var i=0;
@@ -68,12 +80,20 @@ exports.Unit.prototype = {
         }
     },
 
+    /**
+     * Moves the unit to another cell
+     * @param cell.
+     */
     moveToCell : function(cell) {
 
         this.cell =  cell;
 
     },
 
+    /**
+     * Transform the unit attributs to a JSON string
+     * @return data.
+     */
     toJSON : function() {
 
         var data = {
@@ -86,7 +106,9 @@ exports.Unit.prototype = {
             "view" : this.view,
             "movement" : this.movement,
             "properties": this.properties,
-            "cell" : this.cell
+            "cell" : this.cell,
+            "health" : this.health,
+            "range" : this.range,
         }
 
         return data;

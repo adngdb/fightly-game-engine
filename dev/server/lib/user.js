@@ -16,6 +16,7 @@ var util = require("util");
 exports.User = function(id, login) {
     this.id = id;
     this.login = login;
+    this.inGame = null;
 };
 
 exports.User.prototype = {

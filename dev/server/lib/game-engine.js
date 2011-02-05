@@ -18,6 +18,8 @@ var util                = require('util'),
     messageBuilder_     = require('./network/message-builder.js'),
     messageParser_      = require('./network/message-parser.js'),
 
+    actionManager_      = require('./rules/action-manager.js'),
+
     gameFactory_        = require('./world/game-factory.js'),
     playerFactory_      = require('./world/player-factory.js'),
     mapFactory_         = require('./world/map-factory.js'),
@@ -58,6 +60,10 @@ exports.GameEngine.prototype = {
      */
     init: function() {
         util.log("GameEngine: init()");
+
+        // Observer pattern
+        var legacy = new legacy_.Legacy();
+        legacy.inherits(new observer_.Observer(), this);
 
         this.comManager = new comManager_.ComManager(this);
         this.messageBuilder = new messageBuilder_.MessageBuilder();
@@ -158,12 +164,12 @@ exports.GameEngine.prototype = {
      * @return this
      */
     trigger: function(event) {
-    if(this._handlers[event]) {
+        if (this._handlers[event]) {
             this._handlers[event].apply(this, arguments);
-    }
-    else {
-        log("Event: " + event + " is unregistered.");
-    }
+        }
+        else {
+            util.log("Event: " + event + " is unregistered.");
+        }
     },
 
     /**
@@ -173,12 +179,12 @@ exports.GameEngine.prototype = {
      * @return this
      */
     addListener: function(event, callback) {
-    if(typeof(callback) == "function"){
+        if (typeof(callback) == "function"){
             this._handlers[event] = callback;
-    }
-    else {
-        log("Need a function to listen this event");
-    }
+        }
+        else {
+            util.log("Need a function to bind this event");
+        }
 
         return this;
     },
@@ -225,6 +231,8 @@ exports.GameEngine.prototype = {
             this.addGame(game);
         }
 
+        user.game = game.id;
+
         // Sending game data to the new coming player
         var gameData = this.messageBuilder.createNewGameData(game);
         this.sendUser(user, gameData);
@@ -232,7 +240,16 @@ exports.GameEngine.prototype = {
         return this;
     },
 
-};
+    onMoveUnit: function(unitId, toX, toY, clientId) {
+        var user = this.getUser(clientId);
+        if (user.game == null) {
+            util.log("User is not in game, cannot call onMoveUnit");
+            return this;
+        }
+        var game = this.getGame(user.game);
 
-// Inheritance
-new legacy_.Legacy().inherits(observer_.Observer, exports.GameEngine);
+        var am = new actionManager_.ActionManager(game);
+        am.moveUnit(user.id, unitId, toX, toY);
+    },
+
+};
