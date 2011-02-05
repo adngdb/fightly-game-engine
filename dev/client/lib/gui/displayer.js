@@ -26,4 +26,8 @@ Displayer.prototype = {
         return prompt("Username", "player");
     },
 
+    getGameId: function() {
+        return window.location.search.substring(1).split("=")[1];
+    },
+
 };
