@@ -14,8 +14,9 @@ exports.Player = function() {
     this.name = null;
     this.turn = null;
     this.units = [];
-
+    this.startPoint = {type : null , x :null , y:null};
     this.play = false;
+
     this.startPoint = null;
 
     this.unitFactory = null;
@@ -24,9 +25,11 @@ exports.Player = function() {
 exports.Player.prototype = {
 
     addUnit: function(type) {
+
         util.log("Player.addUnit: startPoint=" + this.startPoint);
 
         var unit = this.unitFactory.create(type, this, this.startPoint);
+
         unit.addObserver(this);
         this.units.push(unit);
 
@@ -56,9 +59,9 @@ exports.Player.prototype = {
         context.player = this;
         this.notify(context);
     },
-    
+
     resetUnits: function() {
-        for(var i=0;i<this.units.length;i++) {            
+        for(var i=0;i<this.units.length;i++) {
               this.units[i].resetMovement();
         }
     }
