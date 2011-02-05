@@ -15,7 +15,9 @@
 Displayer = function(world) {
     this.world = world;
 
-    this.loggerElt = $('#log');
+    // HTML elements
+    this.loggerElt  = $('#log');
+    this.gameElt    = $('#game');
 };
 
 Displayer.prototype = {
@@ -36,6 +38,13 @@ Displayer.prototype = {
         // TODO
         // Check the variable's name
         return window.location.search.substring(1).split("=")[1];
+    },
+
+    displayGame: function() {
+        var state = this.world.game.state;
+        if (state == "waiting") {
+            this.gameElt.empty().append('<h1>Waiting for opponents...</h1>');
+        }
     },
 
 };
