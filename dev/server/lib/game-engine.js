@@ -9,6 +9,7 @@
 
 var sys = require('sys'),
     comManager_ = require('./network/com-manager.js'),
+    messageParser_ = require('./network/message-parser.js'),
     gameFactory_ = require('./world/game-factory.js'),
     playerFactory_ = require('./world/player-factory.js');
 
@@ -23,6 +24,7 @@ exports.GameEngine = function() {
     this.gameFactory = null;
 
     this.comManager = null;
+    this.messageParser = null;
 
     this.games = [];
     this.players = [];
@@ -41,6 +43,7 @@ exports.GameEngine.prototype = {
         sys.log("GameEngine: init()");
 
         this.comManager = new comManager_.ComManager(this);
+        this.messageParser = new messageParser_.MessageParser(this);
 
         // Factories
         this.gameFactory = new gameFactory_.GameFactory();
