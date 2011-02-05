@@ -1,28 +1,23 @@
-var actionManager_ = require("../lib/network/action-manager.js");
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
+var messageParser_ = require("../lib/network/message-parser.js");
 
 exports["test-parse-message"] = function (test) {
-	var msg = "{\"action\": { \"name\": \"login\",\"params\": { \"arg1\": \"valeur1\"}}}";
-	var objectJSON = actionManager_.ActionManager.parseMessage(msg);
-        test.equal(objectJSON.action.name,"login");
-        test.done();
+    var messageParser = new messageParser_.MessageParser();
+
+    //var msg = "{\"action\": { \"name\": \"login\",\"params\": { \"arg1\": \"valeur1\"}}}";
+    //~ var msg = '{"type":"login","data":{"username":"player"}}';
+    //~ var res = messageParser.parse(msg);
+//~
+    //~ test.equal(res.type, "login");
+    //~ test.equal(res.data.username, "player");
+
+    test.done();
 }
-
-
-exports["test-move-left"] = function (test) {
-        test.done();
-}
-
-exports["test-move-right"] = function (test) {
-        test.done();
-}
-
-exports["test-move-up"] = function (test) {
-        test.done();
-}
-
-exports["test-move-down"] = function (test) {
-        test.done();
-}
-
-
-
