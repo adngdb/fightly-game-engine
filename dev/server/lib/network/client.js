@@ -9,20 +9,19 @@
 
 var sys = require("sys");
 
-exports.Client = function(connection, server) {
+exports.Client = function(connection, server, gameEngine) {
 
     this.conn = connection;
     this.server = server;
+    this.gameEngine = gameEngine;
 
-    //in many cases: "this" is a DOM object
-    var me = this;
     this.conn.on("message", function(msg) {
-        me.onMessage(msg);
-    });
+        this.onMessage(msg);
+    }.bind(this));
 
     this.conn.addListener("disconnect", function() {
-        me.onDisconnect();
-    });
+        this.onDisconnect();
+    }.bind(this));
 }
 
 
@@ -38,7 +37,7 @@ exports.Client.prototype = {
     },
 
     onDisconnect: function() {
-    sys.log("Connection " + this.conn.sessionId + " has closed");
-    }
+        sys.log("Connection " + this.conn.sessionId + " has closed");
+    },
 }
 

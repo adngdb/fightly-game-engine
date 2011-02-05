@@ -40,7 +40,7 @@ exports.GameEngine.prototype = {
     init: function() {
         sys.log("GameEngine: init()");
 
-        this.comManager = new comManager_.ComManager();
+        this.comManager = new comManager_.ComManager(this);
 
         // Factories
         this.gameFactory = new gameFactory_.GameFactory();
