@@ -57,7 +57,7 @@ exports.Player.prototype = {
     },
 
     /**
-     * Transform the player attributs to a JSON string
+     * Transform the player's attributs to a JSON string
      * @return the JSON string.
      */
     toJSON : function() {
