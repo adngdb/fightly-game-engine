@@ -15,6 +15,7 @@
 GameEngine = function() {
     this.comManager = null;
     this.messageBuilder = null;
+    this.displayer = null;
 
     this._handlers = [];
 };
@@ -27,6 +28,7 @@ GameEngine.prototype = {
      */
     init: function() {
         this.messageBuilder = new MessageBuilder();
+        this.displayer = new Displayer();
 
         this.comManager = new ComManager(this);
         return this;
@@ -56,7 +58,7 @@ GameEngine.prototype = {
     },
 
     onAuthenticationQuery: function() {
-        var login = prompt("Username", "player");
+        var login = this.displayer.getUserLogin();
         this.comManager.send(this.messageBuilder.createAuthenticationLogin(login));
     },
 
