@@ -64,4 +64,8 @@ GameEngine.prototype = {
 
 };
 
-new GameEngine().init().start();
+var gameEngineInstance = new GameEngine().init().start();
+
+function log(msg) {
+    gameEngineInstance.displayer.log(msg);
+}
