@@ -24,8 +24,9 @@ exports.Client = function(connection, server, gameEngine) {
     this.conn.addListener("disconnect", function() {
         this.onDisconnect();
     }.bind(this));
-};
 
+    gameEngine.onConnectionOpen(this);
+};
 
 exports.Client.prototype = {
 
@@ -40,6 +41,8 @@ exports.Client.prototype = {
 
     onDisconnect: function() {
         sys.log("Connection " + this.id + " has closed");
+        // TODO
+        // Tell the server this client is dead
     },
 };
 
