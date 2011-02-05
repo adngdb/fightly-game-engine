@@ -22,30 +22,30 @@ var newUnit = new unit_.Unit();
 exports.Unit.prototype = {
     //add a new properties to unit
 
-    addProperties : function(propertie) {
-        this.properties.push(propertie);
+    addProperty : function(property) {
+        this.properties.push(property);
         return this;
     },
 
-    removeProperties : function(propertie) {
+    removeProperty : function(property) {
 
         var i=0;
-        while (i < this.properties.length && this.properties[i] != propertie) {
+        while (i < this.properties.length && this.properties[i] != property) {
             i++;
         }
         if ( i == this.properties.length ) {
             console.log("WARNING: aucune propriete à supprimer ");
         }
         else {
-             this.properties[i] = null;
+             this.properties.splice(i,1);
         }
         return this;
     },
 
-    hasProperties : function(propertie) {
+    hasProperty : function(property) {
 
         var i=0;
-        while (i < this.properties.length && this.properties[i] != propertie) {
+        while (i < this.properties.length && this.properties[i] != property) {
             i++;
         }
 

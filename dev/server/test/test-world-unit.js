@@ -12,46 +12,46 @@ exports["test-unit-toJSON"] = function (test) {
         test.done();
 }
 
-exports["test-unit-removeProperties"] = function (test) {
+exports["test-unit-removeProperty"] = function (test) {
 
         var un = new unit_.Unit();
         un.properties = ["a","b","c"];
-        var prop = un.removeProperties("c");
-        test.equal("a,b,", prop.properties);
+        var prop = un.removeProperty("c");
+        test.equal("a,b", prop.properties);
 
         var un = new unit_.Unit();
         un.properties = ["a","b","c"];
-        var prop = un.removeProperties("b");
-        test.equal("a,,c", prop.properties);
+        var prop = un.removeProperty("b");
+        test.equal("a,c", prop.properties);
         test.done();
 }
 
-exports["test-unit-addProperties"] = function (test) {
+exports["test-unit-addProperty"] = function (test) {
 
         var un = new unit_.Unit();
         un.properties = ["a","b"];
-        un.addProperties("c");
+        un.addProperty("c");
         test.equal("a,b,c" , un.properties);
         test.done();
 
 }
 
-exports["test-unit-addProperties"] = function (test) {
+exports["test-unit-addProperty"] = function (test) {
 
         var un = new unit_.Unit();
         un.properties = ["a","b"];
-        un.addProperties("c");
+        un.addProperty("c");
         test.equal("a,b,c" , un.properties);
         test.done();
 
 }
 
-exports["test-unit-hasProperties"] = function (test) {
+exports["test-unit-hasProperty"] = function (test) {
 
         var un = new unit_.Unit();
         un.properties = ["a","b","c"];
-        test.equal(true , un.hasProperties("b"));
-        test.equal(false , un.hasProperties("d"));
+        test.equal(true , un.hasProperty("b"));
+        test.equal(false , un.hasProperty("d"));
         test.done();
 
 }

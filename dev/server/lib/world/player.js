@@ -25,10 +25,3 @@ exports.Player.prototype = {
 }
 
 
-
-/*var player_ = require("./player.js");
-var newPlayer = new player_.Player();
-console.log("////////////////////////////  " + newPlayer.id + me.name);
-console.log("%%%%%%%%% " + newPlayer.toJSON());
-*/
-
