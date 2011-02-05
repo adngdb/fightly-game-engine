@@ -82,7 +82,7 @@ exports.GameEngine.prototype = {
     },
 
     onLogin: function(username, clientId) {
-        var player = new Player(id);
+        var player = this.playerFactory.create(clientId);
         player.login = username;
         this.players.push(player);
         this.sendPlayer(player, this.messageBuilder.createAuthenticationData(username, true));
