@@ -17,6 +17,8 @@ GameEngine = function() {
     this.messageBuilder = null;
     this.displayer = null;
 
+    this.player = null;
+
     this._handlers = [];
 };
 
@@ -63,7 +65,18 @@ GameEngine.prototype = {
     },
 
     onAuthenticationConfirm: function(username, valid) {
-        // TODO
+        if (valid == true) {
+            this.player = username;
+            this.joinGame();
+        }
+        else {
+            // TODO
+        }
+    },
+
+    joinGame: function() {
+        var gameId = this.displayer.getGameId();
+        this.comManager.send( this.messageBuilder.createJoinGameAction(gameId) );
     },
 
 };
