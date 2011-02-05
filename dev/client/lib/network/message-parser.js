@@ -13,7 +13,7 @@
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
 MessageParser = function(ge) {
-    this.ge = ge;   // GameEngine
+    this.gameEngine = ge;   // GameEngine
 };
 
 MessageParser.prototype = {
@@ -43,7 +43,7 @@ MessageParser.prototype = {
 
         switch (data.response_type) {
             case "login":
-                this.ge.onAuthenticationQuery();
+                this.gameEngine.onAuthenticationQuery();
                 break;
         }
         return this;
@@ -54,6 +54,32 @@ MessageParser.prototype = {
     },
 
     parseData: function(data) {
+        switch (data.method) {
+            case "new":
+                this.parseNewData(data.object, data.object_data);
+                break;
+            case "update":
+                this.parseUpdateData(data.object, data.object_data);
+                break;
+            case "delete":
+                this.parseDeleteData(data.object, data.object_data);
+                break;
+        }
+        return this;
+    },
+
+    parseNewData: function(object, data) {
+        if (object == "Authentication") {
+            this.gameEngine.onAuthenticationConfirm(data.username, data.valid);
+        }
+        return this;
+    },
+
+    parseUpdateData: function(object, data) {
+        return this;
+    },
+
+    parseDeleteData: function(object, data) {
         return this;
     },
 
