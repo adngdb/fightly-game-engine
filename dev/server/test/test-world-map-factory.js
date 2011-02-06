@@ -1,10 +1,10 @@
 // playerFactory class:
 
-var map_ = require("../lib/world/map-factory.js");
+var mapfactory_ = require("../lib/world/map-factory.js");
 
 exports["test-world-map-factory-create"] = function(test) {
 
-        var createdMap = new map_.MapFactory.prototype.create(3,2);
+        var createdMap = new mapfactory_.MapFactory.prototype.create(3,2);
 
         for (i=0;i<2;i++) {
             for (j=0;j<3;j++) {
@@ -19,7 +19,7 @@ exports["test-world-map-factory-create"] = function(test) {
 
 exports["test-world-map-factory-mapFromFile"] = function(test) {
 
-        var obj = new map_.MapFactory();
+        var obj = new mapfactory_.MapFactory();
         var map = obj.mapFromFile("../data/maps/sample-map.json");
         test.equal(map.height , 10);
         test.equal(map.width , 10);
