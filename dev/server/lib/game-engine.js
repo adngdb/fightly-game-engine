@@ -66,6 +66,44 @@ exports.GameEngine.prototype = {
         return this;
     },
 
+    //---> Getters and setters
+
+    getPlayer: function(id) {
+        var i = 0,
+            l = this.players.length;
+
+        for (; i < l; i++) {
+            if (this.players[i].id == id) {
+                return this.players[i];
+            }
+        }
+
+        return null;
+    },
+
+    addPlayer: function(player) {
+        this.players.push(player);
+        return this;
+    },
+
+    getGame: function(id) {
+        var i = 0,
+            l = this.games.length;
+
+        for (; i < l; i++) {
+            if (this.games[i].id == id) {
+                return this.games[i];
+            }
+        }
+
+        return null;
+    },
+
+    addGame: function(game) {
+        this.games.push(game);
+        return this;
+    },
+
     //---> Network functions
 
     sendPlayer: function(player, message) {
@@ -90,28 +128,31 @@ exports.GameEngine.prototype = {
     onLogin: function(username, clientId) {
         var player = this.playerFactory.create(clientId);
         player.login = username;
-        this.players.push(player);
+        this.addPlayer(player);
         this.sendPlayer(player, this.messageBuilder.createAuthenticationData(username, true));
 
         return this;
     },
 
     onJoinGame: function(gameId, clientId) {
-        var game = this.games[gameId];
-        if (typeof game != "undefined" && game != null) {
-            var msg = this.messageBuilder.createNewPlayerData(player);
+        var game = this.getGame(gameId),
+            player = this.getPlayer(clientId);
+
+        if (game != null) {
+            var msg = this.messageBuilder.createNewPlayerData( player );
             this.send(game, msg);
-            game.addPlayer(this.players[clientId]);
+            game.addPlayer( player );
         }
         // this game doesn't exist yet: create it
         else {
             game = this.gameFactory.create(gameId);
-            game.addPlayer(this.players[clientId]);
-            this.games[gameId] = game;
+            game.addPlayer( player );
+            this.addGame(game);
         }
+
         // Sending game data to the new coming player
         var gameData = this.messageBuilder.createNewGameData(game);
-        this.sendPlayer(this.players[clientId], gameData);
+        this.sendPlayer(player, gameData);
 
         return this;
     },
