@@ -7,8 +7,10 @@
  *
  **********************************************************************/
 
-var sys = require('sys'),
+var util = require('util'),
     comManager_ = require('./network/com-manager.js'),
+    messageParser_ = require('./network/message-parser.js'),
+    messageBuilder_ = require('./network/message-builder.js'),
     gameFactory_ = require('./world/game-factory.js'),
     playerFactory_ = require('./world/player-factory.js');
 
@@ -23,6 +25,8 @@ exports.GameEngine = function() {
     this.gameFactory = null;
 
     this.comManager = null;
+    this.messageBuilder = null;
+    this.messageParser = null;
 
     this.games = [];
     this.players = [];
@@ -38,9 +42,11 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     init: function() {
-        sys.log("GameEngine: init()");
+        util.log("GameEngine: init()");
 
         this.comManager = new comManager_.ComManager(this);
+        this.messageBuilder = new messageBuilder_.MessageBuilder();
+        this.messageParser = new messageParser_.MessageParser(this);
 
         // Factories
         this.gameFactory = new gameFactory_.GameFactory();
@@ -55,8 +61,53 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     start: function() {
-        sys.log("GameEngine: start()");
+        util.log("GameEngine: start()");
         this.comManager.listen(3401);
+        return this;
+    },
+
+    //---> Network functions
+
+    sendPlayer: function(player, message) {
+        this.comManager.send(player.id, message);
+        return this;
+    },
+
+    sendGame: function(game, message) {
+        this.comManager.send(game.getPlayersIds, message);  // TODO Game.getPlayersIds
+        return this;
+    },
+
+    //---> Events functions
+
+    onConnectionOpen: function(client) {
+        util.log('GameEngine.onConnectionOpen');
+        client.send(this.messageBuilder.createAuthenticationQuery());
+        return this;
+    },
+
+    onLogin: function(username, clientId) {
+        var player = this.playerFactory.create(clientId);
+        player.login = username;
+        this.players.push(player);
+        this.sendPlayer(player, this.messageBuilder.createAuthenticationData(username, true));
+        return this;
+    },
+
+    onJoinGame: function(gameId, clientId) {
+        // TODO
+        // alert players that the game changed
+
+        var game = this.games[gameId];
+        if (typeof game != "undefined" && game != null) {
+            game.addPlayer(this.players[clientId]);
+        }
+        // this game doesn't exist yet: create it
+        else {
+            game = this.gameFactory.create(gameId);
+            game.addPlayer(this.players[clientId]);
+            this.games[gameId] = game;
+        }
         return this;
     },
 

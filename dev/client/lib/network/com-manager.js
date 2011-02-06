@@ -15,7 +15,7 @@
 ComManager = function(ge) {
     this.ge = ge;
 
-    this.mp = null;
+    this.messageParser = null;
 
     this.host = 'localhost';
     this.port = 3401;
@@ -26,25 +26,27 @@ ComManager = function(ge) {
 ComManager.prototype = {
 
     init: function() {
-        this.mp = new MessageParser(this.ge);
+        this.messageParser = new MessageParser(this.ge);
 
         this._socket = new io.Socket(this.host, { port: this.port });
+        this._socket.on('connect', this._onOpen.bind(this));
+        this._socket.on('message', this._onMessage.bind(this));
+        this._socket.on('disconnect', this._onClose.bind(this));
+
         this._socket.connect();
-        this._socket.on('connect', this._onOpen);
-        this._socket.on('message', this._onMessage);
-        this._socket.on('disconnect', this._onClose);
     },
 
     _onOpen: function() {
-        alert("On open");
+        log("ComManager.onOpen");
     },
 
     _onMessage: function(msg) {
-        this.mp.parse(msg);
+        log("ComManager.onMessage: "+msg);
+        this.messageParser.parse(msg);
     },
 
     _onClose: function() {
-        alert("On close");
+        log("ComManager.onClose");
     },
 
     send: function(message) {
