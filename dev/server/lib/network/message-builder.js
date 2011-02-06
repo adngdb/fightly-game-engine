@@ -93,8 +93,12 @@ exports.MessageBuilder.prototype = {
         return this.createAction();
     },
 
-    createGameData: function(object_data){
-        return this.createData("new", "Game", object_data);
+    createNewGameData: function(game){
+        return this.createData("new", "Game", game);
     },
+
+    createNewPlayerData: function(player) {
+        return this.createData('new', 'Player', player);
+    }
 
 };
