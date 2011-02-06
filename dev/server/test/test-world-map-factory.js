@@ -16,3 +16,15 @@ exports["test-world-map-factory-create"] = function(test) {
 
         test.done();
 }
+
+exports["test-world-map-factory-mapFromFile"] = function(test) {
+
+        var obj = new map_.MapFactory();
+        var map = obj.mapFromFile("../data/maps/sample-map.json");
+        test.equal(map.height , 10);
+        test.equal(map.width , 10);
+        test.equal(map.cells[2][3].x , 2);
+        test.equal(map.cells[2][3].y , 3);
+        test.equal(map.cells[2][3].type , "swamp");
+        test.done();
+}

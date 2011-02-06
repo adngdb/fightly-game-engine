@@ -28,12 +28,8 @@ exports.MapFactory.prototype = {
 
     mapFromFile : function(file) {
 
-        var mapString = fs.readFileSync(file);
-        var mapObject = JSON.parse(mapString);
-        var mayMap = this.create(mapObject.heigh,mapObject.width);
-        console.log("---- heigh = "+ mapObject.heigh + "---- width = "+ mapObject.width );
+        var file_ = fs.readFileSync(file,"utf8");
+        var mapObject = JSON.parse(file_);
+        return mapObject;
     },
 }
-
-var file_ = require("/home/youness/web-game-engine/dev/server/data/maps/sample-map.json");
-var obj = new MapFactory.prototype.mapFromFile(file_);
