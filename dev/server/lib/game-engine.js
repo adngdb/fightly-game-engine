@@ -7,12 +7,12 @@
  *
  **********************************************************************/
 
-var util = require('util'),
-    comManager_ = require('./network/com-manager.js'),
-    messageParser_ = require('./network/message-parser.js'),
-    messageBuilder_ = require('./network/message-builder.js'),
-    gameFactory_ = require('./world/game-factory.js'),
-    playerFactory_ = require('./world/player-factory.js');
+var util                = require('util'),
+    comManager_         = require('./network/com-manager.js'),
+    messageBuilder_     = require('./network/message-builder.js'),
+    messageParser_      = require('./network/message-parser.js'),
+    gameFactory_        = require('./world/game-factory.js'),
+    playerFactory_      = require('./world/player-factory.js');
 
 /**
  * Class GameEngine
@@ -74,7 +74,7 @@ exports.GameEngine.prototype = {
     },
 
     sendGame: function(game, message) {
-        this.comManager.send(game.getPlayersIds, message);  // TODO Game.getPlayersIds
+        this.comManager.send(game.getPlayersIds(), message);  // TODO Game.getPlayersIds
         return this;
     },
 
@@ -83,6 +83,7 @@ exports.GameEngine.prototype = {
     onConnectionOpen: function(client) {
         util.log('GameEngine.onConnectionOpen');
         client.send(this.messageBuilder.createAuthenticationQuery());
+
         return this;
     },
 
@@ -91,15 +92,15 @@ exports.GameEngine.prototype = {
         player.login = username;
         this.players.push(player);
         this.sendPlayer(player, this.messageBuilder.createAuthenticationData(username, true));
+
         return this;
     },
 
     onJoinGame: function(gameId, clientId) {
-        // TODO
-        // alert players that the game changed
-
         var game = this.games[gameId];
         if (typeof game != "undefined" && game != null) {
+            var msg = this.messageBuilder.createNewPlayerData(player);
+            this.send(game, msg);
             game.addPlayer(this.players[clientId]);
         }
         // this game doesn't exist yet: create it
@@ -108,6 +109,10 @@ exports.GameEngine.prototype = {
             game.addPlayer(this.players[clientId]);
             this.games[gameId] = game;
         }
+        // Sending game data to the new coming player
+        var gameData = this.messageBuilder.createNewGameData(game);
+        this.sendPlayer(this.players[clientId], gameData);
+
         return this;
     },
 
