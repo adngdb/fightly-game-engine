@@ -1,27 +1,26 @@
-// Player Class
-
+// Classe joueur
 exports.Player = function() {
-    this.id = -1;
-    this.name = null;
-    this.turn = -1;
-    this.units = [];
+    this.id;
+    this.name;
+    var turn;
 }
 
-
-
-exports.Player.prototype = {
-
-    toJSON : function() {
-
-        var data = {
-                "id" : this.id,
-                "name" : this.name,
-                "turn" : this.turn,
-                "units" : this.units
-           }
-
-        return JSON.stringify(data);
-    },
+/*exports.Player.prototype = {
+    getPlayerId : function(){
+        //console.log("id joueur = "+this.id + "tour joueur" + this.tour);
+        return this.id;
+    }
+    setPlayerId : function(par1){
+        this.id = par1;
+        //console.log("id joueur = "+this.id + "   tour joueur = " + this.tour);
+    }
+    getPlayerTour : function(){
+        //console.log("id joueur = "+this.id + "tour joueur" + this.tour);
+        return this.tour;
+    }
+    setPlayerTour : function(par2){
+        this.tour=par2;
+        //console.log("id joueur = "+this.id + "   tour joueur = " + this.tour);
+    }
 }
-
-
+*/

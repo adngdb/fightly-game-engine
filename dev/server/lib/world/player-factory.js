@@ -1,6 +1,6 @@
 // playerFactory class:
 
-var player_ = require("./player.js");
+var player = require("./player.js");
 
 exports.PlayerFactory = function() {
 
@@ -8,10 +8,10 @@ exports.PlayerFactory = function() {
 
 exports.PlayerFactory.prototype = {
 
-    create: function(id,name) {
+    create: function(id,login) {
+        var myPlayer = new player.Player();
 
-        var myPlayer = new player_.Player();
-        myPlayer.name = name;
+        myPlayer.name = login;
         myPlayer.id = id;
 
         return myPlayer;

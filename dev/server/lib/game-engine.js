@@ -140,7 +140,7 @@ exports.GameEngine.prototype = {
 
         if (game != null) {
             var msg = this.messageBuilder.createNewPlayerData( player );
-            this.send(game, msg);
+            this.sendGame(game, msg);
             game.addPlayer( player );
         }
         // this game doesn't exist yet: create it

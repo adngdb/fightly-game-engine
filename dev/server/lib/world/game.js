@@ -1,11 +1,11 @@
 // Game class
 
-var map_= require("./map.js");
 
 exports.Game = function() {
     this.id = -1;
     this.players = [];
-    this.map = null;
+
+    this.state = "waiting";
 }
 
 exports.Game.prototype = {
@@ -14,14 +14,24 @@ exports.Game.prototype = {
         this.players.push(player);
     },
 
-    toJSON : function() {
+    getPlayersIds: function() {
+        var i = 0,
+            l = this.players.length,
+            ids = [];
 
-        var data = {
+        for (; i < l; i++) {
+            ids.push(this.players[i].id);
+        }
+
+        return ids;
+    },
+
+    toJSON: function() {
+        return {
             "id": this.id,
-            "players" : this.players,
-            "map" : this.map
+            "players": this.players,
+            "state": this.state,
         };
-
-        return JSON.stringify(data);
     },
 }
+
