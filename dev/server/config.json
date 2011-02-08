@@ -30,29 +30,29 @@
 
 		"fantassin" : {
 			"hp" : "100",
-			"degat" : "20",
-			"move" : "1",
+			"damage" : "20",
+			"movement" : "1",
 			"reach" : "1",
 			"bonus" : [
-				{ "on" : "archer", "skill" : "degat", "mod" : "*2" }
+				{ "when" : "fight", "on" : "archer", "skill" : "damage", "mod" : "*2" }
 			]
 		},
 		"archer" : {
 			"hp" : "80",
-			"degat" : "10",
-			"move" : "1",
+			"damage" : "10",
+			"movement" : "1",
 			"reach" : "3",
 			"bonus" : [
-				{ "on" : "chevalier", "skill" : "degat", "mod" : "*2" }
+				{ "when" : "fight", "on" : "chevalier", "skill" : "damage", "mod" : "*2" }
 			]
 		},
 		"chevalier" : {
 			"hp" : "130",
-			"degat" : "30",
-			"move" : "2",
+			"damage" : "30",
+			"movement" : "2",
 			"reach" : "1",
 			"bonus" : [
-				{ "on" : "fantassin", "skill" : "degat", "mod" : "*2" }
+				{ "when" : "fight", "on" : "fantassin", "skill" : "damage", "mod" : "*2" }
 			]
 		}
 

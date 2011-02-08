@@ -2,8 +2,9 @@
 var fs = require('fs') ;
 var sys = require('sys') ;
 
-exports.Rules = function() {
+exports.Rules = function(game) {
 	this.json = null ;
+	this.gameEngine = gameEngine ;
 } ;
 
 exports.Rules.prototype = {
@@ -69,9 +70,22 @@ exports.Rules.prototype = {
 		for(exe in rule.do) {
 			//eval(exe) ;
 		}
-	}
+	},
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
+
 
 
 
