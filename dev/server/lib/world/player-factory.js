@@ -1,6 +1,14 @@
-// playerFactory class:
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
-var player = require("./player.js");
+
+var player_ = require("./player.js");
 
 exports.PlayerFactory = function() {
 
@@ -8,10 +16,10 @@ exports.PlayerFactory = function() {
 
 exports.PlayerFactory.prototype = {
 
-    create: function(id,login) {
-        var myPlayer = new player.Player();
+    create: function(id,name) {
 
-        myPlayer.name = login;
+        var myPlayer = new player_.Player();
+        myPlayer.name = name;
         myPlayer.id = id;
 
         return myPlayer;

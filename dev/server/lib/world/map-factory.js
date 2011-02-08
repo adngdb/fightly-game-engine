@@ -1,10 +1,18 @@
-// playerFactory class:
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
 var map_ = require("./map.js");
 var cell_ = require("./cell.js");
 var fs = require("fs");
 
 exports.MapFactory = function() {
+
 }
 
 exports.MapFactory.prototype = {

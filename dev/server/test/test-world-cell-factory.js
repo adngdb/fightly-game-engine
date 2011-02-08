@@ -1,3 +1,11 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
 var cellFactory_ = require("../lib/world/cell-factory.js");
 
