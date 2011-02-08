@@ -5,7 +5,6 @@ var cell_ = require("./cell.js");
 var fs = require("fs");
 
 exports.MapFactory = function() {
-
 }
 
 exports.MapFactory.prototype = {
