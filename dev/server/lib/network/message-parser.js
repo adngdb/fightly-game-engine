@@ -57,6 +57,18 @@ exports.MessageParser.prototype = {
             case "join-game":
                 this.gameEngine.onJoinGame(action.data.game_id, clientId);
                 break;
+	    case "move-unit":
+		this.gameEngine.onMoveUnit(action.data.unit_id, action.data.to_x, action.data.to_y, clientId);
+		break;
+	    case "attack-unit":
+		this.gameEngine.onAttackUnit(action.data.attacker_id, action.data.victim_id, clientId);
+		break;
+	    case "abandon":
+		this.gameEngine.onAbandon(clientId);
+		break;
+	    case "end-turn":
+		this.gameEngine.onEndTurn(clientId);
+		break;
         }
         return this;
     },
