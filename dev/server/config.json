@@ -2,8 +2,9 @@
 
 	"game" :  {
 		"name" :  "Fightly",
-		"player"  : "4",
-		"tour" :  "60",
+		"playerCount"  : "4",
+		"tourDuration" :  "60",
+		"tourCount" : "10",
 		"type" :  "..."
 	}
 
