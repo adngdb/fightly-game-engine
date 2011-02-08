@@ -1,0 +1,63 @@
+{
+
+	"game" :  {
+		"name" :  "Fightly",
+		"player"  : "4",
+		"tour" :  "60",
+		"type" :  "..."
+	}
+
+	"map" : {
+		"geometry" : "square",
+		"width" : "50",
+		"height" : "50",
+	}
+
+	"cells" : {
+		"mount" : {
+			"viewMod" : "+1"
+		},
+		"plain" : {
+
+		},
+		"marais" : {
+			"moveMod" : "-2"
+		}
+	}
+
+
+	"units" : {
+
+		"fantassin" : {
+			"hp" : "100",
+			"degat" : "20",
+			"move" : "1",
+			"reach" : "1",
+			"bonus" : [
+				{ "on" : "archer", "skill" : "degat", "mod" : "*2" }
+			]
+		},
+		"archer" : {
+			"hp" : "80",
+			"degat" : "10",
+			"move" : "1",
+			"reach" : "3",
+			"bonus" : [
+				{ "on" : "chevalier", "skill" : "degat", "mod" : "*2" }
+			]
+		},
+		"chevalier" : {
+			"hp" : "130",
+			"degat" : "30",
+			"move" : "2",
+			"reach" : "1",
+			"bonus" : [
+				{ "on" : "fantassin", "skill" : "degat", "mod" : "*2" }
+			]
+		}
+
+	}
+
+}
+
+

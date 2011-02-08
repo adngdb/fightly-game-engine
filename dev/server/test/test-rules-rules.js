@@ -9,6 +9,10 @@ exports['load'] = function (test) {
 
 exports['execute'] = function (test) {
 	var r = new rules_.Rules() ;
-	r.execute('toto') ;
+	r.load('rules.json') ;
+	r.execute('foo') ;
+	
+	test.throws(function() { r.execute('UnexistantAction') }) ;
+
 	test.done() ;
 };
