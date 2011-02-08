@@ -10,7 +10,6 @@
 
 WorldManager = function() {
     this.game = null;
-    thisGame = this;
 };
 
 WorldManager.prototype = {
@@ -29,33 +28,30 @@ WorldManager.prototype = {
 	},
 	
     gameData: function(data) {
-        this.game = JSON.parse(data);
+        this.game = data;
     },
 
     gameUpdate: function(data) {
-        var obj = JSON.parse(data);
-        thisGame.updateValues(this.game, obj);
+        this.updateValues(this.game, data);
     },
 
     mapData: function(data) {
-        this.game.map = JSON.parse(data);
+        this.game.map = data;
     },
 
 	mapUpdate: function(data) {
-        var obj = JSON.parse(data);
-        this.updateValues(this.game.map, obj);
+        this.updateValues(this.game.map, data);
     },
     
     playerData: function(data) {
-        this.game.players.push(JSON.parse(data));
+        this.game.players.push(data);
     },
     
     playerUpdate: function(data) {
-        var obj = JSON.parse(data);
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i].id == obj.id){
-				 this.updateValues(this.game.players[i], obj);
+			if(this.game.players[i].id == data.id){
+				 this.updateValues(this.game.players[i], data);
 				 i = this.game.players.length;
 				}
 			i++;
@@ -69,12 +65,10 @@ WorldManager.prototype = {
     },
 */
     unitCreate: function(data) {
-        var obj = JSON.parse(data);
-        // obj = {idOfPlayer,unit}
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i].id == obj.owner){
-				 this.game.players[i].units.push(obj);
+			if(this.game.players[i].id == data.owner){
+				 this.game.players[i].units.push(data);
 				 i = this.game.players.length;
 				}
 			i++;
@@ -82,14 +76,13 @@ WorldManager.prototype = {
     },
 
     unitUpdate: function(data) {
-        var obj = JSON.parse(data);        
 		var i = 0;
 		while(i<this.game.players.length){
-			if(this.game.players[i].id == obj.owner){				
+			if(this.game.players[i].id == data.owner){				
 			var j = 0;
 			while(j<this.game.players[i].units.length){
-				if(this.game.players[i].units[j].id == obj.id){
-					this.updateValues(this.game.players[i].units[j], obj);
+				if(this.game.players[i].units[j].id == data.id){
+					this.updateValues(this.game.players[i].units[j], data);
 				 	j = this.game.players[i].units.length;
 					}
 				j++;
