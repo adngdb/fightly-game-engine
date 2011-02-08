@@ -18,8 +18,6 @@ Displayer = function(world) {
     // HTML elements
     this.loggerElt  = $('#log');
     this.gameElt    = $('#game');
-
-    this.gameDisplayer = new GameDisplayer(this.world);
 };
 
 Displayer.prototype = {
@@ -61,9 +59,6 @@ Displayer.prototype = {
         var players = this.world.game.players;
         if (state == "waiting") {
             this.gameElt.empty().append('<h1>Waiting for opponents...</h1>');
-        }
-        else {
-            this.gameDisplayer.display();
         }
         this.gameElt.append('<ul>');
         for (var i = 0; i < players.length; i++) {
