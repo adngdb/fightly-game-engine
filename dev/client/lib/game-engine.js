@@ -87,6 +87,10 @@ GameEngine.prototype = {
         this.displayer.displayGame();
     },
 
+    invalidate: function() {
+        this.displayer.invalidate();
+    },
+
 };
 
 var gameEngineInstance = new GameEngine().init().start();
