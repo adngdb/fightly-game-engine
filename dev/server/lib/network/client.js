@@ -9,6 +9,10 @@
 
 var sys = require("sys");
 
+/*
+ * Class Client
+ * 
+ */
 exports.Client = function(connection, server, gameEngine) {
 
     this.conn = connection;
@@ -30,15 +34,27 @@ exports.Client = function(connection, server, gameEngine) {
 
 exports.Client.prototype = {
 
+    /*
+     * Send message to Client
+     * @param msg: JSON Message in String format
+     */
     send: function(msg) {
         this.conn.send(msg);
     },
 
+    /*
+     * Listen for message received
+     * @param msg: message receiced
+     */
     onMessage: function(msg) {
         sys.log("Message received: " + msg);
         this.messageParser.parse(msg, this.id);
     },
 
+    /*
+     * Listen for event "disconnect"
+     * 
+     */
     onDisconnect: function() {
         sys.log("Connection " + this.id + " has closed");
         // TODO

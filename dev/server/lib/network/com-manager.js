@@ -14,6 +14,11 @@ var sys = require("sys"),
     client_ = require("./client"),
     messageBuilder_ = require("./message-builder");
 
+/**
+ * Class ComManager
+ *
+ */
+
 exports.ComManager = function(gameEngine) {
 
     this.gameEngine = gameEngine;
@@ -31,12 +36,23 @@ exports.ComManager = function(gameEngine) {
 
 exports.ComManager.prototype = {
 
+    /*
+     * Server listens on a port
+     * @param port: Port Number
+     * @return this
+     */
     listen : function(port){
         this.server.listen(port);
         sys.log("Server created. Listening on port " + port);
         return this;
     },
 
+
+    /*
+     * Create a connection which is correspondant with a Client
+     * @param connection Socket Connection of a Client
+     * @return this
+     */
     onConnect : function(connection) {
         sys.log("New connection: " + connection.sessionId);
         this.clients[connection.sessionId] = new client_.Client(connection, this, this.gameEngine);
