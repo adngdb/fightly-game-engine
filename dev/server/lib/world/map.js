@@ -7,17 +7,13 @@ exports.Map = function() {
     this.cells = [];
 }
 
-
 exports.Map.prototype = {
 
     toJSON : function() {
-
-        var data = {
+        return {
             "height": this.height,
             "width" : this.width,
             "cells" : this.cells
-        };
-
-        return JSON.stringify(data);
+        }
     },
 }
