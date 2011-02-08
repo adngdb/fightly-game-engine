@@ -2,9 +2,8 @@
 var fs = require('fs') ;
 var sys = require('sys') ;
 
-exports.Rules = function(game) {
+exports.Rules = function() {
 	this.json = null ;
-	this.gameEngine = gameEngine ;
 } ;
 
 exports.Rules.prototype = {
@@ -13,79 +12,43 @@ exports.Rules.prototype = {
 	 * chargement du fichier de règle
 	 */
 	load: function(filename) {
-		var data = fs.readFileSync(filename) ;
-		this.json = JSON.parse(data) ;
-		for(var property in this.json.rules) {
-			sys.log(" load --> rule : " + property) ;
-		}
+
+		fs.readFile(
+			filename, 
+			function (err, data) {
+				if (err) { sys.log('erreur') ; throw err ; }
+					this.json = JSON.parse(data) ;
+					sys.log(typeof this.json) ;
+
+					for(var property in this.json.rules) {
+						sys.log("Création de la règle : "+property) ;
+					}
+
+			}.bind(this)
+		);
+
 	},
+
+
+	
 
 	/**
 	 * exécuter une action
 	 */
-	execute: function(action) {
-		
-		//pour chaque règle
-		for(var rule in this.json.rules) {
+	execute: function(action,params) {
+
+		for(var rules in this.json.rules) {
 			
-			//si elle correspond à notre action
-			if(rule == action) {
-
-				if( this.validateRule(rule) ) {
-					this.executeRule(rule) ;
-					return true ;
-				}
-
-			}
 		}
 
-		return false ;
-		
-	}
+		if(params == null)
+			sys.log("no params") ;
 
-	/**
-	 * vérifie qu'une règle existe pour l'action
-	 */
-	hasRule: function(action) {
+		sys.log(action) ;
 
 	}
-
-
-	/**
-	 * valide une règle
-	 */
-	validateRule: function(rule) {
-		var valid = false ;
-		for(cond in rule.if) {
-			//valid = valid && eval(cond) ;
-		}
-		return valid ;
-	}
-	
-
-	/**
-	 * execute une action
-	 */
-	executeRule: function(rule) {
-		for(exe in rule.do) {
-			//eval(exe) ;
-		}
-	},
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
-
 
 
 

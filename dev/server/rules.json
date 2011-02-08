@@ -2,20 +2,11 @@
 	"rules" : {
 		"moveUnit" : {
 			"if" : [
-				{ "call" : "unit.condition1" },
-				{ "call" : "unit.condition2" }
+				{ "call" : "condition" },
+				{ "call" : "toto" }
 			],
 			"do" : [
 				{ "call" : "conclusion" , "on" : "param" }
-			]
-		},
-		"foo" : {
-			"if" : [
-				{ "call" : "bar.condition1" }
-				{ "call" : "bar.condition2" }
-			],
-			"do" : [
-				{ "call" : "bar.conclusion" }
 			]
 		}
 	}

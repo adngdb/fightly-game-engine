@@ -9,11 +9,11 @@ exports.ActionManager = function(game) {
 exports.ActionManager.prototype = {
 
 	/**
-	 * Move a unit to a cell
-	 * @param string unitId id of the unit
-	 * @param int cellX X of the cell
-	 * @param int cellY Y of the cell
-	 * @return true if the action succeeded, false otherwise
+	 * déplacer une unité sur une case
+	 * @param string unitId identifiant de l'unité
+	 * @param int cellX coordonnée x de la case
+	 * @param int cellY coordonnée y de la case
+	 * @return true si l'action à réussit, false sinon
 	 */	
 	moveUnit: function(unitId,cellX,cellY) {
 
@@ -21,9 +21,6 @@ exports.ActionManager.prototype = {
 		var cell = this.game.map.getCell(cellX,cellY) ;
 		if( this.game.map.getDistanceBetween(unit.cell, cell) <= unit.movement ) {
 			unit.moveToCell(cell) ;
-			//TODO modifier la valeur de déplacement en fonction de movement dans fichier de config
-			//unit.movement -= this.rules.get(...) ...
-			--unit.movement ;
 			return true ;
 		}
 
@@ -32,20 +29,20 @@ exports.ActionManager.prototype = {
 
 
 	/**
-	 * attack a targer with a unit
-	 * @param string unitId id of the unit who attacks
-	 * @param string targetId id of the target
-	 * @return true if the action succeeded, false otherwise
+	 * attaquer une cible avec une unité
+	 * @param string unitId identifiant de l'unité
+	 * @param string targetId identifiant de la cible
+	 * @return true si l'action à réussit, false sinon
 	 */	
 	attackUnit: function(unitId,targetId) {
 
 		var unit = this.game.getUnit(unitId) ;
 		var target = this.game.getUnit(targetId) ;
 
-		//if the target is reachable
+		//si cible à porter
 		if( this.game.map.getDistanceBetween(unit.cell, target.cell) <= unit.reach ) {
 
-			//the unit attacks
+			//l'unité attaque
 			unit.attack(target) ;
 			
 			//riposte de la cible si à porter

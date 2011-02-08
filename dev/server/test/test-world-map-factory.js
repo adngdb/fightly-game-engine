@@ -1,11 +1,4 @@
-/***********************************************************************
- *
- * Fightly - Web Game Engine
- * http://fightly.com
- *
- * License: see LICENSE.txt
- *
- **********************************************************************/
+// playerFactory class:
 
 var mapfactory_ = require("../lib/world/map-factory.js");
 
