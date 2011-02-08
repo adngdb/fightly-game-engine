@@ -1,3 +1,12 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
 
 var game_ = require("../lib/world/game-factory.js");
 

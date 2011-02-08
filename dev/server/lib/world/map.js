@@ -1,4 +1,11 @@
-// Map class
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
 
 exports.Map = function() {
@@ -7,13 +14,17 @@ exports.Map = function() {
     this.cells = [];
 }
 
+
 exports.Map.prototype = {
 
     toJSON : function() {
-        return {
+
+        var data = {
             "height": this.height,
             "width" : this.width,
             "cells" : this.cells
-        }
+        };
+
+        return data;
     },
 }

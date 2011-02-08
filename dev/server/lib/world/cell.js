@@ -1,5 +1,11 @@
-// Cell class
-
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
 exports.Cell = function() {
     this.type = null; // plains, mountain, swamp
@@ -17,6 +23,6 @@ exports.Cell.prototype = {
             "y" : this.y,
         };
 
-        return JSON.stringify(data);
+        return data;
     },
 }
