@@ -11,7 +11,7 @@
 var player_ = require("./player.js");
 
 exports.PlayerFactory = function() {
-
+    this.unitFactory = null;
 }
 
 exports.PlayerFactory.prototype = {
@@ -21,8 +21,12 @@ exports.PlayerFactory.prototype = {
         var myPlayer = new player_.Player();
         myPlayer.name = name;
         myPlayer.id = id;
-
+        myPlayer.units[0] = new this.unitFactory.create((id,name,owner,type,attack,defense,view,move,properties);
         return myPlayer;
+    },
+
+    createFromUser: function(user) {
+        this.create(user.id, user.login);
     },
 
 }

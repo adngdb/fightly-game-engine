@@ -12,22 +12,25 @@ var unit_ = require("./unit.js");
 
 
 exports.UnitFactory = function() {
-
+    this.currentId = 0;
 }
 
 exports.UnitFactory.prototype = {
 
-    create: function(id,name,owner,type,attack,defense,view,move,properties) {
+    create: function(id,name,owner,type,attack,defense,view,movement,properties) {
 
         var myUnit = new unit_.Unit();
+
         myUnit.name = name;
         myUnit.owner = owner;
         myUnit.type = type;
         myUnit.attack = attack;
         myUnit.defense = defense;
         myUnit.view = view;
-        myUnit.move = move;
+        myUnit.movement = movement;
         myUnit.properties = properties;
+
+        this.currentId ++;
         return myUnit;
     },
 

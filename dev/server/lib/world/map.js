@@ -27,4 +27,11 @@ exports.Map.prototype = {
 
         return data;
     },
+
+    getDistanceBetween : function(cell1,cell2) {
+
+        var distance = abs(cell1.x - cell2.x) + abs(cell1.y - cell2.y);
+        return distance;
+
+    }
 }

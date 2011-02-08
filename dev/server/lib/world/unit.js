@@ -17,7 +17,7 @@ exports.Unit = function() {
     this.attack = null;
     this.defense = null;
     this.view = null;
-    this.move = null;
+    this.movement = null;
     this.properties = [];
     this.cell = null;
 }
@@ -66,11 +66,16 @@ exports.Unit.prototype = {
         }
     },
 
-    moveToCell(cell) : function() {
+    moveToCell : function(cell) {
 
-            this.cell =  cell;
+        this.cell =  cell;
 
     },
+
+    attack : function(targetUnit) {
+
+
+    }
 
     toJSON : function() {
 

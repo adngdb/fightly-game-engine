@@ -10,9 +10,15 @@
 var map_= require("./map.js");
 
 exports.Game = function() {
+
     this.id = -1;
     this.players = [];
     this.map = null;
+    this.playerFactory = null;
+    this.mapFactory = null;
+    this.unitFactory = null;
+
+
 }
 
 exports.Game.prototype = {
@@ -20,6 +26,13 @@ exports.Game.prototype = {
     addPlayer : function(player){
         this.players.push(player);
     },
+
+    //prend user en parametre et instancie un player
+
+    /*addPlayer : function() {
+
+
+    }*/
 
     getPlayersIds : function() {
 
