@@ -12,7 +12,10 @@ var util                = require('util'),
     messageBuilder_     = require('./network/message-builder.js'),
     messageParser_      = require('./network/message-parser.js'),
     gameFactory_        = require('./world/game-factory.js'),
-    playerFactory_      = require('./world/player-factory.js');
+    playerFactory_      = require('./world/player-factory.js'),
+    mapFactory_         = require('./world/map-factory.js'),
+    cellFactory_        = require('./world/cell-factory.js'),
+    unitFactory_        = require('./world/unit-factory.js');
 
 /**
  * Class GameEngine
@@ -21,8 +24,11 @@ var util                = require('util'),
  */
 exports.GameEngine = function() {
 
-    this.playerFactory = null;
     this.gameFactory = null;
+    this.playerFactory = null;
+    this.mapFactory = null;
+    this.cellFactory = null;
+    this.unitFactory = null;
 
     this.comManager = null;
     this.messageBuilder = null;
@@ -49,8 +55,27 @@ exports.GameEngine.prototype = {
         this.messageParser = new messageParser_.MessageParser(this);
 
         // Factories
+        this._initFactories();
+
+        return this;
+    },
+
+    /**
+     * Initialize factories and assign them.
+     *
+     * @return this.
+     */
+    _initFactories: function() {
         this.gameFactory = new gameFactory_.GameFactory();
         this.playerFactory = new playerFactory_.PlayerFactory();
+        this.unitFactory = new unitFactory_.UnitFactory();
+        this.mapFactory = new mapFactory_.MapFactory();
+        this.cellFactory = new cellFactory_.CellFactory();
+
+        this.gameFactory.playerFactory = this.playerFactory;
+        this.gameFactory.mapFactory = this.mapFactory;
+        this.playerFactory.unitFactory = this.unitFactory;
+        this.mapFactory.cellFactory = this.cellFactory;
 
         return this;
     },
