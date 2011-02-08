@@ -1,11 +1,18 @@
-// Game class
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
+var map_= require("./map.js");
 
 exports.Game = function() {
     this.id = -1;
     this.players = [];
-
-    this.state = "waiting";
+    this.map = null;
 }
 
 exports.Game.prototype = {
@@ -14,24 +21,23 @@ exports.Game.prototype = {
         this.players.push(player);
     },
 
-    getPlayersIds: function() {
-        var i = 0,
-            l = this.players.length,
-            ids = [];
+    getPlayersIds : function() {
 
-        for (; i < l; i++) {
-            ids.push(this.players[i].id);
+        var playersIds = [];
+        for (i=0 ; i<this.players.length ; i++) {
+                playersIds[i] = this.players[i].id;
         }
-
-        return ids;
+        return playersIds;
     },
 
-    toJSON: function() {
-        return {
+    toJSON : function() {
+
+        var data = {
             "id": this.id,
-            "players": this.players,
-            "state": this.state,
+            "players" : this.players,
+            "map" : this.map
         };
+
+        return data;
     },
 }
-

@@ -1,4 +1,12 @@
-// Unit Class
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
 
 exports.Unit = function() {
 
@@ -58,6 +66,7 @@ exports.Unit.prototype = {
     },
 
     toJSON : function() {
+
         var data = {
             "id" : this.id ,
             "name": this.name,
@@ -70,8 +79,7 @@ exports.Unit.prototype = {
             "properties": this.properties
         };
 
-        var st =  JSON.stringify(data);
-        return st;
+        return data;
     },
 }
 

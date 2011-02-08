@@ -1,22 +1,21 @@
-// gameFactory class
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
-var game = require("./game.js");
+var game_ = require("./game.js");
 
 exports.GameFactory = function() {
-    this.configs = {
-        "nb_players_max": "4",
-        "default": {
-            "map": {
-                "source": "data/maps/sample-map.json"
-            }
-        }
-    };
 }
 
 exports.GameFactory.prototype = {
 
     create: function(id) {
-        var myGame = new game.Game();
+        var myGame = new game_.Game();
         myGame.id = id;
         return myGame;
     },

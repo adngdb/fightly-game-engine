@@ -1,7 +1,15 @@
-// unitFactory class:
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
 
 var unit_ = require("./unit.js");
-//var cell_ = require("./cell.js");
+
 
 exports.UnitFactory = function() {
 

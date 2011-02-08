@@ -1,3 +1,13 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
+
 var player_ = require("../lib/world/player.js");
 
 exports["test-new-player"] = function (test) {
@@ -12,6 +22,6 @@ exports["test-player-toJSON"] = function (test) {
 
         var pl = new player_.Player();
         var str = "{" + "\"id\"" + ":-1,"+"\"name\""+":null,"+"\"turn\""+":-1,"+"\"units\""+":[]}" ;
-        test.equal(str,pl.toJSON());
+        test.equal(str,JSON.stringify(pl.toJSON()));
         test.done();
 }

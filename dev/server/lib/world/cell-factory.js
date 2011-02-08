@@ -1,5 +1,13 @@
-var cell_ = require("./cell.js");
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
+var cell_ = require("./cell.js");
 
 exports.CellFactory = function() {
 

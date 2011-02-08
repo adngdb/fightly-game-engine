@@ -1,4 +1,11 @@
-// playerFactory class:
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
 
 var mapfactory_ = require("../lib/world/map-factory.js");
 
