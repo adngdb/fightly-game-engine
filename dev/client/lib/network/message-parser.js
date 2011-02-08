@@ -19,6 +19,7 @@ MessageParser = function(ge) {
 MessageParser.prototype = {
 
     parse: function(message) {
+        console.log(message);
         var obj = JSON.parse(message);
         log('MessageParser.parse: '+obj);
 
@@ -65,6 +66,7 @@ MessageParser.prototype = {
                 this.parseDeleteData(data.object, data.object_data);
                 break;
         }
+        this.gameEngine.invalidate();
         return this;
     },
 
@@ -74,13 +76,33 @@ MessageParser.prototype = {
                 this.gameEngine.onAuthenticationConfirm(data.username, data.valid);
                 break;
             case "Game":
-                this.gameEngine.newGame(data);
+                this.gameEngine.world.gameData(data);
+                break;
+            case "Player":
+                this.gameEngine.world.playerData(data);
+                break;
+            case "Map":
+                this.gameEngine.world.mapData(data);
+                break;
+            case "Unit":
+                this.gameEngine.world.unitData(data);
                 break;
         }
         return this;
     },
 
     parseUpdateData: function(object, data) {
+        switch (object) {
+            case "Game":
+                this.gameEngine.world.gameUpdate(data);
+                break;
+            case "Player":
+                this.gameEngine.world.playerUpdate(data);
+                break;
+            case "Unit":
+                this.gameEngine.world.unitUpdate(data);
+                break;
+        }
         return this;
     },
 
