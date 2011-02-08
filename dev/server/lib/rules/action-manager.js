@@ -20,9 +20,10 @@ exports.ActionManager.prototype = {
 		var unit = this.game.getUnit(unitId) ;
 		var cell = this.game.map.getCell(cellX,cellY) ;
 		if( this.game.map.getDistanceBetween(unit.cell, cell) <= unit.movement ) {
-			unit.moveToCoord(cell.x,cell.y) ;
+			unit.moveToCell(cell) ;
 			return true ;
 		}
+
 		return false ;
 	},
 
