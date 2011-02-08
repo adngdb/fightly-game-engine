@@ -1,3 +1,13 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
+
 var unitFactory_ = require("../lib/world/unit-factory.js");
 
 exports["test-unit-factory-create"] = function (test) {
