@@ -82,4 +82,50 @@ MessageBuilder.prototype = {
         return this.createAction("join-game", data);
     },
 
+    /**
+     * Create action message: move unit.
+     * @param unitId Id of the unit which the player want to move.
+     * @param to_X Target Absciss.
+     * @param to_Y Target Ordinate.
+     * @return JSON message to send.
+     */
+    createMoveUnitAction: function(unitId, toX, toY) {
+        var data = {};
+        data.unit_id = unitId;
+	data.to_x = toX;
+	data.to_y = toY;
+
+        return this.createAction("move-unit", data);
+    },
+
+    /**
+     * Create action message: attack unit.
+     * @param AttackerId Id of the unit which is attacker.
+     * @param VictimId Id of the unit which is attacked.
+     * @return JSON message to send.
+     */
+    createAttackUnitAction: function(AttackerId, VictimId) {
+        var data = {};
+        data.attacker_id = AttackerId;
+	data.victim_id = VictimId;
+
+        return this.createAction("attack-unit", data);
+    },
+
+    /**
+     * Create an action message: abandon.
+     * @return JSON message to send.
+     */
+    createAbandonAction: function() {        
+        return this.createAction("abandon");
+    },
+
+    /**
+     * Create an action message: end turn.
+     * @return JSON message to send.
+     */
+    createEndTurnAction: function() {        
+        return this.createAction("end-turn");
+    },
+
 };
