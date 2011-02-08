@@ -48,6 +48,17 @@ GameEngine.prototype = {
         return this;
     },
 
+    /**
+     * Invalidate the data, forcing to redraw the game.
+     * @return this
+     */
+    invalidate: function() {
+        this.displayer.invalidate();
+        return this;
+    },
+
+    //---> Triggers
+
     trigger: function(event, data) {
         this._handlers[event].call(this, data);
         return this;
@@ -61,6 +72,8 @@ GameEngine.prototype = {
     unbind: function(event) {
         this._handlers.splice(event, 1);
     },
+
+    //---> Events
 
     onAuthenticationQuery: function() {
         var login = this.displayer.getUserLogin();
@@ -80,15 +93,6 @@ GameEngine.prototype = {
     joinGame: function() {
         var gameId = this.displayer.getGameId();
         this.comManager.send( this.messageBuilder.createJoinGameAction(gameId) );
-    },
-
-    newGame: function(data) {
-        this.world.gameData(data);
-        this.displayer.displayGame();
-    },
-
-    invalidate: function() {
-        this.displayer.invalidate();
     },
 
 };
