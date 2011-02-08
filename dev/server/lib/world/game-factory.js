@@ -4,8 +4,8 @@ var game = require("./game.js");
 
 exports.GameFactory = function() {
     this.configs = {
-        "nb_players_max": "4",
         "default": {
+            "nb_players_max": "4",
             "map": {
                 "source": "data/maps/sample-map.json"
             }
