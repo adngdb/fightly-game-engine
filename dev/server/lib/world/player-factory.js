@@ -17,16 +17,18 @@ exports.PlayerFactory = function() {
 exports.PlayerFactory.prototype = {
 
     create: function(id,name) {
-
         var myPlayer = new player_.Player();
         myPlayer.name = name;
         myPlayer.id = id;
+
+        // For testing purpose
         myPlayer.units[0] = this.unitFactory.create("alpha",myPlayer);
+
         return myPlayer;
     },
 
     createFromUser: function(user) {
-        this.create(user.id, user.login);
+        return this.create(user.id, user.login);
     },
 
 }
