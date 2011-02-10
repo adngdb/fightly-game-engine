@@ -21,7 +21,10 @@ exports.GameFactory.prototype = {
 
     create: function(id) {
         var myGame = new game_.Game();
+
         myGame.id = id;
+        myGame.map = this.mapFactory.create();
+
         myGame.playerFactory = this.playerFactory;
         myGame.mapFactory = this.mapFactory;
         myGame.unitFactory = this.unitFactory;
