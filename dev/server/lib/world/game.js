@@ -20,19 +20,22 @@ exports.Game = function() {
     this.players = [];
 
     this.state = "waiting";
+
+    // Configuration
+    this.nbMaxPlayers = 2;
 };
 
 exports.Game.prototype = {
 
     //prend user en paramètre et instancie un player
 
-    addPlayer : function(user) {
+    addPlayer: function(user) {
         var pl = this.playerFactory.createFromUser(user);
         this.players.push(pl);
-        return this;
+        return pl;
     },
 
-    getPlayersIds : function() {
+    getPlayersIds: function() {
 
         var playersIds = [];
         for (i=0 ; i<this.players.length ; i++) {
@@ -41,11 +44,11 @@ exports.Game.prototype = {
         return playersIds;
     },
 
-    downloadMapFromFile : function(file) {
+    downloadMapFromFile: function(file) {
         this.map = mapFactory.createFromFile(file);
     },
 
-    toJSON : function() {
+    toJSON: function() {
         return {
             "id":       this.id,
             "players":  this.players,
