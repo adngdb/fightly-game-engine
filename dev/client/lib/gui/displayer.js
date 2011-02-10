@@ -20,6 +20,8 @@ Displayer = function(world) {
     this.gameElt    = $('#game');
 
     this.gameDisplayer = new GameDisplayer(this.world);
+
+    this.inGame = false;
 };
 
 Displayer.prototype = {
@@ -63,6 +65,10 @@ Displayer.prototype = {
             this.gameElt.empty().append('<h1>Waiting for opponents...</h1>');
         }
         else {
+            if (!this.inGame) {
+                this.gameDisplayer.init();
+                this.inGame = true;
+            }
             this.gameDisplayer.display();
         }
         this.gameElt.append('<ul>');
