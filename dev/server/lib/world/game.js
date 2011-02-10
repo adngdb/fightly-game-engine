@@ -32,6 +32,7 @@ exports.Game.prototype = {
     addPlayer: function(user) {
         var pl = this.playerFactory.createFromUser(user);
         this.players.push(pl);
+        this.checkState();
         return pl;
     },
 
@@ -42,6 +43,13 @@ exports.Game.prototype = {
                 playersIds[i] = this.players[i].id;
         }
         return playersIds;
+    },
+
+    checkState: function() {
+        if (this.nbMaxPlayers == this.players.length) {
+            this.state = "playing";
+        }
+        return this;
     },
 
     downloadMapFromFile: function(file) {
