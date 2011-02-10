@@ -164,9 +164,10 @@ exports.GameEngine.prototype = {
             user = this.getUser(clientId);
 
         if (game != null) {
-            var msg = this.messageBuilder.createNewPlayerData( player );
-            this.sendGame(game, msg);
-            game.addPlayer( user );
+            var gameIds = game.getPlayersIds();
+            var newPlayer = game.addPlayer( user );
+            var msg = this.messageBuilder.createNewPlayerData( newPlayer );
+            this.comManager.send(gameIds, msg);
         }
         // this game doesn't exist yet: create it
         else {
