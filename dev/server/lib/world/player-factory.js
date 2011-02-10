@@ -21,7 +21,7 @@ exports.PlayerFactory.prototype = {
         var myPlayer = new player_.Player();
         myPlayer.name = name;
         myPlayer.id = id;
-        myPlayer.units[0] = new this.unitFactory.create((id,name,owner,type,attack,defense,view,move,properties);
+        myPlayer.units[0] = this.unitFactory.create("alpha",myPlayer);
         return myPlayer;
     },
 

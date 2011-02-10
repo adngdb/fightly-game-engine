@@ -72,11 +72,6 @@ exports.Unit.prototype = {
 
     },
 
-    attack : function(targetUnit) {
-
-
-    }
-
     toJSON : function() {
 
         var data = {
@@ -87,10 +82,10 @@ exports.Unit.prototype = {
             "attack" :this.attack,
             "defense": this.defense,
             "view" : this.view,
-            "move" : this.move,
+            "movement" : this.movement,
             "properties": this.properties,
-            "cell" : this.cell,
-        };
+            "cell" : this.cell
+        }
 
         return data;
     },

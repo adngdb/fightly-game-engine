@@ -17,21 +17,20 @@ exports.UnitFactory = function() {
 
 exports.UnitFactory.prototype = {
 
-    create: function(id,name,owner,type,attack,defense,view,movement,properties) {
+    create: function(name,owner) {
 
         var myUnit = new unit_.Unit();
 
+        myUnit.id = this.currentId;
         myUnit.name = name;
         myUnit.owner = owner;
-        myUnit.type = type;
-        myUnit.attack = attack;
-        myUnit.defense = defense;
-        myUnit.view = view;
-        myUnit.movement = movement;
-        myUnit.properties = properties;
+        // On doit initialiser l'emplacement par défaut de l'unite sur la carte en fonction du tour du joueur,
+        // Il faut pas oublié de tester le type de case
+        // var xInit = ..turn
+        // var yInt = ..
+        //myUnit.cell = owner.turn...;
 
         this.currentId ++;
         return myUnit;
     },
-
 }

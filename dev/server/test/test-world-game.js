@@ -28,12 +28,13 @@ exports["test-game-toJSON"] = function(test) {
         test.done();
 }
 
-exports["test-game-getPlayersIds"] = function(test) {
+/*exports["test-game-getPlayersIds"] = function(test) {
 
-        var pf = new playerFactory_.PlayerFactory();
-        var pl1 = pf.create(1,"toto");
-        var pl2 = pf.create(2,"titi");
         var gm = new game_.Game();
+
+        var pl1 = gm.addPlayer(1,"toto");
+        var pl2 = gm.addPlayer(2,"titi");
+
 
         gm.players[0] = pl1;
         gm.players[1] = pl2;
@@ -44,5 +45,5 @@ exports["test-game-getPlayersIds"] = function(test) {
         test.equal(tab[1],2);
         test.done();
 
-}
+} */
 

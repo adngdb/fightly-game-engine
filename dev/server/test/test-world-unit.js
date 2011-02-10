@@ -15,8 +15,8 @@ var player_ = require("../lib/world/player.js");
 exports["test-unit-toJSON"] = function (test) {
 
         var st = new unit_.Unit();
-        st.owner = new player_.Player(); 
-        var str = "{" + "\"id\"" + ":-1,"+"\"name\""+":null,"+ "\"owner\""+":-1," +"\"type\""+":null,"+"\"attack\""+":null,"+"\"defense\""+":null,"+"\"view\""+":null,"+"\"move\""+":null,"+"\"properties\""+":[],"+"\"cell\""+":null}";
+        st.owner = new player_.Player();
+        var str = "{" + "\"id\"" + ":-1,"+"\"name\""+":null,"+ "\"owner\""+":-1," +"\"type\""+":null,"+"\"attack\""+":null,"+"\"defense\""+":null,"+"\"view\""+":null,"+"\"movement\""+":null,"+"\"properties\""+":[],"+"\"cell\""+":null}";
         test.equal(str,JSON.stringify(st.toJSON()));
         test.done();
 }
@@ -35,15 +35,6 @@ exports["test-unit-removeProperty"] = function (test) {
         test.done();
 }
 
-exports["test-unit-addProperty"] = function (test) {
-
-        var un = new unit_.Unit();
-        un.properties = ["a","b"];
-        un.addProperty("c");
-        test.equal("a,b,c" , un.properties);
-        test.done();
-
-}
 
 exports["test-unit-addProperty"] = function (test) {
 

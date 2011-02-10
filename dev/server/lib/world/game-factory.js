@@ -24,6 +24,7 @@ exports.GameFactory.prototype = {
         myGame.id = id;
         myGame.playerFactory = this.playerFactory;
         myGame.mapFactory = this.mapFactory;
+        myGame.unitFactory = this.unitFactory;
 
         return myGame;
     },

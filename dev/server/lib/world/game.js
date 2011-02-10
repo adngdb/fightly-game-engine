@@ -22,17 +22,20 @@ exports.Game = function() {
 }
 
 exports.Game.prototype = {
-    //add a new player
-    addPlayer : function(player){
-        this.players.push(player);
+
+    //prend user en paramètre et instancie un player
+
+    addPlayer : function(user) {
+
+        pl = this.playerFactory.createFromUser(user);
+        this.players.push(pl);
     },
 
-    //prend user en parametre et instancie un player
+    addPlayer : function(id,name) {
 
-    /*addPlayer : function() {
-
-
-    }*/
+        pl = this.playerFactory.create(id,name);
+        this.players.push(pl);
+    },
 
     getPlayersIds : function() {
 
@@ -42,6 +45,11 @@ exports.Game.prototype = {
         }
         return playersIds;
     },
+
+    downloadMapFromFile : function(file) {
+            this.map = mapFactory.createFromFile(file);
+    },
+
 
     toJSON : function() {
 
