@@ -58,9 +58,9 @@ Displayer.prototype = {
     },
 
     displayGame: function() {
-        alert('display');
         var state = this.world.game.state;
         var players = this.world.game.players;
+
         if (state == "waiting") {
             this.gameElt.empty().append('<h1>Waiting for opponents...</h1>');
         }
@@ -71,9 +71,10 @@ Displayer.prototype = {
             }
             this.gameDisplayer.display();
         }
+
         this.gameElt.append('<ul>');
         for (var i = 0; i < players.length; i++) {
-            this.gameElt.append('<li>'+ players[i].login +'</li>');
+            this.gameElt.append('<li>'+ players[i].name +'</li>');
         }
         this.gameElt.append('</ul>');
     },
