@@ -47,7 +47,7 @@
           [
             {"type" : "mountain" , "x": 3 , "y" : 0},
             {"type" : "plains"   , "x": 3 , "y" : 1},
-            {"type" : "mounain"  , "x": 3 , "y" : 2},
+            {"type" : "mountain"  , "x": 3 , "y" : 2},
             {"type" : "plains"   , "x": 3 , "y" : 3},
             {"type" : "plains"   , "x": 3 , "y" : 4},
             {"type" : "swamp"    , "x": 3 , "y" : 5},
