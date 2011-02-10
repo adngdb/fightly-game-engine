@@ -10,15 +10,14 @@
 var map_= require("./map.js");
 
 exports.Game = function() {
+    this.id = null;
 
-    this.id = -1;
-    this.players = [];
-    this.map = null;
-    this.playerFactory = null;
     this.mapFactory = null;
+    this.playerFactory = null;
     this.unitFactory = null;
 
-
+    this.map = null;
+    this.players = [];
 }
 
 exports.Game.prototype = {
@@ -26,15 +25,9 @@ exports.Game.prototype = {
     //prend user en paramètre et instancie un player
 
     addPlayer : function(user) {
-
-        pl = this.playerFactory.createFromUser(user);
+        var pl = this.playerFactory.createFromUser(user);
         this.players.push(pl);
-    },
-
-    addPlayer : function(id,name) {
-
-        pl = this.playerFactory.create(id,name);
-        this.players.push(pl);
+        return this;
     },
 
     getPlayersIds : function() {
@@ -47,9 +40,8 @@ exports.Game.prototype = {
     },
 
     downloadMapFromFile : function(file) {
-            this.map = mapFactory.createFromFile(file);
+        this.map = mapFactory.createFromFile(file);
     },
-
 
     toJSON : function() {
 
