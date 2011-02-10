@@ -7,29 +7,24 @@
  *
  **********************************************************************/
 
-
 exports.Player = function() {
-    this.id = -1;
+    this.id = null;
     this.name = null;
-    this.turn = -1;
+    this.turn = null;
     this.units = [];
-}
-
-
+};
 
 exports.Player.prototype = {
 
     toJSON : function() {
-
-        var data = {
-                "id" : this.id,
-                "name" : this.name,
-                "turn" : this.turn,
-                "units" : this.units
-           }
-
-        return data;
+        return {
+            "id": this.id,
+            "name": this.name,
+            "turn": this.turn,
+            "units": this.units,
+        };
     },
-}
+
+};
 
 
