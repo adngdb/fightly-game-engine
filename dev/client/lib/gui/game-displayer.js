@@ -7,8 +7,6 @@
  *
  **********************************************************************/
 
-var util = require('util');
-
 /**
  * Class GameDisplayer
  *
@@ -23,7 +21,7 @@ function GameDisplayer(world) {
 
     this.mapSprite = 'assets/images/map.png';
 
-    this.iso = Crafty.isometric.init(spriteSize);
+    this.iso = Crafty.isometric.init(this.spriteSize);
 };
 
 GameDisplayer.prototype = {
