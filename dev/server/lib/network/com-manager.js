@@ -18,7 +18,6 @@ var sys = require("sys"),
  * Class ComManager
  *
  */
-
 exports.ComManager = function(gameEngine) {
 
     this.gameEngine = gameEngine;
@@ -36,7 +35,7 @@ exports.ComManager = function(gameEngine) {
 
 exports.ComManager.prototype = {
 
-    /*
+    /**
      * Server listens on a port
      * @param port: Port Number
      * @return this
@@ -48,7 +47,7 @@ exports.ComManager.prototype = {
     },
 
 
-    /*
+    /**
      * Create a connection which is correspondant with a Client
      * @param connection Socket Connection of a Client
      * @return this
