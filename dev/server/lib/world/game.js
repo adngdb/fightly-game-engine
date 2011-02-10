@@ -18,7 +18,9 @@ exports.Game = function() {
 
     this.map = null;
     this.players = [];
-}
+
+    this.state = "waiting";
+};
 
 exports.Game.prototype = {
 
@@ -44,13 +46,11 @@ exports.Game.prototype = {
     },
 
     toJSON : function() {
-
-        var data = {
-            "id": this.id,
-            "players" : this.players,
-            "map" : this.map
+        return {
+            "id":       this.id,
+            "players":  this.players,
+            "map":      this.map,
+            "state":    this.state,
         };
-
-        return data;
     },
-}
+};
