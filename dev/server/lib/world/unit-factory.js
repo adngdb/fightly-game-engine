@@ -17,7 +17,7 @@ exports.UnitFactory = function() {
 
 exports.UnitFactory.prototype = {
 
-    create: function(name,owner) {
+    create: function(name, owner) {
 
         var myUnit = new unit_.Unit();
 
