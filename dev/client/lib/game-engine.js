@@ -63,18 +63,43 @@ GameEngine.prototype = {
 
     //---> Triggers
 
-    trigger: function(event, data) {
-        this._handlers[event].call(this, data);
+    /**
+     * Call a event 
+     * @param event Name of event
+     * @return this
+     */
+    trigger: function(event) {
+	if(this._handlers[event]) {
+            this._handlers[event].apply(this, arguments);
+	}
+	else {
+	    log("Event: " + event + " is unregistered.");
+	}
+    },
+
+    /**
+     * Add a event listener
+     * @param event Name of event
+     * @param callback Nam of function which listens this event
+     * @return this
+     */
+    addListener: function(event, callback) {
+	if(typeof(callback) == "function"){
+            this._handlers[event] = callback;
+	}
+	else {
+	    log("Need a function to listen this event");
+	}
+	    
         return this;
     },
 
-    bind: function(event, callback) {
-        this._handlers[event] = callback;
-        return this;
-    },
-
-    unbind: function(event) {
-        this._handlers.splice(event, 1);
+    /**
+     * Remove a event listener
+     * @param event Name of event
+     */
+    removeListener: function(event) {
+        this._handlers = this._handlers.splice(event, 1);
     },
 
     //---> Events
