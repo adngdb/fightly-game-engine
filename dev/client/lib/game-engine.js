@@ -16,6 +16,7 @@ GameEngine = function() {
     this.comManager = null;
     this.messageBuilder = null;
     this.displayer = null;
+    this.eventManager = null;
 
     this.world = null;
 
@@ -33,9 +34,12 @@ GameEngine.prototype = {
     init: function() {
         this.messageBuilder = new MessageBuilder();
         this.world = new WorldManager();
-        this.displayer = new Displayer(this.world);
+        this.eventManager = new EventManager(this.world, this.comManager, this.messageBuilder);
+
+        this.displayer = new Displayer(this.world, this.eventManager);
 
         this.comManager = new ComManager(this);
+
         return this;
     },
 
