@@ -30,7 +30,7 @@ exports.Map.prototype = {
 
     getDistanceBetween : function(cell1,cell2) {
 
-        var distance = abs(cell1.x - cell2.x) + abs(cell1.y - cell2.y);
+        var distance = Math.abs(cell1.x - cell2.x) + Math.abs(cell1.y - cell2.y);
         return distance;
 
     }
