@@ -12,14 +12,15 @@
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
-Displayer = function(world) {
+Displayer = function(world, eventManager) {
     this.world = world;
+    this.eventManager = eventManager;
 
     // HTML elements
     this.loggerElt  = $('#log');
     this.gameElt    = $('#game');
 
-    this.gameDisplayer = new GameDisplayer(this.world);
+    this.gameDisplayer = new GameDisplayer(this.world, this.eventManager);
 
     this.inGame = false;
 };
