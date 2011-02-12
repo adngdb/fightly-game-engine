@@ -20,6 +20,7 @@ exports.Unit = function() {
     this.movement = null;
     this.properties = [];
     this.cell = null;
+    this.health = null;
 }
 
 

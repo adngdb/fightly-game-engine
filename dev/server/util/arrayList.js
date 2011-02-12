@@ -41,7 +41,7 @@ exports.ArrayList.prototype = {
     },
 
     // index must be a number
-    removeAt = function (index) {
+    removeAt : function (index) {
 
         var m_count = this.aList.length;
 
