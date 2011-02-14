@@ -10,20 +10,21 @@
 var map_= require("./map.js");
 
 exports.Game = function() {
+
     this.id = null;
+    this.map = null;
+    this.players = [];
+    this.state = "waiting";
 
     this.mapFactory = null;
     this.playerFactory = null;
     this.unitFactory = null;
 
-    this.map = null;
-    this.players = [];
-
-    this.state = "waiting";
 
     // Configuration
     this.nbMaxPlayers = 2;
 
+    //play in turn
     this.currentPlayer = null;
     this.interval = null;
 };
@@ -68,12 +69,12 @@ exports.Game.prototype = {
         };
     },
 
-    //get player by turn
+    //play in turn
     getPlayerByTurn: function(turn) {
 	var player = null;
-	for (i=0 ; i<this.players.length ; i++) {
-            if(players[i].turn == turn) {
-		player = players[i];
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].turn == turn) {
+		player = this.players[i];
 		break;    
 	    }
         }
@@ -116,16 +117,27 @@ exports.Game.prototype = {
 	this.nextTurn();
     },
 
-    startPlaying: function(){
+    startPlaying: function() {
 	this.currentPlayer = this.getPlayerByTurn(0);
 	console.log("This is turn of player 0");
 
 	this.startTimer();
     }
 
-    stopPlaying: function(){
+    stopPlaying: function() {
 	clearInterval(this.interval);
 	setTurn(-1);
-    }
-      
+    },
+
+    getPlayerById: function(id) {
+	var player = null;
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].id == id) {
+		player = this.players[i];
+		break;    
+	    }
+        }
+	
+	return player;
+    }     
 };
