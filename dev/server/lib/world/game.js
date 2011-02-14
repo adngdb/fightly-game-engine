@@ -10,16 +10,16 @@
 var map_= require("./map.js");
 
 exports.Game = function() {
+
     this.id = null;
+    this.map = null;
+    this.players = [];
+    this.state = "waiting";
 
     this.mapFactory = null;
     this.playerFactory = null;
     this.unitFactory = null;
 
-    this.map = null;
-    this.players = [];
-
-    this.state = "waiting";
 
     // Configuration
     this.nbMaxPlayers = 2;
