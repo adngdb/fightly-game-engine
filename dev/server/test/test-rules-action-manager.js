@@ -24,8 +24,8 @@ exports['moveUnit'] = function (test) {
     var unit = uFac.create("foo","one",null,null,10,10,1,1,null) ;
     unit.cell = cFac.create(null,1,1) ;
 
-    //déplacer l'unité
-    aMan.moveUnit(unit.id,1,2) ;
+    //TODO déplacer l'unité
+    aMan.moveUnit(null,unit.id,1,2) ;
 
     //vérifier que le coordonnée de l'unité ont changé
     assert.equal(unit.cell.x,1,"x n'a pas changé") ;
@@ -58,8 +58,22 @@ exports['attackUnit'] = function (test) {
     unit1.cell = cFac.create(null,1,1) ;
     unit2.cell = cFac.create(null,1,2) ;
 
-    //unit1 attaque unit2
-    aMan.attackUnit(unit1.id,unit2.id) ;
+    //TODO unit1 attaque unit2
+    aMan.attackUnit(null,unit1.id,unit2.id) ;
 
     test.done() ;
 }
+
+
+exports['canPlay'] = function (test) {
+	
+	var aMan = new ActionManager_.ActionManager() ;
+
+	//TODO
+
+	test.done() ;
+
+}
+
+
+

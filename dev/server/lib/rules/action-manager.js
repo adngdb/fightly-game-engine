@@ -67,6 +67,9 @@ exports.ActionManager.prototype = {
 
 		var player = this.game.getPlayer(playerId) ;
 
+		//TODO
+
+		return false ;
 	}
 
 }
