@@ -40,6 +40,15 @@ exports.Game.prototype = {
         return pl;
     },
 
+    removePlayer: function(playerId) {
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].id == playerId) {
+		this.players[i].play = false;
+		break;    
+	    }
+        }
+    },
+
     getPlayersIds: function() {
 
         var playersIds = [];
@@ -80,11 +89,11 @@ exports.Game.prototype = {
         }
 	
 	return player;
-    }
+    },
 
     getNextPlayer: function(currentTurn) {
 	var nextPlayer = null;
-	while(nextPlayer == null) {
+	while(nextPlayer.play == false) {
 	    currentTurn++;
 	    if(currentTurn >= this.nbMaxPlayers) {
 		currentTurn = 0;
@@ -94,7 +103,7 @@ exports.Game.prototype = {
 	}
 
 	return nextPlayer;
-    }
+    },
 
     nextTurn: function() {
 	var currentTurn = this.currentPlayer.turn;
@@ -110,7 +119,7 @@ exports.Game.prototype = {
 	    clearInterval(this.interval);
 	    this.nextTurn();
 	}, 5000).bind(this);
-    }
+    },
 
     changeTurn: function() {
 	clearInterval(this.interval);
@@ -122,7 +131,7 @@ exports.Game.prototype = {
 	console.log("This is turn of player 0");
 
 	this.startTimer();
-    }
+    },
 
     stopPlaying: function() {
 	clearInterval(this.interval);
@@ -139,5 +148,29 @@ exports.Game.prototype = {
         }
 	
 	return player;
-    }     
+    },
+
+    getUnitById: function(id) {
+	for(var i=0; i<this.players.length; i++) {
+	    for(var j=0; j<this.players[i].units.length; j++) {
+		if(this.players[i].units[j].id == id) {
+		    return this.players[i].units[j];		        
+	    	}
+	    }
+	}
+
+	return null;
+    },
+
+    getCell: function(x, y) {
+	var cell = null;
+	for (var i=0 ; i<this.map.cells.length ; i++) {
+            if(this.map.cells[i].x == x && this.map.cells[i].y == y) {
+		cell = this.this.map.cells[i];
+		break;    
+	    }
+        }
+	
+	return player;
+    },     
 };
