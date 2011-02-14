@@ -9,10 +9,12 @@ Crafty.c("clickable", {
         if (!this.has("controls")) {
             this.addComponent("controls");
         }
+        return this;
     },
 
     clickable: function(polygon, callback) {
         this.areaMap(polygon).bind("mousedown", callback);
+        return this;
     },
 
 });
