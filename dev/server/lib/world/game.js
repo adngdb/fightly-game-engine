@@ -24,8 +24,8 @@ exports.Game = function() {
     // Configuration
     this.nbMaxPlayers = 2;
 
-    this.turn = -1;
-    this.interval = -1;
+    this.currentPlayer = null;
+    this.interval = null;
 };
 
 exports.Game.prototype = {
@@ -68,27 +68,48 @@ exports.Game.prototype = {
         };
     },
 
-    //play in turns
-    getTurn: function() {
-	return this.turn;
-    },
+    //get player by turn
+    getPlayerByTurn: function(turn) {
+	var player = null;
+	for (i=0 ; i<this.players.length ; i++) {
+            if(players[i].turn == turn) {
+		player = players[i];
+		break;    
+	    }
+        }
+	
+	return player;
+    }
 
-    setTurn: function(newTurn) {
-	this.turn = newTurn;
-    },
+    getNextPlayer: function(currentTurn) {
+	var nextPlayer = null;
+	while(nextPlayer == null) {
+	    currentTurn++;
+	    if(currentTurn >= this.nbMaxPlayers) {
+		currentTurn = 0;
+	    }
+	
+  	    nextPlayer = this.getPlayerByTurn(currentTurn);
+	}
+
+	return nextPlayer;
+    }
 
     nextTurn: function() {
-	var currentTurn = this.getTurn();
-	var newTurn = (currentTurn + 1) % this.players.length;
-	this.setTurn(newTurn);
-	console.log("This is turn of " + newTurn);
-	//Start timer for next player (player[newTurn]);
-	
-	this.interval = setInterval(function() {
-		clearInterval(this.interval);
-		this.nextTurn();
-	}, 5000).bind(this);
+	var currentTurn = this.currentPlayer.turn;
+	this.currentPlayer = this.getNextPlayer(currentTurn);
+	console.log("This is turn of player " + this.currentPlayer.turn);
+
+	//Start timer for next player	
+	this.startTimer();
     },
+    
+    startTimer: function() {
+	this.interval = setInterval(function() {
+	    clearInterval(this.interval);
+	    this.nextTurn();
+	}, 5000).bind(this);
+    }
 
     changeTurn: function() {
 	clearInterval(this.interval);
@@ -96,6 +117,15 @@ exports.Game.prototype = {
     },
 
     startPlaying: function(){
-	this.nextTurn();
-    }  
+	this.currentPlayer = this.getPlayerByTurn(0);
+	console.log("This is turn of player 0");
+
+	this.startTimer();
+    }
+
+    stopPlaying: function(){
+	clearInterval(this.interval);
+	setTurn(-1);
+    }
+      
 };
