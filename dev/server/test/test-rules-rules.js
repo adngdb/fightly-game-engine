@@ -17,8 +17,3 @@ exports['load'] = function (test) {
     test.done() ;
 };
 
-exports['execute'] = function (test) {
-    var r = new rules_.Rules() ;
-    r.execute('toto') ;
-    test.done() ;
-};
