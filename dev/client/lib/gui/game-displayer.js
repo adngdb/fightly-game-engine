@@ -15,7 +15,7 @@
 function GameDisplayer(world, eventManager) {
     this.world = world;
     this.eventManager = eventManager;
-	
+
     this.width = 800;
     this.height = 600;
     this.spriteSize = 64;
@@ -62,16 +62,13 @@ GameDisplayer.prototype = {
         var cellClickMap = function() { return new Crafty.polygon([32,16], [64,32], [32,48], [0,32]); };
 
         for (var y = 0; y < map.height; y++) {
-        	alert(y);
+            alert(y);
             for (var x = 0; x < map.width; x++) {
-        		alert("begin " + x);
                 var cell = map.cells[x][y];
                 var tile = Crafty.e('2D, DOM, clickable, ' + cell.type)
                     .clickable(cellClickMap(), function () { alert("Hallo, ich bin "+x+", "+y); });
-                    
-        		alert("middle " + x);
+
                 this.iso.place(x, y, 0, tile);
-        		alert("end " + x);
             }
         }
         return this;
@@ -92,7 +89,7 @@ GameDisplayer.prototype = {
             for (; j < ul; j++) {
                 var unit = units[j];
                 var unitSprite = Crafty.e('2D, DOM, unit, clickable')
-                	.clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), function() { alert("i am here !"); });
+                    .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), function() { alert("i am here !"); });
                 this.iso.place(unit.cell.x, unit.cell.y, 1, unitSprite);
             }
         }
