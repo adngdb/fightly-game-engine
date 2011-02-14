@@ -21,6 +21,7 @@ exports.Unit = function() {
     this.properties = [];
     this.cell = null;
     this.health = null;
+    this.range = null;
 }
 
 

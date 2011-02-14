@@ -67,3 +67,20 @@ exports["test-game-getPlayersIds"] = function(test) {
 
 }
 
+exports["test-game-removePlayer"] = function(test) {
+
+        var user1 = new user_.User(3,"toto");
+        var user2 = new user_.User(4,"titi");
+        var user2 = new user_.User(5,"titiyyy");
+
+		var game = gf.create(14);
+
+        var pl1 = game.addPlayer(user1);
+        var pl2 = game.addPlayer(user2);
+
+		game.removePlayer(4);		
+		
+		test.equal(game.players[1].id , 5);
+		test.done();
+}
+

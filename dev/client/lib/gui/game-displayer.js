@@ -12,8 +12,9 @@
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
-function GameDisplayer(world) {
+function GameDisplayer(world, eventManager) {
     this.world = world;
+    this.eventManager = eventManager;
 
     this.width = 800;
     this.height = 600;
@@ -58,15 +59,15 @@ GameDisplayer.prototype = {
 
     displayMap: function() {
         var map = this.world.game.map;
+        var cellClickMap = function() { return new Crafty.polygon([32,16], [64,32], [32,48], [0,32]); };
 
         for (var y = 0; y < map.height; y++) {
+            alert(y);
             for (var x = 0; x < map.width; x++) {
                 var cell = map.cells[x][y];
-                var tile = Crafty.e('2D, DOM, mouse, '+cell.type)
-                    .areaMap([32,16], [64,32], [32,48], [0,32])
-                    .bind("click", function() {
-                        this.destroy();
-                    });
+                var tile = Crafty.e('2D, DOM, clickable, ' + cell.type)
+                    .clickable(cellClickMap(), function () { alert("Hallo, ich bin "+x+", "+y); });
+
                 this.iso.place(x, y, 0, tile);
             }
         }
@@ -87,7 +88,8 @@ GameDisplayer.prototype = {
 
             for (; j < ul; j++) {
                 var unit = units[j];
-                var unitSprite = Crafty.e('2D, DOM, mouse, unit');
+                var unitSprite = Crafty.e('2D, DOM, unit, clickable')
+                    .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), function() { alert("i am here !"); });
                 this.iso.place(unit.cell.x, unit.cell.y, 1, unitSprite);
             }
         }

@@ -15,6 +15,6 @@ exports.Observer.prototype = {
 
     update : function() {
         return;
-   },
+    },
 
 }

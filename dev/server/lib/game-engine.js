@@ -8,10 +8,16 @@
  **********************************************************************/
 
 var util                = require('util'),
-    user_         = require('./user.js'),
+
+    user_               = require('./user.js'),
+
+    legacy_             = require('./util/legacy.js'),
+    observer_           = require('./util/observer.js'),
+
     comManager_         = require('./network/com-manager.js'),
     messageBuilder_     = require('./network/message-builder.js'),
     messageParser_      = require('./network/message-parser.js'),
+
     gameFactory_        = require('./world/game-factory.js'),
     playerFactory_      = require('./world/player-factory.js'),
     mapFactory_         = require('./world/map-factory.js'),
@@ -147,17 +153,17 @@ exports.GameEngine.prototype = {
     //---> Triggers
 
     /**
-     * Call a event 
+     * Call a event
      * @param event Name of event
      * @return this
      */
     trigger: function(event) {
-	if(this._handlers[event]) {
+    if(this._handlers[event]) {
             this._handlers[event].apply(this, arguments);
-	}
-	else {
-	    log("Event: " + event + " is unregistered.");
-	}
+    }
+    else {
+        log("Event: " + event + " is unregistered.");
+    }
     },
 
     /**
@@ -167,13 +173,13 @@ exports.GameEngine.prototype = {
      * @return this
      */
     addListener: function(event, callback) {
-	if(typeof(callback) == "function"){
+    if(typeof(callback) == "function"){
             this._handlers[event] = callback;
-	}
-	else {
-	    log("Need a function to listen this event");
-	}
-	    
+    }
+    else {
+        log("Need a function to listen this event");
+    }
+
         return this;
     },
 
@@ -227,3 +233,6 @@ exports.GameEngine.prototype = {
     },
 
 };
+
+// Inheritance
+new legacy_.Legacy().inherits(observer_.Observer, exports.GameEngine);

@@ -10,22 +10,23 @@
 var map_= require("./map.js");
 
 exports.Game = function() {
+
     this.id = null;
+    this.map = null;
+    this.players = [];
+    this.state = "waiting";
 
     this.mapFactory = null;
     this.playerFactory = null;
     this.unitFactory = null;
 
-    this.map = null;
-    this.players = [];
-
-    this.state = "waiting";
 
     // Configuration
     this.nbMaxPlayers = 2;
 
-    this.turn = -1;
-    this.interval = -1;
+    //play in turn
+    this.currentPlayer = null;
+    this.interval = null;
 };
 
 exports.Game.prototype = {
@@ -37,6 +38,15 @@ exports.Game.prototype = {
         this.players.push(pl);
         this.checkState();
         return pl;
+    },
+
+    removePlayer: function(playerId) {
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].id == playerId) {
+		this.players[i].play = false;
+		break;    
+	    }
+        }
     },
 
     getPlayersIds: function() {
@@ -68,25 +78,46 @@ exports.Game.prototype = {
         };
     },
 
-    //play in turns
-    getTurn: function() {
-	return this.turn;
+    //play in turn
+    getPlayerByTurn: function(turn) {
+	var player = null;
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].turn == turn) {
+		player = this.players[i];
+		break;    
+	    }
+        }
+	
+	return player;
     },
 
-    setTurn: function(newTurn) {
-	this.turn = newTurn;
+    getNextPlayer: function(currentTurn) {
+	var nextPlayer = null;
+	while(nextPlayer.play == false) {
+	    currentTurn++;
+	    if(currentTurn >= this.nbMaxPlayers) {
+		currentTurn = 0;
+	    }
+	
+  	    nextPlayer = this.getPlayerByTurn(currentTurn);
+	}
+
+	return nextPlayer;
     },
 
     nextTurn: function() {
-	var currentTurn = this.getTurn();
-	var newTurn = (currentTurn + 1) % this.players.length;
-	this.setTurn(newTurn);
-	console.log("This is turn of " + newTurn);
-	//Start timer for next player (player[newTurn]);
-	
+	var currentTurn = this.currentPlayer.turn;
+	this.currentPlayer = this.getNextPlayer(currentTurn);
+	console.log("This is turn of player " + this.currentPlayer.turn);
+
+	//Start timer for next player	
+	this.startTimer();
+    },
+    
+    startTimer: function() {
 	this.interval = setInterval(function() {
-		clearInterval(this.interval);
-		this.nextTurn();
+	    clearInterval(this.interval);
+	    this.nextTurn();
 	}, 5000).bind(this);
     },
 
@@ -95,7 +126,51 @@ exports.Game.prototype = {
 	this.nextTurn();
     },
 
-    startPlaying: function(){
-	this.nextTurn();
-    }  
+    startPlaying: function() {
+	this.currentPlayer = this.getPlayerByTurn(0);
+	console.log("This is turn of player 0");
+
+	this.startTimer();
+    },
+
+    stopPlaying: function() {
+	clearInterval(this.interval);
+	setTurn(-1);
+    },
+
+    getPlayerById: function(id) {
+	var player = null;
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].id == id) {
+		player = this.players[i];
+		break;    
+	    }
+        }
+	
+	return player;
+    },
+
+    getUnitById: function(id) {
+	for(var i=0; i<this.players.length; i++) {
+	    for(var j=0; j<this.players[i].units.length; j++) {
+		if(this.players[i].units[j].id == id) {
+		    return this.players[i].units[j];		        
+	    	}
+	    }
+	}
+
+	return null;
+    },
+
+    getCell: function(x, y) {
+	var cell = null;
+	for (var i=0 ; i<this.map.cells.length ; i++) {
+            if(this.map.cells[i].x == x && this.map.cells[i].y == y) {
+		cell = this.this.map.cells[i];
+		break;    
+	    }
+        }
+	
+	return player;
+    },     
 };
