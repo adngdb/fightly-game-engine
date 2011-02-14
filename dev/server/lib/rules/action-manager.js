@@ -15,16 +15,19 @@ exports.ActionManager.prototype = {
 	 * @param int cellY coordonnée y de la case
 	 * @return true si l'action à réussit, false sinon
 	 */	
-	moveUnit: function(unitId,cellX,cellY) {
+	moveUnit: function(playerId,unitId,cellX,cellY) {
 
 		var unit = this.game.getUnit(unitId) ;
 		var cell = this.game.map.getCell(cellX,cellY) ;
-		if( this.game.map.getDistanceBetween(unit.cell, cell) <= unit.movement ) {
-			unit.moveToCell(cell) ;
-			return true ;
-		}
 
-		return false ;
+		if( !this.canPlay(playerId) )
+			return false ;
+
+		if( this.game.map.getDistanceBetween(unit.cell, cell) > unit.movement )
+			return false ;
+
+		unit.moveToCell(cell) ;
+		return true ;
 	},
 
 
@@ -34,23 +37,37 @@ exports.ActionManager.prototype = {
 	 * @param string targetId identifiant de la cible
 	 * @return true si l'action à réussit, false sinon
 	 */	
-	attackUnit: function(unitId,targetId) {
+	attackUnit: function(playerId,unitId,targetId) {
 
 		var unit = this.game.getUnit(unitId) ;
 		var target = this.game.getUnit(targetId) ;
 
-		//si cible à porter
-		if( this.game.map.getDistanceBetween(unit.cell, target.cell) <= unit.reach ) {
+		if( !this.canPlay(playerId) )
+			return false ;
+		
+		if( this.game.map.getDistanceBetween(unit.cell, target.cell) > unit.reach )
+			return false ;
 
-			//l'unité attaque
-			unit.attack(target) ;
-			
-			//riposte de la cible si à porter
-			if( this.game.map.getDistanceBetween(target.cell, unit.cell) <= target.reach )
-				target.attack(unit) ;
+		//l'unité attaque
+		unit.attack(target) ;
+		
+		//riposte de la cible si à porter
+		if( this.game.map.getDistanceBetween(target.cell, unit.cell) <= target.reach )
+			target.attack(unit) ;
 
-			return true ;
-		}
+		return true ;
+	},
+
+
+	/**
+	 * vérifie que le joueur peut jouer ?
+	 * que c'est sont tour, etc
+	 */
+	canPlay: function(playerId) {
+
+		var player = this.game.getPlayer(playerId) ;
+
+		//TODO
 
 		return false ;
 	}
