@@ -23,6 +23,9 @@ exports.Game = function() {
 
     // Configuration
     this.nbMaxPlayers = 2;
+
+    this.turn = -1;
+    this.interval = -1;
 };
 
 exports.Game.prototype = {
@@ -64,4 +67,35 @@ exports.Game.prototype = {
             "state":    this.state,
         };
     },
+
+    //play in turns
+    getTurn: function() {
+	return this.turn;
+    },
+
+    setTurn: function(newTurn) {
+	this.turn = newTurn;
+    },
+
+    nextTurn: function() {
+	var currentTurn = this.getTurn();
+	var newTurn = (currentTurn + 1) % this.players.length;
+	this.setTurn(newTurn);
+	console.log("This is turn of " + newTurn);
+	//Start timer for next player (player[newTurn]);
+	
+	this.interval = setInterval(function() {
+		clearInterval(this.interval);
+		this.nextTurn();
+	}, 5000).bind(this);
+    },
+
+    changeTurn: function() {
+	clearInterval(this.interval);
+	this.nextTurn();
+    },
+
+    startPlaying: function(){
+	this.nextTurn();
+    }  
 };
