@@ -43,6 +43,7 @@ exports.Game.prototype = {
      */
     addPlayer: function(user) {
         var player = this.playerFactory.createFromUser(user);
+        player.addObserver(this);
         this.players.push(player);
         this.checkState();
         return player;
@@ -81,6 +82,7 @@ exports.Game.prototype = {
     checkState: function() {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
+            this.notify({game: this});
         }
         return this;
     },
@@ -259,4 +261,10 @@ exports.Game.prototype = {
 
         return cell;
     },
+
+    onUpdate: function(context) {
+        context.game = this;
+        this.notify(context);
+    },
+
 };

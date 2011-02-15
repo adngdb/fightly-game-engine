@@ -87,6 +87,7 @@ exports.Unit.prototype = {
     moveToCell : function(cell) {
 
         this.cell =  cell;
+        this.notify({object: "Unit", modified: "cell", unit: this});
 
     },
 

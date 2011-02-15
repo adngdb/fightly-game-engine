@@ -7,9 +7,16 @@
  *
  **********************************************************************/
 
-var game_ = require("./game.js");
+var game_ = require("./game.js"),
+    legacy_ = require("../util/legacy.js"),
+    observer_ = require("../util/observer.js"),
+    subject_ = require("../util/subject.js");
 
-exports.GameFactory = function() {
+var legacy = new legacy_.Legacy();
+
+exports.GameFactory = function(gameEngine) {
+    this.gameEngine = gameEngine;
+
     this.playerFactory = null;
     this.mapFactory = null;
     this.cellFactory = null;
@@ -32,9 +39,15 @@ exports.GameFactory.prototype = {
         myGame.playerFactory = this.playerFactory;
         myGame.mapFactory = this.mapFactory;
         myGame.unitFactory = this.unitFactory;
+
         myGame.nbMaxPlayers = this.config.nbMaxPlayers;
         myGame.nbMaxTurns = this.config.nbMaxTurns;
         myGame.turnDuration = this.config.turnDuration;
+
+        legacy.inherits(new subject_.Subject(), myGame);
+        legacy.inherits(new observer_.Observer(), myGame);
+        myGame.addObserver(this.gameEngine);
+
         return myGame;
     },
 

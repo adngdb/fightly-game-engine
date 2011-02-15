@@ -8,9 +8,16 @@
  **********************************************************************/
 
 
-var player_ = require("./player.js");
+var player_ = require("./player.js"),
+    legacy_ = require("../util/legacy.js"),
+    observer_ = require("../util/observer.js"),
+    subject_ = require("../util/subject.js");
 
-exports.PlayerFactory = function() {
+var legacy = new legacy_.Legacy();
+
+exports.PlayerFactory = function(gameEngine) {
+    this.gameEngine = gameEngine;
+
     this.unitFactory = null;
 }
 
@@ -20,10 +27,16 @@ exports.PlayerFactory.prototype = {
         var myPlayer = new player_.Player();
         myPlayer.name = name;
         myPlayer.id = id;
+        myPlayer.play = true;
+
+        myPlayer.unitFactory = this.unitFactory;
+
+        legacy.inherits(new subject_.Subject(), myPlayer);
+        legacy.inherits(new observer_.Observer(), myPlayer);
 
         // For testing purpose
-        myPlayer.units[0] = this.unitFactory.create("alpha",myPlayer);
-	myPlayer.play = true;
+        myPlayer.addUnit("choucroute");
+
         return myPlayer;
     },
 

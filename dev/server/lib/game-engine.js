@@ -81,7 +81,7 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     _initFactories: function() {
-        this.gameFactory = new gameFactory_.GameFactory();
+        this.gameFactory = new gameFactory_.GameFactory(this);
         this.playerFactory = new playerFactory_.PlayerFactory();
         this.unitFactory = new unitFactory_.UnitFactory();
         this.mapFactory = new mapFactory_.MapFactory();
@@ -250,6 +250,10 @@ exports.GameEngine.prototype = {
 
         var am = new actionManager_.ActionManager(game);
         am.moveUnit(user.id, unitId, toX, toY);
+    },
+
+    onUpdate: function(context) {
+        this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
     },
 
 };

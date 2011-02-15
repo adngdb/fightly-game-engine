@@ -7,16 +7,24 @@
  *
  **********************************************************************/
 
-var unit_ = require("./unit.js");
+var unit_ = require("./unit.js"),
+    legacy_ = require("../util/legacy.js"),
+    subject_ = require("../util/subject.js");
+
+var legacy = new legacy_.Legacy();
 
 /**
  * Class UnitFactory
  * @authors Youness HAMRI - youness.hamri@gmail.com / duc ....
  **/
+exports.UnitFactory = function(gameEngine) {
+    this.gameEngine = gameEngine;
 
-exports.UnitFactory = function() {
     this.currentId = 0;
     this.types = [];
+
+    // For testing purpose only
+    this.addUnitType("choucroute", 100, 10, 10, 3, 2, 1, []);
 }
 
 exports.UnitFactory.prototype = {
@@ -57,6 +65,8 @@ exports.UnitFactory.prototype = {
         // var xInit = ..turn
         // var yInt = ..
         //myUnit.cell = owner.turn...;
+
+        legacy.inherits(new subject_.Subject(), myUnit);
 
         this.currentId ++;
         return myUnit;
