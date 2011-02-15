@@ -93,14 +93,14 @@ exports.Game.prototype = {
 
     getNextPlayer: function(currentTurn) {
 	var nextPlayer = null;
-	while(nextPlayer.play == false) {
+	do{
 	    currentTurn++;
 	    if(currentTurn >= this.nbMaxPlayers) {
 		currentTurn = 0;
 	    }
 	
   	    nextPlayer = this.getPlayerByTurn(currentTurn);
-	}
+	}while(nextPlayer.play == false);
 
 	return nextPlayer;
     },
@@ -114,11 +114,12 @@ exports.Game.prototype = {
 	this.startTimer();
     },
     
+    
     startTimer: function() {
 	this.interval = setInterval(function() {
 	    clearInterval(this.interval);
 	    this.nextTurn();
-	}, 5000).bind(this);
+	}.bind(this), 5000);
     },
 
     changeTurn: function() {
