@@ -150,6 +150,10 @@ exports.Game.prototype = {
         return player;
     },
 
+    getPlayer: function(id) {
+        return this.getPlayerById(id);
+    },
+
     getUnitById: function(id) {
         for(var i=0; i<this.players.length; i++) {
             for(var j=0; j<this.players[i].units.length; j++) {
@@ -162,6 +166,10 @@ exports.Game.prototype = {
         return null;
     },
 
+    getUnit: function(id) {
+        return this.getUnitById(id);
+    },
+
     getCell: function(x, y) {
         var cell = null;
         for (var i=0 ; i<this.map.cells.length ; i++) {
@@ -171,6 +179,6 @@ exports.Game.prototype = {
             }
         }
 
-        return player;
+        return cell;
     },
 };
