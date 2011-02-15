@@ -20,6 +20,7 @@ exports.Game = function() {
     this.playerFactory = null;
     this.unitFactory = null;
 
+    this.actionManager = null;
 
     // Configuration
     this.nbMaxPlayers = 2;
@@ -89,7 +90,7 @@ exports.Game.prototype = {
         }
 
         return player;
-    }
+    },
 
     getNextPlayer: function(currentTurn) {
         var nextPlayer = null;
