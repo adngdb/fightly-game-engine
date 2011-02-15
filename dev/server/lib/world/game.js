@@ -28,7 +28,7 @@ exports.Game = function() {
     // Configuration
     this.nbMaxPlayers = -1;
     this.nbMaxTurns = -1;
-
+    this.turnDuration = -1;
     //play in turn
     this.currentPlayer = null;
     this.interval = null;
