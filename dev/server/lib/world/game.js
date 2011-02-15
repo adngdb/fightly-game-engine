@@ -26,7 +26,8 @@ exports.Game = function() {
     this.unitFactory = null;
 
     // Configuration
-    this.nbMaxPlayers = 3;
+    this.nbMaxPlayers = -1;
+    this.nbMaxTurns = -1;
 
     //play in turn
     this.currentPlayer = null;

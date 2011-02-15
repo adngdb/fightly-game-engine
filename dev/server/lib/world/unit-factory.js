@@ -9,6 +9,10 @@
 
 var unit_ = require("./unit.js");
 
+/**
+ * Class UnitFactory
+ * @authors Youness HAMRI - youness.hamri@gmail.com / duc ....
+ **/
 
 exports.UnitFactory = function() {
     this.currentId = 0;
@@ -17,6 +21,13 @@ exports.UnitFactory = function() {
 
 exports.UnitFactory.prototype = {
 
+    /**
+     * Create a new unit.
+     * @param type, the type of unit. Note that
+     * @param owner, the player who has creating a unit
+     * @param cell, the cell that will be occupied by the unit
+     * @return myUnit: the created unit.
+     */
     create: function(type, owner, cell) {
 
         var myUnit = new unit_.Unit();

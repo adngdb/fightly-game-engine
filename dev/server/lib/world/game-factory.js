@@ -15,7 +15,8 @@ exports.GameFactory = function() {
     this.cellFactory = null;
     this.unitFactory = null;
     this.config = {
-        "nbMaxPlayer": 2,
+        "nbMaxPlayers": 2,
+        "nbMaxTurns" : 200
     };
 }
 
@@ -24,19 +25,21 @@ exports.GameFactory.prototype = {
     create: function(id) {
 
         var myGame = new game_.Game();
-
+	
         myGame.id = id;
         myGame.map = this.mapFactory.create();
         myGame.playerFactory = this.playerFactory;
         myGame.mapFactory = this.mapFactory;
         myGame.unitFactory = this.unitFactory;
-
+        myGame.nbMaxPlayers = this.config.nbMaxPlayers; 
+        myGame.nbMaxTurns = this.config.nbMaxTurns;
         return myGame;
     },
 
-    setConfig : function(nbMaxPlayer) {
+    setConfig : function(nbMaxPlayers, nbMaxTurns) {
 
-        this.config.nbMaxPlayer = nbMaxPlayer;
+        this.config.nbMaxPlayers = nbMaxPlayers;
+        this.config.nbMaxTurns = nbMaxTurns;
 
     },
 

@@ -8,9 +8,9 @@
  **********************************************************************/
 
 /**
- * Class Game
+ * Class Unit
  * @authors Youness HAMRI - youness.hamri@gmail.com
- * */
+ **/
 
 exports.Unit = function() {
 
@@ -63,7 +63,7 @@ exports.Unit.prototype = {
     /**
      * checks whether a property is present in the list of properties
      * @param property.
-     * @return boolean.
+     * @return true when a properties list contains a property and return false otherwise .
      */
     hasProperty : function(property) {
 
