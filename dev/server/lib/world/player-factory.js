@@ -26,13 +26,14 @@ exports.PlayerFactory.prototype = {
         var myPlayer = new player_.Player();
         myPlayer.name = name;
         myPlayer.id = id;
+        myPlayer.play = true;
+
+        myPlayer.unitFactory = this.unitFactory;
 
         // For testing purpose
         myPlayer.units[0] = this.unitFactory.create("alpha",myPlayer);
-    myPlayer.play = true;
 
         legacy.inherits(new subject_.Subject(), myPlayer);
-        myPlayer.addObserver(this.gameEngine);
 
         return myPlayer;
     },
