@@ -71,73 +71,73 @@ exports.Game.prototype = {
 
     //play in turn
     getPlayerByTurn: function(turn) {
-	var player = null;
-	for (var i=0 ; i<this.players.length ; i++) {
+    var player = null;
+    for (var i=0 ; i<this.players.length ; i++) {
             if(this.players[i].turn == turn) {
-		player = this.players[i];
-		break;    
-	    }
+        player = this.players[i];
+        break;
         }
-	
-	return player;
+        }
+
+    return player;
     }
 
     getNextPlayer: function(currentTurn) {
-	var nextPlayer = null;
-	while(nextPlayer == null) {
-	    currentTurn++;
-	    if(currentTurn >= this.nbMaxPlayers) {
-		currentTurn = 0;
-	    }
-	
-  	    nextPlayer = this.getPlayerByTurn(currentTurn);
-	}
+    var nextPlayer = null;
+    while(nextPlayer == null) {
+        currentTurn++;
+        if(currentTurn >= this.nbMaxPlayers) {
+        currentTurn = 0;
+        }
 
-	return nextPlayer;
+        nextPlayer = this.getPlayerByTurn(currentTurn);
+    }
+
+    return nextPlayer;
     }
 
     nextTurn: function() {
-	var currentTurn = this.currentPlayer.turn;
-	this.currentPlayer = this.getNextPlayer(currentTurn);
-	console.log("This is turn of player " + this.currentPlayer.turn);
+    var currentTurn = this.currentPlayer.turn;
+    this.currentPlayer = this.getNextPlayer(currentTurn);
+    console.log("This is turn of player " + this.currentPlayer.turn);
 
-	//Start timer for next player	
-	this.startTimer();
+    //Start timer for next player
+    this.startTimer();
     },
-    
+
     startTimer: function() {
-	this.interval = setInterval(function() {
-	    clearInterval(this.interval);
-	    this.nextTurn();
-	}, 5000).bind(this);
+    this.interval = setInterval(function() {
+        clearInterval(this.interval);
+        this.nextTurn();
+    }, 5000).bind(this);
     }
 
     changeTurn: function() {
-	clearInterval(this.interval);
-	this.nextTurn();
+    clearInterval(this.interval);
+    this.nextTurn();
     },
 
     startPlaying: function() {
-	this.currentPlayer = this.getPlayerByTurn(0);
-	console.log("This is turn of player 0");
+    this.currentPlayer = this.getPlayerByTurn(0);
+    console.log("This is turn of player 0");
 
-	this.startTimer();
+    this.startTimer();
     }
 
     stopPlaying: function() {
-	clearInterval(this.interval);
-	setTurn(-1);
+    clearInterval(this.interval);
+    setTurn(-1);
     },
 
     getPlayerById: function(id) {
-	var player = null;
-	for (var i=0 ; i<this.players.length ; i++) {
+    var player = null;
+    for (var i=0 ; i<this.players.length ; i++) {
             if(this.players[i].id == id) {
-		player = this.players[i];
-		break;    
-	    }
+        player = this.players[i];
+        break;
         }
-	
-	return player;
-    }     
+    }
+
+    return player;
+    }
 };
