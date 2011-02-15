@@ -22,7 +22,7 @@ exports.Game = function() {
 
 
     // Configuration
-    this.nbMaxPlayers = 2;
+    this.nbMaxPlayers = 3;
 
     //play in turn
     this.currentPlayer = null;
@@ -78,7 +78,13 @@ exports.Game.prototype = {
         };
     },
 
-    //play in turn
+    //--->play in turn
+
+    /**
+     * Get a player by attribut "turn"
+     * @param turn Turn of player
+     * @return player
+     */
     getPlayerByTurn: function(turn) {
         var player = null;
         for (var i=0 ; i<this.players.length ; i++) {
@@ -89,8 +95,13 @@ exports.Game.prototype = {
         }
 
         return player;
-    }
+    },
 
+    /**
+     * Get player who has next turn
+     * @param currentTurn Turn of current player
+     * @return player
+     */
     getNextPlayer: function(currentTurn) {
         var nextPlayer = null;
         do {
@@ -106,6 +117,9 @@ exports.Game.prototype = {
         return nextPlayer;
     },
 
+    /**
+     * Change turn to the next player (according to Timer)
+     */
     nextTurn: function() {
         var currentTurn = this.currentPlayer.turn;
         this.currentPlayer = this.getNextPlayer(currentTurn);
@@ -115,18 +129,28 @@ exports.Game.prototype = {
         this.startTimer();
     },
 
+    /**
+     * Start Timer for playing in turn
+     */
     startTimer: function() {
-        this.interval = setInterval(function() {
-            clearInterval(this.interval);
+        this.interval = setInterval(function() {            
             this.nextTurn();
+            clearInterval(this.interval);
         }.bind(this), 5000);
     },
 
+    /**
+     * Change turn to the next player (immediately)
+     */
     changeTurn: function() {
         clearInterval(this.interval);
         this.nextTurn();
     },
 
+    /**
+     * Start playing in turn 
+     * Player whose turn is 0 will be the first
+     */
     startPlaying: function() {
         this.currentPlayer = this.getPlayerByTurn(0);
         console.log("This is turn of player 0");
@@ -134,11 +158,20 @@ exports.Game.prototype = {
         this.startTimer();
     },
 
+    /**
+     * Stop playing
+     * 
+     */
     stopPlaying: function() {
         clearInterval(this.interval);
         setTurn(-1);
     },
 
+    /**
+     * Get a player by attribut "id"
+     * @param id Id of player
+     * @return player
+     */
     getPlayerById: function(id) {
         var player = null;
         for (var i=0 ; i<this.players.length ; i++) {
@@ -149,8 +182,13 @@ exports.Game.prototype = {
         }
 
         return player;
-    }
+    },
 
+    /**
+     * Get a unit by attribut "id" in game
+     * @param id Id of unit
+     * @return unit
+     */
     getUnitById: function(id) {
         for(var i=0; i<this.players.length; i++) {
             for(var j=0; j<this.players[i].units.length; j++) {
@@ -163,6 +201,12 @@ exports.Game.prototype = {
         return null;
     },
 
+    /**
+     * Get a cell by coodinates x and y
+     * @param x Coordinate x of this cell
+     * @param y Coordinate y of this cell
+     * @return cell
+     */
     getCell: function(x, y) {
         var cell = null;
         for (var i=0 ; i<this.map.cells.length ; i++) {
