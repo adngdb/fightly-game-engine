@@ -217,6 +217,6 @@ exports.Game.prototype = {
             }
         }
 
-        return player;
+        return cell;
     },
 };
