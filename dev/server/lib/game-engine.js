@@ -59,6 +59,10 @@ exports.GameEngine.prototype = {
     init: function() {
         util.log("GameEngine: init()");
 
+        // Observer pattern
+        var legacy = new legacy_.Legacy();
+        legacy.inherits(new observer_.Observer(), this);
+
         this.comManager = new comManager_.ComManager(this);
         this.messageBuilder = new messageBuilder_.MessageBuilder();
         this.messageParser = new messageParser_.MessageParser(this);
@@ -158,12 +162,12 @@ exports.GameEngine.prototype = {
      * @return this
      */
     trigger: function(event) {
-    if(this._handlers[event]) {
+        if (this._handlers[event]) {
             this._handlers[event].apply(this, arguments);
-    }
-    else {
-        log("Event: " + event + " is unregistered.");
-    }
+        }
+        else {
+            util.log("Event: " + event + " is unregistered.");
+        }
     },
 
     /**
@@ -173,12 +177,12 @@ exports.GameEngine.prototype = {
      * @return this
      */
     addListener: function(event, callback) {
-    if(typeof(callback) == "function"){
+        if (typeof(callback) == "function"){
             this._handlers[event] = callback;
-    }
-    else {
-        log("Need a function to listen this event");
-    }
+        }
+        else {
+            util.log("Need a function to bind this event");
+        }
 
         return this;
     },
@@ -233,6 +237,3 @@ exports.GameEngine.prototype = {
     },
 
 };
-
-// Inheritance
-new legacy_.Legacy().inherits(observer_.Observer, exports.GameEngine);

@@ -52,6 +52,7 @@ Displayer.prototype = {
         else {
             this.displayState();
         }
+        this.eventManager.bindAll();
     },
 
     displayState: function() {

@@ -54,7 +54,8 @@ GameDisplayer.prototype = {
 
     display: function() {
         this.displayMap()
-            .displayUnits();
+            .displayUnits()
+            .displayInterface();
     },
 
     displayMap: function() {
@@ -62,7 +63,6 @@ GameDisplayer.prototype = {
         var cellClickMap = function() { return new Crafty.polygon([32,16], [64,32], [32,48], [0,32]); };
 
         for (var y = 0; y < map.height; y++) {
-            alert(y);
             for (var x = 0; x < map.width; x++) {
                 var cell = map.cells[x][y];
                 var tile = Crafty.e('2D, DOM, clickable, ' + cell.type)
@@ -90,9 +90,14 @@ GameDisplayer.prototype = {
                 var unit = units[j];
                 var unitSprite = Crafty.e('2D, DOM, unit, clickable')
                     .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), function() { alert("i am here !"); });
-                this.iso.place(unit.cell.x, unit.cell.y, 1, unitSprite);
+                this.iso.place(0, 0, 1, unitSprite);
             }
         }
+        return this;
+    },
+
+    displayInterface: function() {
+        $("#game").append('<button id="move-test-action">Test Move Unit</button>');
     },
 
 };
