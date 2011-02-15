@@ -150,7 +150,7 @@ exports.Game.prototype = {
         }
 
         return player;
-    }
+    },
 
     getUnitById: function(id) {
         for(var i=0; i<this.players.length; i++) {
