@@ -9,6 +9,7 @@
 
 var game_ = require("./game.js"),
     legacy_ = require("../util/legacy.js"),
+    observer_ = require("../util/observer.js"),
     subject_ = require("../util/subject.js");
 
 var legacy = new legacy_.Legacy();
@@ -38,6 +39,7 @@ exports.GameFactory.prototype = {
         myGame.unitFactory = this.unitFactory;
 
         legacy.inherits(new subject_.Subject(), myGame);
+        legacy.inherits(new observer_.Observer(), myGame);
         myGame.addObserver(this.gameEngine);
 
         return myGame;
