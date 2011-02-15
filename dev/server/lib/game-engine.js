@@ -231,7 +231,7 @@ exports.GameEngine.prototype = {
             this.addGame(game);
         }
 
-        user.inGame = game.id;
+        user.game = game.id;
 
         // Sending game data to the new coming player
         var gameData = this.messageBuilder.createNewGameData(game);
