@@ -25,8 +25,6 @@ exports.Game = function() {
     this.playerFactory = null;
     this.unitFactory = null;
 
-    this.actionManager = null;
-
     // Configuration
     this.nbMaxPlayers = 3;
 
@@ -211,6 +209,14 @@ exports.Game.prototype = {
     },
 
     /**
+     * Alias for getPlayerById
+     * @see getPlayerById
+     */
+    getPlayer: function(id) {
+        return this.getPlayerById(id);
+    },
+
+    /**
      * Get a unit by attribut "id" in game
      * @param id Id of unit
      * @return unit
@@ -228,6 +234,14 @@ exports.Game.prototype = {
     },
 
     /**
+     * Alias for getUnitById
+     * @see getUnitById
+     */
+    getUnit: function(id) {
+        return this.getUnitById(id);
+    },
+
+    /**
      * Get a cell by coodinates x and y
      * @param x Coordinate x of this cell
      * @param y Coordinate y of this cell
@@ -242,6 +256,6 @@ exports.Game.prototype = {
             }
         }
 
-        return player;
+        return cell;
     },
 };

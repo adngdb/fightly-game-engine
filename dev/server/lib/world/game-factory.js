@@ -7,8 +7,7 @@
  *
  **********************************************************************/
 
-var game_               = require("./game.js"),
-    actionManager_      = require('../rules/action-manager.js');
+var game_ = require("./game.js");
 
 exports.GameFactory = function() {
     this.playerFactory = null;
@@ -31,8 +30,6 @@ exports.GameFactory.prototype = {
         myGame.playerFactory = this.playerFactory;
         myGame.mapFactory = this.mapFactory;
         myGame.unitFactory = this.unitFactory;
-
-        myGame.actionManager = new actionManager_.ActionManager(myGame);
 
         return myGame;
     },
