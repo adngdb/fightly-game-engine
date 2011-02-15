@@ -40,6 +40,15 @@ exports.Game.prototype = {
         return pl;
     },
 
+    removePlayer: function(playerId) {
+	for (var i=0 ; i<this.players.length ; i++) {
+            if(this.players[i].id == playerId) {
+		this.players[i].play = false;
+		break;    
+	    }
+        }
+    },
+
     getPlayersIds: function() {
 
         var playersIds = [];
@@ -77,6 +86,7 @@ exports.Game.prototype = {
         player = this.players[i];
         break;
         }
+<<<<<<< HEAD
         }
 
     return player;
@@ -95,6 +105,25 @@ exports.Game.prototype = {
 
     return nextPlayer;
     }
+=======
+	
+	return player;
+    },
+
+    getNextPlayer: function(currentTurn) {
+	var nextPlayer = null;
+	do{
+	    currentTurn++;
+	    if(currentTurn >= this.nbMaxPlayers) {
+		currentTurn = 0;
+	    }
+	
+  	    nextPlayer = this.getPlayerByTurn(currentTurn);
+	}while(nextPlayer.play == false);
+
+	return nextPlayer;
+    },
+>>>>>>> 3325c352aefdf80155eae618da6079d6c31ec47a
 
     nextTurn: function() {
     var currentTurn = this.currentPlayer.turn;
@@ -104,6 +133,7 @@ exports.Game.prototype = {
     //Start timer for next player
     this.startTimer();
     },
+<<<<<<< HEAD
 
     startTimer: function() {
     this.interval = setInterval(function() {
@@ -111,6 +141,16 @@ exports.Game.prototype = {
         this.nextTurn();
     }, 5000).bind(this);
     }
+=======
+    
+    
+    startTimer: function() {
+	this.interval = setInterval(function() {
+	    clearInterval(this.interval);
+	    this.nextTurn();
+	}.bind(this), 5000);
+    },
+>>>>>>> 3325c352aefdf80155eae618da6079d6c31ec47a
 
     changeTurn: function() {
     clearInterval(this.interval);
@@ -121,8 +161,13 @@ exports.Game.prototype = {
     this.currentPlayer = this.getPlayerByTurn(0);
     console.log("This is turn of player 0");
 
+<<<<<<< HEAD
     this.startTimer();
     }
+=======
+	this.startTimer();
+    },
+>>>>>>> 3325c352aefdf80155eae618da6079d6c31ec47a
 
     stopPlaying: function() {
     clearInterval(this.interval);
@@ -136,8 +181,38 @@ exports.Game.prototype = {
         player = this.players[i];
         break;
         }
+<<<<<<< HEAD
     }
 
     return player;
     }
+=======
+	
+	return player;
+    },
+
+    getUnitById: function(id) {
+	for(var i=0; i<this.players.length; i++) {
+	    for(var j=0; j<this.players[i].units.length; j++) {
+		if(this.players[i].units[j].id == id) {
+		    return this.players[i].units[j];		        
+	    	}
+	    }
+	}
+
+	return null;
+    },
+
+    getCell: function(x, y) {
+	var cell = null;
+	for (var i=0 ; i<this.map.cells.length ; i++) {
+            if(this.map.cells[i].x == x && this.map.cells[i].y == y) {
+		cell = this.this.map.cells[i];
+		break;    
+	    }
+        }
+	
+	return player;
+    },     
+>>>>>>> 3325c352aefdf80155eae618da6079d6c31ec47a
 };

@@ -7,6 +7,12 @@
  *
  **********************************************************************/
 
+/**
+ * Class MessageBuilder
+ * Create messages to send to the server in a simple way.
+ *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr, Van-Duc Nguyen
+ */
 exports.MessageBuilder = function() {
 };
 
@@ -72,12 +78,19 @@ exports.MessageBuilder.prototype = {
     },
 
     /**
-     * Authentication
+     * Create a request message asking for the login of the client.
+     * @return JSON message to send.
      */
     createAuthenticationQuery: function() {
         return this.createQuery("login", {});
     },
 
+    /**
+     * Create a data message confirming the authentication.
+     * @param username Login used to authenticate.
+     * @param valid Boolean to say if authentication is done or not.
+     * @return JSON message to send.
+     */
     createAuthenticationData: function(username, valid) {
         var data = {};
         data.username = username;

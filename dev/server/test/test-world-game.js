@@ -67,3 +67,47 @@ exports["test-game-getPlayersIds"] = function(test) {
 
 }
 
+exports["test-game-removePlayer"] = function(test) {
+
+        var user1 = new user_.User(3,"toto");
+        var user2 = new user_.User(4,"titi");
+        var user2 = new user_.User(5,"titiyyy");
+
+		var game = gf.create(14);
+
+        var pl1 = game.addPlayer(user1);
+        var pl2 = game.addPlayer(user2);
+
+		game.removePlayer(4);		
+		
+		test.equal(game.players[1].id , 5);
+		test.done();
+}
+
+exports["test-game-startPlaying"] = function(test) {
+
+        var user1 = new user_.User(3,"toto");
+        var user2 = new user_.User(4,"titi");
+        var user3 = new user_.User(5,"titiyyy");
+
+		var game = gf.create(14);
+
+        var pl1 = game.addPlayer(user1);
+        var pl2 = game.addPlayer(user2);
+        var pl3 = game.addPlayer(user3);
+		pl1.turn = 0;
+		pl2.turn = 1;
+		pl3.turn = 2;
+		var currentTurn = 0;
+		
+		game.startPlaying();
+		var interval = setInterval(function() {
+		    //test.equal(game.currentPlayer.turn , currentTurn);
+		    console.log("gameTurn: " + game.currentPlayer.turn + "--- currentTurn: " + currentTurn);
+		    console.log(game.currentPlayer.turn == currentTurn);
+		    currentTurn++;
+		    if(currentTurn > 2)
+				currentTurn = 0;
+		}, 5000);
+		
+}

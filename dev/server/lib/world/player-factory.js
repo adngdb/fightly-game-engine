@@ -23,7 +23,7 @@ exports.PlayerFactory.prototype = {
 
         // For testing purpose
         myPlayer.units[0] = this.unitFactory.create("alpha",myPlayer);
-
+	myPlayer.play = true;
         return myPlayer;
     },
 

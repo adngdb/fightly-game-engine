@@ -1,52 +1,97 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ *
+ **********************************************************************/
+
 
 var fs = require('fs') ;
 var sys = require('sys') ;
 
-exports.Rules = function() {
+
+/**
+ * Manage the rules
+ * @author Maxime COLIN
+ * @param Instance of the GameEngine
+ */
+exports.Rules = function(gameEngine) {
 	this.json = null ;
+	this.gameEngine = gameEngine ;
 } ;
 
 exports.Rules.prototype = {
 	
 	/**
-	 * chargement du fichier de règle
+	 * loading of the rules file
+	 * @return this
 	 */
 	load: function(filename) {
-
-		fs.readFile(
-			filename, 
-			function (err, data) {
-				if (err) { sys.log('erreur') ; throw err ; }
-					this.json = JSON.parse(data) ;
-					sys.log(typeof this.json) ;
-
-					for(var property in this.json.rules) {
-						sys.log("Création de la règle : "+property) ;
-					}
-
-			}.bind(this)
-		);
-
+		var data = fs.readFileSync(filename) ;
+		this.json = JSON.parse(data) ;
+		for(var property in this.json.rules) {
+			sys.log(" load --> rule : " + property) ;
+		}
+		return this ;
 	},
 
-
-	
-
 	/**
-	 * exécuter une action
+	 * configure the factories
 	 */
-	execute: function(action,params) {
+	configureFactories: function() {
 
-		for(var rules in this.json.rules) {
-			
-		}
-
-		if(params == null)
-			sys.log("no params") ;
-
-		sys.log(action) ;
+		//TODO
 
 	}
+
+
+/*
+,
+
+	execute: function(action) {
+		
+		//pour chaque règle
+		for(var rule in this.json.rules) {
+			
+			//si elle correspond à notre action
+			if(rule == action) {
+
+				if( this.validateRule(rule) ) {
+					this.executeRule(rule) ;
+					return true ;
+				}
+
+			}
+		}
+
+		return false ;
+		
+	}
+
+	hasRule: function(action) {
+
+	}
+
+	validateRule: function(rule) {
+		var valid = false ;
+		for(cond in rule.if) {
+			//valid = valid && eval(cond) ;
+		}
+		return valid ;
+	}
+
+	executeRule: function(rule) {
+		for(exe in rule.do) {
+			//eval(exe) ;
+		}
+	},
+
+*/
+
+
 
 }
 

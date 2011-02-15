@@ -9,8 +9,9 @@
 
 /**
  * Class MessageBuilder
+ * Create messages to send to the server in a simple way.
  *
- * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @author Adrian Gaudebert - adrian@gaudebert.fr, Van-Duc Nguyen
  */
 MessageBuilder = function() {
 };
@@ -68,6 +69,12 @@ MessageBuilder.prototype = {
         return this.createMessage("action", actionData);
     },
 
+    /**
+     * Create a login message to authenticate on the server.
+     * @param login Login of the user.
+     * @param password Password of the user.
+     * @return JSON message to send.
+     */
     createAuthenticationLogin: function(login, password) {
         var data = {};
         if (password != null) {
@@ -76,6 +83,11 @@ MessageBuilder.prototype = {
         return this.createLogin(login, data);
     },
 
+    /**
+     * Create an action message to join a game.
+     * @param gameId Identifier of the game to join.
+     * @return JSON message to send.
+     */
     createJoinGameAction: function(gameId) {
         var data = {};
         data.game_id = gameId;
@@ -92,8 +104,8 @@ MessageBuilder.prototype = {
     createMoveUnitAction: function(unitId, toX, toY) {
         var data = {};
         data.unit_id = unitId;
-	data.to_x = toX;
-	data.to_y = toY;
+    data.to_x = toX;
+    data.to_y = toY;
 
         return this.createAction("move-unit", data);
     },
@@ -107,7 +119,7 @@ MessageBuilder.prototype = {
     createAttackUnitAction: function(AttackerId, VictimId) {
         var data = {};
         data.attacker_id = AttackerId;
-	data.victim_id = VictimId;
+    data.victim_id = VictimId;
 
         return this.createAction("attack-unit", data);
     },
@@ -116,7 +128,7 @@ MessageBuilder.prototype = {
      * Create an action message: abandon.
      * @return JSON message to send.
      */
-    createAbandonAction: function() {        
+    createAbandonAction: function() {
         return this.createAction("abandon");
     },
 
@@ -124,7 +136,7 @@ MessageBuilder.prototype = {
      * Create an action message: end turn.
      * @return JSON message to send.
      */
-    createEndTurnAction: function() {        
+    createEndTurnAction: function() {
         return this.createAction("end-turn");
     },
 
