@@ -252,4 +252,8 @@ exports.GameEngine.prototype = {
         am.moveUnit(user.id, unitId, toX, toY);
     },
 
+    onUpdate: function(context) {
+        this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
+    },
+
 };
