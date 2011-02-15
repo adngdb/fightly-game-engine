@@ -231,7 +231,7 @@ exports.GameEngine.prototype = {
             this.addGame(game);
         }
 
-        user.game = game.id;
+        user.inGame = game.id;
 
         // Sending game data to the new coming player
         var gameData = this.messageBuilder.createNewGameData(game);
@@ -246,7 +246,7 @@ exports.GameEngine.prototype = {
             util.log("User is not in game, cannot call onMoveUnit");
             return this;
         }
-        var game = this.getGame(user.game);
+        var game = this.getGame(user.inGame);
 
         var am = new actionManager_.ActionManager(game);
         am.moveUnit(user.id, unitId, toX, toY);
