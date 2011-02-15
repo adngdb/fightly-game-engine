@@ -18,7 +18,7 @@ var util                = require('util'),
     messageBuilder_     = require('./network/message-builder.js'),
     messageParser_      = require('./network/message-parser.js'),
 
-    actionManager_      = require('../rules/action-manager.js'),
+    actionManager_      = require('./rules/action-manager.js'),
 
     gameFactory_        = require('./world/game-factory.js'),
     playerFactory_      = require('./world/player-factory.js'),
@@ -241,7 +241,7 @@ exports.GameEngine.prototype = {
     },
 
     onMoveUnit: function(unitId, toX, toY, clientId) {
-        var user = this.getUser(clientid);
+        var user = this.getUser(clientId);
         if (user.game == null) {
             util.log("User is not in game, cannot call onMoveUnit");
             return this;
