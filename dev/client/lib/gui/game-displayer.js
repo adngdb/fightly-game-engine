@@ -52,8 +52,14 @@ GameDisplayer.prototype = {
         });
     },
 
+    reset: function() {
+        Crafty("2D").destroy();
+        return this;
+    },
+
     display: function() {
-        this.displayMap()
+        this.reset()
+            .displayMap()
             .displayUnits()
             .displayInterface();
     },
@@ -73,12 +79,12 @@ GameDisplayer.prototype = {
         }
         return this;
     },
-    
-    // unitCallback : 
+
+    // unitCallback :
     unitCallback: function() {
-    	var uSprite = this;
-    	if(uSprite.alpha == 0.5){ uSprite.alpha = 1;  };
-    	if(uSprite.alpha == 1  ){ uSprite.alpha = 0.5;};
+        var uSprite = this;
+        if(uSprite.alpha == 0.5){ uSprite.alpha = 1;  };
+        if(uSprite.alpha == 1  ){ uSprite.alpha = 0.5;};
     },
 
     displayUnits: function() {

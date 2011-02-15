@@ -55,6 +55,11 @@ Displayer.prototype = {
         this.eventManager.bindAll();
     },
 
+    reset: function() {
+        this.gameElt.empty();
+        return this;
+    },
+
     displayState: function() {
         // TODO
     },
@@ -63,8 +68,10 @@ Displayer.prototype = {
         var state = this.world.game.state;
         var players = this.world.game.players;
 
+        this.reset();
+
         if (state == "waiting") {
-            this.gameElt.empty().append('<h1>Waiting for opponents...</h1>');
+            this.gameElt.append('<h1>Waiting for opponents...</h1>');
         }
         else {
             if (!this.inGame) {
