@@ -1,5 +1,18 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ * @author Maxime COLIN
+ *
+ **********************************************************************/
+
+
 /**
- * Gère les action
+ * Manage the actions
+ * @author Maxime COLIN
  * @param Game game instance de la partie
  */
 exports.ActionManager = function(game) {
@@ -9,49 +22,71 @@ exports.ActionManager = function(game) {
 exports.ActionManager.prototype = {
 
 	/**
-	 * déplacer une unité sur une case
-	 * @param string unitId identifiant de l'unité
-	 * @param int cellX coordonnée x de la case
-	 * @param int cellY coordonnée y de la case
-	 * @return true si l'action à réussit, false sinon
+	 * Move a unit to a cell
+	 * @param string unitId id of the unit
+	 * @param int cellX x coord of the cell
+	 * @param int cellY y coord of the cell
+	 * @return true if the action succeed, false otherwise
 	 */	
 	moveUnit: function(playerId,unitId,cellX,cellY) {
 
 		var unit = this.game.getUnit(unitId) ;
 		var cell = this.game.map.getCell(cellX,cellY) ;
+		var player = this.game.getPlayer(playerId) ;
 
-		if( !this.canPlay(playerId) )
+		//check if the player can play
+		if( !this.canPlay(player) )
 			return false ;
 
+		//check if the player owns the unit
+		if( !player.ownUnit(unitId) )
+			return false ;
+
+		//check the distance
 		if( this.game.map.getDistanceBetween(unit.cell, cell) > unit.movement )
 			return false ;
 
-		unit.moveToCell(cell) ;
+		//move the unit
+		unit.setCell(cell) ;
+		unit.movement-- ;
+
 		return true ;
 	},
 
 
 	/**
-	 * attaquer une cible avec une unité
-	 * @param string unitId identifiant de l'unité
-	 * @param string targetId identifiant de la cible
-	 * @return true si l'action à réussit, false sinon
+	 * Attack a target with a unit
+	 * @param string playerId id of the player
+	 * @param string unitId id of the unit
+	 * @param string targetId id of the target
+	 * @return true if the action succeed, false otherwise
 	 */	
 	attackUnit: function(playerId,unitId,targetId) {
 
 		var unit = this.game.getUnit(unitId) ;
 		var target = this.game.getUnit(targetId) ;
+		var player = this.game.getPlayer(playerId) ;
 
+		//check if the player can play
 		if( !this.canPlay(playerId) )
 			return false ;
 		
+		//check if the player owns the units
+		if( !player.ownUnit(unitId) )
+			return false
+
+		//check if the player doesn't own the target
+		if( player.ownUnit(targetUnit) )
+			return false ;
+
+		//check the distance
 		if( this.game.map.getDistanceBetween(unit.cell, target.cell) > unit.reach )
 			return false ;
 
-		//l'unité attaque
+		//attack
 		unit.attack(target) ;
 		
-		//riposte de la cible si à porter
+		//riposte
 		if( this.game.map.getDistanceBetween(target.cell, unit.cell) <= target.reach )
 			target.attack(unit) ;
 
@@ -60,14 +95,13 @@ exports.ActionManager.prototype = {
 
 
 	/**
-	 * vérifie que le joueur peut jouer ?
-	 * que c'est sont tour, etc
+	 * check if the player can play
+	 * @return true if he can play, false otherwise
 	 */
-	canPlay: function(playerId) {
-
-		var player = this.game.getPlayer(playerId) ;
+	canPlay: function(player) {
 
 		//TODO
+		//return player.canPlay() ;
 
 		return false ;
 	}

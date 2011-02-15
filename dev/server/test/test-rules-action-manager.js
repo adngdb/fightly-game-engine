@@ -1,3 +1,15 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ * @author Maxime COLIN
+ *
+ **********************************************************************/
+
+
 var sys = require('sys') ;
 var ActionManager_ = require('lib/rules/action-manager.js') ;
 var GameFactory_ = require('lib/world/game-factory.js') ;

@@ -13,7 +13,7 @@ exports.Legacy = function() {
 
 exports.Legacy.prototype = {
 
-   inherits : function(base, extension) {
+    inherits : function(base, extension) {
         for (var property in base) {
 
             try {

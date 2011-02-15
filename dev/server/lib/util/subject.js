@@ -7,7 +7,7 @@
  *
  **********************************************************************/
 
-var arrayList_ = require("./arrayList.js");
+var arrayList_ = require("./array-list.js");
 
 exports.Subject = function() {
 
