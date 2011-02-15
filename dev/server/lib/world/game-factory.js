@@ -15,7 +15,8 @@ exports.GameFactory = function() {
     this.cellFactory = null;
     this.unitFactory = null;
     this.config = {
-        "nbMaxPlayer": 2,
+        "nbMaxPlayers": 2,
+        "nbMaxTurns" : 200
     };
 }
 
@@ -36,7 +37,8 @@ exports.GameFactory.prototype = {
 
     setConfig : function(nbMaxPlayer) {
 
-        this.config.nbMaxPlayer = nbMaxPlayer;
+        this.config.nbMaxPlayers = nbMaxPlayers;
+        this.config.nbMaxTurns = nbMaxTurns;
 
     },
 

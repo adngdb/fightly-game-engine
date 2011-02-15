@@ -8,9 +8,9 @@
  **********************************************************************/
 
 /**
- * Class Game
+ * Class Unit
  * @authors Youness HAMRI - youness.hamri@gmail.com
- * */
+ **/
 
 exports.Unit = function() {
 
