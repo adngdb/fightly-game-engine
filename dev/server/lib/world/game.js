@@ -9,6 +9,11 @@
 
 var map_= require("./map.js");
 
+/**
+ * Class Game
+ * @authors Youness HAMRI - youness.hamri@gmail.com / duc ....
+ * */
+
 exports.Game = function() {
 
     this.id = null;
@@ -31,15 +36,22 @@ exports.Game = function() {
 
 exports.Game.prototype = {
 
-    //prend user en paramètre et instancie un player
-
+    /**
+     * Adds a new player to current game from an user .
+     * @param user.
+     * @return player.
+     */
     addPlayer: function(user) {
-        var pl = this.playerFactory.createFromUser(user);
-        this.players.push(pl);
+        var player = this.playerFactory.createFromUser(user);
+        this.players.push(player);
         this.checkState();
-        return pl;
+        return player;
     },
 
+    /**
+     * Set to false a play attribute of player.
+     * @param PlayerId (a player identity)
+     */
     removePlayer: function(playerId) {
         for (var i=0 ; i<this.players.length ; i++) {
             if(this.players[i].id == playerId) {
@@ -49,6 +61,10 @@ exports.Game.prototype = {
         }
     },
 
+    /**
+     * Get a game list of players identities.
+     * @return PlayersIds
+     */
     getPlayersIds: function() {
 
         var playersIds = [];
@@ -58,6 +74,10 @@ exports.Game.prototype = {
         return playersIds;
     },
 
+    /**
+     * Launchs the game when a maximum number of players is reached
+     * @return this
+     */
     checkState: function() {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
@@ -65,6 +85,10 @@ exports.Game.prototype = {
         return this;
     },
 
+    /**
+     * Downloads one map from a data map file
+     * @param file
+     */
     downloadMapFromFile: function(file) {
         this.map = mapFactory.createFromFile(file);
     },
@@ -78,8 +102,12 @@ exports.Game.prototype = {
         };
     },
 
-    //play in turn
-    getPlayerByTurn: function(turn) {
+    /**
+     * Returns the player who is playing
+     * @param turn
+     * @return player
+     */
+     getPlayerByTurn: function(turn) {
         var player = null;
         for (var i=0 ; i<this.players.length ; i++) {
             if(this.players[i].turn == turn) {
@@ -89,8 +117,13 @@ exports.Game.prototype = {
         }
 
         return player;
-    }
+    },
 
+    /**
+     * returns the next player who waits his turn
+     * @param currentTurn
+     * @return nextPlayer
+     */
     getNextPlayer: function(currentTurn) {
         var nextPlayer = null;
         do {
