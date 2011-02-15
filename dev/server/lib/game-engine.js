@@ -249,6 +249,7 @@ exports.GameEngine.prototype = {
         var game = this.getGame(user.game);
 
         var am = new actionManager_.ActionManager(game);
+        am.moveUnit(user.id, unitId, toX, toY);
     },
 
 };
