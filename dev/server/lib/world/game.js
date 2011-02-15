@@ -81,6 +81,7 @@ exports.Game.prototype = {
     checkState: function() {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
+            this.notify({game: this});
         }
         return this;
     },
@@ -259,4 +260,10 @@ exports.Game.prototype = {
 
         return cell;
     },
+
+    update: function(context) {
+        context.game = this;
+        this.notify(context);
+    },
+
 };
