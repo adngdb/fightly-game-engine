@@ -42,6 +42,7 @@ exports.Game.prototype = {
      */
     addPlayer: function(user) {
         var player = this.playerFactory.createFromUser(user);
+        player.addObserver(this);
         this.players.push(player);
         this.checkState();
         return player;
