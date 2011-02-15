@@ -18,6 +18,8 @@ var util                = require('util'),
     messageBuilder_     = require('./network/message-builder.js'),
     messageParser_      = require('./network/message-parser.js'),
 
+    actionManager_      = require('../rules/action-manager.js'),
+
     gameFactory_        = require('./world/game-factory.js'),
     playerFactory_      = require('./world/player-factory.js'),
     mapFactory_         = require('./world/map-factory.js'),
@@ -229,11 +231,24 @@ exports.GameEngine.prototype = {
             this.addGame(game);
         }
 
+        user.inGame = game.id;
+
         // Sending game data to the new coming player
         var gameData = this.messageBuilder.createNewGameData(game);
         this.sendUser(user, gameData);
 
         return this;
+    },
+
+    onMoveUnit: function(unitId, toX, toY, clientId) {
+        var user = this.getUser(clientid);
+        if (user.game == null) {
+            util.log("User is not in game, cannot call onMoveUnit");
+            return this;
+        }
+        var game = this.getGame(user.game);
+
+        var am = new actionManager_.ActionManager(game);
     },
 
 };
