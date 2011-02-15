@@ -31,7 +31,7 @@ exports.PlayerFactory.prototype = {
         myPlayer.unitFactory = this.unitFactory;
 
         // For testing purpose
-        myPlayer.units[0] = this.unitFactory.create("alpha",myPlayer);
+        myPlayer.addUnit("choucroute");
 
         legacy.inherits(new subject_.Subject(), myPlayer);
 

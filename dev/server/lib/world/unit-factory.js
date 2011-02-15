@@ -19,6 +19,9 @@ exports.UnitFactory = function(gameEngine) {
 
     this.currentId = 0;
     this.types = [];
+
+    // For testing purpose only
+    this.addUnitType("choucroute", 100, 10, 10, 3, 2, 1, []);
 }
 
 exports.UnitFactory.prototype = {
@@ -54,7 +57,6 @@ exports.UnitFactory.prototype = {
         //myUnit.cell = owner.turn...;
 
         legacy.inherits(new subject_.Subject(), myUnit);
-        myUnit.addObserver(this.gameEngine);
 
         this.currentId ++;
         return myUnit;

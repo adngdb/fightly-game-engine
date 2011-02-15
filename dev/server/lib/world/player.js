@@ -21,9 +21,11 @@ exports.Player = function() {
 exports.Player.prototype = {
 
     addUnit: function(type) {
-        var unit = this.unitFactory.create(type, this);
+        var unit = this.unitFactory.create(type, this, null);
         unit.addObserver(this);
         this.units.push(unit);
+
+        this.notify({object: "Player", modified: "units", player: this});
 
         return unit;
     },
@@ -35,6 +37,11 @@ exports.Player.prototype = {
             "turn": this.turn,
             "units": this.units,
         };
+    },
+
+    onUpdate: function(context) {
+        context.player = this;
+        this.notify(context);
     },
 
 };
