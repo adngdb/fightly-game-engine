@@ -261,7 +261,7 @@ exports.Game.prototype = {
         return cell;
     },
 
-    update: function(context) {
+    onUpdate: function(context) {
         context.game = this;
         this.notify(context);
     },
