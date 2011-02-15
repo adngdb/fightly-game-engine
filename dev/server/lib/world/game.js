@@ -20,8 +20,6 @@ exports.Game = function() {
     this.playerFactory = null;
     this.unitFactory = null;
 
-    this.actionManager = null;
-
     // Configuration
     this.nbMaxPlayers = 2;
 
