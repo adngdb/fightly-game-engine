@@ -52,7 +52,7 @@ exports.Unit.prototype = {
             i++;
         }
         if ( i == this.properties.length ) {
-            console.log("WARNING: aucune propriete à supprimer ");
+            console.log("WARNING: aucune propriété à supprimer ");
         }
         else {
              this.properties.splice(i,1);
@@ -81,8 +81,8 @@ exports.Unit.prototype = {
     },
 
     /**
-     * Moves the unit to another cell
-     * @param cell.
+     * Moves the unit to another cell,
+     * @param cell. a new cell that will contains the unit.
      */
     moveToCell : function(cell) {
 
@@ -92,7 +92,7 @@ exports.Unit.prototype = {
 
     /**
      * Transform the unit attributs to a JSON string
-     * @return data.
+     * @return data, contains the unit attributs.
      */
     toJSON : function() {
 
