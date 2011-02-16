@@ -7,7 +7,8 @@
  *
  **********************************************************************/
 
-var map_= require("./map.js");
+var util = require("util"),
+    map_ = require("./map.js");
 
 /**
  * Class Game
@@ -47,6 +48,7 @@ exports.Game.prototype = {
     addPlayer: function(user) {
         var player = this.playerFactory.createFromUser(user);
         player.startPoint = this.map.getStartPoints().shift();
+        util.log(player.startPoint);
         player.addObserver(this);
         this.players.push(player);
         this.checkState();
@@ -266,15 +268,7 @@ exports.Game.prototype = {
      * @return cell
      */
     getCell: function(x, y) {
-        var cell = null;
-        for (var i=0 ; i<this.map.cells.length ; i++) {
-            if(this.map.cells[i].x == x && this.map.cells[i].y == y) {
-                cell = this.this.map.cells[i];
-                break;
-            }
-        }
-
-        return cell;
+        return this.map.getCell(x, y);
     },
 
     onUpdate: function(context) {
