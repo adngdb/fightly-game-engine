@@ -46,6 +46,7 @@ exports.Game.prototype = {
      */
     addPlayer: function(user) {
         var player = this.playerFactory.createFromUser(user);
+        player.startPoint = this.map.getStartPoints().shift();
         player.addObserver(this);
         this.players.push(player);
         this.checkState();
@@ -150,7 +151,7 @@ exports.Game.prototype = {
     /**
      * Change turn to the next player (according to Timer)
      */
-    nextTurn: function() {        
+    nextTurn: function() {
         var nextPlayer = this.getNextPlayer(this.currentPlayer.turn);
         if(nextPlayer.turn <= this.currentPlayer.turn) {
             this.nbPlayedTurns++;
@@ -206,7 +207,7 @@ exports.Game.prototype = {
         clearInterval(this.interval);
         this.currentPlayer = null;
     },
-    
+
 
     /**
      * Get a player by attribut "id"
