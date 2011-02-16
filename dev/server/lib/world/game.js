@@ -11,7 +11,7 @@ var map_= require("./map.js");
 
 /**
  * Class Game
- * @authors Youness HAMRI - youness.hamri@gmail.com / duc ....
+ * @authors Youness HAMRI - youness.hamri@gmail.com / Van Duc NGUYEN - ducnguyen272@yahoo.com
  * */
 
 exports.Game = function() {
@@ -29,6 +29,7 @@ exports.Game = function() {
     this.nbMaxPlayers = -1;
     this.nbMaxTurns = -1;
     this.turnDuration = -1;
+
     //play in turn
     this.currentPlayer = null;
     this.interval = null;
@@ -156,12 +157,13 @@ exports.Game.prototype = {
 
     /**
      * Start Timer for playing in turn
+     * (in miliseconds)
      */
     startTimer: function() {
         this.interval = setInterval(function() {
             this.nextTurn();
             clearInterval(this.interval);
-        }.bind(this), 5000);
+        }.bind(this), this.turnDuration * 1000);
     },
 
     /**
