@@ -7,7 +7,8 @@
  *
  **********************************************************************/
 
-var unit_ = require("./unit.js"),
+var util = require("util"),
+    unit_ = require("./unit.js"),
     legacy_ = require("../util/legacy.js"),
     subject_ = require("../util/subject.js");
 
@@ -37,6 +38,8 @@ exports.UnitFactory.prototype = {
      * @return myUnit: the created unit.
      */
     create: function(type, owner, cell) {
+
+        util.log("UnitFactory.create: cell=" + cell);
 
         var myUnit = new unit_.Unit();
 
