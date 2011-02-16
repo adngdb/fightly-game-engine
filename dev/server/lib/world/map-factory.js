@@ -50,9 +50,7 @@ exports.MapFactory.prototype = {
 
         for (var i = 0; i < mapObject.nbMaxPlayers ; i++) {
                 var startPoint = mapObject.startPoints[i];
-                myMap.startPoints[i].type = startPoint.type;
-                myMap.startPoints[i].x = startPoint.x;
-                myMap.startPoints[i].y = startPoint.y;
+                myMap.startPoints[i] = {x: startPoint.x, y: startPoint.y};
         }
 
 
