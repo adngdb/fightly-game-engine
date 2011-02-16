@@ -48,7 +48,7 @@ GameDisplayer.prototype = {
 
         // Unit sprite
         Crafty.sprite(this.spriteSize, this.unitSprite, {
-            unit: [0, 0, 1, 1],
+            choucroute: [0, 0, 1, 1],
         });
     },
 
@@ -96,7 +96,8 @@ GameDisplayer.prototype = {
 
             for (; j < ul; j++) {
                 var unit = units[j];
-                var unitSprite = Crafty.e('2D, DOM, unit, clickable')
+                var unitSprite = Crafty.e('2D, DOM, clickable, unit, ' + unit.type)
+                    .unit(unit.id, this.eventManager)
                     .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), this.eventManager.onUnitClick);
 
                 //this.iso.place(unit.cell.x, unit.cell.y, 1, unitSprite);
