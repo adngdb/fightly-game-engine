@@ -14,6 +14,7 @@ exports.Player = function() {
     this.units = [];
 
     this.play = false;
+    this.startPoint = null;
 
     this.unitFactory = null;
 };
@@ -21,7 +22,7 @@ exports.Player = function() {
 exports.Player.prototype = {
 
     addUnit: function(type) {
-        var unit = this.unitFactory.create(type, this, null);
+        var unit = this.unitFactory.create(type, this, this.startPoint);
         unit.addObserver(this);
         this.units.push(unit);
 
