@@ -40,8 +40,7 @@ exports.Map.prototype = {
     },
 
     getStartPoints : function() {
-
-            return this.startPoints;
+        return this.startPoints;
     },
 
     /**
