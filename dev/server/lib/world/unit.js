@@ -114,6 +114,18 @@ exports.Unit.prototype = {
 
         return data;
     },
+
+    setCell: function(cell) {
+	this.cell = cell;
+    },
+
+    setHealth: function(health) {
+	this.health = health;
+    },
+
+    setMovement: function(movement) {
+	this.movement = movement;
+    },
 }
 
 
