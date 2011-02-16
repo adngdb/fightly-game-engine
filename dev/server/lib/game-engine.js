@@ -19,12 +19,14 @@ var util                = require('util'),
     messageParser_      = require('./network/message-parser.js'),
 
     actionManager_      = require('./rules/action-manager.js'),
+	rules_				= require('./rules/rules.js'),
 
     gameFactory_        = require('./world/game-factory.js'),
     playerFactory_      = require('./world/player-factory.js'),
     mapFactory_         = require('./world/map-factory.js'),
     cellFactory_        = require('./world/cell-factory.js'),
     unitFactory_        = require('./world/unit-factory.js');
+
 
 /**
  * Class GameEngine
@@ -92,8 +94,19 @@ exports.GameEngine.prototype = {
         this.playerFactory.unitFactory = this.unitFactory;
         this.mapFactory.cellFactory = this.cellFactory;
 
+		this._configureFactories() ;
+
         return this;
     },
+
+
+	_configureFactories: function() {
+		var rules = new _rules.Rules(this) ;
+		rules.load('rules.json') ;
+		rules.configureFactories() ;
+		
+		return this ;
+	},
 
     /**
      * Start the GameEngine.
