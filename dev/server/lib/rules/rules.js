@@ -38,12 +38,31 @@ exports.Rules.prototype = {
 		return this ;
 	},
 
+
 	/**
 	 * configure the factories
 	 */
 	configureFactories: function() {
+	
+		//game-factory : set the game configuration
+		this.gameEngine.gameFactory.setConfig(
+			this.json.game.nbMaxPlayer,
+			this.json.game.nbMaxTurns,
+			this.json.game.turnDuration
+		) ;
 
-		//TODO
+		//unit-factory : add the unit type
+		for(unit in this.json.units) {
+			this.gameEngine.unitFactory.addUnitType.(unit,unit.health,unit.attack,unit.defense,
+						unit.view,unit.movement,unit.range,unit.properties) ;
+		}
+
+		//map-factory : nothing to do
+
+		//cell-factory : nothing to do
+
+		//player-factory : nothing to do
+
 
 	}
 

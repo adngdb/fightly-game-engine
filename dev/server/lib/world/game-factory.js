@@ -48,7 +48,14 @@ exports.GameFactory.prototype = {
         legacy.inherits(new observer_.Observer(), myGame);
         myGame.addObserver(this.gameEngine);
 
-        return myGame;
+        // test if the maximum number if players of the map is equals to the game one
+
+        if(myGame.nbMaxPlayers == myGame.map.nbMaxPlayers ) {
+            return myGame;
+        }
+        else {
+            console.log("Erreur : contradiction pour le nombre maximum de joueurs");
+        }
     },
 
     setConfig : function(nbMaxPlayers, nbMaxTurns, turnDuration) {

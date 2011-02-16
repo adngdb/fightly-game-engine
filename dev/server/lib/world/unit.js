@@ -15,17 +15,17 @@
 exports.Unit = function() {
 
     this.id = -1;
-    this.name = null;
     this.owner = null;
+    this.cell = null;
     this.type = null;
+    this.health = null;
+    this.range = null;
     this.attack = null;
     this.defense = null;
     this.view = null;
     this.movement = null;
     this.properties = [];
-    this.cell = null;
-    this.health = null;
-    this.range = null;
+
 }
 
 exports.Unit.prototype = {
@@ -99,36 +99,58 @@ exports.Unit.prototype = {
 
         var data = {
             "id" : this.id ,
-            "name": this.name,
             "owner": this.owner.id,
+            "cell" : this.cell,
             "type" : this.type,
+            "health" : this.health,
+            "range" : this.range,
             "attack" :this.attack,
             "defense": this.defense,
             "view" : this.view,
             "movement" : this.movement,
-            "properties": this.properties,
-            "cell" : this.cell,
-            "health" : this.health,
-            "range" : this.range,
+            "properties": this.properties
         }
 
         return data;
     },
 
-    setCell: function(cell) {
-	this.cell = cell;
+    setCell : function(cell) {
+        this.cell = cell;
+        this.notify({object: "Unit", modified: "cell", unit: this});
     },
 
-    setHealth: function(health) {
-	this.health = health;
+    setHealth : function(health) {
+        this.health = health;
+        this.notify({object: "Unit", modified: "health", unit: this});
     },
 
-    setMovement: function(movement) {
-	this.movement = movement;
+    setView : function(view) {
+        this.view = view;
+        this.notify({object: "Unit", modified: "view", unit: this});
     },
+
+    setMovement : function(movement) {
+        this.movement = movement;
+        this.notify({object: "Unit", modified: "movement", unit: this});
+
+    },
+
+    setRange : function(range) {
+        this.range = range;
+        this.notify({object: "Unit", modified: "range", unit: this});
+    },
+
+    setDefense : function(defense) {
+        this.defense = defense;
+        this.notify({object: "Unit", modified: "defense", unit: this});
+    },
+
+    setAttack : function(attack) {
+        this.attack = attack;
+        this.notify({object: "Unit", modified: "attack", unit: this});
+    },
+
 }
-
-
 
 
 

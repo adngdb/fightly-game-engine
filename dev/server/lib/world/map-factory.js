@@ -43,8 +43,16 @@ exports.MapFactory.prototype = {
         var myMap = new map_.Map();
         var file_ = fs.readFileSync(file,"utf8");
         var mapObject = JSON.parse(file_);
+
         myMap.width = mapObject.width;
         myMap.height = mapObject.height;
+        myMap.nbMaxPlayers = mapObject.nbMaxPlayers;
+
+        for (var i = 0; i < mapObject.nbMaxPlayers ; i++) {
+                var startPoint = mapObject.startPoints[i];
+                myMap.startPoints[i] = {x: startPoint.x, y: startPoint.y};
+        }
+
 
         for (var i = 0; i < myMap.width; i++) {
             myMap.cells[i] = [];
@@ -55,4 +63,6 @@ exports.MapFactory.prototype = {
         }
         return myMap;
     },
+
+
 }
