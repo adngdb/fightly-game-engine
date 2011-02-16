@@ -115,15 +115,15 @@ exports.Unit.prototype = {
         return data;
     },
 
-    setCell(cell) {
+    setCell: function(cell) {
 	this.cell = cell;
     },
 
-    setHealth(health) {
+    setHealth: function(health) {
 	this.health = health;
     },
 
-    setMovement(movement) {
+    setMovement: function(movement) {
 	this.movement = movement;
     },
 }
