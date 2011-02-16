@@ -23,4 +23,41 @@ EventManager.prototype = {
         return this;
     },
 
+    select: function(item) {
+        this.selected = item;
+        return this;
+    },
+
+
+    deselect: function() {
+        this.selected = null;
+        return this;
+    },
+
+
+    isUnitSelected: function() {
+        if (this.selected == null) {
+            return false;
+        }
+
+        return true;
+    },
+
+    onCellClick: function() {
+        //~ console.log("onCellClick: arguments = " + arguments[0]);
+        //~ console.log("onCellClick: cell = " + this.cell.x);
+        var em = this.cell.eventManager;
+
+        if (em.isUnitSelected()) {
+            var msg = em.messageBuilder.createMoveUnitAction( em.selected.id, this.cell.x, this.cell.y );
+            em.comManager.send( msg );
+            em.deselect();
+        }
+    },
+
+    onUnitClick: function() {
+        console.log("onUnitClick: arguments = " + arguments.length);
+        console.log("onUnitClick: unit = " + this);
+    },
+
 };
