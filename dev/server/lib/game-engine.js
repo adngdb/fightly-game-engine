@@ -242,7 +242,7 @@ exports.GameEngine.prototype = {
 
     onMoveUnit: function(unitId, toX, toY, clientId) {
         var user = this.getUser(clientId);
-        if (user.game == null) {
+        if (user.inGame == null) {
             util.log("User is not in game, cannot call onMoveUnit");
             return this;
         }

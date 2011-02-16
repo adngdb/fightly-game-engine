@@ -28,11 +28,13 @@ exports.Game = function() {
     // Configuration
     this.nbMaxPlayers = -1;
     this.nbMaxTurns = -1;
-    this.turnDuration = -1;
+    this.turnDuration = 5;
+
 
     //play in turn
     this.currentPlayer = null;
     this.interval = null;
+    this.nbPlayedTurns = -1;
 };
 
 exports.Game.prototype = {
@@ -146,10 +148,23 @@ exports.Game.prototype = {
     },
 
     /**
+     * Set current turn and the number of played turns
+     * @param turn Turn of the next player
+     */
+    setTurn: function(turn) {
+        if(turn <= this.currentTurn) {
+            this.nbPlayedTurns++;
+        }
+
+	this.currentTurn = turn;
+    },
+
+
+    /**
      * Change turn to the next player (according to Timer)
      */
     nextTurn: function() {
-        var currentTurn = this.currentPlayer.turn;
+        setTurn(this.currentPlayer.turn);
         this.currentPlayer = this.getNextPlayer(currentTurn);
         console.log("This is turn of player " + this.currentPlayer.turn);
 
@@ -181,6 +196,7 @@ exports.Game.prototype = {
      * Player whose turn is 0 will be the first
      */
     startPlaying: function() {
+        this.nbPlayedTurns = 0;
         this.currentPlayer = this.getPlayerByTurn(0);
         console.log("This is turn of player 0");
 
@@ -193,8 +209,9 @@ exports.Game.prototype = {
      */
     stopPlaying: function() {
         clearInterval(this.interval);
-        setTurn(-1);
+        this.currentPlayer = null;
     },
+    
 
     /**
      * Get a player by attribut "id"

@@ -114,39 +114,38 @@ exports.Unit.prototype = {
         return data;
     },
 
-
-    setCell(cell) {
+    setCell : function(cell) {
         this.cell = cell;
         this.notify({object: "Unit", modified: "cell", unit: this});
     },
 
-
-    setHealth(health) {
+    setHealth : function(health) {
         this.health = health;
         this.notify({object: "Unit", modified: "health", unit: this});
     },
 
-     setView(view) {
+    setView : function(view) {
         this.view = view;
         this.notify({object: "Unit", modified: "view", unit: this});
     },
 
-    setMovement(movement) {
+    setMovement : function(movement) {
         this.movement = movement;
         this.notify({object: "Unit", modified: "movement", unit: this});
+
     },
 
-    setRange(range) {
+    setRange : function(range) {
         this.range = range;
         this.notify({object: "Unit", modified: "range", unit: this});
     },
 
-    setDefense(defense) {
+    setDefense : function(defense) {
         this.defense = defense;
         this.notify({object: "Unit", modified: "defense", unit: this});
     },
 
-    setAttack(attack) {
+    setAttack : function(attack) {
         this.attack = attack;
         this.notify({object: "Unit", modified: "attack", unit: this});
     },

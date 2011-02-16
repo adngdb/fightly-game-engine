@@ -30,6 +30,13 @@ exports.Player.prototype = {
         return unit;
     },
 
+	hasUnit: function(unitId) {
+		for(var i=0;i<this.units.length;i++) {
+			if(this.units[i].id = unitId) 
+				return true ;
+		}
+	}
+
     toJSON : function() {
         return {
             "id": this.id,

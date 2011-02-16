@@ -39,7 +39,7 @@ exports.ActionManager.prototype = {
             return false ;
 
         //check if the player owns the unit
-        if( !player.ownUnit(unitId) )
+        if( !player.hasUnit(unitId) )
             return false ;
 
         //check the distance
@@ -72,11 +72,11 @@ exports.ActionManager.prototype = {
             return false ;
 
         //check if the player owns the units
-        if( !player.ownUnit(unitId) )
+        if( !player.hasUnit(unitId) )
             return false
 
         //check if the player doesn't own the target
-        if( player.ownUnit(targetUnit) )
+        if( player.hasUnit(targetUnit) )
             return false ;
 
         //check the distance
@@ -103,7 +103,7 @@ exports.ActionManager.prototype = {
         //TODO
         //return player.canPlay() ;
 
-        return false ;
+        return true ;
     }
 
 }
