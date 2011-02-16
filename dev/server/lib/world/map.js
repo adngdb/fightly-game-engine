@@ -43,4 +43,24 @@ exports.Map.prototype = {
 
             return this.startPoints;
     },
+
+    /**
+     * Get a cell by coodinates x and y
+     * @param x Coordinate x of this cell
+     * @param y Coordinate y of this cell
+     * @return cell
+     */
+    getCell: function(x, y) {
+        for (var i = 0; i < this.cells.length; i++) {
+            var line = this.cells[i];
+            for (var j = 0; j < line.length; j++) {
+                if(line[j].x == x && line[j].y == y) {
+                    return line[j];
+                }
+            }
+        }
+
+        return null;
+    },
+
 }
