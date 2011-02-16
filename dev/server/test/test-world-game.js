@@ -111,8 +111,7 @@ exports["test-game-startPlaying"] = function(test) {
 			if(!game.currentPlayer) {
 				test.done();
 		    } else {			
-		        test.equal(game.currentPlayer.turn , currentTurn);
-		        console.log("Round: " + game.nbPlayedTurns);
+		        test.equal(game.currentPlayer.turn , currentTurn);		        
 			}		    
 		}, game.turnDuration * 1000);
 		
