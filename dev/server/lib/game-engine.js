@@ -234,10 +234,17 @@ exports.GameEngine.prototype = {
             user = this.getUser(clientId);
 
         if (game != null) {
-            var gameIds = game.getPlayersIds();
-            var newPlayer = game.addPlayer( user );
-            var msg = this.messageBuilder.createNewPlayerData( newPlayer );
-            this.comManager.send(gameIds, msg);
+            if (game.state == "waiting") {
+                //var gameIds = game.getPlayersIds();
+                var newPlayer = game.addPlayer( user );
+                //var msg = this.messageBuilder.createNewPlayerData( newPlayer );
+                //this.comManager.send(gameIds, msg);
+            }
+            else {
+                // TODO Error message
+                //this.sendUser(user, this.messageBuilder.create...());
+                return this;
+            }
         }
         // this game doesn't exist yet: create it
         else {
