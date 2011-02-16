@@ -98,10 +98,6 @@ exports.MessageBuilder.prototype = {
         return this.createData("new", "Authentication", data);
     },
 
-    createConfirmationData: function(object_data){
-        return this.createData("new", "Player", object_data);
-    },
-
     createJoinAction: function(){
         return this.createAction();
     },
