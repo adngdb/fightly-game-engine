@@ -7,6 +7,8 @@
  *
  **********************************************************************/
 
+var util = require("util");
+
 exports.Player = function() {
     this.id = null;
     this.name = null;
@@ -22,6 +24,8 @@ exports.Player = function() {
 exports.Player.prototype = {
 
     addUnit: function(type) {
+        util.log("Player.addUnit: startPoint=" + this.startPoint);
+
         var unit = this.unitFactory.create(type, this, this.startPoint);
         unit.addObserver(this);
         this.units.push(unit);
