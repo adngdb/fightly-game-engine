@@ -16,6 +16,9 @@ exports.Observer = function() {
 exports.Observer.prototype = {
 
     update : function(context) {
+		if (!this.onUpdate) {
+			return;
+		}
         return this.onUpdate(context);
     },
 

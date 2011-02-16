@@ -23,8 +23,8 @@ exports.GameFactory = function(gameEngine) {
     this.unitFactory = null;
     this.config = {
         "nbMaxPlayers": 3,
-        "nbMaxTurns" : 200,
-        "turnDuration" : 20, //second
+        "nbMaxTurns" : 4,
+        "turnDuration" : 5, //second
     };
 }
 
