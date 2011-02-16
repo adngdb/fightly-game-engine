@@ -7,14 +7,16 @@
  *
  **********************************************************************/
 
+var util = require('util');
+
 exports.Observer = function() {
 
-}
+};
 
 exports.Observer.prototype = {
 
-    update : function() {
-        return;
+    update : function(context) {
+        return this.onUpdate(context);
     },
 
-}
+};

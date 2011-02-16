@@ -81,7 +81,7 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     _initFactories: function() {
-        this.gameFactory = new gameFactory_.GameFactory();
+        this.gameFactory = new gameFactory_.GameFactory(this);
         this.playerFactory = new playerFactory_.PlayerFactory();
         this.unitFactory = new unitFactory_.UnitFactory();
         this.mapFactory = new mapFactory_.MapFactory();
@@ -231,7 +231,7 @@ exports.GameEngine.prototype = {
             this.addGame(game);
         }
 
-        user.game = game.id;
+        user.inGame = game.id;
 
         // Sending game data to the new coming player
         var gameData = this.messageBuilder.createNewGameData(game);
@@ -246,10 +246,14 @@ exports.GameEngine.prototype = {
             util.log("User is not in game, cannot call onMoveUnit");
             return this;
         }
-        var game = this.getGame(user.game);
+        var game = this.getGame(user.inGame);
 
         var am = new actionManager_.ActionManager(game);
         am.moveUnit(user.id, unitId, toX, toY);
+    },
+
+    onUpdate: function(context) {
+        this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
     },
 
 };
