@@ -62,6 +62,7 @@ GameDisplayer.prototype = {
             .displayMap()
             .displayUnits()
             .displayInterface();
+        return this;
     },
 
     displayMap: function() {
@@ -71,20 +72,14 @@ GameDisplayer.prototype = {
         for (var y = 0; y < map.height; y++) {
             for (var x = 0; x < map.width; x++) {
                 var cell = map.cells[x][y];
-                var tile = Crafty.e('2D, DOM, clickable, ' + cell.type)
-                    .clickable(cellClickMap(), function () { alert("Hallo, ich bin "+this.x+", "+this.y); });
+                var tile = Crafty.e('2D, DOM, clickable, cell, ' + cell.type)
+                    .cell(cell.x, cell.y, this.eventManager)
+                    .clickable(cellClickMap(), this.eventManager.onCellClick);
 
                 this.iso.place(x, y, 0, tile);
             }
         }
         return this;
-    },
-
-    // unitCallback :
-    unitCallback: function() {
-        var uSprite = this;
-        if(uSprite.alpha == 0.5){ uSprite.alpha = 1;  };
-        if(uSprite.alpha == 1  ){ uSprite.alpha = 0.5;};
     },
 
     displayUnits: function() {
@@ -101,10 +96,9 @@ GameDisplayer.prototype = {
 
             for (; j < ul; j++) {
                 var unit = units[j];
-                var unitSprite = Crafty.e('2D, DOM, unit, clickable');
-                    //.clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), function () {this.alpha = 0.5;});
-                    //.clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), this.unitCallback);
-                    //alert("unit.cell.x = "+unit);
+                var unitSprite = Crafty.e('2D, DOM, unit, clickable')
+                    .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), this.eventManager.onUnitClick);
+
                 //this.iso.place(unit.cell.x, unit.cell.y, 1, unitSprite);
                 this.iso.place(0, 2, 1, unitSprite);
             }
