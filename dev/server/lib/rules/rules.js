@@ -46,7 +46,7 @@ exports.Rules.prototype = {
 
         //game-factory : set the game configuration
         this.gameEngine.gameFactory.setConfig(
-            this.json.game.nbMaxPlayer,
+            this.json.game.nbMaxPlayers,
             this.json.game.nbMaxTurns,
             this.json.game.turnDuration
         ) ;
