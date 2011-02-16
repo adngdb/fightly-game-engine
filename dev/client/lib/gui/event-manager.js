@@ -4,6 +4,8 @@ function EventManager(world, comManager, messageBuilder) {
     this.comManager = comManager;
     this.messageBuilder = messageBuilder;
 
+    this.selected = null;
+
 };
 
 EventManager.prototype = {
@@ -25,6 +27,7 @@ EventManager.prototype = {
 
     select: function(item) {
         this.selected = item;
+        console.log("Select item: "+item);
         return this;
     },
 
@@ -44,8 +47,7 @@ EventManager.prototype = {
     },
 
     onCellClick: function() {
-        //~ console.log("onCellClick: arguments = " + arguments[0]);
-        //~ console.log("onCellClick: cell = " + this.cell.x);
+        console.log("onCellClick");
         var em = this.cell.eventManager;
 
         if (em.isUnitSelected()) {
@@ -56,8 +58,10 @@ EventManager.prototype = {
     },
 
     onUnitClick: function() {
-        console.log("onUnitClick: arguments = " + arguments.length);
-        console.log("onUnitClick: unit = " + this);
+        console.log("onUnitClick");
+        var em = this.unit.eventManager;
+
+        em.select(this.unit);
     },
 
 };
