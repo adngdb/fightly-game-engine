@@ -23,11 +23,12 @@ exports.PlayerFactory = function(gameEngine) {
 
 exports.PlayerFactory.prototype = {
 
-    create: function(id, name) {
+    create: function(id, name, startPoint) {
         var myPlayer = new player_.Player();
         myPlayer.name = name;
         myPlayer.id = id;
         myPlayer.play = true;
+        myPlayer.startPoint = startPoint;
 
         myPlayer.unitFactory = this.unitFactory;
 
@@ -40,8 +41,8 @@ exports.PlayerFactory.prototype = {
         return myPlayer;
     },
 
-    createFromUser: function(user) {
-        return this.create(user.id, user.login);
+    createFromUser: function(user, startPoint) {
+        return this.create(user.id, user.login, startPoint);
     },
 
 }
