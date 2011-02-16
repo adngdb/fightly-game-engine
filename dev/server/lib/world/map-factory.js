@@ -48,11 +48,6 @@ exports.MapFactory.prototype = {
         myMap.height = mapObject.height;
         myMap.nbMaxPlayers = mapObject.nbMaxPlayers;
 
-        for (var i = 0; i < mapObject.nbMaxPlayers ; i++) {
-                var startPoint = mapObject.startPoints[i];
-                myMap.startPoints[i] = {x: startPoint.x, y: startPoint.y};
-        }
-
 
         for (var i = 0; i < myMap.width; i++) {
             myMap.cells[i] = [];
@@ -61,6 +56,12 @@ exports.MapFactory.prototype = {
                 myMap.cells[i][j] = this.cellFactory.create(cell.type, cell.x, cell.y);
             }
         }
+
+        for (var i = 0; i < mapObject.startPoints.length; i++) {
+            var startPoint = mapObject.startPoints[i];
+            myMap.startPoints[i] = myMap.getCell(startPoint.x, startPoint.y);
+        }
+
         return myMap;
     },
 
