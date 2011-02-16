@@ -12,6 +12,8 @@ exports.Map = function() {
     this.height = -1;
     this.width = -1;
     this.cells = [];
+    this.nbMaxPlayer = -1;
+    this.startPoints = [];
 }
 
 
@@ -22,7 +24,9 @@ exports.Map.prototype = {
         var data = {
             "height": this.height,
             "width" : this.width,
-            "cells" : this.cells
+            "cells" : this.cells,
+            "nbMaxPlayers" : this.nbMaxPlayers,
+            "startPoints" : this.startPoints
         };
 
         return data;
@@ -33,5 +37,10 @@ exports.Map.prototype = {
         var distance = Math.abs(cell1.x - cell2.x) + Math.abs(cell1.y - cell2.y);
         return distance;
 
-    }
+    },
+
+    getStartPoints : function() {
+
+            return this.startPoints;
+    },
 }
