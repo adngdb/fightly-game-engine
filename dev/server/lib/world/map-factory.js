@@ -22,22 +22,6 @@ exports.MapFactory.prototype = {
         return this.createFromFile('data/maps/sample-map.json');
     },
 
-    /*create: function(height,width) {
-
-        var myMap = new map_.Map();
-        myMap.height = height;
-        myMap.width = width;
-
-        for (i=0;i<width;i++) {
-            myMap.cells[i] = [];
-            for (j=0;j<height;j++) {
-                myMap.cells[i][j]= this.cellFactory.create("plains", i, j);
-            }
-        }
-
-        return myMap;
-    },*/
-
     createFromFile : function(file) {
 
         var myMap = new map_.Map();
@@ -50,7 +34,7 @@ exports.MapFactory.prototype = {
 
         for (var i = 0; i < mapObject.nbMaxPlayers ; i++) {
                 var startPoint = mapObject.startPoints[i];
-                myMap.startPoints[i] = {x: startPoint.x, y: startPoint.y};
+                myMap.startPoints[i] = {type: startPoint.type , x: startPoint.x, y: startPoint.y};
         }
 
 

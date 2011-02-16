@@ -41,6 +41,11 @@ exports.Map.prototype = {
 
     getStartPoints : function() {
 
-            return this.startPoints;
+        return this.startPoints;
     },
+
+    allocStartPoint : function() {
+        return startPoints.splice(0,1);
+    }
+
 }

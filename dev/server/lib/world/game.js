@@ -47,6 +47,7 @@ exports.Game.prototype = {
     addPlayer: function(user) {
         var player = this.playerFactory.createFromUser(user);
         player.addObserver(this);
+        player.startPoint = this.map.allocStartPoint();
         this.players.push(player);
         this.checkState();
         return player;
@@ -156,7 +157,7 @@ exports.Game.prototype = {
             this.nbPlayedTurns++;
         }
 
-	this.currentTurn = turn;
+    this.currentTurn = turn;
     },
 
 
@@ -211,7 +212,7 @@ exports.Game.prototype = {
         clearInterval(this.interval);
         this.currentPlayer = null;
     },
-    
+
 
     /**
      * Get a player by attribut "id"

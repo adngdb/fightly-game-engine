@@ -12,16 +12,16 @@ exports.Player = function() {
     this.name = null;
     this.turn = null;
     this.units = [];
-
+    this.startPoint = {type : null , x :null , y:null};
     this.play = false;
-
     this.unitFactory = null;
 };
 
 exports.Player.prototype = {
 
     addUnit: function(type) {
-        var unit = this.unitFactory.create(type, this, null);
+
+        var unit = this.unitFactory.create(type, this, startPoint);
         unit.addObserver(this);
         this.units.push(unit);
 
