@@ -100,7 +100,7 @@ GameDisplayer.prototype = {
                     .unit(unit.id, this.eventManager)
                     .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), this.eventManager.onUnitClick);
 
-                this.iso.place(unit.cell.x, unit.cell.y, 1, unitSprite);
+                this.iso.place(unit.cell.x, unit.cell.y, 0, unitSprite);
                 console.log("Unit is placed to " + unit.cell.x + ", " + unit.cell.y);
                 //this.iso.place(0, 2, 1, unitSprite);
             }
