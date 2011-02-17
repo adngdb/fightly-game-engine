@@ -3,7 +3,7 @@
     "width" : 10,
     "nbMaxPlayers" : 3,
     "startPoints" : [ {"type"   : "plains"   , "x": 0 , "y" : 0},
-                      {"type" : "plains"   , "x": 0 , "y" : 9},
+                      {"type" : "plains"   , "x": 0 , "y" : 1},
                       {"type" : "plains"   , "x": 9 , "y" : 0}
                     ],
 
