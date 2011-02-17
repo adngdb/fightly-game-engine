@@ -48,18 +48,17 @@ exports.ActionManager.prototype = {
             return false ;
         }
 
-		//check if this cell is empty
-        if( !this.game.getUnitByCell(cell) ) {
-            util.log("ActionManager.moveUnit: Error - This cell is not empty.");
-            return false ;
-        }
-		
         //check the distance
         if( this.game.map.getDistanceBetween(unit.cell, cell) > unit.movement ) {
             util.log("ActionManager.moveUnit: Error - Unit has not enough movement to go to cell.");
             return false ;
         }
-			
+
+        //check if this cell is empty
+        if( this.game.getUnitByCell(cell) != null ) {
+            util.log("ActionManager.moveUnit: Error - This cell is not empty.");
+            return false ;
+        }
 
         //move the unit
         unit.setCell(cell) ;
@@ -120,29 +119,29 @@ exports.ActionManager.prototype = {
 
         return (this.game.currentPlayer.id == player.id) ;
     },
-    
-    
+
+
     /**
      * Finish turn of current player (before time out)
      * @param playerId Id of player who wants to end his turn
      */
     endTurn: function(playerId) {
-    	var player = this.game.getPlayer(playerId) ;
+        var player = this.game.getPlayer(playerId) ;
 
         //check if the player can play
         if( !this.canPlay(player) ) {
             util.log("ActionManager.endTurn: Error - It's not your turn.");
             return false ;
         }
-        
+
         this.game.changeTurn();
-    }
-    
+    },
+
     /**
      * Abandon the game
      * @param playerId Id of player who wants to leave the game
      */
-    abandon: function(playerId) {    	
+    abandon: function(playerId) {
         this.game.removePlayer(playerId);
-    }
+    },
 }
