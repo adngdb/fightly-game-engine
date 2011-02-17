@@ -31,7 +31,7 @@ GameDisplayer.prototype = {
         var map = this.world.game.map;
 
         this.width = map.width * this.spriteSize + this.spriteSize / 2;
-        this.height = map.height * this.spriteSize / 2;
+        this.height = ( map.height * this.spriteSize / 4 ) + ( this.spriteSize / 2 * ( ( map.height + 1 ) % 2 ) );
 
         Crafty.init(50, this.width, this.height);
 
@@ -98,18 +98,20 @@ GameDisplayer.prototype = {
                 var unit = units[j];
                 var unitSprite = Crafty.e('2D, DOM, clickable, unit, ' + unit.type)
                     .unit(unit.id, this.eventManager)
-                    .clickable(new Crafty.polygon([0,0],[24,0],[24,32],[0,32]), this.eventManager.onUnitClick);
+                    .clickable(new Crafty.polygon([32,16], [64,32], [32,48], [0,32]), this.eventManager.onUnitClick);
 
                 this.iso.place(unit.cell.x, unit.cell.y, 0, unitSprite);
                 console.log("Unit is placed to " + unit.cell.x + ", " + unit.cell.y);
-                //this.iso.place(0, 2, 1, unitSprite);
             }
         }
         return this;
     },
 
     displayInterface: function() {
-        $("#game").append('<button id="move-test-action">Test Move Unit</button>');
+        if (this.world.amIPlaying()) {
+            $("#game").append('<button id="end-turn-btn">End my turn</button>');
+        }
+        $("#game").append('<p>Turn: ' + this.world.game.currentTurn + ' / ' + this.world.game.nbMaxTurns + '</p>');
     },
 
 };
