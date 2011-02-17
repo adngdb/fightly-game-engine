@@ -89,24 +89,28 @@ exports.ActionManager.prototype = {
 
         //check if the player owns the units
         if( !player.hasUnit(unitId) ) {
-            util.log("ActionManager.attackUnit: Error - Player cannot play now.");
+            util.log("ActionManager.attackUnit: Player doesn't own the unit.");
             return false ;
-
+        }
 
         //check if the player doesn't own the target
-        if( player.hasUnit(targetUnit) )
+        if( player.hasUnit(targetUnit) ){
+            util.log("ActionManager.attackUnit: Player can't attack his own unit.");
             return false ;
+        }
 
         //check the distance
-        if( this.game.map.getDistanceBetween(unit.cell, target.cell) > unit.reach )
+        if( this.game.map.getDistanceBetween(unit.cell, target.cell) > unit.reach ){
+            util.log("ActionManager.attackUnit: Error - Unit has not enough movement to go to cell.");
             return false ;
+        }
 
         //attack
-        unit.attack(target) ;
+        target.setHealth(target.health - unit.attack) ;
 
         //riposte
         if( this.game.map.getDistanceBetween(target.cell, unit.cell) <= target.reach )
-            target.attack(unit) ;
+            unit.setHealth(unit.health - target.defense) ;
 
         return true ;
     },
