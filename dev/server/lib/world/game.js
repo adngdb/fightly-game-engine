@@ -26,9 +26,9 @@ exports.Game = function() {
     this.unitFactory = null;
 
     // Configuration
-    this.nbMaxPlayers = -1;
-    this.nbMaxTurns = -1;
-    this.turnDuration = 5;
+    this.nbMaxPlayers = null;
+    this.nbMaxTurns = null;
+    this.turnDuration = null;
 
 
     //play in turn
@@ -149,24 +149,19 @@ exports.Game.prototype = {
     },
 
     /**
-     * Set current turn and the number of played turns
-     * @param turn Turn of the next player
-     */
-    setTurn: function(turn) {
-        if(turn <= this.currentTurn) {
-            this.nbPlayedTurns++;
-        }
-
-    this.currentTurn = turn;
-    },
-
-
-    /**
      * Change turn to the next player (according to Timer)
      */
     nextTurn: function() {
-        setTurn(this.currentPlayer.turn);
-        this.currentPlayer = this.getNextPlayer(currentTurn);
+        var nextPlayer = this.getNextPlayer(this.currentPlayer.turn);
+        if(nextPlayer.turn <= this.currentPlayer.turn) {
+            this.nbPlayedTurns++;
+            if(this.nbPlayedTurns > this.nbMaxTurns) {
+                this.stopPlaying();
+                return;
+            }
+        }
+        this.currentPlayer = nextPlayer;
+
         console.log("This is turn of player " + this.currentPlayer.turn);
 
         //Start timer for next player

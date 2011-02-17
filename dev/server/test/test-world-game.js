@@ -13,10 +13,11 @@ var mapFactory_ = require("../lib/world/map-factory.js");
 var cellFactory_ = require("../lib/world/cell-factory.js");
 var unitFactory_ = require("../lib/world/unit-factory.js");
 var user_ = require("../lib/user.js");
+var observer_ = require("../lib/util/observer.js");
 
 //var gm = new gameFactory_.GameFactory().create(12);
 
-var gf = new gameFactory_.GameFactory();
+var gf = new gameFactory_.GameFactory(new observer_.Observer());
 var pf = new playerFactory_.PlayerFactory();
 var mf = new mapFactory_.MapFactory();
 var cf = new cellFactory_.CellFactory();
@@ -106,8 +107,12 @@ exports["test-game-startPlaying"] = function(test) {
 		var startInterval = setInterval(function() {		    
 		    currentTurn++;
 		    if(currentTurn > 2)
-				currentTurn = 0;				
-		    test.equal(game.currentPlayer.turn , currentTurn);		    
+				currentTurn = 0;
+			if(!game.currentPlayer) {
+				test.done();
+		    } else {			
+		        test.equal(game.currentPlayer.turn , currentTurn);		        
+			}		    
 		}, game.turnDuration * 1000);
 		
 		
@@ -115,6 +120,6 @@ exports["test-game-startPlaying"] = function(test) {
 		    test.done();
 		    clearInterval(startInterval);
 		    clearInterval(stopInterval);
-		}, 60000);
+		}, 100000);
 		
 }
