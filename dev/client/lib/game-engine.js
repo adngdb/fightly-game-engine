@@ -109,9 +109,9 @@ GameEngine.prototype = {
         this.comManager.send(this.messageBuilder.createAuthenticationLogin(login));
     },
 
-    onAuthenticationConfirm: function(username, valid) {
+    onAuthenticationConfirm: function(id, valid) {
         if (valid == true) {
-            this.player = username;
+            this.player = id;
             this.joinGame();
         }
         else {
