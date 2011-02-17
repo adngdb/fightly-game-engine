@@ -40,6 +40,18 @@ exports.Game = function() {
 
 exports.Game.prototype = {
 
+    toJSON: function() {
+        return {
+            "id":               this.id,
+            "players":          this.players,
+            "map":              this.map,
+            "state":            this.state,
+            "nbMaxTurns":       this.nbMaxTurns,
+            "turnDuration":     this.turnDuration,
+            "currentPlayer":    this.currentPlayer,
+        };
+    },
+
     /**
      * Adds a new player to current game from an user .
      * @param user.
@@ -102,16 +114,6 @@ exports.Game.prototype = {
         this.map = mapFactory.createFromFile(file);
     },
 
-    toJSON: function() {
-        return {
-            "id":       this.id,
-            "players":  this.players,
-            "map":      this.map,
-            "state":    this.state,
-        };
-    },
-
-
     //--->play in turn
 
     /**
@@ -165,7 +167,7 @@ exports.Game.prototype = {
         }
         this.currentPlayer = nextPlayer;
         this.currentPlayer.resetUnits();
-        
+
         this.notify({game: this});
 
         console.log("This is turn of player " + this.currentPlayer.turn);
