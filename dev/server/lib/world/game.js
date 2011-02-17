@@ -88,6 +88,7 @@ exports.Game.prototype = {
     checkState: function() {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
+            this.startPlaying();
             this.notify({game: this});
         }
         return this;
@@ -120,8 +121,8 @@ exports.Game.prototype = {
      */
     getPlayerByTurn: function(turn) {
         var player = null;
-        for (var i=0 ; i<this.players.length ; i++) {
-            if(this.players[i].turn == turn) {
+        for (var i = 0; i < this.players.length; i++) {
+            if (this.players[i].turn == turn) {
                 player = this.players[i];
                 break;
             }
@@ -164,6 +165,8 @@ exports.Game.prototype = {
         }
         this.currentPlayer = nextPlayer;
 
+        this.notify({game: this});
+
         console.log("This is turn of player " + this.currentPlayer.turn);
 
         //Start timer for next player
@@ -190,13 +193,30 @@ exports.Game.prototype = {
     },
 
     /**
+     * Set the turn order for each player.
+     * @return this.
+     */
+    orderPlayers: function() {
+        var i = 0,
+            l = this.players.length;
+
+        for (; i < l; i++) {
+            this.players[i].turn = i;
+        }
+        return this;
+    },
+
+    /**
      * Start playing in turn
      * Player whose turn is 0 will be the first
      */
     startPlaying: function() {
         this.nbPlayedTurns = 0;
+
+        this.orderPlayers();
+
         this.currentPlayer = this.getPlayerByTurn(0);
-        console.log("This is turn of player 0");
+        util.log("This is turn of player 0: " + this.currentPlayer);
 
         this.startTimer();
     },
@@ -242,10 +262,12 @@ exports.Game.prototype = {
      * @return unit
      */
     getUnitById: function(id) {
-        for(var i=0; i<this.players.length; i++) {
-            for(var j=0; j<this.players[i].units.length; j++) {
-                if(this.players[i].units[j].id == id) {
-                    return this.players[i].units[j];
+        for (var i = 0; i < this.players.length; i++) {
+            var player = this.players[i];
+            for (var j = 0; j < player.units.length; j++) {
+                var unit = player.units[j];
+                if (unit.id == id) {
+                    return unit;
                 }
             }
         }
