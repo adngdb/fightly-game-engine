@@ -57,9 +57,9 @@ exports.Player.prototype = {
         this.notify(context);
     },
     
-    resetUnitMovement: function() {
+    resetUnits: function() {
         for(var i=0;i<this.units.length;i++) {            
-                this.units[i].resetMovement();
+              this.units[i].resetMovement();
         }
     }
 };
