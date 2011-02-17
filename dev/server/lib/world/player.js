@@ -36,10 +36,11 @@ exports.Player.prototype = {
     },
 
     hasUnit: function(unitId) {
-        for(var i=0;i<this.units.length;i++) {
-            if(this.units[i].id = unitId)
+        for (var i = 0; i < this.units.length; i++) {
+            if (this.units[i].id == unitId)
                 return true ;
         }
+        return false;
     },
 
     toJSON : function() {
