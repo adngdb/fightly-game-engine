@@ -17,8 +17,8 @@ exports.Client = function(connection, server, gameEngine) {
 
     this.conn = connection;
     this.id = this.conn.sessionId;
-
     this.server = server;
+    this.gameEngine = gameEngine;
     this.messageParser = gameEngine.messageParser;
 
     this.conn.on("message", function(msg) {
@@ -57,8 +57,7 @@ exports.Client.prototype = {
      */
     onDisconnect: function() {
         sys.log("Connection " + this.id + " has closed");
-        // TODO
-        // Tell the server this client is dead
+        this.gameEngine.onDisconnect(this.id);
     },
 };
 
