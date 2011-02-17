@@ -164,7 +164,7 @@ exports.Game.prototype = {
             }
         }
         this.currentPlayer = nextPlayer;
-        this.currentPlayer.resetMovement();
+        this.currentPlayer.resetUnits();
         
         this.notify({game: this});
 
