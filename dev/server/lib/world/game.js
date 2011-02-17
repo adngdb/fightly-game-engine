@@ -60,10 +60,9 @@ exports.Game.prototype = {
      */
     addPlayer: function(user) {
         util.log("Game.addPlayer");
-        var player = this.playerFactory.createFromUser(user, this.map.startPoints.shift());
+        var player = this.playerFactory.createFromUser(user, this.map.allocStartPoint());
         util.log(player.startPoint);
         player.addObserver(this);
-        player.startPoint = this.map.allocStartPoint();
         this.players.push(player);
         this.checkState();
         return player;
