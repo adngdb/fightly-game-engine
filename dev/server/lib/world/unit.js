@@ -25,7 +25,8 @@ exports.Unit = function() {
     this.view = null;
     this.movement = null;
     this.properties = [];
-
+    
+    this.nbMaxMovements = null;
 }
 
 exports.Unit.prototype = {
@@ -150,6 +151,9 @@ exports.Unit.prototype = {
         this.notify({object: "Unit", modified: "attack", unit: this});
     },
 
+    resetMovement : function() {
+        this.setMovement(this.nbMaxMovements);
+    }
 }
 
 

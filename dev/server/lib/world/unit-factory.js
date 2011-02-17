@@ -58,7 +58,8 @@ exports.UnitFactory.prototype = {
             myUnit.attack = this.types[type].attack;
             myUnit.defense = this.types[type].defense;
             myUnit.view = this.types[type].view;
-            myUnit.movement = this.types[type].movement;
+            myUnit.nbMaxMovements = this.types[type].movement;
+            myUnit.movement = myUnit.nbMaxMovements;
             myUnit.range = this.types[type].range;
             myUnit.properties = this.types[type].properties;
 

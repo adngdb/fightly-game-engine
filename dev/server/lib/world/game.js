@@ -164,7 +164,8 @@ exports.Game.prototype = {
             }
         }
         this.currentPlayer = nextPlayer;
-
+        this.currentPlayer.resetMovement();
+        
         this.notify({game: this});
 
         console.log("This is turn of player " + this.currentPlayer.turn);
