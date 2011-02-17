@@ -71,7 +71,7 @@ exports.Map.prototype = {
     },
 
     allocStartPoint : function() {
-        return startPoints.splice(0,1);
+        return this.startPoints.shift();
     }
 
 }
