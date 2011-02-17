@@ -316,8 +316,7 @@ exports.GameEngine.prototype = {
          var user = this.getUser(clientId);
          var game = this.getGame(user.inGame);
 
-        var am = new actionManager_.ActionManager(game);
-        am.disconnect(user.id);
+         game.removePlayer(user.id);
     },
 
     onUpdate: function(context) {

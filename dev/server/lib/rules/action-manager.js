@@ -153,11 +153,4 @@ exports.ActionManager.prototype = {
         this.game.removePlayer(playerId);
     },
 
-    /**
-     * Disconnect
-     * @param playerId Id of player who disconnected
-     */
-    disconnect: function(playerId) {
-        this.game.removePlayer(playerId);
-    },
-}
+};
