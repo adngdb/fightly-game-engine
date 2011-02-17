@@ -9,6 +9,7 @@
  *
  **********************************************************************/
 
+var util = require('util');
 
 /**
  * Manage the actions
@@ -31,24 +32,31 @@ exports.ActionManager.prototype = {
     moveUnit: function(playerId,unitId,cellX,cellY) {
 
         var unit = this.game.getUnit(unitId) ;
+        util.log("ActionManager.moveUnit: unit=" +unit);
         var cell = this.game.getCell(cellX,cellY) ;
         var player = this.game.getPlayer(playerId) ;
 
         //check if the player can play
-        if( !this.canPlay(player) )
+        if( !this.canPlay(player) ) {
+            util.log("ActionManager.moveUnit: Error - Player cannot play now.");
             return false ;
+        }
 
         //check if the player owns the unit
-        if( !player.hasUnit(unitId) )
+        if( !player.hasUnit(unitId) ) {
+            util.log("ActionManager.moveUnit: Error - Player doesn't own the unit.");
             return false ;
+        }
 
         //check the distance
-        if( this.game.map.getDistanceBetween(unit.cell, cell) > unit.movement )
+        if( this.game.map.getDistanceBetween(unit.cell, cell) > unit.movement ) {
+            util.log("ActionManager.moveUnit: Error - Unit has not enough movement to go to cell.");
             return false ;
+        }
 
         //move the unit
         unit.setCell(cell) ;
-        unit.movement-- ;
+        unit.setMovement(unit.movement - 1) ;
 
         return true ;
     },
