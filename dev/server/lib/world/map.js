@@ -32,11 +32,19 @@ exports.Map.prototype = {
         return data;
     },
 
-    getDistanceBetween : function(cell1,cell2) {
-
+    getDistanceBetween : function(c1, c2) {
+        var cell1 = this._squarify(c1);
+        var cell2 = this._squarify(c2);
         var distance = Math.abs(cell1.x - cell2.x) + Math.abs(cell1.y - cell2.y);
         return distance;
 
+    },
+
+    _squarify: function(cell) {
+        var c = {};
+        c.x = cell.x - cell.y / 2;
+        c.y = cell.y + c.x;
+        return c;
     },
 
     getStartPoints : function() {
