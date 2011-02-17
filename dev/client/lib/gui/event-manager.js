@@ -11,16 +11,14 @@ function EventManager(world, comManager, messageBuilder) {
 EventManager.prototype = {
 
     bindAll: function() {
-        this.bindTestMoveBtn();
+        this.bindEndTurnBtn();
     },
 
-    bindTestMoveBtn: function() {
-        var btn = $("#move-test-action");
+    bindEndTurnBtn: function() {
+        var btn = $("#end-turn-action");
         btn.click(function(e) {
             e.preventDefault();
-            var unit = this.world.game.players[0].units[0];
-            var cell = this.world.game.map.cells[1][0];
-            this.comManager.send(this.messageBuilder.createMoveUnitAction(unit.id, cell.x, cell.y));
+            this.comManager.send(this.messageBuilder.createEndTurnAction());
         }.bind(this));
         return this;
     },
