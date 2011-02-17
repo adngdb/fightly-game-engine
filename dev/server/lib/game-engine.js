@@ -299,6 +299,14 @@ exports.GameEngine.prototype = {
         var am = new actionManager_.ActionManager(game);
         am.abandon(user.id);
     },
+    
+    onDisconnect: function(playerId) {
+         var user = this.getUser(clientId);
+         var game = this.getGame(user.inGame);
+
+        var am = new actionManager_.ActionManager(game);
+        am.disconnect(user.id);
+    },
 
     onUpdate: function(context) {
         this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
