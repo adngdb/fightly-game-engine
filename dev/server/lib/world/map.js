@@ -67,7 +67,11 @@ exports.Map.prototype = {
             }
         }
 
-        return null;
+        return this.startPoints;
     },
+
+    allocStartPoint : function() {
+        return startPoints.splice(0,1);
+    }
 
 }

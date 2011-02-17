@@ -58,8 +58,18 @@ EventManager.prototype = {
     onUnitClick: function() {
         console.log("onUnitClick");
         var em = this.unit.eventManager;
-
-        em.select(this.unit);
+		
+		if (em.isUnitSelected()) {
+			if(em.selected.id == this.unit.id) { 
+				em.deselect();
+			}else{	
+					var msg = em.messageBuilder.createAttackUnitAction( em.selected.id, this.unit.id);
+            		em.comManager.send( msg );
+				 }
+		}
+		else {
+			 em.select(this.unit);	
+		}
     },
 
 };
