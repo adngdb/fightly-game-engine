@@ -131,6 +131,7 @@ exports.Game.prototype = {
         return player;
     },
 
+
     /**
      * Get player who has next turn
      * @param currentTurn Turn of current player
@@ -150,6 +151,7 @@ exports.Game.prototype = {
 
         return nextPlayer;
     },
+
 
     /**
      * Change turn to the next player (according to Timer)
@@ -174,6 +176,7 @@ exports.Game.prototype = {
         this.startTimer();
     },
 
+
     /**
      * Start Timer for playing in turn
      * (in miliseconds)
@@ -185,6 +188,7 @@ exports.Game.prototype = {
         }.bind(this), this.turnDuration * 1000);
     },
 
+
     /**
      * Change turn to the next player (immediately)
      */
@@ -192,6 +196,7 @@ exports.Game.prototype = {
         clearInterval(this.interval);
         this.nextTurn();
     },
+
 
     /**
      * Set the turn order for each player.
@@ -207,6 +212,7 @@ exports.Game.prototype = {
         return this;
     },
 
+
     /**
      * Start playing in turn
      * Player whose turn is 0 will be the first
@@ -221,6 +227,7 @@ exports.Game.prototype = {
 
         this.startTimer();
     },
+
 
     /**
      * Stop playing
@@ -249,6 +256,7 @@ exports.Game.prototype = {
         return player;
     },
 
+
     /**
      * Alias for getPlayerById
      * @see getPlayerById
@@ -257,8 +265,9 @@ exports.Game.prototype = {
         return this.getPlayerById(id);
     },
 
+
     /**
-     * Get a unit by attribut "id" in game
+     * Get a unit in game by attribut "id"
      * @param id Id of unit
      * @return unit
      */
@@ -277,12 +286,32 @@ exports.Game.prototype = {
     },
 
     /**
+     * Get a unit in game by attribut "cell"
+     * @param cell Cell represents position of unit
+     * @return unit
+     */
+    getUnitByCell: function(cell) {
+        for (var i = 0; i < this.players.length; i++) {
+            var player = this.players[i];
+            for (var j = 0; j < player.units.length; j++) {
+                var unit = player.units[j];
+                if (unit.cell == cell) {
+                    return unit;
+                }
+            }
+        }
+
+        return null;
+    },
+
+    /**
      * Alias for getUnitById
      * @see getUnitById
      */
     getUnit: function(id) {
         return this.getUnitById(id);
     },
+
 
     /**
      * Get a cell by coodinates x and y
