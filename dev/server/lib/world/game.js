@@ -186,11 +186,9 @@ exports.Game.prototype = {
      */
     startTimer: function() {
         this.interval = setInterval(function() {
-            this.nextTurn();
-            clearInterval(this.interval);
+            this.changeTurn();
         }.bind(this), this.turnDuration * 1000);
     },
-
 
     /**
      * Change turn to the next player (immediately)
@@ -303,7 +301,6 @@ exports.Game.prototype = {
                 }
             }
         }
-
         return null;
     },
 
