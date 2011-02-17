@@ -111,7 +111,7 @@ exports.ActionManager.prototype = {
         //TODO
         //return player.canPlay() ;
 
-        return true ;
+        return (this.game.currentPlayer.id == player.id) ;
     }
 
 }
