@@ -7,6 +7,7 @@
  *
  **********************************************************************/
 
+var util = require('util');
 
 exports.Map = function() {
     this.height = -1;
@@ -67,7 +68,7 @@ exports.Map.prototype = {
             }
         }
 
-        return this.startPoints;
+        return null;
     },
 
     allocStartPoint : function() {
