@@ -48,6 +48,7 @@ exports.Game.prototype = {
             "state":            this.state,
             "nbMaxTurns":       this.nbMaxTurns,
             "turnDuration":     this.turnDuration,
+            "currentTurn":      this.nbPlayedTurns,
             "currentPlayer":    (this.currentPlayer == null) ? null : this.currentPlayer.id,
         };
     },
