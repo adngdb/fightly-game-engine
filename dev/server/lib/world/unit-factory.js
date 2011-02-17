@@ -7,7 +7,8 @@
  *
  **********************************************************************/
 
-var unit_ = require("./unit.js"),
+var util = require("util"),
+    unit_ = require("./unit.js"),
     legacy_ = require("../util/legacy.js"),
     subject_ = require("../util/subject.js");
 
@@ -38,6 +39,8 @@ exports.UnitFactory.prototype = {
      */
     create: function(type, owner, cell) {
 
+        util.log("UnitFactory.create: cell=" + cell);
+
         var myUnit = new unit_.Unit();
 
         myUnit.id = this.currentId;
@@ -55,7 +58,8 @@ exports.UnitFactory.prototype = {
             myUnit.attack = this.types[type].attack;
             myUnit.defense = this.types[type].defense;
             myUnit.view = this.types[type].view;
-            myUnit.movement = this.types[type].movement;
+            myUnit.nbMaxMovements = this.types[type].movement;
+            myUnit.movement = myUnit.nbMaxMovements;
             myUnit.range = this.types[type].range;
             myUnit.properties = this.types[type].properties;
 

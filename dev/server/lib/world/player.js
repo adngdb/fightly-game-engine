@@ -7,6 +7,8 @@
  *
  **********************************************************************/
 
+var util = require("util");
+
 exports.Player = function() {
     this.id = null;
     this.name = null;
@@ -14,6 +16,9 @@ exports.Player = function() {
     this.units = [];
     this.startPoint = {type : null , x :null , y:null};
     this.play = false;
+
+    this.startPoint = null;
+
     this.unitFactory = null;
 };
 
@@ -21,7 +26,10 @@ exports.Player.prototype = {
 
     addUnit: function(type) {
 
-        var unit = this.unitFactory.create(type, this, startPoint);
+        util.log("Player.addUnit: startPoint=" + this.startPoint);
+
+        var unit = this.unitFactory.create(type, this, this.startPoint);
+
         unit.addObserver(this);
         this.units.push(unit);
 
@@ -31,10 +39,11 @@ exports.Player.prototype = {
     },
 
     hasUnit: function(unitId) {
-        for(var i=0;i<this.units.length;i++) {
-            if(this.units[i].id = unitId)
+        for (var i = 0; i < this.units.length; i++) {
+            if (this.units[i].id == unitId)
                 return true ;
         }
+        return false;
     },
 
     toJSON : function() {
@@ -51,6 +60,11 @@ exports.Player.prototype = {
         this.notify(context);
     },
 
+    resetUnits: function() {
+        for(var i=0;i<this.units.length;i++) {
+              this.units[i].resetMovement();
+        }
+    }
 };
 
 

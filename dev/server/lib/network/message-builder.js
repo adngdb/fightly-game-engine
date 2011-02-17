@@ -91,15 +91,11 @@ exports.MessageBuilder.prototype = {
      * @param valid Boolean to say if authentication is done or not.
      * @return JSON message to send.
      */
-    createAuthenticationData: function(username, valid) {
+    createAuthenticationData: function(userId, valid) {
         var data = {};
-        data.username = username;
+        data.id = userId;
         data.valid = valid;
         return this.createData("new", "Authentication", data);
-    },
-
-    createConfirmationData: function(object_data){
-        return this.createData("new", "Player", object_data);
     },
 
     createJoinAction: function(){

@@ -19,7 +19,7 @@ var util                = require('util'),
     messageParser_      = require('./network/message-parser.js'),
 
     actionManager_      = require('./rules/action-manager.js'),
-	rules_				= require('./rules/rules.js'),
+    rules_              = require('./rules/rules.js'),
 
     gameFactory_        = require('./world/game-factory.js'),
     playerFactory_      = require('./world/player-factory.js'),
@@ -44,6 +44,8 @@ exports.GameEngine = function() {
     this.comManager = null;
     this.messageBuilder = null;
     this.messageParser = null;
+
+    this.rules = null;
 
     this.games = [];
     this.users = [];
@@ -94,19 +96,19 @@ exports.GameEngine.prototype = {
         this.playerFactory.unitFactory = this.unitFactory;
         this.mapFactory.cellFactory = this.cellFactory;
 
-		this._configureFactories() ;
+        this._configureFactories();
 
         return this;
     },
 
 
-	_configureFactories: function() {
-		var rules = new _rules.Rules(this) ;
-		rules.load('rules.json') ;
-		rules.configureFactories() ;
-		
-		return this ;
-	},
+    _configureFactories: function() {
+        this.rules = new rules_.Rules(this);
+        this.rules.load('rules.json');
+        this.rules.configureFactories();
+
+        return this;
+    },
 
     /**
      * Start the GameEngine.
@@ -222,7 +224,7 @@ exports.GameEngine.prototype = {
     onLogin: function(username, clientId) {
         var user = new user_.User(clientId, username);
         this.addUser(user);
-        this.sendUser(user, this.messageBuilder.createAuthenticationData(username, true));
+        this.sendUser(user, this.messageBuilder.createAuthenticationData(user.id, true));
 
         return this;
     },
@@ -232,10 +234,17 @@ exports.GameEngine.prototype = {
             user = this.getUser(clientId);
 
         if (game != null) {
-            var gameIds = game.getPlayersIds();
-            var newPlayer = game.addPlayer( user );
-            var msg = this.messageBuilder.createNewPlayerData( newPlayer );
-            this.comManager.send(gameIds, msg);
+            if (game.state == "waiting") {
+                //var gameIds = game.getPlayersIds();
+                var newPlayer = game.addPlayer( user );
+                //var msg = this.messageBuilder.createNewPlayerData( newPlayer );
+                //this.comManager.send(gameIds, msg);
+            }
+            else {
+                // TODO Error message
+                //this.sendUser(user, this.messageBuilder.create...());
+                return this;
+            }
         }
         // this game doesn't exist yet: create it
         else {
@@ -263,6 +272,32 @@ exports.GameEngine.prototype = {
 
         var am = new actionManager_.ActionManager(game);
         am.moveUnit(user.id, unitId, toX, toY);
+    },
+
+    onEndTurn: function(clientId) {
+        var user = this.getUser(clientId);
+        if (user.inGame == null) {
+            util.log("User is not in game, cannot call onEndTurn");
+            return this;
+        }
+
+        var game = this.getGame(user.inGame);
+
+        var am = new actionManager_.ActionManager(game);
+        am.endTurn(user.id);
+    },
+
+    onAbandon: function(clientId) {
+        var user = this.getUser(clientId);
+        if (user.inGame == null) {
+            util.log("User is not in game, cannot call onAbandon");
+            return this;
+        }
+
+        var game = this.getGame(user.inGame);
+
+        var am = new actionManager_.ActionManager(game);
+        am.abandon(user.id);
     },
 
     onUpdate: function(context) {

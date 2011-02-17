@@ -7,7 +7,8 @@
  *
  **********************************************************************/
 
-var map_= require("./map.js");
+var util = require("util"),
+    map_ = require("./map.js");
 
 /**
  * Class Game
@@ -39,13 +40,28 @@ exports.Game = function() {
 
 exports.Game.prototype = {
 
+    toJSON: function() {
+        return {
+            "id":               this.id,
+            "players":          this.players,
+            "map":              this.map,
+            "state":            this.state,
+            "nbMaxTurns":       this.nbMaxTurns,
+            "turnDuration":     this.turnDuration,
+            "currentTurn":      this.nbPlayedTurns,
+            "currentPlayer":    (this.currentPlayer == null) ? null : this.currentPlayer.id,
+        };
+    },
+
     /**
      * Adds a new player to current game from an user .
      * @param user.
      * @return player.
      */
     addPlayer: function(user) {
-        var player = this.playerFactory.createFromUser(user);
+        util.log("Game.addPlayer");
+        var player = this.playerFactory.createFromUser(user, this.map.startPoints.shift());
+        util.log(player.startPoint);
         player.addObserver(this);
         player.startPoint = this.map.allocStartPoint();
         this.players.push(player);
@@ -86,6 +102,7 @@ exports.Game.prototype = {
     checkState: function() {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
+            this.startPlaying();
             this.notify({game: this});
         }
         return this;
@@ -99,16 +116,6 @@ exports.Game.prototype = {
         this.map = mapFactory.createFromFile(file);
     },
 
-    toJSON: function() {
-        return {
-            "id":       this.id,
-            "players":  this.players,
-            "map":      this.map,
-            "state":    this.state,
-        };
-    },
-
-
     //--->play in turn
 
     /**
@@ -118,8 +125,8 @@ exports.Game.prototype = {
      */
     getPlayerByTurn: function(turn) {
         var player = null;
-        for (var i=0 ; i<this.players.length ; i++) {
-            if(this.players[i].turn == turn) {
+        for (var i = 0; i < this.players.length; i++) {
+            if (this.players[i].turn == turn) {
                 player = this.players[i];
                 break;
             }
@@ -127,6 +134,7 @@ exports.Game.prototype = {
 
         return player;
     },
+
 
     /**
      * Get player who has next turn
@@ -148,6 +156,7 @@ exports.Game.prototype = {
         return nextPlayer;
     },
 
+
     /**
      * Change turn to the next player (according to Timer)
      */
@@ -161,6 +170,9 @@ exports.Game.prototype = {
             }
         }
         this.currentPlayer = nextPlayer;
+        this.currentPlayer.resetUnits();
+
+        this.notify({game: this});
 
         console.log("This is turn of player " + this.currentPlayer.turn);
 
@@ -168,14 +180,14 @@ exports.Game.prototype = {
         this.startTimer();
     },
 
+
     /**
      * Start Timer for playing in turn
      * (in miliseconds)
      */
     startTimer: function() {
         this.interval = setInterval(function() {
-            this.nextTurn();
-            clearInterval(this.interval);
+            this.changeTurn();
         }.bind(this), this.turnDuration * 1000);
     },
 
@@ -187,17 +199,37 @@ exports.Game.prototype = {
         this.nextTurn();
     },
 
+
+    /**
+     * Set the turn order for each player.
+     * @return this.
+     */
+    orderPlayers: function() {
+        var i = 0,
+            l = this.players.length;
+
+        for (; i < l; i++) {
+            this.players[i].turn = i;
+        }
+        return this;
+    },
+
+
     /**
      * Start playing in turn
      * Player whose turn is 0 will be the first
      */
     startPlaying: function() {
         this.nbPlayedTurns = 0;
+
+        this.orderPlayers();
+
         this.currentPlayer = this.getPlayerByTurn(0);
-        console.log("This is turn of player 0");
+        util.log("This is turn of player 0: " + this.currentPlayer);
 
         this.startTimer();
     },
+
 
     /**
      * Stop playing
@@ -226,6 +258,7 @@ exports.Game.prototype = {
         return player;
     },
 
+
     /**
      * Alias for getPlayerById
      * @see getPlayerById
@@ -234,20 +267,41 @@ exports.Game.prototype = {
         return this.getPlayerById(id);
     },
 
+
     /**
-     * Get a unit by attribut "id" in game
+     * Get a unit in game by attribut "id"
      * @param id Id of unit
      * @return unit
      */
     getUnitById: function(id) {
-        for(var i=0; i<this.players.length; i++) {
-            for(var j=0; j<this.players[i].units.length; j++) {
-                if(this.players[i].units[j].id == id) {
-                    return this.players[i].units[j];
+        for (var i = 0; i < this.players.length; i++) {
+            var player = this.players[i];
+            for (var j = 0; j < player.units.length; j++) {
+                var unit = player.units[j];
+                if (unit.id == id) {
+                    return unit;
                 }
             }
         }
 
+        return null;
+    },
+
+    /**
+     * Get a unit in game by attribut "cell"
+     * @param cell Cell represents position of unit
+     * @return unit
+     */
+    getUnitByCell: function(cell) {
+        for (var i = 0; i < this.players.length; i++) {
+            var player = this.players[i];
+            for (var j = 0; j < player.units.length; j++) {
+                var unit = player.units[j];
+                if (unit.cell == cell) {
+                    return unit;
+                }
+            }
+        }
         return null;
     },
 
@@ -259,6 +313,7 @@ exports.Game.prototype = {
         return this.getUnitById(id);
     },
 
+
     /**
      * Get a cell by coodinates x and y
      * @param x Coordinate x of this cell
@@ -266,15 +321,7 @@ exports.Game.prototype = {
      * @return cell
      */
     getCell: function(x, y) {
-        var cell = null;
-        for (var i=0 ; i<this.map.cells.length ; i++) {
-            if(this.map.cells[i].x == x && this.map.cells[i].y == y) {
-                cell = this.this.map.cells[i];
-                break;
-            }
-        }
-
-        return cell;
+        return this.map.getCell(x, y);
     },
 
     onUpdate: function(context) {
