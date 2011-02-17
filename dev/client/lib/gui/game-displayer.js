@@ -109,7 +109,7 @@ GameDisplayer.prototype = {
 
     displayInterface: function() {
         if (this.world.amIPlaying()) {
-            $("#game").append('<button id="end-turn-btn">End my turn</button>');
+            $("#game").append('<button id="end-turn-action">End my turn</button>');
         }
         $("#game").append('<p>Turn: ' + this.world.game.currentTurn + ' / ' + this.world.game.nbMaxTurns + '</p>');
     },
