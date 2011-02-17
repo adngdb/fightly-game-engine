@@ -20,8 +20,6 @@ GameEngine = function() {
 
     this.world = null;
 
-    this.player = null;
-
     this._handlers = [];
 };
 
@@ -109,9 +107,9 @@ GameEngine.prototype = {
         this.comManager.send(this.messageBuilder.createAuthenticationLogin(login));
     },
 
-    onAuthenticationConfirm: function(username, valid) {
+    onAuthenticationConfirm: function(id, valid) {
         if (valid == true) {
-            this.player = username;
+            this.world.player = id;
             this.joinGame();
         }
         else {
