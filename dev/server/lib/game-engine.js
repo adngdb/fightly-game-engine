@@ -224,7 +224,7 @@ exports.GameEngine.prototype = {
     onLogin: function(username, clientId) {
         var user = new user_.User(clientId, username);
         this.addUser(user);
-        this.sendUser(user, this.messageBuilder.createAuthenticationData(username, true));
+        this.sendUser(user, this.messageBuilder.createAuthenticationData(user.id, true));
 
         return this;
     },

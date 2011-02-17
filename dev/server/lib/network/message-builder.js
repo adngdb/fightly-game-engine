@@ -91,9 +91,9 @@ exports.MessageBuilder.prototype = {
      * @param valid Boolean to say if authentication is done or not.
      * @return JSON message to send.
      */
-    createAuthenticationData: function(username, valid) {
+    createAuthenticationData: function(userId, valid) {
         var data = {};
-        data.username = username;
+        data.id = userId;
         data.valid = valid;
         return this.createData("new", "Authentication", data);
     },
