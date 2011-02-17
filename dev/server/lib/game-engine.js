@@ -274,6 +274,32 @@ exports.GameEngine.prototype = {
         am.moveUnit(user.id, unitId, toX, toY);
     },
 
+    onEndTurn: function() {
+        var user = this.getUser(clientId);
+        if (user.inGame == null) {
+            util.log("User is not in game, cannot call onEndTurn");
+            return this;
+        }
+                
+        var game = this.getGame(user.inGame);
+        
+        var am = new actionManager_.ActionManager(game);
+        am.endTurn(user.id);
+    }
+    
+    onAbandon: function() {
+        var user = this.getUser(clientId);
+        if (user.inGame == null) {
+            util.log("User is not in game, cannot call onAbandon");
+            return this;
+        }
+                
+        var game = this.getGame(user.inGame);
+        
+        var am = new actionManager_.ActionManager(game);
+        am.abandon(user.id);
+    }
+
     onUpdate: function(context) {
         this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
     },
