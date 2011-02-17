@@ -82,7 +82,7 @@ exports.ActionManager.prototype = {
         var player = this.game.getPlayer(playerId) ;
 
         //check if the player can play
-        if( !this.canPlay(playerId) ){
+        if( !this.canPlay(player) ){
             util.log("ActionManager.attackUnit: Error - Player cannot play now.");
             return false ;
         }
@@ -94,7 +94,7 @@ exports.ActionManager.prototype = {
         }
 
         //check if the player doesn't own the target
-        if( player.hasUnit(targetUnit) ){
+        if( player.hasUnit(targetId) ){
             util.log("ActionManager.attackUnit: Player can't attack his own unit.");
             return false ;
         }
@@ -152,7 +152,7 @@ exports.ActionManager.prototype = {
     abandon: function(playerId) {
         this.game.removePlayer(playerId);
     },
-    
+
     /**
      * Disconnect
      * @param playerId Id of player who disconnected
