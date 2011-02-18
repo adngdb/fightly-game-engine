@@ -320,27 +320,27 @@ exports.GameEngine.prototype = {
     },
 
     onUpdate: function(context) {
-    	switch (context.object) {
-    	    case "Unit":
-    	        var unitData = {};
-    		    unitData.id = context.instance.id;
-    		    unitData[context.modified] = context.instance[context.modified];
-    		    this.sendGame(context.game, this.messageBuilder.createUpdateUnitData(unitData));
-    		    break;    		
-    		    
-    		case "Player":
-    		    var playerData = {};
-    		    playerData.id = context.instance.id;
-    		    playerData[context.modified] = context.instance[context.modified];
-    		    this.sendGame(context.game, this.messageBuilder.createUpdatePlayerData(playerData));
-    		    break;
-    		    
-        	case "Game":
-        	    var gameData = {};
-    		    gameData.id = context.instance.id;
-    		    gameData[context.modified] = context.instance[context.modified];
-    		    this.sendGame(context.game, this.messageBuilder.createUpdateGameData(unitData));
-    		    break;    
+        switch (context.object) {
+            case "Unit":
+                var unitData = {};
+                unitData.id = context.instance.id;
+                unitData[context.modified] = context.instance[context.modified];
+                this.sendGame(context.game, this.messageBuilder.createUpdateUnitData(unitData));
+                break;
+
+            case "Player":
+                var playerData = {};
+                playerData.id = context.instance.id;
+                playerData[context.modified] = context.instance[context.modified];
+                this.sendGame(context.game, this.messageBuilder.createUpdatePlayerData(playerData));
+                break;
+
+            case "Game":
+                var gameData = {};
+                gameData.id = context.instance.id;
+                gameData[context.modified] = context.instance[context.modified];
+                this.sendGame(context.game, this.messageBuilder.createUpdateGameData(gameData));
+                break;
 
        }
     },
