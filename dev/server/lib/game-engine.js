@@ -312,7 +312,7 @@ exports.GameEngine.prototype = {
         am.abandon(user.id);
     },
 
-    onDisconnect: function(playerId) {
+    onDisconnect: function(clientId) {
          var user = this.getUser(clientId);
          var game = this.getGame(user.inGame);
 
