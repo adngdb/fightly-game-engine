@@ -98,20 +98,23 @@ exports.MessageBuilder.prototype = {
         return this.createData("new", "Authentication", data);
     },
 
-    createJoinAction: function(){
+    createJoinAction: function() {
         return this.createAction();
     },
 
-    createNewGameData: function(game){
+    createNewGameData: function(game) {
         return this.createData("new", "Game", game);
     },
 
-    createUpdateGameData: function(game){
+    createUpdateGameData: function(game) {
         return this.createData("update", "Game", game);
     },
 
     createNewPlayerData: function(player) {
         return this.createData('new', 'Player', player);
-    }
-
+    },
+    
+    createUpdateUnitData: function(unit) {
+        return this.createData("update", "Unit", unit);
+    },   
 };
