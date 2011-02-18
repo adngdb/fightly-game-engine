@@ -102,7 +102,7 @@ exports.Game.prototype = {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
             this.startPlaying();
-            this.notify({game: this});
+            this.notify({object: "Game", modified: "state", instance: this});
         }
         return this;
     },

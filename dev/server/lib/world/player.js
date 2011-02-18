@@ -38,7 +38,7 @@ exports.Player.prototype = {
         unit.addObserver(this);
         this.units.push(unit);
 
-        this.notify({object: "Player", modified: "units", player: this});
+        this.notify({object: "Player", modified: "units", instance: this});
 
         return unit;
     },

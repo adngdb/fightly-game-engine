@@ -88,7 +88,7 @@ exports.Unit.prototype = {
     moveToCell : function(cell) {
 
         this.cell =  cell;
-        this.notify({object: "Unit", modified: "cell", unit: this});
+        this.notify({object: "Unit", modified: "cell", instance: this});
 
     },
 
@@ -121,7 +121,7 @@ exports.Unit.prototype = {
      */
     setCell : function(cell) {
         this.cell = cell;
-        this.notify({object: "Unit", modified: "cell", unit: this});
+        this.notify({object: "Unit", modified: "cell", instance: this});
     },
 
     /**
@@ -130,7 +130,7 @@ exports.Unit.prototype = {
      */
     setHealth : function(health) {
         this.health = health;
-        this.notify({object: "Unit", modified: "health", unit: this});
+        this.notify({object: "Unit", modified: "health", instance: this});
     },
 
     /**
@@ -139,7 +139,7 @@ exports.Unit.prototype = {
      */
     setView : function(view) {
         this.view = view;
-        this.notify({object: "Unit", modified: "view", unit: this});
+        this.notify({object: "Unit", modified: "view", instance: this});
     },
 
     /**
@@ -148,7 +148,7 @@ exports.Unit.prototype = {
      */
     setMovement : function(movement) {
         this.movement = movement;
-        this.notify({object: "Unit", modified: "movement", unit: this});
+        this.notify({object: "Unit", modified: "movement", instance: this});
 
     },
 
@@ -158,7 +158,7 @@ exports.Unit.prototype = {
      */
     setRange : function(range) {
         this.range = range;
-        this.notify({object: "Unit", modified: "range", unit: this});
+        this.notify({object: "Unit", modified: "range", instance: this});
     },
 
     /**
@@ -167,7 +167,7 @@ exports.Unit.prototype = {
      */
     setDefense : function(defense) {
         this.defense = defense;
-        this.notify({object: "Unit", modified: "defense", unit: this});
+        this.notify({object: "Unit", modified: "defense", instance: this});
     },
 
     /**
@@ -176,7 +176,7 @@ exports.Unit.prototype = {
      */
     setAttack : function(attack) {
         this.attack = attack;
-        this.notify({object: "Unit", modified: "attack", unit: this});
+        this.notify({object: "Unit", modified: "attack", instance: this});
     },
 
     /**
