@@ -338,7 +338,15 @@ exports.GameEngine.prototype = {
             case "Game":
                 var gameData = {};
                 gameData.id = context.instance.id;
-                gameData[context.modified] = context.instance[context.modified];
+                if (context.modified == "*") {
+                    gameData = context.instance;
+                }
+                else if (context.modified == "currentPlayer") {
+                    gameData[context.modified] = context.instance[context.modified].id;
+                }
+                else {
+                    gameData[context.modified] = context.instance[context.modified];
+                }
                 this.sendGame(context.game, this.messageBuilder.createUpdateGameData(gameData));
                 break;
 

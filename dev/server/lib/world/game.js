@@ -178,7 +178,7 @@ exports.Game.prototype = {
         this.notify({game: this, object: "Game", modified: "currentPlayer", instance: this});
         this.notify({game: this, object: "Game", modified: "currentTurn", instance: this});
 
-        console.log("This is turn of player " + this.currentPlayer.turn);
+        util.log("This is turn of player " + this.currentPlayer.turn + ": " + this.currentPlayer.id);
 
         //Start timer for next player
         this.startTimer();
@@ -230,6 +230,8 @@ exports.Game.prototype = {
 
         this.currentPlayer = this.getPlayerByTurn(0);
         util.log("This is turn of player 0: " + this.currentPlayer);
+
+        this.notify({game: this, object: "Game", modified: "*", instance: this});
 
         this.startTimer();
     },
