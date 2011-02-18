@@ -25,7 +25,7 @@ exports.Unit = function() {
     this.view = null;
     this.movement = null;
     this.properties = [];
-    
+
     this.nbMaxMovements = null;
 }
 
@@ -88,7 +88,7 @@ exports.Unit.prototype = {
     moveToCell : function(cell) {
 
         this.cell =  cell;
-        this.notify({object: "Unit", modified: "cell", unit: this});
+        this.notify({object: "Unit", modified: "cell", instance: this});
 
     },
 
@@ -117,38 +117,38 @@ exports.Unit.prototype = {
 
     setCell : function(cell) {
         this.cell = cell;
-        this.notify({object: "Unit", modified: "cell", unit: this});
+        this.notify({object: "Unit", modified: "cell", instance: this});
     },
 
     setHealth : function(health) {
         this.health = health;
-        this.notify({object: "Unit", modified: "health", unit: this});
+        this.notify({object: "Unit", modified: "health", instance: this});
     },
 
     setView : function(view) {
         this.view = view;
-        this.notify({object: "Unit", modified: "view", unit: this});
+        this.notify({object: "Unit", modified: "view", instance: this});
     },
 
     setMovement : function(movement) {
         this.movement = movement;
-        this.notify({object: "Unit", modified: "movement", unit: this});
+        this.notify({object: "Unit", modified: "movement", instance: this});
 
     },
 
     setRange : function(range) {
         this.range = range;
-        this.notify({object: "Unit", modified: "range", unit: this});
+        this.notify({object: "Unit", modified: "range", instance: this});
     },
 
     setDefense : function(defense) {
         this.defense = defense;
-        this.notify({object: "Unit", modified: "defense", unit: this});
+        this.notify({object: "Unit", modified: "defense", instance: this});
     },
 
     setAttack : function(attack) {
         this.attack = attack;
-        this.notify({object: "Unit", modified: "attack", unit: this});
+        this.notify({object: "Unit", modified: "attack", instance: this});
     },
 
     resetMovement : function() {
