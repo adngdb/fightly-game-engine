@@ -50,6 +50,7 @@ exports.PlayerFactory.prototype = {
 
     /**
      * Create a player from a user requesting to join games
+     * @return this. the created player.
      */
     createFromUser: function(user, startPoint) {
         return this.create(user.id, user.login, startPoint);

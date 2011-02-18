@@ -22,6 +22,11 @@ exports.MapFactory.prototype = {
         return this.createFromFile('data/maps/sample-map.json');
     },
 
+    /**
+     * Create a new map from a map file (JSON format).
+     * @param file. A JSON file that contains a map object.
+     * @return myMap.  The created map.
+     */
     createFromFile : function(file) {
 
         var myMap = new map_.Map();

@@ -93,7 +93,7 @@ exports.Unit.prototype = {
     },
 
     /**
-     * Transform the unit attributs to a JSON string
+     * Transform the unit's attributs to a JSON string
      * @return data, contains the unit attributs.
      */
     toJSON : function() {
