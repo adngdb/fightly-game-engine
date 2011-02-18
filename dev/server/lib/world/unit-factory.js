@@ -32,7 +32,7 @@ exports.UnitFactory.prototype = {
 
     /**
      * Create a new unit.
-     * @param type, the type of unit. Note that
+     * @param type, the type of unit.
      * @param owner, the player who has creating a unit
      * @param cell, the cell that will be occupied by the unit
      * @return myUnit: the created unit.
@@ -64,11 +64,6 @@ exports.UnitFactory.prototype = {
             myUnit.properties = this.types[type].properties;
 
         }
-        // On doit initialiser l'emplacement par défaut de l'unite sur la carte en fonction du tour du joueur,
-        // Il faut pas oublié de tester le type de case
-        // var xInit = ..turn
-        // var yInt = ..
-        //myUnit.cell = owner.turn...;
 
         legacy.inherits(new subject_.Subject(), myUnit);
 

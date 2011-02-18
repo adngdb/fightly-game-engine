@@ -24,6 +24,11 @@ exports.Player = function() {
 
 exports.Player.prototype = {
 
+    /**
+     * Create a new unit for player : assign a movement value to the unit and notify it.
+     * @param type. the type of unit
+     * @return unit. the player unit
+     */
     addUnit: function(type) {
 
         util.log("Player.addUnit: startPoint=" + this.startPoint);
@@ -38,6 +43,11 @@ exports.Player.prototype = {
         return unit;
     },
 
+    /**
+     * checks if the player has a unit
+     * @param unitId. the unit identity
+     * @return boolean. returns true if the player has this unit, and returns false otherwise.
+     */
     hasUnit: function(unitId) {
         for (var i = 0; i < this.units.length; i++) {
             if (this.units[i].id == unitId)
@@ -46,6 +56,10 @@ exports.Player.prototype = {
         return false;
     },
 
+    /**
+     * Transform the player's attributs to a JSON string
+     * @return the JSON string.
+     */
     toJSON : function() {
         return {
             "id": this.id,
@@ -55,11 +69,18 @@ exports.Player.prototype = {
         };
     },
 
+    /**
+     * Notify any change in the context
+     * @param context. The player context.
+     */
     onUpdate: function(context) {
         context.player = this;
         this.notify(context);
     },
 
+    /**
+     * Assign the maximun movement value to the player units.
+     */
     resetUnits: function() {
         for(var i=0;i<this.units.length;i++) {
               this.units[i].resetMovement();

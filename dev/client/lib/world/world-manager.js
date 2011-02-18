@@ -7,6 +7,10 @@
  *
  **********************************************************************/
 
+/**
+ * Class WorldManager
+ * @authors Ilyas BOUTEBAL - boutebal_ilyas@yahoo.fr
+ * */
 
 WorldManager = function() {
     this.game = null;
@@ -16,38 +20,59 @@ WorldManager = function() {
 WorldManager.prototype = {
 
     /**
-     * data must contain following information:
-     *      height
-     *      width
-     *      ...
+     * Update the objet "o1" from the second object "o2"
+     * @return this
      */
-// Function for updating the object o1 from the object o2
     updateValues: function (o1,o2) {
         for (var propertyName in o2) {
             o1[propertyName] = o2[propertyName];
         }
     },
 
+    /**
+     * Create game object
+     * @param data
+     */
     gameData: function(data) {
         this.game = data;
     },
 
+    /**
+     * Update game object
+     * @param data
+     */
     gameUpdate: function(data) {
         this.updateValues(this.game, data);
     },
 
+    /**
+     * Create the map
+     * @param data
+     */
     mapData: function(data) {
         this.game.map = data;
     },
 
+    /**
+     * Update the map
+     * @param data
+     */
     mapUpdate: function(data) {
         this.updateValues(this.game.map, data);
     },
 
+    /**
+     * Create the player
+     * @param data
+     */
     playerData: function(data) {
         this.game.players.push(data);
     },
 
+    /**
+     * Update the player
+     * @param data
+     */
     playerUpdate: function(data) {
         var i = 0;
         while(i<this.game.players.length){
@@ -58,13 +83,11 @@ WorldManager.prototype = {
             i++;
             }
     },
-/*
-    cellUpdate: function(data) {
-        var newCell = JSON.parse(data);
-        // Err !! celles un tableau de cell (y a pas 2 dimensions)
-        this.game.map.cells[newCell.x][newCell.y] = newCell;
-    },
-*/
+
+    /**
+     * Create A unit
+     * @param data
+     */
     unitCreate: function(data) {
         var i = 0;
         while(i<this.game.players.length){
@@ -76,6 +99,10 @@ WorldManager.prototype = {
             }
     },
 
+    /**
+     * Update a Unit
+     * @param data
+     */
     unitUpdate: function(data) {
         var i = 0;
         while(i<this.game.players.length){
@@ -94,6 +121,11 @@ WorldManager.prototype = {
             }
     },
 
+
+    /**
+     * checks if a player is playing or not
+     * @param data
+     */
     amIPlaying: function() {
         return (this.game.currentPlayer == this.player);
     },

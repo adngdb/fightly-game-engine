@@ -20,6 +20,10 @@ exports.Map = function() {
 
 exports.Map.prototype = {
 
+    /**
+     * Transform the map's attributs to a JSON string
+     * @return the JSON string.
+     */
     toJSON : function() {
 
         var data = {
@@ -33,6 +37,12 @@ exports.Map.prototype = {
         return data;
     },
 
+    /**
+     * Calculate the Manathan distance between two cells
+     * @param c1. the first cell,
+     * @param c2. the seconde cell,
+     * @return distance. the distance between c1 and c2.
+     */
     getDistanceBetween : function(c1, c2) {
         var cell1 = this._squarify(c1);
         var cell2 = this._squarify(c2);
@@ -41,6 +51,12 @@ exports.Map.prototype = {
 
     },
 
+    /**
+     * this method changes the coordinates of the diamond cell to
+     * transform it to a square cells
+     * @param cell, the diamond cell
+     * @return c, the transformed cell
+     */
     _squarify: function(cell) {
         var c = {};
         c.x = cell.x - cell.y / 2;
@@ -48,6 +64,12 @@ exports.Map.prototype = {
         return c;
     },
 
+    /**
+     * this method changes the coordinates of the diamond cell to
+     * transform it to a square cells
+     * @param cell, the diamond cell
+     * @return c, the transformed cell
+     */
     getStartPoints : function() {
         return this.startPoints;
     },
@@ -71,6 +93,11 @@ exports.Map.prototype = {
         return null;
     },
 
+    /**
+     * Allocate a default cell to one player
+     * @return this.startPoints.shift(): a first cells at the
+     * startPoints array.
+     */
     allocStartPoint : function() {
         return this.startPoints.shift();
     }

@@ -35,7 +35,7 @@ exports.Game = function() {
     //play in turn
     this.currentPlayer = null;
     this.interval = null;
-    this.nbPlayedTurns = -1;
+    this.nbPlayedTurns = null;
 };
 
 exports.Game.prototype = {
@@ -118,7 +118,7 @@ exports.Game.prototype = {
     //--->play in turn
 
     /**
-     * Get a player by attribut "turn"
+     * Get a player by attribute "turn"
      * @param turn Turn of player
      * @return player
      */
@@ -268,7 +268,7 @@ exports.Game.prototype = {
 
 
     /**
-     * Get a unit in game by attribut "id"
+     * Get a unit in game by attribute "id"
      * @param id Id of unit
      * @return unit
      */
@@ -287,7 +287,7 @@ exports.Game.prototype = {
     },
 
     /**
-     * Get a unit in game by attribut "cell"
+     * Get a unit in game by attribute "cell"
      * @param cell Cell represents position of unit
      * @return unit
      */

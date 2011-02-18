@@ -30,6 +30,11 @@ exports.GameFactory = function(gameEngine) {
 
 exports.GameFactory.prototype = {
 
+    /**
+     * Create a new game.
+     * @param id. A game's identity.
+     * @return myGame.  The created game.
+     */
     create: function(id) {
 
         var myGame = new game_.Game();
@@ -58,6 +63,14 @@ exports.GameFactory.prototype = {
         }
     },
 
+    /**
+     * Set the game's configuration.
+     * @param nbMaxPlayers. A maximum number of game players .
+     * @param nbMaxTurns. A maximum number of game turns. Note that we
+     * consider that one games'turn is done if each player has
+     * passed his turn.
+     * @param nbMaxTurns. A turn duration of each player's turn.
+     */
     setConfig : function(nbMaxPlayers, nbMaxTurns, turnDuration) {
 
         this.config.nbMaxPlayers = nbMaxPlayers;

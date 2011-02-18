@@ -320,7 +320,19 @@ exports.GameEngine.prototype = {
     },
 
     onUpdate: function(context) {
-        this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
+    	switch (context.object) {
+    	    case "Unit":
+    	        var unitData = {};
+    		    unitData.id = instance.id;
+    		    unitData[context.modified] = instance[context.modified];
+    		    this.sendGame(context.game, this.messageBuilder.createUpdateUnitData(unitData));
+    		    break;    		
+    		case "Player":
+    		    break;
+        	case "Game":
+        	    this.sendGame(context.game, this.messageBuilder.createUpdateGameData(context.game));
+        	    break;
+       }
     },
 
 };
