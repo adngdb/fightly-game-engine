@@ -23,6 +23,13 @@ exports.PlayerFactory = function(gameEngine) {
 
 exports.PlayerFactory.prototype = {
 
+    /**
+     * Create a new player with attributs.
+     * @param id, the player identity,
+     * @param name, the player name,
+     * @param startPoint, coordinates of the cell that will host its unit.
+     * @return myPlayer, the created player.
+     */
     create: function(id, name, startPoint) {
         var myPlayer = new player_.Player();
         myPlayer.name = name;
@@ -41,6 +48,9 @@ exports.PlayerFactory.prototype = {
         return myPlayer;
     },
 
+    /**
+     * Create a player from a user requesting to join games
+     */
     createFromUser: function(user, startPoint) {
         return this.create(user.id, user.login, startPoint);
     },

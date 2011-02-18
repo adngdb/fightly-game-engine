@@ -25,7 +25,7 @@ exports.Unit = function() {
     this.view = null;
     this.movement = null;
     this.properties = [];
-    
+
     this.nbMaxMovements = null;
 }
 
@@ -115,42 +115,73 @@ exports.Unit.prototype = {
         return data;
     },
 
+    /**
+     * The cell setter: assign a cell to the unit and notify it.
+     * @param cell.
+     */
     setCell : function(cell) {
         this.cell = cell;
         this.notify({object: "Unit", modified: "cell", unit: this});
     },
 
+    /**
+     * The health setter: assign a health value to the unit and notify it.
+     * @param health.
+     */
     setHealth : function(health) {
         this.health = health;
         this.notify({object: "Unit", modified: "health", unit: this});
     },
 
+    /**
+     * The view setter: assign a view value to the unit and notify it.
+     * @param view.
+     */
     setView : function(view) {
         this.view = view;
         this.notify({object: "Unit", modified: "view", unit: this});
     },
 
+    /**
+     * The movement setter: assign a movement value to the unit and notify it.
+     * @param movement.
+     */
     setMovement : function(movement) {
         this.movement = movement;
         this.notify({object: "Unit", modified: "movement", unit: this});
 
     },
 
+    /**
+     * The range setter: assign a range value to the unit and notify it.
+     * @param range.
+     */
     setRange : function(range) {
         this.range = range;
         this.notify({object: "Unit", modified: "range", unit: this});
     },
 
+    /**
+     * The defense setter: assign a defense value to the unit and notify it.
+     * @param defense.
+     */
     setDefense : function(defense) {
         this.defense = defense;
         this.notify({object: "Unit", modified: "defense", unit: this});
     },
 
+    /**
+     * The defense attack: assign a attack value to the unit and notify it.
+     * @param attack.
+     */
     setAttack : function(attack) {
         this.attack = attack;
         this.notify({object: "Unit", modified: "attack", unit: this});
     },
 
+    /**
+     * Assign the maximun movement value to the unit.
+     */
     resetMovement : function() {
         this.setMovement(this.nbMaxMovements);
     }
