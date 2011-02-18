@@ -104,21 +104,22 @@ WorldManager.prototype = {
      * @param data
      */
     unitUpdate: function(data) {
-        var i = 0;
-        while(i<this.game.players.length){
-            if(this.game.players[i].id == data.owner){
-            var j = 0;
-            while(j<this.game.players[i].units.length){
-                if(this.game.players[i].units[j].id == data.id){
-                    this.updateValues(this.game.players[i].units[j], data);
-                    j = this.game.players[i].units.length;
-                    }
-                j++;
+        var i = 0,
+            l = this.game.players.length;
+
+        for (; i < l; i++) {
+            var player = this.game.players[i],
+                j = 0,
+                k = player.units.length;
+
+            for (; j < k; j++) {
+                var unit = player.units[j];
+                if (unit.id == data.id) {
+                    this.updateValues(unit, data);
+                    return;
                 }
-                 i = this.game.players.length;
-                }
-            i++;
             }
+        }
     },
 
 

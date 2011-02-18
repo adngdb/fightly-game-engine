@@ -6,7 +6,11 @@
  * License: see LICENSE.txt
  *
  **********************************************************************/
-//var worldManager_ = require("../lib/world/world-manager.js");
+
+/**
+ * Class WorldManager
+ * @authors Ilyas BOUTEBAL - boutebal_ilyas@yahoo.fr
+ * */
 
 WorldManagerTest = TestCase("WorldManagerTest");
 

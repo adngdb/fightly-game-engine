@@ -20,8 +20,11 @@ function GameDisplayer(world, eventManager) {
     this.height = 600;
     this.spriteSize = 64;
 
+    this.mapIsDisplayed = false;
+
     this.mapSprite = './assets/images/map.png';
     this.unitSprite = './assets/images/unit.png';
+    this.selectedSprite = './assets/images/selected.png';
 
     this.iso = Crafty.isometric.init(this.spriteSize);
 };
@@ -50,10 +53,16 @@ GameDisplayer.prototype = {
         Crafty.sprite(this.spriteSize, this.unitSprite, {
             choucroute: [0, 0, 1, 1],
         });
+
+        // Selected circle
+        Crafty.sprite(this.spriteSize, this.selectedSprite, {
+            selected: [0, 0, 1, 1],
+        });
     },
 
     reset: function() {
-        Crafty("2D").destroy();
+        Crafty("unit").destroy();
+        Crafty("selected").destroy();
         return this;
     },
 
@@ -66,18 +75,22 @@ GameDisplayer.prototype = {
     },
 
     displayMap: function() {
-        var map = this.world.game.map;
-        var cellClickMap = function() { return new Crafty.polygon([32,16], [64,32], [32,48], [0,32]); };
+        if (!this.mapIsDisplayed) {
+            var map = this.world.game.map;
+            var cellClickMap = function() { return new Crafty.polygon([32,16], [64,32], [32,48], [0,32]); };
 
-        for (var y = 0; y < map.height; y++) {
-            for (var x = 0; x < map.width; x++) {
-                var cell = map.cells[x][y];
-                var tile = Crafty.e('2D, DOM, clickable, cell, ' + cell.type)
-                    .cell(cell.x, cell.y, this.eventManager)
-                    .clickable(cellClickMap(), this.eventManager.onCellClick);
+            for (var y = 0; y < map.height; y++) {
+                for (var x = 0; x < map.width; x++) {
+                    var cell = map.cells[x][y];
+                    var tile = Crafty.e('2D, DOM, clickable, cell, ' + cell.type)
+                        .cell(cell.x, cell.y, this.eventManager)
+                        .clickable(cellClickMap(), this.eventManager.onCellClick);
 
-                this.iso.place(x, y, 0, tile);
+                    this.iso.place(x, y, 0, tile);
+                }
             }
+
+            this.mapIsDisplayed = true;
         }
         return this;
     },
@@ -96,6 +109,13 @@ GameDisplayer.prototype = {
 
             for (; j < ul; j++) {
                 var unit = units[j];
+
+                if (this.eventManager.isUnitSelected() && unit.id == this.eventManager.selected.unit.id) {
+                    // This unit is selected, let's display a circle under it
+                    var selected = Crafty.e('2D, DOM, selected');
+                    this.iso.place(unit.cell.x, unit.cell.y, 0, selected);
+                }
+
                 var unitSprite = Crafty.e('2D, DOM, clickable, unit, ' + unit.type)
                     .unit(unit.id, this.eventManager)
                     .clickable(new Crafty.polygon([32,16], [64,32], [32,48], [0,32]), this.eventManager.onUnitClick);

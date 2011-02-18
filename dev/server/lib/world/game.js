@@ -35,7 +35,7 @@ exports.Game = function() {
     //play in turn
     this.currentPlayer = null;
     this.interval = null;
-    this.nbPlayedTurns = -1;
+    this.currentTurn = null;
 };
 
 exports.Game.prototype = {
@@ -48,7 +48,7 @@ exports.Game.prototype = {
             "state":            this.state,
             "nbMaxTurns":       this.nbMaxTurns,
             "turnDuration":     this.turnDuration,
-            "currentTurn":      this.nbPlayedTurns,
+            "currentTurn":      this.currentTurn,
             "currentPlayer":    (this.currentPlayer == null) ? null : this.currentPlayer.id,
         };
     },
@@ -60,10 +60,14 @@ exports.Game.prototype = {
      */
     addPlayer: function(user) {
         util.log("Game.addPlayer");
+
         var player = this.playerFactory.createFromUser(user, this.map.allocStartPoint());
         util.log(player.startPoint);
         player.addObserver(this);
+
         this.players.push(player);
+        this.notify({game: this, object: "Game", modified: "players", instance: this});
+
         this.checkState();
         return player;
     },
@@ -102,7 +106,7 @@ exports.Game.prototype = {
         if (this.nbMaxPlayers == this.players.length) {
             this.state = "playing";
             this.startPlaying();
-            this.notify({object: "Game", modified: "state", instance: this});
+            this.notify({game: this, object: "Game", modified: "state", instance: this});
         }
         return this;
     },
@@ -118,7 +122,7 @@ exports.Game.prototype = {
     //--->play in turn
 
     /**
-     * Get a player by attribut "turn"
+     * Get a player by attribute "turn"
      * @param turn Turn of player
      * @return player
      */
@@ -162,8 +166,8 @@ exports.Game.prototype = {
     nextTurn: function() {
         var nextPlayer = this.getNextPlayer(this.currentPlayer.turn);
         if(nextPlayer.turn <= this.currentPlayer.turn) {
-            this.nbPlayedTurns++;
-            if(this.nbPlayedTurns > this.nbMaxTurns) {
+            this.currentTurn++;
+            if(this.currentTurn > this.nbMaxTurns) {
                 this.stopPlaying();
                 return;
             }
@@ -171,7 +175,8 @@ exports.Game.prototype = {
         this.currentPlayer = nextPlayer;
         this.currentPlayer.resetUnits();
 
-        this.notify({game: this});
+        this.notify({game: this, object: "Game", modified: "currentPlayer", instance: this});
+        this.notify({game: this, object: "Game", modified: "currentTurn", instance: this});
 
         console.log("This is turn of player " + this.currentPlayer.turn);
 
@@ -219,7 +224,7 @@ exports.Game.prototype = {
      * Player whose turn is 0 will be the first
      */
     startPlaying: function() {
-        this.nbPlayedTurns = 0;
+        this.currentTurn = 0;
 
         this.orderPlayers();
 
@@ -241,7 +246,7 @@ exports.Game.prototype = {
 
 
     /**
-     * Get a player by attribut "id"
+     * Get a player by attribute "id"
      * @param id Id of player
      * @return player
      */
@@ -268,7 +273,7 @@ exports.Game.prototype = {
 
 
     /**
-     * Get a unit in game by attribut "id"
+     * Get a unit in game by attribute "id"
      * @param id Id of unit
      * @return unit
      */
@@ -287,7 +292,7 @@ exports.Game.prototype = {
     },
 
     /**
-     * Get a unit in game by attribut "cell"
+     * Get a unit in game by attribute "cell"
      * @param cell Cell represents position of unit
      * @return unit
      */
