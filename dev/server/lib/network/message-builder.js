@@ -112,7 +112,11 @@ exports.MessageBuilder.prototype = {
 
     createNewPlayerData: function(player) {
         return this.createData('new', 'Player', player);
-    },
+    },    
+        
+    createUpdatePlayerData: function(player) {
+        return this.createData("update", "player", unit);
+    },   
     
     createUpdateUnitData: function(unit) {
         return this.createData("update", "Unit", unit);

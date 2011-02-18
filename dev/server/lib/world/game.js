@@ -241,7 +241,7 @@ exports.Game.prototype = {
 
 
     /**
-     * Get a player by attribut "id"
+     * Get a player by attribute "id"
      * @param id Id of player
      * @return player
      */
