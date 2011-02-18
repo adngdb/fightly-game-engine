@@ -48,8 +48,10 @@ exports.ActionManager.prototype = {
             return false ;
         }
 
+        var movement = this.game.map.getDistanceBetween(unit.cell, cell);
+
         //check the distance
-        if( this.game.map.getDistanceBetween(unit.cell, cell) > unit.movement ) {
+        if( movement > unit.movement ) {
             util.log("ActionManager.moveUnit: Error - Unit has not enough movement to go to cell.");
             return false ;
         }
@@ -62,7 +64,7 @@ exports.ActionManager.prototype = {
 
         //move the unit
         unit.setCell(cell) ;
-        unit.setMovement(unit.movement - 1) ;
+        unit.setMovement(unit.movement - movement) ;
 
         return true ;
     },
