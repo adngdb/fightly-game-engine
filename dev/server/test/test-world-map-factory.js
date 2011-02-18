@@ -8,6 +8,7 @@
  **********************************************************************/
 
 var mapfactory_ = require("../lib/world/map-factory.js");
+var cellFactory_ = require("../lib/world/cell-factory.js");
 
 /*exports["test-world-map-factory-create"] = function(test) {
 
@@ -27,7 +28,7 @@ var mapfactory_ = require("../lib/world/map-factory.js");
 exports["test-world-map-factory-createFromFile"] = function(test) {
 
         var obj = new mapfactory_.MapFactory();
-
+        obj.cellFactory = new cellFactory_.CellFactory();
         var map = obj.createFromFile("./data/maps/sample-map.json");
 
         test.equal(map.height , 10);

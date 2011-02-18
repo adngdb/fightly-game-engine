@@ -22,7 +22,7 @@ exports["test-world-map"] = function(test) {
 exports["test-map-toJSON"] = function(test) {
 
         var myMap = new map_.Map();
-        var str = "{"+"\"height\"" + ":-1,"+"\"width\""+":-1,"+"\"cells\""+":[]}" ;
+        var str = "{"+"\"height\"" + ":-1,"+"\"width\""+":-1,"+"\"cells\""+":[],"+"\"startPoints\""+":[]}" ;
         test.equal(str,JSON.stringify(myMap.toJSON()));
         test.done();
 }
