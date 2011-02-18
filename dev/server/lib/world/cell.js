@@ -15,6 +15,10 @@ exports.Cell = function() {
 
 exports.Cell.prototype = {
 
+    /**
+     * Transform the cell's attributs to a JSON string
+     * @return data, contains the unit attributs.
+     */
     toJSON : function() {
 
         var data = {
