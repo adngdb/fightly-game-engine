@@ -34,7 +34,7 @@ GameEngine.prototype = {
 
         this.messageBuilder = new MessageBuilder();
         this.world = new WorldManager();
-        this.eventManager = new EventManager(this.world, this.comManager, this.messageBuilder);
+        this.eventManager = new EventManager(this);
 
         this.displayer = new Displayer(this.world, this.eventManager);
 

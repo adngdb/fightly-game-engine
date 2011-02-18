@@ -1,8 +1,9 @@
-function EventManager(world, comManager, messageBuilder) {
+function EventManager(gameEngine) {
 
-    this.world = world;
-    this.comManager = comManager;
-    this.messageBuilder = messageBuilder;
+    this.gameEngine = gameEngine;
+    this.world = gameEngine.world;
+    this.comManager = gameEngine.comManager;
+    this.messageBuilder = gameEngine.messageBuilder;
 
     this.selected = null;
 
@@ -26,12 +27,14 @@ EventManager.prototype = {
     select: function(item) {
         this.selected = item;
         console.log("Select item: "+item);
+        this.gameEngine.invalidate();
         return this;
     },
 
 
     deselect: function() {
         this.selected = null;
+        this.gameEngine.invalidate();
         return this;
     },
 
@@ -58,18 +61,18 @@ EventManager.prototype = {
     onUnitClick: function() {
         console.log("onUnitClick");
         var em = this.unit.eventManager;
-		
-		if (em.isUnitSelected()) {
-			if(em.selected.id == this.unit.id) { 
-				em.deselect();
-			}else{	
-					var msg = em.messageBuilder.createAttackUnitAction( em.selected.id, this.unit.id);
-            		em.comManager.send( msg );
-				 }
-		}
-		else {
-			 em.select(this.unit);	
-		}
+
+        if (em.isUnitSelected()) {
+            if(em.selected.id == this.unit.id) {
+                em.deselect();
+            }else{
+                    var msg = em.messageBuilder.createAttackUnitAction( em.selected.id, this.unit.id);
+                    em.comManager.send( msg );
+                 }
+        }
+        else {
+             em.select(this.unit);
+        }
     },
 
 };

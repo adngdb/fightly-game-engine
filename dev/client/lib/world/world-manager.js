@@ -128,6 +128,9 @@ WorldManager.prototype = {
      * @param data
      */
     amIPlaying: function() {
+        console.log("amIPlaying?");
+        console.log(this.game.currentPlayer);
+        console.log(this.player);
         return (this.game.currentPlayer == this.player);
     },
 
