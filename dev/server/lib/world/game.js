@@ -35,7 +35,7 @@ exports.Game = function() {
     //play in turn
     this.currentPlayer = null;
     this.interval = null;
-    this.nbPlayedTurns = null;
+    this.currentTurn = null;
 };
 
 exports.Game.prototype = {
@@ -48,7 +48,7 @@ exports.Game.prototype = {
             "state":            this.state,
             "nbMaxTurns":       this.nbMaxTurns,
             "turnDuration":     this.turnDuration,
-            "currentTurn":      this.nbPlayedTurns,
+            "currentTurn":      this.currentTurn,
             "currentPlayer":    (this.currentPlayer == null) ? null : this.currentPlayer.id,
         };
     },
@@ -60,10 +60,14 @@ exports.Game.prototype = {
      */
     addPlayer: function(user) {
         util.log("Game.addPlayer");
+
         var player = this.playerFactory.createFromUser(user, this.map.allocStartPoint());
         util.log(player.startPoint);
         player.addObserver(this);
+
         this.players.push(player);
+        this.notify({game: this, object: "Game", modified: "players", instance: this});
+
         this.checkState();
         return player;
     },
@@ -162,8 +166,8 @@ exports.Game.prototype = {
     nextTurn: function() {
         var nextPlayer = this.getNextPlayer(this.currentPlayer.turn);
         if(nextPlayer.turn <= this.currentPlayer.turn) {
-            this.nbPlayedTurns++;
-            if(this.nbPlayedTurns > this.nbMaxTurns) {
+            this.currentTurn++;
+            if(this.currentTurn > this.nbMaxTurns) {
                 this.stopPlaying();
                 return;
             }
@@ -171,7 +175,8 @@ exports.Game.prototype = {
         this.currentPlayer = nextPlayer;
         this.currentPlayer.resetUnits();
 
-        this.notify({game: this});
+        this.notify({game: this, object: "Game", modified: "currentPlayer", instance: this});
+        this.notify({game: this, object: "Game", modified: "currentTurn", instance: this});
 
         console.log("This is turn of player " + this.currentPlayer.turn);
 
@@ -219,7 +224,7 @@ exports.Game.prototype = {
      * Player whose turn is 0 will be the first
      */
     startPlaying: function() {
-        this.nbPlayedTurns = 0;
+        this.currentTurn = 0;
 
         this.orderPlayers();
 
