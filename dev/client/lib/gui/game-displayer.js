@@ -111,7 +111,6 @@ GameDisplayer.prototype = {
                 var unit = units[j];
 
                 if (this.eventManager.isUnitSelected() && unit.id == this.eventManager.selected.id) {
-                    console.log-('on est dedans');
                     // This unit is selected, let's display a circle under it
                     var selected = Crafty.e('2D, DOM, selected');
                     this.iso.place(unit.cell.x, unit.cell.y, 0, selected);
