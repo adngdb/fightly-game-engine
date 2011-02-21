@@ -102,7 +102,7 @@ exports.ActionManager.prototype = {
         }
 
         //check the distance
-        if( this.game.map.getDistanceBetween(unit.cell, target.cell) > unit.reach ){
+        if( this.game.map.getDistanceBetween(unit.cell, target.cell) > unit.range ){
             util.log("ActionManager.attackUnit: Error - Unit has not enough movement to go to cell.");
             return false ;
         }
@@ -111,7 +111,7 @@ exports.ActionManager.prototype = {
         target.setHealth(target.health - unit.attack) ;
 
         //riposte
-        if( this.game.map.getDistanceBetween(target.cell, unit.cell) <= target.reach )
+        if( this.game.map.getDistanceBetween(target.cell, unit.cell) <= target.range )
             unit.setHealth(unit.health - target.defense) ;
 
         return true ;
