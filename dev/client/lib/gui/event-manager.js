@@ -1,3 +1,18 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
+/**
+ * Class EventManager
+ *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
+ */
 function EventManager(gameEngine) {
 
     this.gameEngine = gameEngine;

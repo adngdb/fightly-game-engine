@@ -11,6 +11,7 @@
  * Class GameDisplayer
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
 function GameDisplayer(world, eventManager) {
     this.world = world;

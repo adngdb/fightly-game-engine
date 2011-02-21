@@ -11,6 +11,7 @@
  * Class ComManager
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
 ComManager = function(ge) {
     this.ge = ge;

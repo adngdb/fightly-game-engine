@@ -12,6 +12,7 @@
  * Create messages to send to the server in a simple way.
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr, Van-Duc Nguyen
+ * @constructor
  */
 MessageBuilder = function() {
 };

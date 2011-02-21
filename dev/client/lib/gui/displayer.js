@@ -11,6 +11,7 @@
  * Class Displayer
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
 Displayer = function(world, eventManager) {
     this.world = world;

@@ -11,6 +11,7 @@
  * Class GameEngine
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
 GameEngine = function() {
     this.comManager = null;

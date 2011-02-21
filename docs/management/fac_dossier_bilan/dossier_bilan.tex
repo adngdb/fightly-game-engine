@@ -25,24 +25,37 @@
 
   Le projet Fightly a pour objectif la création, dans un premier temps, d'un moteur de jeu Web orienté stratégie au tour par tour, puis dans un deuxième temps de promouvoir ce moteur, notamment en créant des jeux l'utilisant. Ce projet est libre, il devra donc vivre et évoluer par et pour sa communauté. 
 
-  Le but de notre travail, dans le cadre de l'UE TI5 de notre formation, a donc été de lancer ce projet, en en développant les bases et en préparant sa communauté. Ce document présente l'avancement du projet Fightly à la fin de cette première étape, les objectifs atteints, ce qui n'a pas pu être fait, et ce qu'il faudra faire à l'avenir. 
+  Le but de notre travail, dans le cadre de l'UE TI5 de notre formation, a donc été de lancer ce projet, en développant ses bases et en préparant sa communauté. Ce document présente l'avancement du projet Fightly à la fin de cette première étape, les objectifs atteints, ce qui n'a pas pu être fait, et ce qu'il faudra faire à l'avenir. 
 
   \chapter{Livrables}
 
-    Le cahier des charges du projet indiquait que nous devions livrer, au terme du projet, trois éléments différents : 
+  Le cahier des charges du projet indiquait que nous devions livrer, au terme du projet, trois éléments différents : 
 
-    \begin{quote}
-      À la fin du projet, on fournira au client les trois éléments suivants : 
+  \begin{quote}
+    À la fin du projet, on fournira au client les trois éléments suivants : 
 
-      \begin{list}{-}{}
-	\item{Le code source complet de l'application développée ;}
-	\item{Une documentation technique, à destination des développeurs qui utiliseront le moteur, mais également à l'intention des développeurs qui contribueront par la suite au projet, celui-ci étant libre ;}
-	\item{Une démonstration technique du moteur.}
-      \end{list}
-    \end{quote}
+    \begin{list}{-}{}
+      \item{Le code source complet de l'application développée ;}
+      \item{Une documentation technique, à destination des développeurs qui utiliseront le moteur, mais également à l'intention des développeurs qui contribueront par la suite au projet, celui-ci étant libre ;}
+      \item{Une démonstration technique du moteur.}
+    \end{list}
+  \end{quote}
 
-    Le projet étant libre, l'intégralité du code source est accessible en ligne, via le site de github.com : https://github.com/AdrianGaudebert/fightly-game-engine
+    \section{Code source}
 
+    Le projet étant libre, l'intégralité du code source est accessible en ligne, via le site de github.com : \url{https://github.com/AdrianGaudebert/fightly-game-engine}. 
+
+    En l'état actuel, le code de l'application contient également le code de la démonstration technique : nous fournissons avec le code du moteur de jeu un ensemble de fichiers de configuration qui permettent de simuler un jeu très simple (avec gestion des tours, déplacements et attaques d'unités), ainsi qu'un ensemble de fonctions et d'images permettant de gérer l'affichage de cette démonstration. 
+
+    Le moteur en tant que tel n'est pas encore réellement générique, puisque certains aspects sont peu paramétrables, ou trop interdépendants. Cependant, la structure a été pensée pour permettre l'extensibilité, le travail à effectuer restera donc minime pour arriver à une version plus générique du moteur. 
+
+    Nous n'avons pas atteint l'objectif d'origine du projet, qui était de créer un moteur utilisable, générique et extensible. Ce résultat s'explique par la complexité du projet, mais également par des choix qui ont été faits en accord avec le client. Nous avons en effet rencontré, comme dans tout projet, des problèmes imprévus qu'il nous a fallu résoudre, et qui ont retardé notre avancement. Etant donné le temps relativement réduit du développement, nous avons choisi de simplifier certaines problématiques, et de nous concentrer sur des problèmes liés directement aux mécaniques du moteur plutôt qu'à des problèmes de généricité. Si nous avons donc une version démontrable techniquement, elle n'est pas totalement extensible. 
+
+    \section{Documentation}
+
+    La documentation finale du projet devra être découpée en deux parties : une à destination des développeurs internes au projet, et une à destination des utilisateurs du moteur (les créateurs de jeux). Nous avons fait le choix, pour l'instant, de ne pas séparer ces deux documentations. Nous ne fournissons donc, au terme de ce projet pour l'université, qu'une seule documentation technique, disponible sur le wiki technique du projet : \url{http://fightly-dev.lqbs.fr/wiki/}. 
+
+    De plus, le code source de notre application est intégralement documenté en suivant les normes JSDoc. La documentation ainsi générée est accessible aux adresses \url{http://fightly.com/api/server/} (côté Serveur) et \url{http://fightly.com/api/client/} (côté Client) et devra être intégrée au reste de la documentation du projet. 
 
   \chapter{Organisation}
 

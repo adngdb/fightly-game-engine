@@ -11,6 +11,7 @@
  * Class MessageParser
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
 MessageParser = function(ge) {
     this.gameEngine = ge;   // GameEngine

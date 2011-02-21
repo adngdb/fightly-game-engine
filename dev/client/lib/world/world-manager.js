@@ -9,8 +9,9 @@
 
 /**
  * Class WorldManager
- * @authors Ilyas BOUTEBAL - boutebal_ilyas@yahoo.fr
- * */
+ * @author Ilyas BOUTEBAL - boutebal_ilyas@yahoo.fr
+ * @constructor
+ */
 
 WorldManager = function() {
     this.game = null;
