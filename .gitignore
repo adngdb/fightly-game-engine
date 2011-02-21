@@ -1,1 +1,6 @@
 *~
+*.aux
+*.log
+*.out
+*.backup
+*.toc
