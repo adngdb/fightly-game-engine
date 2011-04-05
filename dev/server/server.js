@@ -5,7 +5,7 @@
  *
  **********************************************************************/
 
-var gameEngine_ = require("./lib/game-engine.js"),
-    ge = new gameEngine_.GameEngine();
+var GameEngine = require("./lib/game-engine.js"),
+    ge = new GameEngine();
 
 ge.start();

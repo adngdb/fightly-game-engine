@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,11 +7,16 @@
  *
  **********************************************************************/
 
-exports.Legacy = function() {
+/**
+ * Class Legacy
+ *
+ * @constructor
+ */
+function Legacy() {
 
 }
 
-exports.Legacy.prototype = {
+Legacy.prototype = {
 
     inherits : function(base, extension) {
         for (var property in base) {
@@ -22,4 +27,6 @@ exports.Legacy.prototype = {
             }catch( warning ){}
         }
    },
-}
+};
+
+module.exports = Legacy;

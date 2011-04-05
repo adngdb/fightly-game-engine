@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -9,7 +9,12 @@
 
 var util = require('util');
 
-exports.Map = function() {
+/**
+ * Class Map
+ *
+ * @constructor
+ */
+function Map() {
     this.height = -1;
     this.width = -1;
     this.cells = [];
@@ -18,7 +23,7 @@ exports.Map = function() {
 }
 
 
-exports.Map.prototype = {
+Map.prototype = {
 
     /**
      * Transform the map's attributs to a JSON string
@@ -103,3 +108,5 @@ exports.Map.prototype = {
     }
 
 }
+
+module.exports = Map;

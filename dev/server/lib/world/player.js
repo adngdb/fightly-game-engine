@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -9,7 +9,12 @@
 
 var util = require("util");
 
-exports.Player = function() {
+/**
+ * Class Player
+ *
+ * @constructor
+ */
+function Player() {
     this.id = null;
     this.name = null;
     this.turn = null;
@@ -22,7 +27,7 @@ exports.Player = function() {
     this.unitFactory = null;
 };
 
-exports.Player.prototype = {
+Player.prototype = {
 
     /**
      * Create a new unit for player : assign a movement value to the unit and notify it.
@@ -88,4 +93,4 @@ exports.Player.prototype = {
     }
 };
 
-
+module.exports = Player;

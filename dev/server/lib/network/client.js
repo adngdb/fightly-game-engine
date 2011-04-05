@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -9,11 +9,12 @@
 
 var sys = require("sys");
 
-/*
+/**
  * Class Client
- * 
+ *
+ * @constructor
  */
-exports.Client = function(connection, server, gameEngine) {
+function Client(connection, server, gameEngine) {
 
     this.conn = connection;
     this.id = this.conn.sessionId;
@@ -32,7 +33,7 @@ exports.Client = function(connection, server, gameEngine) {
     gameEngine.onConnectionOpen(this);
 };
 
-exports.Client.prototype = {
+Client.prototype = {
 
     /*
      * Send message to Client
@@ -53,7 +54,7 @@ exports.Client.prototype = {
 
     /*
      * Listen for event "disconnect"
-     * 
+     *
      */
     onDisconnect: function() {
         sys.log("Connection " + this.id + " has closed");
@@ -61,3 +62,4 @@ exports.Client.prototype = {
     },
 };
 
+module.exports = Client;

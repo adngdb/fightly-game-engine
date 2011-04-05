@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,13 +7,18 @@
  *
  **********************************************************************/
 
-var cell_ = require("./cell.js");
+var Cell = require("./cell.js");
 
-exports.CellFactory = function() {
+/**
+ * Class CellFactory
+ *
+ * @constructor
+ */
+function CellFactory() {
 
 }
 
-exports.CellFactory.prototype = {
+CellFactory.prototype = {
 
     /**
      * Create a new cell.
@@ -24,10 +29,12 @@ exports.CellFactory.prototype = {
      */
     create: function(type,x,y) {
 
-        var myCell = new cell_.Cell();
+        var myCell = new Cell();
         myCell.type = type;
         myCell.x = x;
         myCell.y = y;
         return myCell;
     },
 }
+
+module.exports = CellFactory;

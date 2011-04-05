@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,14 +7,19 @@
  *
  **********************************************************************/
 
-var game_ = require("./game.js"),
-    legacy_ = require("../util/legacy.js"),
-    observer_ = require("../util/observer.js"),
-    subject_ = require("../util/subject.js");
+var Game = require("./game.js"),
+    Legacy = require("../util/legacy.js"),
+    Observer = require("../util/observer.js"),
+    Subject = require("../util/subject.js");
 
-var legacy = new legacy_.Legacy();
+var legacy = new Legacy();
 
-exports.GameFactory = function(gameEngine) {
+/**
+ * Class GameFactory
+ *
+ * @constructor
+ */
+function GameFactory(gameEngine) {
     this.gameEngine = gameEngine;
 
     this.playerFactory = null;
@@ -28,7 +33,7 @@ exports.GameFactory = function(gameEngine) {
     };
 }
 
-exports.GameFactory.prototype = {
+GameFactory.prototype = {
 
     /**
      * Create a new game.
@@ -37,7 +42,7 @@ exports.GameFactory.prototype = {
      */
     create: function(id) {
 
-        var myGame = new game_.Game();
+        var myGame = new Game();
 
         myGame.id = id;
         myGame.map = this.mapFactory.create();
@@ -49,8 +54,8 @@ exports.GameFactory.prototype = {
         myGame.nbMaxTurns = this.config.nbMaxTurns;
         myGame.turnDuration = this.config.turnDuration;
 
-        legacy.inherits(new subject_.Subject(), myGame);
-        legacy.inherits(new observer_.Observer(), myGame);
+        legacy.inherits(new Subject(), myGame);
+        legacy.inherits(new Observer(), myGame);
         myGame.addObserver(this.gameEngine);
 
         // test if the maximum number if players of the map is equals to the game one
@@ -80,3 +85,5 @@ exports.GameFactory.prototype = {
     },
 
 }
+
+module.exports = GameFactory;

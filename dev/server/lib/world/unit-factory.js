@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,18 +7,20 @@
  *
  **********************************************************************/
 
-var util = require("util"),
-    unit_ = require("./unit.js"),
-    legacy_ = require("../util/legacy.js"),
-    subject_ = require("../util/subject.js");
+var util        = require("util"),
+    Unit        = require("./unit.js"),
+    Legacy      = require("../util/legacy.js"),
+    Subject     = require("../util/subject.js");
 
-var legacy = new legacy_.Legacy();
+var legacy = new Legacy();
 
 /**
  * Class UnitFactory
- * @authors Youness HAMRI - youness.hamri@gmail.com / duc ....
- **/
-exports.UnitFactory = function(gameEngine) {
+ *
+ * @author Youness HAMRI - youness.hamri@gmail.com / duc ....
+ * @constructor
+ */
+function UnitFactory(gameEngine) {
     this.gameEngine = gameEngine;
 
     this.currentId = 0;
@@ -28,7 +30,7 @@ exports.UnitFactory = function(gameEngine) {
     this.addUnitType("choucroute", 100, 10, 10, 3, 2, 1, []);
 }
 
-exports.UnitFactory.prototype = {
+UnitFactory.prototype = {
 
     /**
      * Create a new unit.
@@ -41,7 +43,7 @@ exports.UnitFactory.prototype = {
 
         util.log("UnitFactory.create: cell=" + cell);
 
-        var myUnit = new unit_.Unit();
+        var myUnit = new Unit();
 
         myUnit.id = this.currentId;
         myUnit.type = type;
@@ -65,7 +67,7 @@ exports.UnitFactory.prototype = {
 
         }
 
-        legacy.inherits(new subject_.Subject(), myUnit);
+        legacy.inherits(new Subject(), myUnit);
 
         this.currentId ++;
         return myUnit;
@@ -93,3 +95,5 @@ exports.UnitFactory.prototype = {
         }
     },
 }
+
+module.exports = UnitFactory;

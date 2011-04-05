@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -12,11 +12,12 @@
  * Create messages to send to the server in a simple way.
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr, Van-Duc Nguyen
+ * @constructor
  */
-exports.MessageBuilder = function() {
+function MessageBuilder() {
 };
 
-exports.MessageBuilder.prototype = {
+MessageBuilder.prototype = {
 
     /**
      * Create the basic structure of a message, and stringify to JSON.
@@ -112,13 +113,15 @@ exports.MessageBuilder.prototype = {
 
     createNewPlayerData: function(player) {
         return this.createData('new', 'Player', player);
-    },    
-        
+    },
+
     createUpdatePlayerData: function(player) {
         return this.createData("update", "player", player);
-    },   
-    
+    },
+
     createUpdateUnitData: function(unit) {
         return this.createData("update", "Unit", unit);
-    },   
+    },
 };
+
+module.exports = MessageBuilder;

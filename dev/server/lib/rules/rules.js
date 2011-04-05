@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -17,13 +17,14 @@ var sys = require('sys') ;
  * Manage the rules
  * @author Maxime COLIN
  * @param Instance of the GameEngine
+ * @constructor
  */
-exports.Rules = function(gameEngine) {
+function Rules(gameEngine) {
     this.json = null ;
     this.gameEngine = gameEngine ;
 } ;
 
-exports.Rules.prototype = {
+Rules.prototype = {
 
     /**
      * loading of the rules file
@@ -109,10 +110,6 @@ exports.Rules.prototype = {
     },
 
 */
-
-
-
 }
 
-
-
+module.exports = Rules;

@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -14,13 +14,14 @@ var util = require('util');
 /**
  * Manage the actions
  * @author Maxime COLIN
- * @param Game game instance de la partie
+ * @param game instance of the game
+ * @constructor
  */
-exports.ActionManager = function(game) {
+function ActionManager(game) {
     this.game = game ;
 }
 
-exports.ActionManager.prototype = {
+ActionManager.prototype = {
 
     /**
      * Move a unit to a cell
@@ -156,3 +157,5 @@ exports.ActionManager.prototype = {
     },
 
 };
+
+module.exports = ActionManager;

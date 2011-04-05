@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -9,17 +9,25 @@
 
 var util = require('util');
 
-exports.Observer = function() {
+/**
+ * Class Observer
+ * Part of the observer pattern.
+ *
+ * @constructor
+ */
+function Observer() {
 
 };
 
-exports.Observer.prototype = {
+Observer.prototype = {
 
     update : function(context) {
-		if (!this.onUpdate) {
-			return;
-		}
+        if (!this.onUpdate) {
+            return;
+        }
         return this.onUpdate(context);
     },
 
 };
+
+module.exports = Observer;

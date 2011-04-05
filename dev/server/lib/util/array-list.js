@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,13 +7,18 @@
  *
  **********************************************************************/
 
-exports.ArrayList = function () {
+/**
+ * Class ArrayList
+ *
+ * @constructor
+ */
+function ArrayList () {
 
    this.aList = []; //initialize with an empty array
 
 }
 
-exports.ArrayList.prototype = {
+ArrayList.prototype = {
 
     count : function() {
         return this.aList.length;
@@ -132,3 +137,5 @@ exports.ArrayList.prototype = {
         return m_returnValue;
     },
 };
+
+module.exports = ArrayList;

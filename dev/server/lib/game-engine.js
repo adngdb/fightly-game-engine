@@ -9,31 +9,31 @@
 
 var util                = require('util'),
 
-    user_               = require('./user.js'),
+    User                = require('./user.js'),
 
-    legacy_             = require('./util/legacy.js'),
-    observer_           = require('./util/observer.js'),
+    Legacy             = require('./util/legacy.js'),
+    Observer           = require('./util/observer.js'),
 
-    comManager_         = require('./network/com-manager.js'),
-    messageBuilder_     = require('./network/message-builder.js'),
-    messageParser_      = require('./network/message-parser.js'),
+    ComManager          = require('./network/com-manager.js'),
+    MessageBuilder      = require('./network/message-builder.js'),
+    MessageParser       = require('./network/message-parser.js'),
 
-    actionManager_      = require('./rules/action-manager.js'),
-    rules_              = require('./rules/rules.js'),
+    ActionManager      = require('./rules/action-manager.js'),
+    Rules              = require('./rules/rules.js'),
 
-    gameFactory_        = require('./world/game-factory.js'),
-    playerFactory_      = require('./world/player-factory.js'),
-    mapFactory_         = require('./world/map-factory.js'),
-    cellFactory_        = require('./world/cell-factory.js'),
-    unitFactory_        = require('./world/unit-factory.js');
-
+    GameFactory        = require('./world/game-factory.js'),
+    PlayerFactory      = require('./world/player-factory.js'),
+    MapFactory         = require('./world/map-factory.js'),
+    CellFactory        = require('./world/cell-factory.js'),
+    UnitFactory        = require('./world/unit-factory.js');
 
 /**
  * Class GameEngine
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
-exports.GameEngine = function() {
+function GameEngine() {
 
     this.gameFactory = null;
     this.playerFactory = null;
@@ -55,7 +55,7 @@ exports.GameEngine = function() {
     this.init();
 };
 
-exports.GameEngine.prototype = {
+GameEngine.prototype = {
 
     /**
      * Initialize the GameEngine.
@@ -66,12 +66,12 @@ exports.GameEngine.prototype = {
         util.log("GameEngine: init()");
 
         // Observer pattern
-        var legacy = new legacy_.Legacy();
-        legacy.inherits(new observer_.Observer(), this);
+        var legacy = new Legacy();
+        legacy.inherits(new Observer(), this);
 
-        this.comManager = new comManager_.ComManager(this);
-        this.messageBuilder = new messageBuilder_.MessageBuilder();
-        this.messageParser = new messageParser_.MessageParser(this);
+        this.comManager = new ComManager(this);
+        this.messageBuilder = new MessageBuilder();
+        this.messageParser = new MessageParser(this);
 
         // Factories
         this._initFactories();
@@ -85,11 +85,11 @@ exports.GameEngine.prototype = {
      * @return this.
      */
     _initFactories: function() {
-        this.gameFactory = new gameFactory_.GameFactory(this);
-        this.playerFactory = new playerFactory_.PlayerFactory();
-        this.unitFactory = new unitFactory_.UnitFactory();
-        this.mapFactory = new mapFactory_.MapFactory();
-        this.cellFactory = new cellFactory_.CellFactory();
+        this.gameFactory = new GameFactory(this);
+        this.playerFactory = new PlayerFactory();
+        this.unitFactory = new UnitFactory();
+        this.mapFactory = new MapFactory();
+        this.cellFactory = new CellFactory();
 
         this.gameFactory.playerFactory = this.playerFactory;
         this.gameFactory.mapFactory = this.mapFactory;
@@ -103,7 +103,7 @@ exports.GameEngine.prototype = {
 
 
     _configureFactories: function() {
-        this.rules = new rules_.Rules(this);
+        this.rules = new Rules(this);
         this.rules.load('rules.json');
         this.rules.configureFactories();
 
@@ -222,7 +222,7 @@ exports.GameEngine.prototype = {
     },
 
     onLogin: function(username, clientId) {
-        var user = new user_.User(clientId, username);
+        var user = new User(clientId, username);
         this.addUser(user);
         this.sendUser(user, this.messageBuilder.createAuthenticationData(user.id, true));
 
@@ -270,7 +270,7 @@ exports.GameEngine.prototype = {
         }
         var game = this.getGame(user.inGame);
 
-        var am = new actionManager_.ActionManager(game);
+        var am = new ActionManager(game);
         am.moveUnit(user.id, unitId, toX, toY);
     },
 
@@ -282,7 +282,7 @@ exports.GameEngine.prototype = {
         }
         var game = this.getGame(user.inGame);
 
-        var am = new actionManager_.ActionManager(game);
+        var am = new ActionManager(game);
         am.attackUnit(user.id, attackerId, defenderId);
     },
 
@@ -295,7 +295,7 @@ exports.GameEngine.prototype = {
 
         var game = this.getGame(user.inGame);
 
-        var am = new actionManager_.ActionManager(game);
+        var am = new ActionManager(game);
         am.endTurn(user.id);
     },
 
@@ -308,7 +308,7 @@ exports.GameEngine.prototype = {
 
         var game = this.getGame(user.inGame);
 
-        var am = new actionManager_.ActionManager(game);
+        var am = new ActionManager(game);
         am.abandon(user.id);
     },
 
@@ -354,3 +354,5 @@ exports.GameEngine.prototype = {
     },
 
 };
+
+module.exports = GameEngine;

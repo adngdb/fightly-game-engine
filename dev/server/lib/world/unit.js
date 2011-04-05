@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -9,10 +9,12 @@
 
 /**
  * Class Unit
- * @authors Youness HAMRI - youness.hamri@gmail.com
- **/
+ *
+ * @author Youness HAMRI - youness.hamri@gmail.com
+ * @constructor
+ */
 
-exports.Unit = function() {
+function Unit() {
 
     this.id = -1;
     this.owner = null;
@@ -29,7 +31,7 @@ exports.Unit = function() {
     this.nbMaxMovements = null;
 }
 
-exports.Unit.prototype = {
+Unit.prototype = {
 
     /**
      * Adds a new properties to unit.
@@ -187,5 +189,4 @@ exports.Unit.prototype = {
     }
 }
 
-
-
+module.exports = Unit;

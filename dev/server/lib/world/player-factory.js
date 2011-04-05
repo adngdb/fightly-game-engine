@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -8,20 +8,25 @@
  **********************************************************************/
 
 
-var player_ = require("./player.js"),
-    legacy_ = require("../util/legacy.js"),
-    observer_ = require("../util/observer.js"),
-    subject_ = require("../util/subject.js");
+var Player      = require("./player.js"),
+    Legacy      = require("../util/legacy.js"),
+    Observer    = require("../util/observer.js"),
+    Subject     = require("../util/subject.js");
 
-var legacy = new legacy_.Legacy();
+var legacy = new Legacy();
 
-exports.PlayerFactory = function(gameEngine) {
+/**
+ * Class PlayerFactory
+ *
+ * @constructor
+ */
+function PlayerFactory(gameEngine) {
     this.gameEngine = gameEngine;
 
     this.unitFactory = null;
 }
 
-exports.PlayerFactory.prototype = {
+PlayerFactory.prototype = {
 
     /**
      * Create a new player with attributs.
@@ -31,7 +36,7 @@ exports.PlayerFactory.prototype = {
      * @return myPlayer, the created player.
      */
     create: function(id, name, startPoint) {
-        var myPlayer = new player_.Player();
+        var myPlayer = new Player();
         myPlayer.name = name;
         myPlayer.id = id;
         myPlayer.play = true;
@@ -39,8 +44,8 @@ exports.PlayerFactory.prototype = {
 
         myPlayer.unitFactory = this.unitFactory;
 
-        legacy.inherits(new subject_.Subject(), myPlayer);
-        legacy.inherits(new observer_.Observer(), myPlayer);
+        legacy.inherits(new Subject(), myPlayer);
+        legacy.inherits(new Observer(), myPlayer);
 
         // For testing purpose
         myPlayer.addUnit("choucroute");
@@ -57,3 +62,5 @@ exports.PlayerFactory.prototype = {
     },
 
 }
+
+module.exports = PlayerFactory;

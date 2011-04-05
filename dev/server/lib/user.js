@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -11,13 +11,17 @@ var util = require("util");
 
 /**
  * Class User
+ *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
-exports.User = function(id, login) {
+function User(id, login) {
     this.id = id;
     this.login = login;
     this.inGame = null;
 };
 
-exports.User.prototype = {
+User.prototype = {
 };
+
+module.exports = User;

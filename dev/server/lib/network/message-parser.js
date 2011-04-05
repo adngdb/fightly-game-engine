@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -13,12 +13,13 @@ var util = require('util');
  * Class MessageParser
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
+ * @constructor
  */
-exports.MessageParser = function(ge) {
+function MessageParser(ge) {
     this.gameEngine = ge; // GameEngine
 };
 
-exports.MessageParser.prototype = {
+MessageParser.prototype = {
 
     parse: function(message, clientId) {
         var obj = JSON.parse(message);
@@ -78,3 +79,5 @@ exports.MessageParser.prototype = {
     },
 
 };
+
+module.exports = MessageParser;

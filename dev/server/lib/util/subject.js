@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,15 +7,21 @@
  *
  **********************************************************************/
 
-var arrayList_ = require("./array-list.js");
+var ArrayList = require("./array-list.js");
 
-exports.Subject = function() {
+/**
+ * Class Subject
+ * Part of the observer pattern.
+ *
+ * @constructor
+ */
+function Subject() {
 
-   this.observers = new arrayList_.ArrayList();
+   this.observers = new ArrayList();
 
 }
 
-exports.Subject.prototype = {
+Subject.prototype = {
 
     notify : function(context) {
 
@@ -39,4 +45,6 @@ exports.Subject.prototype = {
 
         this.observers.removeAt(this.observers.indexOf( observer, 0 ));
     },
-}
+};
+
+module.exports = Subject;

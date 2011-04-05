@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,13 +7,18 @@
  *
  **********************************************************************/
 
-exports.Cell = function() {
+/**
+ * Class Cell
+ *
+ * @constructor
+ */
+function Cell() {
     this.type = null; // plains, mountain, swamp
     this.x = -1;
     this.y = -1;
 }
 
-exports.Cell.prototype = {
+Cell.prototype = {
 
     /**
      * Transform the cell's attributs to a JSON string
@@ -30,3 +35,5 @@ exports.Cell.prototype = {
         return data;
     },
 }
+
+module.exports = Cell;

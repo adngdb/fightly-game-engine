@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,15 +7,14 @@
  *
  **********************************************************************/
 
-var util = require("util"),
-    map_ = require("./map.js");
+var util = require("util");
 
 /**
  * Class Game
- * @authors Youness HAMRI - youness.hamri@gmail.com / Van Duc NGUYEN - ducnguyen272@yahoo.com
- * */
-
-exports.Game = function() {
+ * @author Youness HAMRI - youness.hamri@gmail.com / Van Duc NGUYEN - ducnguyen272@yahoo.com
+ * @constructor
+ */
+function Game() {
 
     this.id = null;
     this.map = null;
@@ -38,7 +37,7 @@ exports.Game = function() {
     this.currentTurn = null;
 };
 
-exports.Game.prototype = {
+Game.prototype = {
 
     toJSON: function() {
         return {
@@ -336,3 +335,5 @@ exports.Game.prototype = {
     },
 
 };
+
+module.exports = Game;

@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,18 +7,18 @@
  *
  **********************************************************************/
 
-var sys = require("sys"),
-    http = require('http'),
-    io = require('socket.io'),
+var sys     = require("sys"),
+    http    = require('http'),
+    io      = require('socket.io'),
 
-    client_ = require("./client"),
-    messageBuilder_ = require("./message-builder");
+    Client  = require("./client");
 
 /**
  * Class ComManager
  *
+ * @constructor
  */
-exports.ComManager = function(gameEngine) {
+function ComManager(gameEngine) {
 
     this.gameEngine = gameEngine;
 
@@ -33,11 +33,11 @@ exports.ComManager = function(gameEngine) {
 
 }
 
-exports.ComManager.prototype = {
+ComManager.prototype = {
 
     /**
      * Server listens on a port
-     * @param port: Port Number
+     * @param port Port Number
      * @return this
      */
     listen : function(port){
@@ -54,7 +54,7 @@ exports.ComManager.prototype = {
      */
     onConnect : function(connection) {
         sys.log("New connection: " + connection.sessionId);
-        this.clients[connection.sessionId] = new client_.Client(connection, this, this.gameEngine);
+        this.clients[connection.sessionId] = new Client(connection, this, this.gameEngine);
         return this;
     },
 
@@ -81,3 +81,5 @@ exports.ComManager.prototype = {
     },
 
 }
+
+module.exports = ComManager;

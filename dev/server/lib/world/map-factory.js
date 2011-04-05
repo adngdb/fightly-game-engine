@@ -1,4 +1,4 @@
-/***********************************************************************
+/* *********************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
@@ -7,16 +7,19 @@
  *
  **********************************************************************/
 
-var map_ = require("./map.js");
-var cell_ = require("./cell.js");
+var Map = require("./map.js");
 var fs = require("fs");
-var cellFactory_ = require("./cell-factory.js");
 
-exports.MapFactory = function() {
+/**
+ * Class MapFactory
+ *
+ * @constructor
+ */
+function MapFactory() {
     this.cellFactory = null;
 }
 
-exports.MapFactory.prototype = {
+MapFactory.prototype = {
 
     create: function() {
         return this.createFromFile('data/maps/sample-map.json');
@@ -29,7 +32,7 @@ exports.MapFactory.prototype = {
      */
     createFromFile : function(file) {
 
-        var myMap = new map_.Map();
+        var myMap = new Map();
         var file_ = fs.readFileSync(file,"utf8");
         var mapObject = JSON.parse(file_);
 
@@ -55,3 +58,5 @@ exports.MapFactory.prototype = {
 
 
 }
+
+module.exports = MapFactory;
