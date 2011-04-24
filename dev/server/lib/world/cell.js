@@ -34,6 +34,10 @@ Cell.prototype = {
 
         return data;
     },
+
+    toString: function() {
+		return "Cell: X = " + this.x + ", Y = " + this.y + ", Type = " + this.type;
+	},
 }
 
 module.exports = Cell;
