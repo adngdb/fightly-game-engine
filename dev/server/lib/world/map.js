@@ -64,7 +64,7 @@ Map.prototype = {
      */
     _squarify: function(cell) {
         var c = {};
-        c.x = cell.x - cell.y / 2;
+        c.x = cell.x - Math.floor(cell.y / 2);
         c.y = cell.y + c.x;
         return c;
     },
