@@ -7,6 +7,8 @@
  *
  **********************************************************************/
 
+var util = require('util');
+
 /**
  * Class Unit
  *
@@ -55,7 +57,7 @@ Unit.prototype = {
             i++;
         }
         if ( i == this.properties.length ) {
-            console.log("WARNING: aucune propriété à supprimer ");
+            util.log("WARNING: aucune propriété à supprimer ");
         }
         else {
              this.properties.splice(i,1);
