@@ -1,0 +1,29 @@
+data/
+    maps/
+        sample.json
+
+lib/
+    components/
+        position.js
+    core/
+        game.js
+        game-engine.js
+        player.js
+        user.js
+    network/
+        client.js
+        server.js
+    message/
+        message-builder.js
+        message-parser.js
+
+modules/
+    map/
+        actions.js
+        cell.js
+        map.js
+        module.js
+    unit/
+        actions.js
+        module.js
+        unit.js
