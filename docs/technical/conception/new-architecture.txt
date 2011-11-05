@@ -3,13 +3,12 @@ data/
         sample.json
 
 lib/
-    components/
-        position.js
+    game-engine.js
     core/
+        actions.js
         game.js
-        game-engine.js
         player.js
-        user.js
+        position.js
     network/
         client.js
         server.js
@@ -27,3 +26,7 @@ modules/
         actions.js
         module.js
         unit.js
+
+vendor/
+    component-entity/
+        component-entity-manager.js
