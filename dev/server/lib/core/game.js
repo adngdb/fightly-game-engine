@@ -21,15 +21,10 @@ function Game() {
     this.players = [];
     this.state = "waiting";
 
-    this.mapFactory = null;
-    this.playerFactory = null;
-    this.unitFactory = null;
-
     // Configuration
     this.nbMaxPlayers = null;
     this.nbMaxTurns = null;
     this.turnDuration = null;
-
 
     //play in turn
     this.currentPlayer = null;

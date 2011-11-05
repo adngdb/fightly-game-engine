@@ -14,17 +14,8 @@ var util = require("util");
  *
  * @constructor
  */
-function Player() {
-    this.id = null;
-    this.name = null;
-    this.turn = null;
-    this.units = [];
-    this.startPoint = {type : null , x :null , y:null};
-    this.play = false;
-
-    this.startPoint = null;
-
-    this.unitFactory = null;
+function Player(user) {
+    this.user = null;
 };
 
 Player.prototype = {
@@ -87,8 +78,8 @@ Player.prototype = {
      * Assign the maximun movement value to the player units.
      */
     resetUnits: function() {
-        for(var i=0;i<this.units.length;i++) {
-              this.units[i].resetMovement();
+        for (var i = 0; i < this.units.length; i++) {
+            this.units[i].resetMovement();
         }
     }
 };

@@ -7,8 +7,6 @@
  *
  **********************************************************************/
 
-var util = require("util");
-
 /**
  * Class User
  *
@@ -17,11 +15,8 @@ var util = require("util");
  */
 function User(id, login) {
     this.id = id;
-    this.login = login;
+    this.name = login;
     this.inGame = null;
-};
-
-User.prototype = {
 };
 
 module.exports = User;

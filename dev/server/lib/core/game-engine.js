@@ -11,21 +11,12 @@ var util                = require('util'),
 
     User                = require('./user.js'),
 
-    Legacy             = require('./util/legacy.js'),
-    Observer           = require('./util/observer.js'),
+    Legacy             = require('../util/legacy.js'),
+    Observer           = require('../util/observer.js'),
 
-    ComManager          = require('./network/com-manager.js'),
-    MessageBuilder      = require('./network/message-builder.js'),
-    MessageParser       = require('./network/message-parser.js'),
-
-    ActionManager      = require('./rules/action-manager.js'),
-    Rules              = require('./rules/rules.js'),
-
-    GameFactory        = require('./world/game-factory.js'),
-    PlayerFactory      = require('./world/player-factory.js'),
-    MapFactory         = require('./world/map-factory.js'),
-    CellFactory        = require('./world/cell-factory.js'),
-    UnitFactory        = require('./world/unit-factory.js');
+    ComManager          = require('../network/com-manager.js'),
+    MessageBuilder      = require('../network/message-builder.js'),
+    MessageParser       = require('../network/message-parser.js'),
 
 /**
  * Class GameEngine
@@ -35,17 +26,9 @@ var util                = require('util'),
  */
 function GameEngine() {
 
-    this.gameFactory = null;
-    this.playerFactory = null;
-    this.mapFactory = null;
-    this.cellFactory = null;
-    this.unitFactory = null;
-
     this.comManager = null;
     this.messageBuilder = null;
     this.messageParser = null;
-
-    this.rules = null;
 
     this.games = [];
     this.users = [];
@@ -72,40 +55,6 @@ GameEngine.prototype = {
         this.comManager = new ComManager(this);
         this.messageBuilder = new MessageBuilder();
         this.messageParser = new MessageParser(this);
-
-        // Factories
-        this._initFactories();
-
-        return this;
-    },
-
-    /**
-     * Initialize factories and assign them.
-     *
-     * @return this.
-     */
-    _initFactories: function() {
-        this.gameFactory = new GameFactory(this);
-        this.playerFactory = new PlayerFactory();
-        this.unitFactory = new UnitFactory();
-        this.mapFactory = new MapFactory();
-        this.cellFactory = new CellFactory();
-
-        this.gameFactory.playerFactory = this.playerFactory;
-        this.gameFactory.mapFactory = this.mapFactory;
-        this.playerFactory.unitFactory = this.unitFactory;
-        this.mapFactory.cellFactory = this.cellFactory;
-
-        this._configureFactories();
-
-        return this;
-    },
-
-
-    _configureFactories: function() {
-        this.rules = new Rules(this);
-        this.rules.load('rules.json');
-        this.rules.configureFactories();
 
         return this;
     },
@@ -174,9 +123,9 @@ GameEngine.prototype = {
     //---> Triggers
 
     /**
-     * Call a event
-     * @param event Name of event
-     * @return this
+     * Call an event
+     * @param event Name of the event to call.
+     * @return this.
      */
     trigger: function(event) {
         if (this._handlers[event]) {
@@ -188,7 +137,7 @@ GameEngine.prototype = {
     },
 
     /**
-     * Add a event listener
+     * Add an event listener
      * @param event Name of event
      * @param callback Nam of function which listens this event
      * @return this
