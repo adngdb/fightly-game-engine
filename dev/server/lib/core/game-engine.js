@@ -7,16 +7,14 @@
  *
  **********************************************************************/
 
-var util                = require('util'),
-
-    User                = require('./user.js'),
-
-    Legacy             = require('../util/legacy.js'),
-    Observer           = require('../util/observer.js'),
-
-    ComManager          = require('../network/com-manager.js'),
-    MessageBuilder      = require('../network/message-builder.js'),
-    MessageParser       = require('../network/message-parser.js'),
+var util = require('util'),
+    User = require('./user.js'),
+    Legacy = require('../util/legacy.js'),
+    Observer = require('../util/observer.js'),
+    ComManager = require('../network/com-manager.js'),
+    MessageBuilder = require('../network/message-builder.js'),
+    MessageParser = require('../network/message-parser.js'),
+    ComponentEntityManager = require('../../vendor/component-entity/component-entity-manager');
 
 /**
  * Class GameEngine
@@ -51,6 +49,7 @@ GameEngine.prototype = {
         // Observer pattern
         var legacy = new Legacy();
         legacy.inherits(new Observer(), this);
+        legacy.inherits(new ComponentEntityManager(), this);
 
         this.comManager = new ComManager(this);
         this.messageBuilder = new MessageBuilder();
