@@ -1,3 +1,9 @@
 [submodule "dev/server/vendor/component-entity"]
 	path = dev/server/vendor/component-entity
 	url = git@github.com:AdrianGaudebert/component-entity.git
+[submodule "server/vendor/component-entity"]
+	path = server/vendor/component-entity
+	url = git@github.com:AdrianGaudebert/component-entity.git
+[submodule "server/vendor/action-manager"]
+	path = server/vendor/action-manager
+	url = git@github.com:AdrianGaudebert/action-manager.git
