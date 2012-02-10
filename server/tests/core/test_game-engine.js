@@ -21,3 +21,15 @@ exports['inherits'] = function (test) {
 
     test.done();
 }
+
+exports['init'] = function (test) {
+    var myGE = new GameEngine();
+
+    test.done();
+}
+
+exports['create-game'] = function (test) {
+    var myGE = new GameEngine();
+
+    test.done();
+}
