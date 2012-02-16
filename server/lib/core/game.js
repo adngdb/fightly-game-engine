@@ -7,11 +7,12 @@
  *
  * ***************************************************************************/
 
-var util = require("util");
+var util = require('util');
 
 /**
- * Class Game
- * @author Youness HAMRI - youness.hamri@gmail.com / Van Duc NGUYEN - ducnguyen272@yahoo.com
+ * Game component.
+ *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
 var Game = {
