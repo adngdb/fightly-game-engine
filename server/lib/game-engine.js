@@ -12,8 +12,8 @@ var util = require('util')
     , path = require('path')
     ;
 
-var cem = require('../../vendor/component-entity/component-entity-manager')
-    , am = require('../../vendor/action-manager/action-manager')
+var cem = require('../vendor/component-entity/component-entity-manager')
+    , am = require('../vendor/action-manager/action-manager')
     ;
 
 /**
@@ -43,7 +43,7 @@ GameEngine.prototype = {
 
     _loadComponents: function() {},
     _loadCoreComponents: function() {
-        var game = require('./game.js');
+        var game = require('./core/game.js');
     },
 
     /**
@@ -74,7 +74,7 @@ GameEngine.prototype = {
 
                 if (stat.isFile() && file.lastIndexOf('.js') === file.length - 3 && file !== 'actions.js') {
                     // It's a component file, let's load it
-                    components = require('../../' + pathToFile); // Node.js sad hack
+                    components = require('../' + pathToFile); // Node.js sad hack
                     for (c in components) {
                         // Add this component to the GameEngine
                         this.c(c, components[c]);
