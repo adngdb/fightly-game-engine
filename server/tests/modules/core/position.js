@@ -1,9 +1,11 @@
-/**
- * Class PositionComponent
+/* ****************************************************************************
  *
- * @author Adrian Gaudebert - adrian@gaudebert.fr
- * @constructor
- */
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ * ***************************************************************************/
 
 (function(exports) {
     var Position = {

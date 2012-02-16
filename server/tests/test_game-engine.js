@@ -8,7 +8,7 @@
  */
 var path = require('path');
 
-var GameEngine = require('../../lib/core/game-engine');
+var GameEngine = require('../lib/game-engine');
 
 
 exports['inherits'] = function (test) {
@@ -17,7 +17,7 @@ exports['inherits'] = function (test) {
     test.ok(typeof myGE.get == 'function');
     test.ok(typeof myGE.addComponent == 'function');
     test.ok(typeof myGE.createEntity == 'function');
-    test.ok(typeof myGE.loadActions == 'function');
+    test.ok(typeof myGE.addActions == 'function');
     test.ok(typeof myGE.actions == 'object');
 
     test.done();
@@ -44,9 +44,10 @@ exports['get-modules-list'] = function (test) {
 
 exports['load-modules-components'] = function (test) {
     var myGE = new GameEngine(),
-        pathToModules = 'tests/modules';
+        pathToModules = 'tests/modules',
+        modules = myGE._getModulesList(pathToModules);
 
-    myGE._loadModulesComponents(pathToModules);
+    myGE._loadModulesComponents(modules);
 
     var compList = myGE.getComponentsList();
     test.equal(typeof compList, 'object');
@@ -54,6 +55,45 @@ exports['load-modules-components'] = function (test) {
     test.notEqual(compList.indexOf('Cell'), -1);
     test.notEqual(compList.indexOf('Map'), -1);
     test.notEqual(compList.indexOf('Unit'), -1);
+
+    test.done();
+}
+
+exports['load-modules-actions'] = function (test) {
+    var myGE = new GameEngine(),
+        pathToModules = 'tests/modules',
+        modules = myGE._getModulesList(pathToModules);
+
+    myGE._loadModulesActions(modules);
+
+    var actions = myGE.actions;
+    test.equal(typeof actions, 'object');
+    test.equal(typeof actions.unit.move, 'function');
+    test.equal(typeof actions.unit.attack, 'function');
+    test.equal(typeof actions.unknown, 'undefined');
+
+    test.done();
+}
+
+exports['load_core_components'] = function (test) {
+    var myGE = new GameEngine();
+
+    myGE._loadCoreComponents();
+
+    var compList = myGE.getComponentsList();
+    test.equal(typeof compList, 'object');
+    test.notEqual(compList.indexOf('Game'), -1);
+
+    test.done();
+}
+
+exports['load_core_actions'] = function (test) {
+    var myGE = new GameEngine();
+
+    myGE._loadCoreActions();
+
+    var actions = myGE.actions;
+    // Nothing to test yet
 
     test.done();
 }

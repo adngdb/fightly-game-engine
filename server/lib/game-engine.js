@@ -32,29 +32,82 @@ util.inherits(GameEngine, am.ActionManager);
 
 GameEngine.prototype = {
 
+    /**
+     * Initialize the GameEngine. Load core and modules. Start the network.
+     *
+     * @return this.
+     */
     init: function() {
+        var pathToModules = '../tests/modules' // to be loaded from configuration
+            , modules;
+
         // initialize the GameEngine
-        // Load all modules
-        // Load the list of actions
-        // Load all components
+
+
+        // Load core actions and components
+        this._loadCoreComponents()._loadCoreActions()
+
+        // Load modules' actions and components
+        modules = this._getModulesList(pathToModules);
+        this._loadModulesComponents(modules)._loadModulesActions(modules);
+
         // Start network
         // Listen to events
+
+        return this;
     },
 
-    _loadComponents: function() {},
+    /**
+     * Load and register all core actions into this GameEngine.
+     *
+     * @return this.
+     */
+    _loadCoreActions: function() {
+        return this;
+    },
+
+    /**
+     * Load and register all core components into this GameEngine.
+     *
+     * @return this.
+     */
     _loadCoreComponents: function() {
         var game = require('./core/game.js');
+        this.c('Game', game.Game);
+        return this;
+    },
+
+    /**
+     * Load and register all modules' actions into this GameEngine.
+     *
+     * @param modules Array, list of all module directories.
+     * @return this.
+     */
+    _loadModulesActions: function(modules) {
+        var actionsFilePath
+            , actionsFile,
+            module;
+
+        for (m in modules) {
+            module = modules[m].split('/');
+            module = module[module.length - 1];
+            actionsFilePath = path.join(modules[m], 'actions.js');
+            if (path.existsSync(actionsFilePath)) {
+                actionsFile = require('../' + actionsFilePath); // Sad hack...
+                this.addActions(module, actionsFile.actions);
+            }
+        }
+        return this;
     },
 
     /**
      * Load and register all modules' components into this GameEngine.
      *
-     * @param pathToModules String, directory where all the modules live.
+     * @param modules Array, list of all module directories.
      * @return this.
      */
-    _loadModulesComponents: function(pathToModules) {
-        var modules = this._getModulesList(pathToModules)
-            , module
+    _loadModulesComponents: function(modules) {
+        var module
             , files
             , pathToFile
             , stat
@@ -111,8 +164,7 @@ GameEngine.prototype = {
         return modules;
     },
 
-    createGame: function() {
-    },
+    createGame: function() {},
 
 };
 
