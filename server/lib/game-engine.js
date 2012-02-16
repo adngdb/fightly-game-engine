@@ -25,6 +25,8 @@ var cem = require('../vendor/component-entity/component-entity-manager')
 function GameEngine() {
     cem.ComponentEntityManager.call(this);
     am.ActionManager.call(this);
+
+    this.games = [];
 };
 
 util.inherits(GameEngine, cem.ComponentEntityManager);
@@ -164,7 +166,10 @@ GameEngine.prototype = {
         return modules;
     },
 
-    createGame: function() {},
+    createGame: function() {
+        var newGame = this.e('Game');
+        this.games[newGame.id] = newGame;
+    },
 
 };
 
