@@ -65,6 +65,8 @@ GameEngine.prototype = {
      * @return this.
      */
     _loadCoreActions: function() {
+        var actions = require('./core/actions.js');
+        this.addActions('core', actions.actions);
         return this;
     },
 
@@ -76,6 +78,7 @@ GameEngine.prototype = {
     _loadCoreComponents: function() {
         var game = require('./core/game.js');
         this.c('Game', game.Game);
+        util.log('Added Core component Game to GameEngine');
         return this;
     },
 
@@ -133,6 +136,7 @@ GameEngine.prototype = {
                     for (c in components) {
                         // Add this component to the GameEngine
                         this.c(c, components[c]);
+                        util.log('Added component ' + c + ' to GameEngine');
                     }
                 }
             }
@@ -169,6 +173,7 @@ GameEngine.prototype = {
     createGame: function() {
         var newGame = this.e('Game');
         this.games[newGame.id] = newGame;
+        return newGame;
     },
 
 };

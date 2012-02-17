@@ -76,13 +76,19 @@ exports['load-modules-actions'] = function (test) {
 }
 
 exports['load_core_components'] = function (test) {
-    var myGE = new GameEngine();
+    var myGE = new GameEngine(),
+        g;
 
     myGE._loadCoreComponents();
 
     var compList = myGE.getComponentsList();
     test.equal(typeof compList, 'object');
     test.notEqual(compList.indexOf('Game'), -1);
+
+    test.doesNotThrow(function() { g = myGE.e('Game'); });
+
+    test.equal(typeof g, 'object');
+    test.equal(g.currentTurn, 0);
 
     test.done();
 }
@@ -93,7 +99,8 @@ exports['load_core_actions'] = function (test) {
     myGE._loadCoreActions();
 
     var actions = myGE.actions;
-    // Nothing to test yet
+    test.equal(typeof actions, 'object');
+    test.equal(typeof actions.core.nextTurn, 'function');
 
     test.done();
 }
