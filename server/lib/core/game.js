@@ -20,4 +20,4 @@ var Game = {
     'maxNumberOfTurns': 100,
 };
 
-module.exports = Game;
+exports.Game = Game;

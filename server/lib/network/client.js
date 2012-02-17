@@ -1,13 +1,13 @@
-/* *********************************************************************
+/* ****************************************************************************
  *
  * Fightly - Web Game Engine
  * http://fightly.com
  *
  * License: see LICENSE.txt
  *
- **********************************************************************/
+ *****************************************************************************/
 
-var sys = require("sys");
+var util = require('util');
 
 /**
  * Class Client
@@ -35,7 +35,7 @@ function Client(connection, server, gameEngine) {
 
 Client.prototype = {
 
-    /*
+    /**
      * Send message to Client
      * @param msg: JSON Message in String format
      */
@@ -43,7 +43,7 @@ Client.prototype = {
         this.conn.send(msg);
     },
 
-    /*
+    /**
      * Listen for message received
      * @param msg: message receiced
      */
@@ -52,7 +52,7 @@ Client.prototype = {
         this.messageParser.parse(msg, this.id);
     },
 
-    /*
+    /**
      * Listen for event "disconnect"
      *
      */
@@ -62,4 +62,4 @@ Client.prototype = {
     },
 };
 
-module.exports = Client;
+exports.Client = Client;
