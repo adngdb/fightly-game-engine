@@ -5,7 +5,7 @@
  *
  **********************************************************************/
 
-var GameEngine = require("./lib/game-engine.js"),
-    ge = new GameEngine();
+var network = require('./lib/network/com-manager.js')
+    , server = new network.ComManager();
 
-ge.start();
+server.listen(8081);
