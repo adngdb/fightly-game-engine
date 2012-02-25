@@ -14,52 +14,41 @@ var util = require('util');
  *
  * @constructor
  */
-function Client(connection, server, gameEngine) {
+var Client = function(id, socket, emitter) {
+    var self = this;
 
-    this.conn = connection;
-    this.id = this.conn.sessionId;
-    this.server = server;
-    this.gameEngine = gameEngine;
-    this.messageParser = gameEngine.messageParser;
+    this.id = id;
+    this.socket = socket;
+    this.emitter = emitter;
 
-    this.conn.on("message", function(msg) {
-        this.onMessage(msg);
-    }.bind(this));
-
-    this.conn.addListener("disconnect", function() {
-        this.onDisconnect();
-    }.bind(this));
-
-    gameEngine.onConnectionOpen(this);
+    this.socket.on('disconnect', function() {self.disconnect.apply(self, arguments); });
+    this.socket.on('action', function() {self.receiveAction.apply(self, arguments); });
 };
 
-Client.prototype = {
+/**
+ * Send message to Client
+ * @param msg: JSON Message in String format
+ */
+Client.prototype.send = function(msg) {
+    this.socket.send(msg);
+};
 
-    /**
-     * Send message to Client
-     * @param msg: JSON Message in String format
-     */
-    send: function(msg) {
-        this.conn.send(msg);
-    },
+/**
+ * Listen for message received
+ * @param msg: message receiced
+ */
+Client.prototype.receiveAction = function(data) {
+    //~ util.log("Action received: " + data);
+    this.emitter.emit('actionReceive', data);
+};
 
-    /**
-     * Listen for message received
-     * @param msg: message receiced
-     */
-    onMessage: function(msg) {
-        sys.log("Message received: " + msg);
-        this.messageParser.parse(msg, this.id);
-    },
-
-    /**
-     * Listen for event "disconnect"
-     *
-     */
-    onDisconnect: function() {
-        sys.log("Connection " + this.id + " has closed");
-        this.gameEngine.onDisconnect(this.id);
-    },
+/**
+ * Listen for event "disconnect"
+ *
+ */
+Client.prototype.disconnect = function() {
+    //~ util.log("Connection " + this.id + " has closed");
+    this.emitter.emit('clientDisconnect', this);
 };
 
 exports.Client = Client;
