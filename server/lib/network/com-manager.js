@@ -20,17 +20,15 @@ var client = require('./client')
  *
  * @constructor
  */
-function ComManager(gameEngine) {
-
-    this.gameEngine = gameEngine;
+function ComManager() {
 
     this.server = http.createServer(function(req, res){});
-    this.socket = io.listen(this.server);
+    this.sockets = io.listen(this.server).sockets;
 
     this.clients = [];
 
-    this.socket.on('connection', function(conn){
-        this.onConnect(conn);
+    this.sockets.on('connection', function(socket) {
+        this.onConnect(socket);
     }.bind(this));
 
 }
@@ -42,21 +40,20 @@ ComManager.prototype = {
      * @param port Port Number
      * @return this
      */
-    listen : function(port){
+    listen : function(port) {
         this.server.listen(port);
         util.log('Server created. Listening on port ' + port);
         return this;
     },
 
-
     /**
      * Create a connection which is correspondant with a Client
-     * @param connection Socket Connection of a Client
+     * @param socket Socket Connection of a Client
      * @return this
      */
-    onConnect : function(connection) {
-        util.log('New connection: ' + connection.sessionId);
-        this.clients[connection.sessionId] = new client.Client(connection, this, this.gameEngine);
+    onConnect : function(socket) {
+        util.log('New connection: ' + socket.id);
+        this.clients.push(new client.Client(0, socket));
         return this;
     },
 
