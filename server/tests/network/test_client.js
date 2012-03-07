@@ -64,3 +64,22 @@ exports['receiveAction'] = function (test) {
 
     test.done();
 }
+
+exports['disconnect'] = function (test) {
+    var socket = new Socket()
+        , emitter = new events.EventEmitter()
+        , myClient = new client.Client(1, socket, emitter)
+        , nbMsg = 0
+        , i, k;
+
+    emitter.on('clientDisconnect', function() {
+        nbMsg++;
+    });
+
+    // Test receiving one action
+    myClient.disconnect();
+
+    test.equal(nbMsg, 1);
+
+    test.done();
+}
