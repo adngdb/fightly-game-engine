@@ -10,8 +10,10 @@
 var util = require('util');
 
 /**
- * Class Client
+ * Represent and handle a connected client, used to send or receive messages
+ * to or from that client.
  *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
 var Client = function(id, socket, emitter) {

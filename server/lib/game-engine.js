@@ -47,7 +47,7 @@ GameEngine.prototype = {
 
 
         // Load core actions and components
-        this._loadCoreComponents()._loadCoreActions()
+        this._loadCoreComponents()._loadCoreActions();
 
         // Load modules' actions and components
         modules = this._getModulesList(pathToModules);

@@ -16,12 +16,12 @@ var client = require('./client')
     ;
 
 /**
- * Class ComManager
+ * Create and handle the connections with clients.
  *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
 function ComManager() {
-
     this.server = http.createServer(function(req, res){});
     this.sockets = io.listen(this.server).sockets;
 
@@ -30,7 +30,6 @@ function ComManager() {
     this.sockets.on('connection', function(socket) {
         this.onConnect(socket);
     }.bind(this));
-
 }
 
 ComManager.prototype = {

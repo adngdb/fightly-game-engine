@@ -10,8 +10,10 @@
 var util = require('util');
 
 /**
- * Class Group
+ * Represent and handle a group of connected client, used to send a message
+ * to a list of clients in a easy way.
  *
+ * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
 function Group(id) {
