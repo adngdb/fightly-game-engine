@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+ -->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Fightly Web Game Engine</title>
+
+        <!--link href="" rel="stylesheet" media="screen" /-->
+    </head>
+
+    <body>
+        <div id="cr-stage"></div>
+        <div id="game"></div>
+        <ul id="log"></ul>
+
+
+        <script src="http://localhost:8081/socket.io/socket.io.js"></script>
+        <script>
+var socket = io.connect('http://localhost:8081/');
+socket.emit('action', 'hello');
+
+        </script>
+    </body>
+</html>
