@@ -5,7 +5,13 @@
  *
  **********************************************************************/
 
-var network = require('./lib/network/com-manager.js')
-    , server = new network.ComManager();
+var config = require('config');
 
+var network = require('./lib/network/com-manager'),
+    GameEngine = require('./lib/game-engine');
+
+var engine = new GameEngine(config),
+    server = new network.ComManager(engine);
+
+engine.init();
 server.listen(8081);

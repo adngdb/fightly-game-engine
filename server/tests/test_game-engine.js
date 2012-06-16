@@ -6,7 +6,8 @@
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
-var path = require('path');
+var path = require('path'),
+    config = require('config');
 
 var GameEngine = require('../lib/game-engine');
 

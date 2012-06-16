@@ -22,10 +22,11 @@ var cem = require('../vendor/component-entity/component-entity-manager')
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
-function GameEngine() {
+function GameEngine(config) {
     cem.ComponentEntityManager.call(this);
     am.ActionManager.call(this);
 
+    this.config = config;
     this.games = [];
 };
 
@@ -40,7 +41,7 @@ GameEngine.prototype = {
      * @return this.
      */
     init: function() {
-        var pathToModules = '../tests/modules' // to be loaded from configuration
+        var pathToModules = this.config.modules.directory
             , modules;
 
         // initialize the GameEngine

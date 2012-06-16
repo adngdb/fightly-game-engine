@@ -21,7 +21,9 @@ var client = require('./client')
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
-function ComManager() {
+function ComManager(eventsListener) {
+    this.listener = eventsListener;
+
     this.server = http.createServer(function(req, res){});
     this.sockets = io.listen(this.server).sockets;
 
@@ -52,7 +54,7 @@ ComManager.prototype = {
      */
     onConnect : function(socket) {
         util.log('New connection: ' + socket.id);
-        this.clients.push(new client.Client(0, socket));
+        this.clients[socket.id] = new client.Client(socket.id, socket, this.listener);
         return this;
     },
 
