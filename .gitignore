@@ -4,3 +4,4 @@
 *.out
 *.backup
 *.toc
+server/node_modules
