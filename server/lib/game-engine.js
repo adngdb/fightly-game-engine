@@ -78,9 +78,16 @@ GameEngine.prototype._loadCoreActions = function() {
  * @return this.
  */
 GameEngine.prototype._loadCoreComponents = function() {
+    // Game
     var game = require('./core/game.js');
     this.c('Game', game.Game);
     util.log('Added Core component Game to GameEngine');
+
+    // Player
+    var player = require('./core/player.js');
+    this.c('Player', player.Player);
+    util.log('Added Core component Player to GameEngine');
+
     return this;
 };
 
@@ -196,6 +203,9 @@ GameEngine.prototype._initEventsListeners = function() {
 };
 
 /**
+ * Return a new Game instance after adding it to the list of games.
+ *
+ * @return object A Game entity.
  */
 GameEngine.prototype.createGame = function() {
     var newGame = this.e('Game');

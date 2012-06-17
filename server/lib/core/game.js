@@ -18,6 +18,20 @@ var util = require('util');
 var Game = {
     'currentTurn': 0,
     'maxNumberOfTurns': 100,
+
+    'players': [],
+    'maxNumberOfPlayers': 2,
+    'activePlayer': null,
+
+    'state': 'waiting',
+
+    'isPlayerActive': function(player) {
+        return player.id === this.activePlayer;
+    },
+
+    'isGameOver': function() {
+        return this.currentTurn >= this.maxNumberOfTurns;
+    },
 };
 
 exports.Game = Game;

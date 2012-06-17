@@ -157,6 +157,11 @@ exports['init_events_listeners'] = function (test) {
 
 exports['create-game'] = function (test) {
     var myGE = new GameEngine(config);
+    myGE.init();
+
+    var game = myGE.createGame();
+
+    test.equal(game.currentTurn, 0);
 
     test.done();
 }

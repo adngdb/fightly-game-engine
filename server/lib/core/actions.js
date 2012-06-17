@@ -12,12 +12,24 @@ var util = require('util');
 (function(exports) {
 
     var actions = {
-        "nextTurn": {
-            "check": function(game) {
-                return true;
+        "joinGame": {
+            "check": function(game, player) {
+                console.log('+++++++++++++++++++++++++++++++');
+                console.log(game.players.length +' < '+ game.maxNumberOfPlayers);
+                return game.players.length < game.maxNumberOfPlayers;
             },
-            "execute": function(game) {
+            "execute": function(game, player) {
+                game.players.push(player);
+                player.inGame = game;
+            }
+        },
+        "nextTurn": {
+            "check": function(game, player) {
+                return game.isPlayerActive(player);
+            },
+            "execute": function(game, player) {
                 game.currentTurn += 1;
+                game.activePlayer = game.players[game.currentTurn % game.players.length];
             }
         },
     };
