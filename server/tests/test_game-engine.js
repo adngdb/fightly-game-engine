@@ -11,22 +11,27 @@ var path = require('path'),
 
 var GameEngine = require('../lib/game-engine');
 
-
 exports['inherits'] = function (test) {
-    var myGE = new GameEngine();
+    var myGE = new GameEngine(config);
 
-    test.ok(typeof myGE.get == 'function');
-    test.ok(typeof myGE.addComponent == 'function');
-    test.ok(typeof myGE.createEntity == 'function');
-    test.ok(typeof myGE.addActions == 'function');
-    test.ok(typeof myGE.actions == 'object');
+    // ComponentEntityManager
+    test.equal(typeof myGE.get, 'function');
+    test.equal(typeof myGE.addComponent, 'function');
+    test.equal(typeof myGE.createEntity, 'function');
+
+    // ActionManager
+    test.equal(typeof myGE.addActions, 'function');
+    test.equal(typeof myGE.actions, 'object');
+
+    // EventEmitter
+    test.equal(typeof myGE.addListener, 'function');
 
     test.done();
 }
 
 exports['get-modules-list'] = function (test) {
-    var myGE = new GameEngine(),
-        pathToModules = 'tests/modules',
+    var myGE = new GameEngine(config),
+        pathToModules = config.modules.directory,
         modules = myGE._getModulesList(pathToModules),
         modulesExpected;
 
@@ -44,8 +49,8 @@ exports['get-modules-list'] = function (test) {
 }
 
 exports['load-modules-components'] = function (test) {
-    var myGE = new GameEngine(),
-        pathToModules = 'tests/modules',
+    var myGE = new GameEngine(config),
+        pathToModules = config.modules.directory,
         modules = myGE._getModulesList(pathToModules);
 
     myGE._loadModulesComponents(modules);
@@ -57,12 +62,17 @@ exports['load-modules-components'] = function (test) {
     test.notEqual(compList.indexOf('Map'), -1);
     test.notEqual(compList.indexOf('Unit'), -1);
 
+    // Test creating an entity
+    var unit = myGE.e('Unit');
+
+    test.equal(unit.life, 50);
+
     test.done();
 }
 
 exports['load-modules-actions'] = function (test) {
-    var myGE = new GameEngine(),
-        pathToModules = 'tests/modules',
+    var myGE = new GameEngine(config),
+        pathToModules = config.modules.directory,
         modules = myGE._getModulesList(pathToModules);
 
     myGE._loadModulesActions(modules);
@@ -77,7 +87,7 @@ exports['load-modules-actions'] = function (test) {
 }
 
 exports['load_core_components'] = function (test) {
-    var myGE = new GameEngine(),
+    var myGE = new GameEngine(config),
         g;
 
     myGE._loadCoreComponents();
@@ -95,7 +105,7 @@ exports['load_core_components'] = function (test) {
 }
 
 exports['load_core_actions'] = function (test) {
-    var myGE = new GameEngine();
+    var myGE = new GameEngine(config);
 
     myGE._loadCoreActions();
 
@@ -107,13 +117,46 @@ exports['load_core_actions'] = function (test) {
 }
 
 exports['init'] = function (test) {
-    var myGE = new GameEngine();
+    var myGE = new GameEngine(config);
+    myGE.init();
+
+    test.equal(typeof myGE.actions, 'object');
+    test.equal(typeof myGE.getComponentsList(), 'object');
+
+    test.done();
+}
+
+exports['init_events_listeners'] = function (test) {
+    var myGE = new GameEngine(config);
+
+    myGE.init();
+
+    var unit1 = myGE.e('Unit'),
+        unit2 = myGE.e('Unit');
+
+    test.equal(typeof myGE.actions.unit.attack, 'function');
+    test.equal(unit1.life, 50);
+    test.equal(unit2.life, 50);
+
+    var receivedAction = {
+            'action': {
+                'module': 'unit',
+                'name': 'attack',
+                'args': [unit1.id, unit2.id]
+            },
+            'client': 1
+        };
+
+    myGE.emit('actionReceived', receivedAction);
+
+    test.equal(unit1.life, 45);
+    test.equal(unit2.life, 40);
 
     test.done();
 }
 
 exports['create-game'] = function (test) {
-    var myGE = new GameEngine();
+    var myGE = new GameEngine(config);
 
     test.done();
 }

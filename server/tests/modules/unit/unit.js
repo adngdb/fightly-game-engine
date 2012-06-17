@@ -9,6 +9,7 @@
     var Unit = {
         "_requires": "Position",
 
+        "life": 50,
         "attack": 10,
         "defense": 5,
         "speed": 1,
