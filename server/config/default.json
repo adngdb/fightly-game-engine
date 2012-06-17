@@ -1,4 +1,7 @@
 {
+    "server": {
+        "port": 8081
+    },
     "modules": {
         "directory": "./modules/"
     }

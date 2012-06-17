@@ -11,7 +11,7 @@ var network = require('./lib/network/com-manager'),
     GameEngine = require('./lib/game-engine');
 
 var engine = new GameEngine(config),
-    server = new network.ComManager(engine);
+    server = new network.ComManager(config, engine);
 
 engine.init();
-server.listen(8081);
+server.listen(config.server.port);
