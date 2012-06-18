@@ -14,8 +14,6 @@ var util = require('util');
     var actions = {
         "joinGame": {
             "check": function(game, player) {
-                console.log('+++++++++++++++++++++++++++++++');
-                console.log(game.players.length +' < '+ game.maxNumberOfPlayers);
                 return game.players.length < game.maxNumberOfPlayers;
             },
             "execute": function(game, player) {

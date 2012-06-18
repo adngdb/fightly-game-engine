@@ -26,7 +26,7 @@ var Game = {
     'state': 'waiting',
 
     'isPlayerActive': function(player) {
-        return player.id === this.activePlayer;
+        return player.id === this.activePlayer.id;
     },
 
     'isGameOver': function() {

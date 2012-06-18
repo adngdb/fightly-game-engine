@@ -37,8 +37,9 @@ exports['next-turn'] = function (test) {
     var g = myGE.e('Game'),
         p = myGE.e('Player');
 
-    g.players
-    g.currentPlayer = p;
+    g.players.push(p);
+    g.activePlayer = p;
+    p.inGame = g;
 
     test.equal(typeof g, 'object');
     test.equal(g.currentTurn, 0);
