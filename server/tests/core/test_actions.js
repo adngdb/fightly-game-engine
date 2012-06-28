@@ -1,8 +1,8 @@
 /**
- * Test cases for core.GameEngine class.
+ * Test cases for core actions.
  *
- * Requires node.js and it's nodeunit module.
- * To run those tests: nodeunit tests
+ * Requires node.js and its nodeunit module.
+ * To run those tests: ./runtests
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */

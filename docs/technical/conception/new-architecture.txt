@@ -11,22 +11,20 @@ lib/
         position.js
     network/
         client.js
-        server.js
-    message/
-        message-builder.js
-        message-parser.js
+        group.js
+        com-manager.js
 
 modules/
     map/
         actions.js
         cell.js
         map.js
-        module.js
     unit/
         actions.js
-        module.js
         unit.js
 
 vendor/
     component-entity/
         component-entity-manager.js
+    action-manager/
+        action-manager.js
