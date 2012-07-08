@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    FIGHTLY.init().start();
+
     $('#end-turn').click(function(e) {
         FIGHTLY.game.endTurn();
     });
@@ -10,7 +12,6 @@ $(document).ready(function() {
     var units = FIGHTLY.get('Unit');
     for (var i in units) {
         var unit = units[i];
-
-        myOwnEngine.displayUnit(unit.x, unit.y, unit.life);
+        myOwnEngine.displayUnit(unit.x, unit.y, unit.type, unit.life);
     }
 });
