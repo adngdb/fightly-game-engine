@@ -4,3 +4,9 @@
 [submodule "action-manager"]
     path = fightly/vendor/action-manager
     url = git@github.com:AdrianGaudebert/action-manager.git
+[submodule "fightly/vendor/component-entity"]
+	path = fightly/vendor/component-entity
+	url = git@github.com:AdrianGaudebert/component-entity.git
+[submodule "fightly/vendor/action-manager"]
+	path = fightly/vendor/action-manager
+	url = git@github.com:AdrianGaudebert/action-manager.git

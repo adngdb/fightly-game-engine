@@ -13,8 +13,8 @@ var util = require('util')
     , events = require('events')
     ;
 
-var cem = require('../vendor/component-entity/component-entity-manager')
-    , am = require('../vendor/action-manager/action-manager')
+var cem = require('../../vendor/component-entity/component-entity-manager')
+    , am = require('../../vendor/action-manager/action-manager')
     ;
 
 /**
