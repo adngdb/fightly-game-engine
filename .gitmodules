@@ -1,6 +1,6 @@
 [submodule "component-entity"]
-    path = server/vendor/component-entity
+    path = fightly/vendor/component-entity
     url = git@github.com:AdrianGaudebert/component-entity.git
 [submodule "action-manager"]
-    path = server/vendor/action-manager
+    path = fightly/vendor/action-manager
     url = git@github.com:AdrianGaudebert/action-manager.git
