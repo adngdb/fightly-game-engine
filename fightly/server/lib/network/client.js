@@ -25,6 +25,7 @@ var Client = function(id, socket, emitter) {
 
     this.socket.on('disconnect', function() {self.disconnect.apply(self, arguments); });
     this.socket.on('action', function() {self.receiveAction.apply(self, arguments); });
+    this.socket.on('data', function() {self.receiveData.apply(self, arguments); });
 };
 
 /**
@@ -40,12 +41,25 @@ Client.prototype.send = function(msg) {
  * @param msg: message receiced
  */
 Client.prototype.receiveAction = function(action) {
-    //~ util.log("Action received: " + data);
-    var data = {
+    //~ util.log("Action received: " + action);
+    var message = {
         "action": action,
         "client": this
     };
-    this.emitter.emit('actionReceive', data);
+    this.emitter.emit('actionReceive', message);
+};
+
+/**
+ * Listen for message received
+ * @param msg: message receiced
+ */
+Client.prototype.receiveData = function(data) {
+    //~ util.log("Data received: " + data);
+    var message = {
+        "data": data,
+        "client": this
+    };
+    this.emitter.emit('dataReceive', message);
 };
 
 /**
