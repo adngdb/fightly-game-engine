@@ -106,7 +106,7 @@ GameEngine.prototype._loadModulesActions = function(modules) {
         module = modules[m].split('/');
         module = module[module.length - 1];
         actionsFilePath = path.join(modules[m], 'actions.js');
-        if (path.existsSync(actionsFilePath)) {
+        if (fs.existsSync(actionsFilePath)) {
             actionsFile = require('../' + actionsFilePath); // Sad hack...
             this.addActions(module, actionsFile.actions);
         }
@@ -135,7 +135,7 @@ GameEngine.prototype._loadModulesComponents = function(modules) {
         files = fs.readdirSync(module);
         files.sort();
         for (f in files) {
-            file = files[f];
+            var file = files[f];
             pathToFile = path.join(module, file);
             stat = fs.statSync(pathToFile);
 
@@ -165,7 +165,7 @@ GameEngine.prototype._getModulesList = function(pathToModules) {
     var modules;
 
     pathToModules = path.normalize(pathToModules);
-    if (!path.existsSync(pathToModules)) {
+    if (!fs.existsSync(pathToModules)) {
         util.debug("The modules directory '" + pathToModules + "' doesn't exist");
         return [];
     }
@@ -180,13 +180,55 @@ GameEngine.prototype._getModulesList = function(pathToModules) {
 };
 
 /**
+ * Return a dictionary of all modules and their files.
+ *
+ * @return A dictionary with keys being module names and values being a list of
+ * files in that module.
+ */
+GameEngine.prototype.getModules = function() {
+    var pathToModules = this.config.modules.directory;
+    var modules = {};
+
+    pathToModules = path.normalize(pathToModules);
+    if (!fs.existsSync(pathToModules)) {
+        util.debug("The modules directory '" + pathToModules + "' doesn't exist");
+        return [];
+    }
+
+    modulesList = fs.readdirSync(pathToModules);
+    modulesList.sort();
+    for (m in modulesList) {
+        var module = modulesList[m];
+        var pathToModule = path.join(pathToModules, module);
+        var filesInModule = [];
+
+        files = fs.readdirSync(pathToModule);
+        files.sort();
+        for (f in files) {
+            var file = files[f];
+            var pathToFile = path.join(pathToModule, file);
+            stat = fs.statSync(pathToFile);
+
+            if (stat.isFile() && file.lastIndexOf('.js') === file.length - 3) {
+                // Add this file to the list of files in the current module
+                filesInModule.push(file)
+            }
+        }
+
+        modules[modulesList[m]] = filesInModule;
+    }
+
+    return modules;
+};
+
+/**
  * Create bindings for all events the game engine can handle.
  *
  * @return this.
  */
 GameEngine.prototype._initEventsListeners = function() {
     // Execute an action
-    this.on('actionReceived', function(data) {
+    this.on('actionReceive', function(data) {
         var client = data.client,
             module = data.action.module,
             action = data.action.name,
@@ -199,6 +241,19 @@ GameEngine.prototype._initEventsListeners = function() {
 
         this.actions[module][action].apply(null, args);
     }.bind(this));
+
+    this.on('dataReceive', function (message) {
+        util.log('GameEngine received data request: ' + message);
+        var data = message.data,
+            client = message.client;
+
+        if (data === 'modules') {
+            // The client is asking for the list of all modules
+            client.send({
+                'modules': this.getModules()
+            });
+        }
+    });
     return this;
 };
 
