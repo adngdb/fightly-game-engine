@@ -29,6 +29,24 @@ exports['inherits'] = function (test) {
     test.done();
 }
 
+exports['get-modules'] = function (test) {
+    var myGE = new GameEngine(config),
+        modules = myGE.getModules(),
+        modulesExpected;
+
+    // there are 3 folders in tests/modules/
+    test.equal(Object.keys(modules).length, 3);
+
+    modulesExpected = {
+        'core': ['actions.js', 'position.js'],
+        'map': ['actions.js', 'cell.js', 'map.js'],
+        'unit': ['actions.js', 'unit.js'],
+    };
+    test.deepEqual(modules, modulesExpected);
+
+    test.done();
+}
+
 exports['get-modules-list'] = function (test) {
     var myGE = new GameEngine(config),
         pathToModules = config.modules.directory,
@@ -151,6 +169,26 @@ exports['init_events_listeners'] = function (test) {
 
     test.equal(unit1.life, 45);
     test.equal(unit2.life, 40);
+
+    test.done();
+}
+
+exports['data_received_event'] = function (test) {
+    var myGE = new GameEngine(config);
+    var client = {
+        call: 0,
+        send: function () {
+            this.call++;
+        }
+    };
+    var dataReceived = {
+        data: 'modules',
+        client: client
+    };
+
+    myGE.init();
+    myGE.emit('dataReceived', dataReceived);
+    test.equal(client.call, 1);
 
     test.done();
 }

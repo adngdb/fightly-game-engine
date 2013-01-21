@@ -22,7 +22,10 @@ define(['lib/socket.io'], function (socket) {
 
     ComManager.prototype = {
 
-        init: function() {
+        init: function(onConnection, onMessage) {
+            this.connectionCallback = onConnection;
+            this.messageCallback = onMessage;
+
             var socket = io.connect(
                 this.config.host,
                 { port: this.config.port }
@@ -35,15 +38,21 @@ define(['lib/socket.io'], function (socket) {
             socket.on('message', this._onMessage.bind(this));
             socket.on('disconnect', this._onClose.bind(this));
 
+            socket.on('data', function () {
+                console.log('On data');
+            });
+
             this._socket = socket;
         },
 
         _onOpen: function() {
             console.log("ComManager.onOpen");
+            this.connectionCallback.call();
         },
 
         _onMessage: function(msg) {
-            console.log("ComManager.onMessage: "+msg);
+            console.log("ComManager.onMessage: " + msg);
+            this.messageCallback.call(null, msg);
         },
 
         _onClose: function() {
@@ -52,6 +61,11 @@ define(['lib/socket.io'], function (socket) {
 
         action: function (action) {
             this._socket.emit('action', action);
+        },
+
+        data: function (data) {
+            console.log('Sending data request to server: ' + data);
+            this._socket.emit('data', data);
         },
 
         send: function(message) {
