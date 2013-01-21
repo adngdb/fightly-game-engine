@@ -20,16 +20,27 @@ define(['src/network'], function (
         this.config = config;
     };
 
+    var onMessage = function (message) {
+        console.log('onMessage: ' + message);
+
+        if (message.hasOwnProperty('modules')) {
+            console.log(message.modules);
+        }
+    };
+
     F.prototype.init = function () {
+        var self = this;
+
         // create network connexion
         this.server = new network.ComManager(this.config.network);
-        this.server.init();
-
-        this.loadModules();
+        this.server.init(function () {
+            self.loadModules();
+        }, onMessage);
     };
 
     F.prototype.loadModules = function () {
         // Get modules and files list from server
+        this.server.data('modules');
         // Load each file
         // Then call loadActions and loadComponents for each module
     };

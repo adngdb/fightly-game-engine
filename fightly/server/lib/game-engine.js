@@ -228,7 +228,7 @@ GameEngine.prototype.getModules = function() {
  */
 GameEngine.prototype._initEventsListeners = function() {
     // Execute an action
-    this.on('actionReceived', function(data) {
+    this.on('actionReceive', function(data) {
         var client = data.client,
             module = data.action.module,
             action = data.action.name,
@@ -242,7 +242,8 @@ GameEngine.prototype._initEventsListeners = function() {
         this.actions[module][action].apply(null, args);
     }.bind(this));
 
-    this.on('dataReceived', function (message) {
+    this.on('dataReceive', function (message) {
+        util.log('GameEngine received data request: ' + message);
         var data = message.data,
             client = message.client;
 
