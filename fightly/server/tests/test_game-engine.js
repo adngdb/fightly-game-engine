@@ -165,7 +165,7 @@ exports['init_events_listeners'] = function (test) {
             'client': 1
         };
 
-    myGE.emit('actionReceived', receivedAction);
+    myGE.emit('actionReceive', receivedAction);
 
     test.equal(unit1.life, 45);
     test.equal(unit2.life, 40);
@@ -187,7 +187,7 @@ exports['data_received_event'] = function (test) {
     };
 
     myGE.init();
-    myGE.emit('dataReceived', dataReceived);
+    myGE.emit('dataReceive', dataReceived);
     test.equal(client.call, 1);
 
     test.done();
