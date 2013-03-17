@@ -104,11 +104,13 @@ exports['load-modules-actions'] = function (test) {
     test.done();
 }
 
-exports['load_core_components'] = function (test) {
+exports['load-core-components'] = function (test) {
     var myGE = new GameEngine(config),
+        pathToModules = config.core.modules.directory,
+        modules = myGE._getModulesList(pathToModules),
         g;
 
-    myGE._loadCoreComponents();
+    myGE._loadModulesComponents(modules);
 
     var compList = myGE.getComponentsList();
     test.equal(typeof compList, 'object');
@@ -122,10 +124,12 @@ exports['load_core_components'] = function (test) {
     test.done();
 }
 
-exports['load_core_actions'] = function (test) {
-    var myGE = new GameEngine(config);
+exports['load-core-actions'] = function (test) {
+    var myGE = new GameEngine(config)
+        pathToModules = config.core.modules.directory,
+        modules = myGE._getModulesList(pathToModules);
 
-    myGE._loadCoreActions();
+    myGE._loadModulesActions(modules);
 
     var actions = myGE.actions;
     test.equal(typeof actions, 'object');
@@ -144,7 +148,7 @@ exports['init'] = function (test) {
     test.done();
 }
 
-exports['init_events_listeners'] = function (test) {
+exports['init-events-listeners'] = function (test) {
     var myGE = new GameEngine(config);
 
     myGE.init();
@@ -173,7 +177,7 @@ exports['init_events_listeners'] = function (test) {
     test.done();
 }
 
-exports['data_received_event'] = function (test) {
+exports['data-received-event'] = function (test) {
     var myGE = new GameEngine(config);
     var client = {
         call: 0,
@@ -194,7 +198,7 @@ exports['data_received_event'] = function (test) {
 }
 
 exports['create-game'] = function (test) {
-    var myGE = new GameEngine(config);
+    var myGE = new GameEngine(config.core);
     myGE.init();
 
     var game = myGE.createGame();
