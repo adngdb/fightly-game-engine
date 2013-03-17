@@ -4,4 +4,5 @@
 *.out
 *.backup
 *.toc
-fightly/server/node_modules
+fightly/*/node_modules
+fightly/client/fightly.js
