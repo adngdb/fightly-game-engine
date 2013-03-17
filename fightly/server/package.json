@@ -1,0 +1,11 @@
+{
+    "name": "FightlyGameEngine",
+    "version": "0.0.1",
+    "dependencies": {
+        "socket.io": ">=0.9.13",
+        "config": ">=0.4.21"
+    },
+    "devDependencies": {
+        "nodeunit": ">=0.7"
+    }
+}
