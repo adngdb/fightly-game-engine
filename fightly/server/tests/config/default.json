@@ -1,5 +1,10 @@
 {
     "modules": {
         "directory": "./tests/modules"
+    },
+    "core": {
+        "modules": {
+            "directory": "./modules"
+        }
     }
 }

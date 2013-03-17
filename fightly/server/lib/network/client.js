@@ -49,7 +49,6 @@ Client.prototype.send = function(msg) {
  * @param msg: message receiced
  */
 Client.prototype.receiveAction = function(action) {
-    util.log("Action received: " + action);
     var message = {
         "action": action,
         "client": this
