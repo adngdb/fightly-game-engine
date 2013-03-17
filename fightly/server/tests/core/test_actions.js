@@ -7,15 +7,15 @@
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
 var path = require('path'),
-    util = require('util');
+    util = require('util'),
+    config = require('config');
 
 var GameEngine = require('../../lib/game-engine');
 
 
 exports['join-game'] = function (test) {
-    var myGE = new GameEngine();
-    myGE._loadCoreActions()
-        ._loadCoreComponents();
+    var myGE = new GameEngine(config.core);
+    myGE.init();
 
     var g = myGE.e('Game'),
         p = myGE.e('Player');
@@ -30,9 +30,8 @@ exports['join-game'] = function (test) {
 }
 
 exports['next-turn'] = function (test) {
-    var myGE = new GameEngine();
-    myGE._loadCoreActions()
-        ._loadCoreComponents();
+    var myGE = new GameEngine(config.core);
+    myGE.init();
 
     var g = myGE.e('Game'),
         p = myGE.e('Player');

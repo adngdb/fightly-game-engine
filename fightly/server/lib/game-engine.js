@@ -47,46 +47,12 @@ GameEngine.prototype.init = function() {
 
     // initialize the GameEngine
 
-
-    // Load core actions and components
-    this._loadCoreComponents()._loadCoreActions();
-
     // Load modules' actions and components
     modules = this._getModulesList(pathToModules);
     this._loadModulesComponents(modules)._loadModulesActions(modules);
 
     // Listen to events
     this._initEventsListeners();
-
-    return this;
-};
-
-/**
- * Load and register all core actions into this GameEngine.
- *
- * @return this.
- */
-GameEngine.prototype._loadCoreActions = function() {
-    var actions = require('./core/actions.js');
-    this.addActions('core', actions.actions);
-    return this;
-};
-
-/**
- * Load and register all core components into this GameEngine.
- *
- * @return this.
- */
-GameEngine.prototype._loadCoreComponents = function() {
-    // Game
-    var game = require('./core/game.js');
-    this.c('Game', game.Game);
-    util.log('Added Core component Game to GameEngine');
-
-    // Player
-    var player = require('./core/player.js');
-    this.c('Player', player.Player);
-    util.log('Added Core component Player to GameEngine');
 
     return this;
 };
@@ -121,12 +87,12 @@ GameEngine.prototype._loadModulesActions = function(modules) {
  * @return this.
  */
 GameEngine.prototype._loadModulesComponents = function(modules) {
-    var module
-        , files
-        , pathToFile
-        , stat
-        , component
-        ;
+    var module;
+    var files;
+    var file;
+    var pathToFile;
+    var stat;
+    var component;
 
     for (m in modules) {
         module = modules[m];
@@ -135,11 +101,15 @@ GameEngine.prototype._loadModulesComponents = function(modules) {
         files = fs.readdirSync(module);
         files.sort();
         for (f in files) {
-            var file = files[f];
+            file = files[f];
             pathToFile = path.join(module, file);
             stat = fs.statSync(pathToFile);
 
-            if (stat.isFile() && file.lastIndexOf('.js') === file.length - 3 && file !== 'actions.js') {
+            if (
+                stat.isFile() &&
+                file.lastIndexOf('.js') === file.length - 3 &&
+                file !== 'actions.js'
+            ) {
                 // It's a component file, let's load it
                 components = require('../' + pathToFile); // Node.js sad hack
                 for (c in components) {
@@ -166,7 +136,10 @@ GameEngine.prototype._getModulesList = function(pathToModules) {
 
     pathToModules = path.normalize(pathToModules);
     if (!fs.existsSync(pathToModules)) {
-        util.debug("The modules directory '" + pathToModules + "' doesn't exist");
+        util.error(util.format(
+            "The modules directory '%s' doesn't exist",
+            pathToModules
+        ));
         return [];
     }
 
@@ -191,7 +164,10 @@ GameEngine.prototype.getModules = function() {
 
     pathToModules = path.normalize(pathToModules);
     if (!fs.existsSync(pathToModules)) {
-        util.debug("The modules directory '" + pathToModules + "' doesn't exist");
+        util.error(util.format(
+            "The modules directory '%s' doesn't exist",
+            pathToModules
+        ));
         return [];
     }
 
