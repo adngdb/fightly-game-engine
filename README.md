@@ -1,15 +1,49 @@
 Fightly Game Engine
 ===================
 
-A game engine for strategic, turn-based, web games.
+A game engine for strategic, turn-based, web games. The goal is to be heavily modular, to allow a wide variety of turn-based games to be developed.
 
-Testing
-=======
+Features
+--------
 
-To test it, install node.js, npm and module socket.io. See https://gist.github.com/579814 and http://npmjs.org/
+* simple client-side interface in JavaScript
+* complete server stack using ``node.js`` and ``socket.io``
+* based on modules
 
-Launch your web server, and create a link to /dev/client/ in your www folder.
+All you should have to do is find the right modules, and develop the front-end of your game.
 
-Go to /dev/server/ and start the game : node server.js
+Current state
+-------------
 
-Go to your localhost and open three windows with the game: enjoy!
+Fightly is still in early development, most of the features are not ready. If you're interested, feel free to help! You can look at the open issues, read and comment the source code, send pull requests, or test the current version on your environment -- any help is appreciated!
+
+Development
+===========
+
+Server
+------
+
+You will need ``node.js`` and ``npm`` installed on your host first. See for example the [download page of node.js](http://nodejs.org/download/) or this [guide to installing node and npm](http://joyent.com/blog/installing-node-and-npm).
+
+Install the dependencies:
+<pre>
+cd fightly/server/
+npm install
+</pre>
+
+Run the unit tests:
+<pre>
+./runtests
+</pre>
+
+Run the server:
+<pre>
+node server.js
+</pre>
+
+Client
+------
+
+Create a link to ``fightly/client/`` in your Web directory (or configure your Web server to point to ``fightly/client/``) and browse to the corresponding URL.
+
+There is currently nothing to see in the client, except in the logs. Open your browser's console!
