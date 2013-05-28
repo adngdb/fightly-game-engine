@@ -7,31 +7,38 @@
  *
  * ***************************************************************************/
 
-var util = require('util');
+// for compatibility with node.js and require.js
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module)
+}
 
-/**
- * Game component.
- *
- * @author Adrian Gaudebert - adrian@gaudebert.fr
- * @constructor
- */
-var Game = {
-    'currentTurn': 0,
-    'maxNumberOfTurns': 100,
+define(function () {
+    /**
+     * Game component.
+     *
+     * @author Adrian Gaudebert - adrian@gaudebert.fr
+     * @constructor
+     */
+    var Game = {
+        'currentTurn': 0,
+        'maxNumberOfTurns': 100,
 
-    'players': [],
-    'maxNumberOfPlayers': 2,
-    'activePlayer': null,
+        'players': [],
+        'maxNumberOfPlayers': 2,
+        'activePlayer': null,
 
-    'state': 'waiting',
+        'state': 'waiting',
 
-    'isPlayerActive': function(player) {
-        return player.id === this.activePlayer.id;
-    },
+        'isPlayerActive': function(player) {
+            return player.id === this.activePlayer.id;
+        },
 
-    'isGameOver': function() {
-        return this.currentTurn >= this.maxNumberOfTurns;
-    },
-};
+        'isGameOver': function() {
+            return this.currentTurn >= this.maxNumberOfTurns;
+        },
+    };
 
-exports.Game = Game;
+    return {
+        'Game': Game
+    };
+});

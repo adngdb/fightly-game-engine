@@ -7,10 +7,12 @@
  *
  * ***************************************************************************/
 
-var util = require('util');
+// for compatibility with node.js and require.js
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module)
+}
 
-(function(exports) {
-
+define(function () {
     var actions = {
         "joinGame": {
             "check": function(game, player) {
@@ -32,6 +34,7 @@ var util = require('util');
         },
     };
 
-    exports.actions = actions;
-
-})(typeof exports === 'undefined' ? this['exports'] = {} : exports);
+    return {
+        'actions': actions
+    };
+});
