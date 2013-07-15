@@ -115,7 +115,7 @@ GameEngine.prototype._loadModulesComponents = function(modules) {
                 for (c in components) {
                     // Add this component to the GameEngine
                     this.c(c, components[c]);
-                    util.log('Added component ' + c + ' to GameEngine');
+                    //util.log('Added component ' + c + ' to GameEngine');
                 }
             }
         }
@@ -132,7 +132,7 @@ GameEngine.prototype._loadModulesComponents = function(modules) {
  * @return A list of paths to module folders, or an empty list.
  */
 GameEngine.prototype._getModulesList = function(pathToModules) {
-    var modules;
+    var modules = [];
 
     pathToModules = path.normalize(pathToModules);
     if (!fs.existsSync(pathToModules)) {
@@ -143,10 +143,15 @@ GameEngine.prototype._getModulesList = function(pathToModules) {
         return [];
     }
 
-    modules = fs.readdirSync(pathToModules);
-    modules.sort();
-    for (m in modules) {
-        modules[m] = path.join(pathToModules, modules[m]);
+    var modulesList = fs.readdirSync(pathToModules);
+    modulesList.sort();
+    for (var m in modulesList) {
+        var module = modulesList[m];
+        var modulePath = path.join(pathToModules, module);
+        var stats = fs.statSync(modulePath);
+        if (stats.isDirectory() && module !== 'node_modules') {
+            modules.push(modulePath);
+        }
     }
 
     return modules;
@@ -162,20 +167,10 @@ GameEngine.prototype.getModules = function() {
     var pathToModules = this.config.modules.directory;
     var modules = {};
 
-    pathToModules = path.normalize(pathToModules);
-    if (!fs.existsSync(pathToModules)) {
-        util.error(util.format(
-            "The modules directory '%s' doesn't exist",
-            pathToModules
-        ));
-        return [];
-    }
-
-    modulesList = fs.readdirSync(pathToModules);
-    modulesList.sort();
+    modulesList = this._getModulesList(pathToModules);
     for (m in modulesList) {
-        var module = modulesList[m];
-        var pathToModule = path.join(pathToModules, module);
+        var module = path.basename(modulesList[m]);
+        var pathToModule = modulesList[m];
         var filesInModule = [];
 
         files = fs.readdirSync(pathToModule);
@@ -191,7 +186,7 @@ GameEngine.prototype.getModules = function() {
             }
         }
 
-        modules[modulesList[m]] = filesInModule;
+        modules[module] = filesInModule;
     }
 
     return modules;
@@ -219,7 +214,7 @@ GameEngine.prototype._initEventsListeners = function() {
     }.bind(this));
 
     this.on('dataReceive', function (message) {
-        util.log('GameEngine received data request: ' + message);
+        //util.log('GameEngine received data request: ' + message);
         var data = message.data,
             client = message.client;
 

@@ -1,0 +1,7 @@
+{
+    "name": "FightlyGameEngine-modules",
+    "version": "0.0.1",
+    "dependencies": {
+        "amdefine": ">=0.0.4"
+    }
+}

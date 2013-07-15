@@ -20,10 +20,8 @@ exports['join-game'] = function (test) {
     var g = myGE.e('Game'),
         p = myGE.e('Player');
 
-    util.log(util.inspect(myGE.actions.core.joinGame));
 
     test.ok(myGE.actions.core.joinGame(g, p));
-
     test.equal(g.players.length, 1);
 
     test.done();

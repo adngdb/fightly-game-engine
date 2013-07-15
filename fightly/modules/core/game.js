@@ -9,6 +9,7 @@
 
 // for compatibility with node.js and require.js
 if (typeof define !== 'function') {
+    // this file is imported from the server
     var define = require('amdefine')(module)
 }
 
