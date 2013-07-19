@@ -21,20 +21,20 @@ define(function () {
      * @constructor
      */
     var Game = {
-        'currentTurn': 0,
-        'maxNumberOfTurns': 100,
+        currentTurn: 0,
+        maxNumberOfTurns: 100,
 
-        'players': [],
-        'maxNumberOfPlayers': 2,
-        'activePlayer': null,
+        players: [],
+        maxNumberOfPlayers: 2,
+        activePlayer: null,
 
-        'state': 'waiting',
+        state: 'waiting',
 
-        'isPlayerActive': function(player) {
+        isPlayerActive: function(player) {
             return player.id === this.activePlayer.id;
         },
 
-        'isGameOver': function() {
+        isGameOver: function() {
             return this.currentTurn >= this.maxNumberOfTurns;
         },
     };

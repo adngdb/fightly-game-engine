@@ -14,20 +14,20 @@ if (typeof define !== 'function') {
 
 define(function () {
     var actions = {
-        "joinGame": {
-            "check": function(game, player) {
+        joinGame: {
+            check: function(game, player) {
                 return game.players.length < game.maxNumberOfPlayers;
             },
-            "execute": function(game, player) {
+            execute: function(game, player) {
                 game.players.push(player);
                 player.inGame = game;
             }
         },
-        "nextTurn": {
-            "check": function(game, player) {
+        nextTurn: {
+            check: function(game, player) {
                 return game.isPlayerActive(player);
             },
-            "execute": function(game, player) {
+            execute: function(game, player) {
                 game.currentTurn += 1;
                 game.activePlayer = game.players[game.currentTurn % game.players.length];
             }
