@@ -14,18 +14,17 @@ define(['lib/socket.io'], function (socket) {
      * @author Adrian Gaudebert - adrian@gaudebert.fr
      * @constructor
      */
-    var ComManager = function(config) {
+    var ComManager = function(config, eventsListener) {
         this.config = config;
-
+        this.listener = eventsListener;
         this._socket = null;
+
+        this.init();
     };
 
     ComManager.prototype = {
 
-        init: function(onConnection, onMessage) {
-            this.connectionCallback = onConnection;
-            this.messageCallback = onMessage;
-
+        init: function() {
             var socket = io.connect(
                 this.config.host,
                 { port: this.config.port }
@@ -47,12 +46,12 @@ define(['lib/socket.io'], function (socket) {
 
         _onOpen: function() {
             console.log("ComManager.onOpen");
-            this.connectionCallback.call();
+            this.listener.emit('connection');
         },
 
         _onMessage: function(msg) {
             console.log("ComManager.onMessage: " + msg);
-            this.messageCallback.call(null, msg);
+            this.listener.emit('data', msg);
         },
 
         _onClose: function() {

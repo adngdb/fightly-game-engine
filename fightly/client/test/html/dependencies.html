@@ -13,7 +13,14 @@ require various base JS files and then check that there was no require error.
         <script>
 
 requirejs.config({
-    baseUrl: '../..'
+    baseUrl: '../../src',
+    paths: {
+        'main': '../main',
+        'requireLib': '../lib/require',
+        'lib': '../lib',
+        'config': '../config',
+        'vendor': '../../vendor'
+    },
 });
 
         </script>

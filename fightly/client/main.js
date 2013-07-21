@@ -1,4 +1,4 @@
-require(['src/fightly', 'config/config'], function (
+require(['fightly', 'config/config'], function (
           fightly,       config
 ) {
     var F = new fightly(config);

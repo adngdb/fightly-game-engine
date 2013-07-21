@@ -7,8 +7,13 @@
  *
  **********************************************************************/
 
-define(['network', 'vendor/component-entity/component-entity-manager', 'vendor/action-manager/action-manager'], function (
-        network, cem, am
+define([
+    'network',
+    'vendor/component-entity/component-entity-manager',
+    'vendor/action-manager/action-manager',
+    'lib/microevent',
+], function (
+    network, cem, am, microevent
 ) {
     "use strict";
 
@@ -19,6 +24,9 @@ define(['network', 'vendor/component-entity/component-entity-manager', 'vendor/a
     var F = function (config) {
         this.config = config;
     };
+
+    // Make it an event emitter / listener
+    microevent.mixin(F);
 
     var onMessage = function (message) {
         console.log('onMessage: ' + message);
@@ -34,12 +42,14 @@ define(['network', 'vendor/component-entity/component-entity-manager', 'vendor/a
         this.cem = new cem.ComponentEntityManager();
         this.am = new am.ActionManager();
 
-        // create network connexion
-        this.server = new network.ComManager(this.config.network);
-        this.server.init(function () {
+        // create network connection
+        this.server = new network.ComManager(this.config.network, this);
+
+        this.on('connection', function () {
             // Require modules list from the server
             self.server.data('modules');
-        }, onMessage);
+        });
+        this.on('data', onMessage);
     };
 
     F.prototype.loadModules = function (modules) {
