@@ -4,7 +4,8 @@
     out: '../fightly.js',
     paths: {
         'requireLib': '../lib/require',
-        'lib': '../lib/',
+        'lib': '../lib',
+        'vendor': '../../vendor'
     },
     include: 'requireLib'
 })

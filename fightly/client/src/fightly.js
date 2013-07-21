@@ -7,8 +7,8 @@
  *
  **********************************************************************/
 
-define(['network'], function (
-        network
+define(['network', 'vendor/component-entity/component-entity-manager', 'vendor/action-manager/action-manager'], function (
+        network, cem, am
 ) {
     "use strict";
 
@@ -31,25 +31,26 @@ define(['network'], function (
     F.prototype.init = function () {
         var self = this;
 
+        this.cem = new cem.ComponentEntityManager();
+        this.am = new am.ActionManager();
+
         // create network connexion
         this.server = new network.ComManager(this.config.network);
         this.server.init(function () {
-            self.loadModules();
+            // Require modules list from the server
+            self.server.data('modules');
         }, onMessage);
     };
 
-    F.prototype.loadModules = function () {
-        // Get modules and files list from server
-        this.server.data('modules');
-        // Load each file
-        // Then call loadActions and loadComponents for each module
-    };
+    F.prototype.loadModules = function (modules) {
+        ;
+    }
 
-    F.prototype.loadActions = function (module, module_name) {
+    F.prototype.loadActions = function (module, moduleName) {
         // load the actions of a given module
     };
 
-    F.prototype.loadComponents = function (module, module_name) {
+    F.prototype.loadComponents = function (module, moduleName) {
         // load the components of a given module
     };
 
