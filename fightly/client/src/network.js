@@ -8,6 +8,8 @@
  **********************************************************************/
 
 define(['lib/socket.io'], function (socket) {
+    "use strict";
+
     /**
      * Class ComManager
      *
@@ -38,20 +40,18 @@ define(['lib/socket.io'], function (socket) {
             socket.on('disconnect', this._onClose.bind(this));
 
             socket.on('data', function () {
-                console.log('On data');
+                console.log('WARNING: event "data" received and not handled');
             });
 
             this._socket = socket;
         },
 
         _onOpen: function() {
-            console.log("ComManager.onOpen");
             this.listener.emit('connection');
         },
 
         _onMessage: function(msg) {
-            console.log("ComManager.onMessage: " + msg);
-            this.listener.emit('data', msg);
+            this.listener.emit('data', JSON.parse(msg));
         },
 
         _onClose: function() {

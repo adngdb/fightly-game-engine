@@ -93,6 +93,7 @@ GameEngine.prototype._loadModulesComponents = function(modules) {
     var pathToFile;
     var stat;
     var component;
+    var c;
 
     for (m in modules) {
         module = modules[m];
