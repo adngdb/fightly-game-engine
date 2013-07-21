@@ -1,9 +1,7 @@
 BUILD_DIR=./build
 COMPILER=$(BUILD_DIR)/r.js
 
-all: fightly.js
-
-fightly.js:
+all:
 	node $(COMPILER) -o $(BUILD_DIR)/build.js
 
 tests:
