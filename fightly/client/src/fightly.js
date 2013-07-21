@@ -7,7 +7,7 @@
  *
  **********************************************************************/
 
-define(['src/network'], function (
+define(['network'], function (
         network
 ) {
     "use strict";

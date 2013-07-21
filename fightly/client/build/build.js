@@ -1,5 +1,10 @@
 ({
-    baseUrl: '..',
-    name: 'src/fightly',
-    out: '../fightly.js'
+    baseUrl: '../src',
+    name: 'fightly',
+    out: '../fightly.js',
+    paths: {
+        'requireLib': '../lib/require',
+        'lib': '../lib/',
+    },
+    include: 'requireLib'
 })
