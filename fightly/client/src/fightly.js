@@ -17,20 +17,14 @@ define([
 ) {
     "use strict";
 
-    function is_null(variable) {
-        return variable === null || typeof variable === 'undefined';
-    }
-
-    var F = function (config) {
+    var Fightly = function (config) {
         this.config = config;
     };
 
     // Make it an event emitter / listener
-    microevent.mixin(F);
+    microevent.mixin(Fightly);
 
-    F.prototype.init = function () {
-        var self = this;
-
+    Fightly.prototype.init = function () {
         this.cem = new cem.ComponentEntityManager();
         this.am = new am.ActionManager();
 
@@ -41,7 +35,7 @@ define([
         this.listen();
     };
 
-    F.prototype.listen = function () {
+    Fightly.prototype.listen = function () {
         var self = this;
 
         this.on('connection', function () {
@@ -56,7 +50,7 @@ define([
         });
     };
 
-    F.prototype.loadModules = function (modules) {
+    Fightly.prototype.loadModules = function (modules) {
         for (var moduleName in modules) {
             var module = modules[moduleName];
             for (var i in module) {
@@ -70,7 +64,7 @@ define([
         }
     };
 
-    F.prototype.loadActions = function (file, moduleName) {
+    Fightly.prototype.loadActions = function (file, moduleName) {
         var self = this;
 
         // load the actions of a given module
@@ -80,7 +74,7 @@ define([
         });
     };
 
-    F.prototype.loadComponent = function (file, moduleName) {
+    Fightly.prototype.loadComponent = function (file, moduleName) {
         var self = this;
 
         // load a component of a given module
@@ -92,5 +86,5 @@ define([
         });
     };
 
-    return F;
+    return Fightly;
 });
