@@ -7,13 +7,11 @@
  *
  *****************************************************************************/
 
-var util = require('util')
-    , http = require('http')
-    , io = require('socket.io')
-    ;
+var util = require('util');
+var http = require('http');
+var io = require('socket.io');
 
-var client = require('./client')
-    ;
+var client = require('./client');
 
 /**
  * Create and handle the connections with clients.

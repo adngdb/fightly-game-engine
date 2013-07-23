@@ -16,13 +16,13 @@ define(['lib/socket.io'], function (socket) {
      * @author Adrian Gaudebert - adrian@gaudebert.fr
      * @constructor
      */
-    var ComManager = function(config, eventsListener) {
+    function ComManager(config, eventsListener) {
         this.config = config;
         this.listener = eventsListener;
         this._socket = null;
 
         this.init();
-    };
+    }
 
     ComManager.prototype = {
 

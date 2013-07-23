@@ -16,7 +16,7 @@ var util = require('util');
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
-var Client = function(id, socket, emitter) {
+function Client(id, socket, emitter) {
     var self = this;
 
     this.id = id;

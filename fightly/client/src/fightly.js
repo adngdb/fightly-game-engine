@@ -17,9 +17,9 @@ define([
 ) {
     "use strict";
 
-    var Fightly = function (config) {
+    function Fightly(config) {
         this.config = config;
-    };
+    }
 
     // Make it an event emitter / listener
     microevent.mixin(Fightly);

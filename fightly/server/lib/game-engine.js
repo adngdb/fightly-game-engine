@@ -7,15 +7,13 @@
  *
  *****************************************************************************/
 
-var util = require('util')
-    , fs = require('fs')
-    , path = require('path')
-    , events = require('events')
-    ;
+var util = require('util');
+var fs = require('fs');
+var path = require('path');
+var events = require('events');
 
-var cem = require('../../vendor/component-entity/component-entity-manager')
-    , am = require('../../vendor/action-manager/action-manager')
-    ;
+var cem = require('../../vendor/component-entity/component-entity-manager');
+var am = require('../../vendor/action-manager/action-manager');
 
 /**
  * Class GameEngine
@@ -30,7 +28,7 @@ function GameEngine(config) {
 
     this.config = config;
     this.games = [];
-};
+}
 
 util.inherits(GameEngine, cem.ComponentEntityManager);
 util.inherits(GameEngine, am.ActionManager);
