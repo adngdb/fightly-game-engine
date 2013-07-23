@@ -8,7 +8,10 @@ define(function (require) {
     var config = {
         network: {
             host: 'localhost',
-            port: 8001
+            port: 123456
+        },
+        modules: {
+            baseUrl: '../../modules/'
         }
     }
 
@@ -23,6 +26,21 @@ define(function (require) {
             expect(F.emit).to.exist;
             expect(F.on).to.exist;
             expect(F.off).to.exist;
+        });
+
+        it('should have ComponentEntityManager methods', function () {
+            var F = new fightly(config);
+            expect(F.addActions).to.exist;
+            expect(F.actions).to.exist;
+        });
+
+        it('should have ActionManager methods', function () {
+            var F = new fightly(config);
+            expect(F.c).to.exist;
+            expect(F.addComponent).to.exist;
+            expect(F.e).to.exist;
+            expect(F.createEntity).to.exist;
+            expect(F.get).to.exist;
         });
 
         describe('#listen()', function () {
@@ -62,6 +80,34 @@ define(function (require) {
                 F.emit('data', {modules: {a: 13}});
                 expect(data).to.have.length(2);
                 expect(data[1]).to.deep.equal({a: 13});
+            });
+        });
+
+        describe('#loadModules()', function () {
+            it('should load modules', function (done) {
+                var F = new fightly(config);
+                F.init();
+
+                var modules = {
+                    core: [
+                        'actions.js',
+                        'game.js',
+                        'player.js',
+                    ]
+                };
+                F.emit('data', { 'modules': modules });
+
+                F.on('modules-loaded', function () {
+                    // actions
+                    expect(F.actions).to.exist;
+                    expect(F.actions.core).to.exist;
+                    expect(F.actions.core.joinGame).to.exist;
+
+                    // components
+                    expect(F.getComponentsList()).to.deep.equal(['obj', 'Game', 'Player']);
+
+                    done();
+                });
             });
         });
     });
