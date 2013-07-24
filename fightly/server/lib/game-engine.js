@@ -56,6 +56,57 @@ GameEngine.prototype.init = function() {
 };
 
 /**
+ * Create bindings for all events the game engine can handle.
+ *
+ * @return this.
+ */
+GameEngine.prototype._initEventsListeners = function() {
+    var self = this;
+
+    this.on('newPlayer', function (client) {
+        var player = this.e('Player');
+        client._player = player;
+        client.send({identity: player});
+    });
+
+    // Execute an action
+    this.on('actionReceive', function (data) {
+        var client = data.client;
+        var module = data.action.module;
+        var action = data.action.name;
+        var params = data.action.args;
+        var args = [];
+
+        for (var e in params) {
+            args.push(self.get(params[e]));
+        }
+
+        if (module === 'core' && action === 'createGame') {
+            // This is a special case handled by this game engine, as only
+            // the game engine can create a new game.
+            self.createGame.apply(self, args);
+        }
+        else {
+            self.actions[module][action].apply(null, args);
+        }
+    });
+
+    this.on('dataReceive', function (message) {
+        //util.log('GameEngine received data request: ' + message);
+        var data = message.data;
+        var client = message.client;
+
+        if (data === 'modules') {
+            // The client is asking for the list of all modules
+            client.send({
+                'modules': this.getModules()
+            });
+        }
+    });
+    return this;
+};
+
+/**
  * Load and register all modules' actions into this GameEngine.
  *
  * @param modules Array, list of all module directories.
@@ -189,49 +240,6 @@ GameEngine.prototype.getModules = function() {
     }
 
     return modules;
-};
-
-/**
- * Create bindings for all events the game engine can handle.
- *
- * @return this.
- */
-GameEngine.prototype._initEventsListeners = function() {
-    var self = this;
-
-    // Execute an action
-    this.on('actionReceive', function(data) {
-        var client = data.client;
-        var module = data.action.module;
-        var action = data.action.name;
-        var params = data.action.args;
-        var args = [];
-
-        for (var e in params) {
-            args.push(self.get(params[e]));
-        }
-
-        if (module === 'core' && action === 'createGame') {
-            self.createGame.apply(self, args);
-        }
-        else {
-            self.actions[module][action].apply(null, args);
-        }
-    });
-
-    this.on('dataReceive', function (message) {
-        //util.log('GameEngine received data request: ' + message);
-        var data = message.data,
-            client = message.client;
-
-        if (data === 'modules') {
-            // The client is asking for the list of all modules
-            client.send({
-                'modules': this.getModules()
-            });
-        }
-    });
-    return this;
 };
 
 /**

@@ -1,13 +1,13 @@
 /**
  * Test cases for core.GameEngine class.
  *
- * Requires node.js and it's nodeunit module.
+ * Requires node.js and its nodeunit module.
  * To run those tests: nodeunit tests
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
-var path = require('path'),
-    config = require('config');
+var path = require('path');
+var config = require('config');
 
 var GameEngine = require('../lib/game-engine');
 

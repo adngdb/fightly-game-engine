@@ -83,6 +83,11 @@ define(function (require) {
                 expect(data).to.have.length(2);
                 expect(data[1]).to.deep.equal({a: 13});
             });
+
+            it('should be able to receive a player id', function () {
+                var F = new fightly(config);
+                F.init();
+            });
         });
 
         describe('#loadModules()', function () {

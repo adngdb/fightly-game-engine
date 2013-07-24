@@ -34,6 +34,8 @@ function Client(id, socket, emitter) {
         util.log('Received data request');
         self.receiveData.apply(self, arguments);
     });
+
+    this.emitter.emit('newPlayer', this);
 };
 
 /**
@@ -50,6 +52,7 @@ Client.prototype.send = function(msg) {
  * @param msg: message receiced
  */
 Client.prototype.receiveAction = function(action) {
+    util.log('Action received: ' + util.inspect(action));
     var message = {
         "action": action,
         "client": this

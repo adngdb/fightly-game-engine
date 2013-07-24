@@ -27,6 +27,8 @@ define([
         // modules asynchronous loading
         this.loading = 0;
         this.loaded = 0;
+
+        this.identity = null;
     }
 
     util.inherit(Fightly, cem.ComponentEntityManager);
@@ -54,6 +56,10 @@ define([
         this.on('data', function (data) {
             if (data.hasOwnProperty('modules')) {
                 self.loadModules(data.modules);
+            }
+            else if (data.hasOwnProperty('identity')) {
+                self.identity = data.identity;
+                console.log('My identity is ', self.identity);
             }
         });
 
@@ -119,7 +125,7 @@ define([
     };
 
     Fightly.prototype.createGame = function () {
-        this.server.action('createGame');
+        this.actions.core.createGame(this.identity);
     };
 
     return Fightly;
