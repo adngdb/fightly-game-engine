@@ -14,6 +14,14 @@ if (typeof define !== 'function') {
 
 define(function () {
     var actions = {
+        createGame: {
+            check: function(player) {
+                return !player.inGame;
+            },
+            execute: function(player) {
+                // This is a special action handled by the game engine.
+            }
+        },
         joinGame: {
             check: function(game, player) {
                 return game.players.length < game.maxNumberOfPlayers;

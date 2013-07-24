@@ -201,7 +201,9 @@ exports['create-game'] = function (test) {
     var myGE = new GameEngine(config.core);
     myGE.init();
 
-    var game = myGE.createGame();
+    var player = myGE.e('Player');
+    myGE.createGame(player);
+    var game = player.inGame;
 
     test.equal(game.currentTurn, 0);
 

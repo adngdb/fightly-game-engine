@@ -57,8 +57,8 @@ define([
             }
         });
 
-        this.on('modules-loaded', function () {
-            //!TODO
+        this.on('modulesLoaded', function () {
+            this.emit('ready');
         });
     };
 
@@ -69,7 +69,7 @@ define([
         function moduleLoaded() {
             self.loaded++;
             if (self.loading === self.loaded) {
-                self.emit('modules-loaded');
+                self.emit('modulesLoaded');
             }
         }
 
@@ -116,6 +116,10 @@ define([
                 callback();
             }
         });
+    };
+
+    Fightly.prototype.createGame = function () {
+        this.server.action('createGame');
     };
 
     return Fightly;

@@ -16,31 +16,33 @@ define(function (require) {
     }
 
     describe('Fightly', function () {
-        it('should create correctly', function () {
+        it('should have config', function () {
             var F = new fightly(config);
             expect(F.config.network.host).to.equal('localhost');
         });
 
-        it('should have emitter methods', function () {
-            var F = new fightly(config);
-            expect(F.emit).to.exist;
-            expect(F.on).to.exist;
-            expect(F.off).to.exist;
-        });
+        describe('inheritance', function () {
+            it('should have emitter methods', function () {
+                var F = new fightly(config);
+                expect(F.emit).to.exist;
+                expect(F.on).to.exist;
+                expect(F.off).to.exist;
+            });
 
-        it('should have ComponentEntityManager methods', function () {
-            var F = new fightly(config);
-            expect(F.addActions).to.exist;
-            expect(F.actions).to.exist;
-        });
+            it('should have ComponentEntityManager methods', function () {
+                var F = new fightly(config);
+                expect(F.addActions).to.exist;
+                expect(F.actions).to.exist;
+            });
 
-        it('should have ActionManager methods', function () {
-            var F = new fightly(config);
-            expect(F.c).to.exist;
-            expect(F.addComponent).to.exist;
-            expect(F.e).to.exist;
-            expect(F.createEntity).to.exist;
-            expect(F.get).to.exist;
+            it('should have ActionManager methods', function () {
+                var F = new fightly(config);
+                expect(F.c).to.exist;
+                expect(F.addComponent).to.exist;
+                expect(F.e).to.exist;
+                expect(F.createEntity).to.exist;
+                expect(F.get).to.exist;
+            });
         });
 
         describe('#listen()', function () {
@@ -97,7 +99,7 @@ define(function (require) {
                 };
                 F.emit('data', { 'modules': modules });
 
-                F.on('modules-loaded', function () {
+                F.on('modulesLoaded', function () {
                     // actions
                     expect(F.actions).to.exist;
                     expect(F.actions.core).to.exist;
@@ -111,5 +113,4 @@ define(function (require) {
             });
         });
     });
-
 });

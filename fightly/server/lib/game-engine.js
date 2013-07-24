@@ -197,20 +197,27 @@ GameEngine.prototype.getModules = function() {
  * @return this.
  */
 GameEngine.prototype._initEventsListeners = function() {
+    var self = this;
+
     // Execute an action
     this.on('actionReceive', function(data) {
-        var client = data.client,
-            module = data.action.module,
-            action = data.action.name,
-            params = data.action.args,
-            args = [];
+        var client = data.client;
+        var module = data.action.module;
+        var action = data.action.name;
+        var params = data.action.args;
+        var args = [];
 
         for (var e in params) {
-            args.push(this.get(params[e]));
+            args.push(self.get(params[e]));
         }
 
-        this.actions[module][action].apply(null, args);
-    }.bind(this));
+        if (module === 'core' && action === 'createGame') {
+            self.createGame.apply(self, args);
+        }
+        else {
+            self.actions[module][action].apply(null, args);
+        }
+    });
 
     this.on('dataReceive', function (message) {
         //util.log('GameEngine received data request: ' + message);
@@ -232,10 +239,11 @@ GameEngine.prototype._initEventsListeners = function() {
  *
  * @return object A Game entity.
  */
-GameEngine.prototype.createGame = function() {
+GameEngine.prototype.createGame = function(player) {
     var newGame = this.e('Game');
     this.games[newGame.id] = newGame;
-    return newGame;
+
+    this.actions.core.joinGame(newGame, player);
 };
 
 module.exports = GameEngine;
