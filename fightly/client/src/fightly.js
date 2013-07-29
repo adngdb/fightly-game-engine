@@ -59,7 +59,6 @@ define([
             }
             else if (data.hasOwnProperty('identity')) {
                 self.identity = data.identity;
-                console.log('My identity is ', self.identity);
             }
         });
 

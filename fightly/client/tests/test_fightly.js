@@ -16,12 +16,13 @@ define(function (require) {
     }
 
     describe('Fightly', function () {
-        it('should have config', function () {
-            var F = new fightly(config);
-            expect(F.config.network.host).to.equal('localhost');
-        });
 
-        describe('inheritance', function () {
+        describe('#Fightly()', function () {
+            it('should have config', function () {
+                var F = new fightly(config);
+                expect(F.config.network.host).to.equal('localhost');
+            });
+
             it('should have emitter methods', function () {
                 var F = new fightly(config);
                 expect(F.emit).to.exist;
@@ -87,6 +88,10 @@ define(function (require) {
             it('should be able to receive a player id', function () {
                 var F = new fightly(config);
                 F.init();
+
+                F.emit('data', {identity: {id: 42}});
+                expect(F.identity).to.exist;
+                expect(F.identity.id).to.equal(42);
             });
         });
 
@@ -115,6 +120,26 @@ define(function (require) {
 
                     done();
                 });
+            });
+        });
+
+        describe('events', function () {
+            it('should emit the "ready" event', function (done) {
+                var F = new fightly(config);
+                F.init();
+
+                var modules = {
+                    core: [
+                        'actions.js',
+                        'game.js',
+                        'player.js',
+                    ]
+                };
+                F.emit('data', { 'modules': modules });
+
+                F.on('ready', function() {
+                    done();
+                })
             });
         });
     });
