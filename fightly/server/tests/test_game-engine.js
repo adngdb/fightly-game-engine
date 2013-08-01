@@ -203,7 +203,7 @@ exports['create-game'] = function (test) {
 
     var player = myGE.e('Player');
     myGE.createGame(player);
-    var game = player.inGame;
+    var game = player.game;
 
     test.equal(game.currentTurn, 0);
 

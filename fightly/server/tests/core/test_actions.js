@@ -24,14 +24,14 @@ exports['join-game'] = function (test) {
 
     test.equal(g.players.length, 0);
 
-    test.ok(myGE.actions.core.joinGame(g, p1));
+    test.ok(myGE.actions.core.joinGame(p1, g));
     test.equal(g.players.length, 1);
 
-    test.ok(myGE.actions.core.joinGame(g, p2));
+    test.ok(myGE.actions.core.joinGame(p2, g));
     test.equal(g.players.length, 2);
 
     // Test the maximum number of players cannot be passed
-    test.ok(!myGE.actions.core.joinGame(g, p3));
+    test.ok(!myGE.actions.core.joinGame(p3, g));
     test.equal(g.players.length, 2);
 
     test.done();
@@ -48,11 +48,11 @@ exports['next-turn'] = function (test) {
     g.players.push(p1);
     g.players.push(p2);
     g.activePlayer = p1;
-    p1.inGame = p2.inGame = g;
+    p1.game = p2.game = g;
 
     test.equal(g.currentTurn, 0);
 
-    test.ok(myGE.actions.core.nextTurn(g, p1));
+    test.ok(myGE.actions.core.nextTurn(p1));
     test.equal(g.currentTurn, 1);
     test.equal(g.activePlayer.id, p2.id);
 
