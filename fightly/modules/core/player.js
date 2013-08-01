@@ -19,7 +19,7 @@ define(function () {
      * @constructor
      */
     var Player = {
-        'inGame': null,
+        game: null,
     };
 
     return {

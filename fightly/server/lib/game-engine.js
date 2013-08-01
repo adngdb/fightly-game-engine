@@ -251,7 +251,7 @@ GameEngine.prototype.createGame = function(player) {
     var newGame = this.e('Game');
     this.games[newGame.id] = newGame;
 
-    this.actions.core.joinGame(newGame, player);
+    this.actions.core.joinGame(player, newGame);
 };
 
 module.exports = GameEngine;

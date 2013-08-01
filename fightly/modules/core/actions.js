@@ -16,26 +16,27 @@ define(function () {
     var actions = {
         createGame: {
             check: function(player) {
-                return !player.inGame;
+                return !player.game;
             },
             execute: function(player) {
                 // This is a special action handled by the game engine.
             }
         },
         joinGame: {
-            check: function(game, player) {
+            check: function(player, game) {
                 return game.players.length < game.maxNumberOfPlayers;
             },
-            execute: function(game, player) {
+            execute: function(player, game) {
                 game.players.push(player);
-                player.inGame = game;
+                player.game = game;
             }
         },
         nextTurn: {
-            check: function(game, player) {
-                return game.isPlayerActive(player);
+            check: function(player) {
+                return player.game.isPlayerActive(player);
             },
-            execute: function(game, player) {
+            execute: function(player) {
+                var game = player.game;
                 game.currentTurn += 1;
                 game.activePlayer = game.players[game.currentTurn % game.players.length];
             }
