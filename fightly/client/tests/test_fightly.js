@@ -115,6 +115,19 @@ define(function (require) {
                     expect(F.actions.core).to.exist;
                     expect(F.actions.core.joinGame).to.exist;
 
+                    // test calling an action
+                    var action = null;
+                    F.server.action = function (act) {
+                        action = act;
+                    }
+                    F.actions.core.createGame({id: 1});
+
+                    expect(action).to.deep.equal({
+                        module: 'core',
+                        name: 'createGame',
+                        args: [1]
+                    });
+
                     // components
                     expect(F.getComponentsList()).to.deep.equal(['obj', 'Game', 'Player']);
 
@@ -144,3 +157,4 @@ define(function (require) {
         });
     });
 });
+

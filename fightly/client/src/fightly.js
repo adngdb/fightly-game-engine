@@ -70,6 +70,7 @@ define([
     Fightly.prototype.loadModules = function (modules) {
         var self = this;
 
+        this.loaded = 0;
         this.loading = 0;
         function moduleLoaded() {
             self.loaded++;
@@ -80,9 +81,11 @@ define([
 
         for (var moduleName in modules) {
             var module = modules[moduleName];
-            for (var i in module) {
+            var l = module.length;
+            this.loading += l;
+
+            for (var i = 0; i < l; i++) {
                 var file = module[i];
-                this.loading++;
 
                 if (file === "actions.js") {
                     this.loadActions(file, moduleName, moduleLoaded);
@@ -96,10 +99,24 @@ define([
     Fightly.prototype.loadActions = function (file, moduleName, callback) {
         var self = this;
 
+        function execute() {
+            var params = [];
+
+            for (var i = 0, l = arguments.length; i < l; i++) {
+                params.push(arguments[i].id);
+            }
+
+            self.server.action({
+                module: this.module,
+                name: this.actionName,
+                args: params
+            });
+        }
+
         // load the actions of a given module
         var fileUrl = this.config.modules.baseUrl + moduleName + "/" + file;
         require([fileUrl], function (actions) {
-            self.addActions(moduleName, actions.actions);
+            self.addActions(moduleName, actions.actions, execute);
 
             if (callback) {
                 callback();
