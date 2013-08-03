@@ -27,11 +27,9 @@ function Client(id, socket, emitter) {
         self.disconnect.apply(self, arguments);
     });
     this.socket.on('action', function() {
-        util.log('Received action request');
         self.receiveAction.apply(self, arguments);
     });
     this.socket.on('data', function() {
-        util.log('Received data request');
         self.receiveData.apply(self, arguments);
     });
 
@@ -52,7 +50,6 @@ Client.prototype.send = function(msg) {
  * @param msg: message receiced
  */
 Client.prototype.receiveAction = function(action) {
-    util.log('Action received: ' + util.inspect(action));
     var message = {
         "action": action,
         "client": this
@@ -65,7 +62,6 @@ Client.prototype.receiveAction = function(action) {
  * @param msg: message receiced
  */
 Client.prototype.receiveData = function(data) {
-    util.log("Data received: " + data);
     var message = {
         "data": data,
         "client": this
@@ -78,7 +74,6 @@ Client.prototype.receiveData = function(data) {
  *
  */
 Client.prototype.disconnect = function() {
-    //~ util.log("Connection " + this.id + " has closed");
     this.emitter.emit('clientDisconnect', this);
 };
 

@@ -85,7 +85,7 @@ define(function (require) {
                 expect(data[1]).to.deep.equal({a: 13});
             });
 
-            it('should be able to receive a player id', function () {
+            it('should be able to receive an identity', function () {
                 var F = new fightly(config);
                 F.init();
 
@@ -157,4 +157,3 @@ define(function (require) {
         });
     });
 });
-
