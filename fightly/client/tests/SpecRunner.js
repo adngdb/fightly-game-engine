@@ -18,6 +18,7 @@ require(['require', 'chai', 'mocha'], function(require, chai) {
 
     require([
         'tests/test_fightly',
+        'tests/test_messager',
     ], function(require) {
         mocha.run();
     });

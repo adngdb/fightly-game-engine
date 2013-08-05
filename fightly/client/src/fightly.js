@@ -8,13 +8,14 @@
  **********************************************************************/
 
 define([
+    'messager',
     'network',
     'util',
     'vendor/component-entity/component-entity-manager',
     'vendor/action-manager/action-manager',
     'lib/microevent',
 ], function (
-    network, util, cem, am, microevent
+    messager, network, util, cem, am, microevent
 ) {
     "use strict";
 
@@ -24,11 +25,18 @@ define([
 
         this.config = config;
 
+        // create network connection
+        this.server = new network.ComManager(this.config.network, this);
+        this.messager = new messager.Messager(this);
+
         // modules asynchronous loading
         this.loading = 0;
         this.loaded = 0;
 
         this.identity = null;
+
+        // start listening for events
+        this.listen();
     }
 
     util.inherit(Fightly, cem.ComponentEntityManager);
@@ -38,11 +46,6 @@ define([
     microevent.mixin(Fightly);
 
     Fightly.prototype.init = function () {
-        // create network connection
-        this.server = new network.ComManager(this.config.network, this);
-
-        // start listening for events
-        this.listen();
     };
 
     Fightly.prototype.listen = function () {
@@ -54,12 +57,14 @@ define([
         });
 
         this.on('data', function (data) {
-            if (data.hasOwnProperty('modules')) {
-                self.loadModules(data.modules);
-            }
-            else if (data.hasOwnProperty('identity')) {
-                self.identity = data.identity;
-            }
+            self.messager.parse(data);
+        });
+
+        this.on('modulesData', function (modules) {
+            self.loadModules(modules);
+        });
+        this.on('identityData', function (identity) {
+            self.identity = identity;
         });
 
         this.on('modulesLoaded', function () {
@@ -100,17 +105,9 @@ define([
         var self = this;
 
         function execute() {
-            var params = [];
-
-            for (var i = 0, l = arguments.length; i < l; i++) {
-                params.push(arguments[i].id);
-            }
-
-            self.server.action({
-                module: this.module,
-                name: this.actionName,
-                args: params
-            });
+            self.server.action(
+                self.messager.action(this.module, this.actionName, arguments)
+            );
         }
 
         // load the actions of a given module

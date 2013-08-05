@@ -1,3 +1,12 @@
+/***********************************************************************
+ *
+ * Fightly - Web Game Engine
+ * http://fightly.com
+ *
+ * License: see LICENSE.txt
+ *
+ **********************************************************************/
+
 define(function (require) {
     var chai = require('chai');
     var expect = chai.expect;
