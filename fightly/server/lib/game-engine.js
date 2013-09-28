@@ -15,6 +15,8 @@ var events = require('events');
 var cem = require('../../vendor/component-entity/component-entity-manager');
 var am = require('../../vendor/action-manager/action-manager');
 
+var Game = require('./game');
+
 /**
  * Class GameEngine
  *
@@ -28,6 +30,11 @@ function GameEngine(config) {
 
     this.config = config;
     this.games = [];
+
+    // As every new Game object needs to be passed the actions and components,
+    // we cache them in those variables to avoid reloading them from files.
+    this.rawActions = {};
+    this.rawComponents = {};
 }
 
 util.inherits(GameEngine, cem.ComponentEntityManager);
@@ -40,8 +47,8 @@ util.inherits(GameEngine, events.EventEmitter);
  * @return this.
  */
 GameEngine.prototype.init = function() {
-    var pathToModules = this.config.modules.directory
-        , modules;
+    var pathToModules = this.config.modules.directory;
+    var modules;
 
     // initialize the GameEngine
 
@@ -77,16 +84,20 @@ GameEngine.prototype._initEventsListeners = function() {
         var params = data.action.args;
         var args = [];
 
-        for (var e in params) {
-            args.push(self.get(params[e]));
-        }
-
         if (module === 'core' && action === 'createGame') {
             // This is a special case handled by this game engine, as only
             // the game engine can create a new game.
-            self.createGame.apply(self, args);
+            self.createGame(client);
+        }
+        else if (module === 'core' && action === 'joinGame') {
+            // This is a special case handled by this game engine
+            self.joinGame(args[0], client);
         }
         else {
+            for (var e in params) {
+                args.push(self.get(params[e]));
+            }
+
             self.actions[module][action].apply(null, args);
         }
     });
@@ -102,6 +113,12 @@ GameEngine.prototype._initEventsListeners = function() {
                 'modules': this.getModules()
             });
         }
+        else if (data === 'games') {
+            // The client is asking for the list of all existing games
+            client.send({
+                'games': this.games
+            });
+        }
     });
     return this;
 };
@@ -113,9 +130,9 @@ GameEngine.prototype._initEventsListeners = function() {
  * @return this.
  */
 GameEngine.prototype._loadModulesActions = function(modules) {
-    var actionsFilePath
-        , actionsFile,
-        module;
+    var actionsFilePath;
+    var actionsFile;
+    var module;
 
     for (m in modules) {
         module = modules[m].split('/');
@@ -124,6 +141,8 @@ GameEngine.prototype._loadModulesActions = function(modules) {
         if (fs.existsSync(actionsFilePath)) {
             actionsFile = require('../' + actionsFilePath); // Sad hack...
             this.addActions(module, actionsFile.actions);
+            // Caching
+            this.rawActions[module] = actionsFile.actions;
         }
     }
     return this;
@@ -165,7 +184,9 @@ GameEngine.prototype._loadModulesComponents = function(modules) {
                 for (c in components) {
                     // Add this component to the GameEngine
                     this.c(c, components[c]);
-                    //util.log('Added component ' + c + ' to GameEngine');
+
+                    // Caching
+                    this.rawComponents[c] = components[c];
                 }
             }
         }
@@ -247,11 +268,39 @@ GameEngine.prototype.getModules = function() {
  *
  * @return object A Game entity.
  */
-GameEngine.prototype.createGame = function(player) {
-    var newGame = this.e('Game');
-    this.games[newGame.id] = newGame;
+GameEngine.prototype.createGame = function(client) {
+    // Create the new game
+    var newId = this.UID();
+    var newGame = new Game(newId);
+    this.games[newId] = newGame;
 
-    this.actions.core.joinGame(player, newGame);
+    // Copy actions and components
+    for (var a in this.rawActions) {
+        newGame.addActions(a, this.rawActions[a]);
+    }
+    for (var c in this.rawComponents) {
+        newGame.c(c, this.rawComponents[c]);
+    };
+
+    return this.joinGame(newId, client);
+};
+
+/**
+ * Add a player to an existing game.
+ *
+ * @return object A Game entity.
+ */
+GameEngine.prototype.joinGame = function(gameId, client) {
+    var game = this.games[gameId];
+
+    // Create a new player associated to the current client
+    var player = game.e('Player');
+    player._client = client;
+
+    game.addPlayer(player);
+    player.game = game;
+
+    return game;
 };
 
 module.exports = GameEngine;

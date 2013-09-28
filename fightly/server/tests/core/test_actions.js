@@ -13,30 +13,6 @@ var path = require('path'),
 var GameEngine = require('../../lib/game-engine');
 
 
-exports['join-game'] = function (test) {
-    var myGE = new GameEngine(config.core);
-    myGE.init();
-
-    var g = myGE.e('Game');
-    var p1 = myGE.e('Player');
-    var p2 = myGE.e('Player');
-    var p3 = myGE.e('Player');
-
-    test.equal(g.players.length, 0);
-
-    test.ok(myGE.actions.core.joinGame(p1, g));
-    test.equal(g.players.length, 1);
-
-    test.ok(myGE.actions.core.joinGame(p2, g));
-    test.equal(g.players.length, 2);
-
-    // Test the maximum number of players cannot be passed
-    test.ok(!myGE.actions.core.joinGame(p3, g));
-    test.equal(g.players.length, 2);
-
-    test.done();
-}
-
 exports['next-turn'] = function (test) {
     var myGE = new GameEngine(config.core);
     myGE.init();

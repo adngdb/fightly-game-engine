@@ -201,11 +201,26 @@ exports['create-game'] = function (test) {
     var myGE = new GameEngine(config.core);
     myGE.init();
 
-    var player = myGE.e('Player');
-    myGE.createGame(player);
-    var game = player.game;
+    var game = myGE.createGame({});
 
-    test.equal(game.currentTurn, 0);
+    test.equal(game.players.length, 1);
+
+    // Test that a player was created
+    test.equal(game.get('Player').length, 1);
+
+    test.done();
+}
+
+exports['join-game'] = function (test) {
+    var myGE = new GameEngine(config.core);
+    myGE.init();
+
+    var g = myGE.createGame({});
+
+    test.equal(g.players.length, 1);
+
+    test.ok(myGE.joinGame(g.id, {}));
+    test.equal(g.players.length, 2);
 
     test.done();
 }

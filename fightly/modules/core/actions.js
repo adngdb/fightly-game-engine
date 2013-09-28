@@ -15,20 +15,19 @@ if (typeof define !== 'function') {
 define(function () {
     var actions = {
         createGame: {
-            check: function(player) {
-                return !player.game;
+            check: function() {
+                return true;
             },
-            execute: function(player) {
+            execute: function() {
                 // This is a special action handled by the game engine.
             }
         },
         joinGame: {
-            check: function(player, game) {
-                return game.players.length < game.maxNumberOfPlayers;
+            check: function(game) {
+                return true;
             },
-            execute: function(player, game) {
-                game.players.push(player);
-                player.game = game;
+            execute: function(game) {
+                // This is a special action handled by the game engine.
             }
         },
         nextTurn: {
