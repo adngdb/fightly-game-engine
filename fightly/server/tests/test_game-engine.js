@@ -6,6 +6,7 @@
  *
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  */
+var util = require('util');
 var path = require('path');
 var config = require('config');
 
@@ -38,7 +39,7 @@ exports['get-modules'] = function (test) {
     test.equal(Object.keys(modules).length, 3);
 
     modulesExpected = {
-        'core': ['actions.js', 'position.js'],
+        'core': ['actions.js', 'player.js', 'position.js'],
         'map': ['actions.js', 'cell.js', 'map.js'],
         'unit': ['actions.js', 'unit.js'],
     };
@@ -151,12 +152,21 @@ exports['init'] = function (test) {
 exports['init-events-listeners'] = function (test) {
     var myGE = new GameEngine(config);
 
+    util.log('hello');
+
     myGE.init();
 
-    var unit1 = myGE.e('Unit'),
-        unit2 = myGE.e('Unit');
+    util.log('hello');
 
-    test.equal(typeof myGE.actions.unit.attack, 'function');
+    // Create a game
+    var game = myGE.createGame({});
+
+    util.log('hello');
+
+    var unit1 = game.e('Unit');
+    var unit2 = game.e('Unit');
+
+    test.equal(typeof game.actions.unit.attack, 'function');
     test.equal(unit1.life, 50);
     test.equal(unit2.life, 50);
 
@@ -164,11 +174,12 @@ exports['init-events-listeners'] = function (test) {
             'action': {
                 'module': 'unit',
                 'name': 'attack',
-                'args': [unit1.id, unit2.id]
+                'args': [game.id, unit1.id, unit2.id]
             },
             'client': 1
         };
 
+    // Emit to the game engine, and verify that it is passed to the game object
     myGE.emit('actionReceive', receivedAction);
 
     test.equal(unit1.life, 45);

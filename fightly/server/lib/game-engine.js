@@ -94,11 +94,14 @@ GameEngine.prototype._initEventsListeners = function() {
             self.joinGame(args[0], client);
         }
         else {
-            for (var e in params) {
-                args.push(self.get(params[e]));
+            var game = this.games[params[0]];
+
+            // The first parameter is the game itself.
+            for (var i = 1, ln = params.length; i < ln; i++) {
+                args.push(game.get(params[i]));
             }
 
-            self.actions[module][action].apply(null, args);
+            game.actions[module][action].apply(null, args);
         }
     });
 
