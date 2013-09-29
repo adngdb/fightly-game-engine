@@ -36,3 +36,36 @@ exports['test a new entity can be created'] = function (test) {
 
     test.done();
 }
+
+exports['test an `entityChanged` event sends a message to all clients'] = function (test) {
+    var game = new Game(0);
+    game.c('Player', {});
+
+    var count = 0;
+    function send() {
+        count++;
+    }
+
+    var p1 = game.e('Player');
+    p1._client = {
+        'send': send
+    }
+    game.addPlayer(p1);
+
+    var p2 = game.e('Player');
+    p2._client = {
+        'send': send
+    }
+    game.addPlayer(p2);
+
+    var p3 = game.e('Player');
+    p3._client = {
+        'send': send
+    }
+    game.addPlayer(p3);
+
+    game.emit('entityChanged', {entity: {}});
+    test.equal(count, 3);
+
+    test.done();
+}

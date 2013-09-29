@@ -41,6 +41,7 @@ function Client(id, socket, emitter) {
  * @param msg: JavaScript object (will be changed to JSON)
  */
 Client.prototype.send = function(msg) {
+    util.log('Sending ' + util.inspect(msg));
     msg = JSON.stringify(msg);
     this.socket.send(msg);
 };
@@ -76,5 +77,10 @@ Client.prototype.receiveData = function(data) {
 Client.prototype.disconnect = function() {
     this.emitter.emit('clientDisconnect', this);
 };
+
+Client.prototype.toJSON = function () {
+    // There is no need to send anything about the client object to clients.
+    return null;
+}
 
 exports.Client = Client;

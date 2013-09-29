@@ -12,6 +12,8 @@ var config = require('config');
 
 var GameEngine = require('../lib/game-engine');
 
+var client = { send: function () {} };
+
 exports['inherits'] = function (test) {
     var myGE = new GameEngine(config);
 
@@ -152,16 +154,10 @@ exports['init'] = function (test) {
 exports['init-events-listeners'] = function (test) {
     var myGE = new GameEngine(config);
 
-    util.log('hello');
-
     myGE.init();
 
-    util.log('hello');
-
     // Create a game
-    var game = myGE.createGame({});
-
-    util.log('hello');
+    var game = myGE.createGame(client);
 
     var unit1 = game.e('Unit');
     var unit2 = game.e('Unit');
@@ -212,7 +208,7 @@ exports['create-game'] = function (test) {
     var myGE = new GameEngine(config.core);
     myGE.init();
 
-    var game = myGE.createGame({});
+    var game = myGE.createGame(client);
 
     test.equal(game.players.length, 1);
 
@@ -226,11 +222,11 @@ exports['join-game'] = function (test) {
     var myGE = new GameEngine(config.core);
     myGE.init();
 
-    var g = myGE.createGame({});
+    var g = myGE.createGame(client);
 
     test.equal(g.players.length, 1);
 
-    test.ok(myGE.joinGame(g.id, {}));
+    test.ok(myGE.joinGame(g.id, client));
     test.equal(g.players.length, 2);
 
     test.done();
