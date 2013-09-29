@@ -79,7 +79,7 @@ Client.prototype.disconnect = function() {
 };
 
 Client.prototype.toJSON = function () {
-    // There is no need to send anything about the client object to clients.
+    // There is no need to send anything about the Client object to clients.
     return null;
 }
 

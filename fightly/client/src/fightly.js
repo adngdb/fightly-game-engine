@@ -51,28 +51,59 @@ define([
     Fightly.prototype.listen = function () {
         var self = this;
 
+        var gamesLoaded = false;
+        var modulesLoaded = false;
+
+        //== Network Events ==//
+
         this.on('connection', function () {
             // Require modules list from the server when we first connect
             self.server.data('modules');
+            // Require games list from the server
+            self.server.data('games');
         });
 
         this.on('data', function (data) {
             self.messager.parse(data);
         });
 
+        //== Messager Events ==//
+
+        // We received the list of modules.
         this.on('modulesData', function (modules) {
             self.loadModules(modules);
         });
-        this.on('identityData', function (identity) {
-            self.identity = identity;
+
+        // We received the list of games.
+        this.on('gamesData', function (games) {
+            self.games = games;
+
+            gamesLoaded = true;
+            if (modulesLoaded) {
+                this.emit('ready');
+            }
         });
 
+        // We received our own identity.
+        this.on('identityData', function (identity) {
+            self.identity = identity;
+
+            // This also means that we have joined a game!
+            this.emit('gameJoined');
+        });
+
+        // We received new data for an entity.
         this.on('entityData', function (entity) {
             self.updateEntity(entity);
         });
 
+        //== Internal Events ==//
+
         this.on('modulesLoaded', function () {
-            this.emit('ready');
+            modulesLoaded = true;
+            if (gamesLoaded) {
+                this.emit('ready');
+            }
         });
     };
 
@@ -139,10 +170,6 @@ define([
                 callback();
             }
         });
-    };
-
-    Fightly.prototype.createGame = function () {
-        this.actions.core.createGame(this.identity);
     };
 
     Fightly.prototype.updateEntity = function (newEntity) {

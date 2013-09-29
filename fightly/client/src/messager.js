@@ -18,6 +18,9 @@ define(function () {
         if (message.hasOwnProperty('modules')) {
             this.listener.emit('modulesData', message.modules);
         }
+        else if (message.hasOwnProperty('games')) {
+            this.listener.emit('gamesData', message.games);
+        }
         else if (message.hasOwnProperty('identity')) {
             this.listener.emit('identityData', message.identity);
         }
@@ -30,7 +33,9 @@ define(function () {
         var params = [];
 
         for (var i = 0, l = args.length; i < l; i++) {
-            params.push(args[i].id);
+            if (typeof args[i] === 'object') {
+                params.push(args[i].id);
+            }
         }
 
         return {

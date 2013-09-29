@@ -70,12 +70,6 @@ GameEngine.prototype.init = function() {
 GameEngine.prototype._initEventsListeners = function() {
     var self = this;
 
-    this.on('newPlayer', function (client) {
-        var player = this.e('Player');
-        client._player = player;
-        client.send({identity: player});
-    });
-
     // Execute an action
     this.on('actionReceive', function (data) {
         var client = data.client;
@@ -299,6 +293,7 @@ GameEngine.prototype.joinGame = function(gameId, client) {
     // Create a new player associated to the current client
     var player = game.e('Player');
     player._client = client;
+    client.send({identity: player});
 
     game.addPlayer(player);
     player.game = game;
