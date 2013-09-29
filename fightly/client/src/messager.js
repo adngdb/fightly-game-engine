@@ -21,6 +21,9 @@ define(function () {
         else if (message.hasOwnProperty('identity')) {
             this.listener.emit('identityData', message.identity);
         }
+        else if (message.hasOwnProperty('data')) {
+            this.listener.emit('entityData', message.data);
+        }
     };
 
     Messager.prototype.action = function (module, action, args) {

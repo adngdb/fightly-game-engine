@@ -39,19 +39,29 @@ define(function (require) {
                 expect(F.off).to.exist;
             });
 
-            it('should have ComponentEntityManager methods', function () {
+            it('should have ActionManager methods', function () {
                 var F = new fightly(config);
                 expect(F.addActions).to.exist;
                 expect(F.actions).to.exist;
             });
 
-            it('should have ActionManager methods', function () {
+            it('should have ComponentEntityManager methods', function () {
                 var F = new fightly(config);
                 expect(F.c).to.exist;
                 expect(F.addComponent).to.exist;
                 expect(F.e).to.exist;
                 expect(F.createEntity).to.exist;
                 expect(F.get).to.exist;
+            });
+
+            it('should be able to create an entity', function () {
+                var F = new fightly(config);
+                F.c('Fake', {});
+
+                var entity = F.e('Fake');
+                expect(entity).to.exist;
+                expect(F.get('Fake')).to.exist;
+                expect(F.get('Fake').length).to.equal(1);
             });
         });
 
@@ -145,6 +155,73 @@ define(function (require) {
             });
         });
 
+        describe('#updateEntity()', function () {
+            it('should create a new entity', function (done) {
+                var F = new fightly(config);
+                F.init();
+
+                var modules = {
+                    core: [
+                        'actions.js',
+                        'game.js',
+                        'player.js',
+                    ]
+                };
+                F.emit('data', { 'modules': modules });
+
+                F.on('ready', function() {
+                    expect(F.get('Player')).to.not.exist;
+
+                    var newEntity = {
+                        'id': 42,
+                        'type': ['obj', 'Player'],
+                        'game': null
+                    }
+                    F.updateEntity(newEntity);
+
+                    expect(F.get(42)).to.exist;
+                    expect(F.get('Player')).to.exist;
+                    expect(F.get('Player').length).to.equal(1);
+
+                    done();
+                });
+            });
+
+            it('should update the values of an entity', function (done) {
+                var F = new fightly(config);
+                F.init();
+
+                var modules = {
+                    core: [
+                        'actions.js',
+                        'game.js',
+                        'player.js',
+                    ]
+                };
+                F.emit('data', { 'modules': modules });
+
+                F.on('ready', function() {
+                    var player = F.e('Player');
+                    expect(F.get('Player').length).to.equal(1);
+                    expect(player.game).to.not.exist;
+
+                    var newEntity = {
+                        'id': player.id,
+                        'type': ['obj', 'Player'],
+                        'game': 12345
+                    }
+                    F.updateEntity(newEntity);
+
+                    expect(F.get(player.id)).to.exist;
+                    expect(F.get('Player').length).to.equal(1);
+
+                    expect(player.game).to.equal(12345);
+
+                    done();
+                });
+            });
+        });
+
         describe('events', function () {
             it('should emit the "ready" event', function (done) {
                 var F = new fightly(config);
@@ -161,7 +238,7 @@ define(function (require) {
 
                 F.on('ready', function() {
                     done();
-                })
+                });
             });
         });
     });

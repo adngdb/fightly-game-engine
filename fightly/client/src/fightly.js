@@ -67,6 +67,10 @@ define([
             self.identity = identity;
         });
 
+        this.on('entityData', function (entity) {
+            self.updateEntity(entity);
+        });
+
         this.on('modulesLoaded', function () {
             this.emit('ready');
         });
@@ -139,6 +143,22 @@ define([
 
     Fightly.prototype.createGame = function () {
         this.actions.core.createGame(this.identity);
+    };
+
+    Fightly.prototype.updateEntity = function (newEntity) {
+        var entity = this.get(newEntity.id);
+
+        if (!entity) {
+            // That entity doesn't exist yet, create it.
+            var args = [newEntity.id];
+            args = args.concat([newEntity.type]);
+            this.e.apply(this, args);
+        }
+        else {
+            for (var p in newEntity) {
+                entity[p] = newEntity[p];
+            }
+        }
     };
 
     return Fightly;
