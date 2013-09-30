@@ -78,10 +78,10 @@ define(function (require) {
                 };
 
                 F.emit('connection');
-                expect(count).to.equal(1);
+                expect(count).to.equal(2);
 
                 F.emit('connection');
-                expect(count).to.equal(2);
+                expect(count).to.equal(4);
             });
 
             it('should be able to receive a "data" event', function () {
@@ -168,6 +168,7 @@ define(function (require) {
                     ]
                 };
                 F.emit('data', { 'modules': modules });
+                F.emit('data', { 'games': [] });
 
                 F.on('ready', function() {
                     expect(F.get('Player')).to.not.exist;
@@ -199,6 +200,7 @@ define(function (require) {
                     ]
                 };
                 F.emit('data', { 'modules': modules });
+                F.emit('data', { 'games': [] });
 
                 F.on('ready', function() {
                     var player = F.e('Player');
@@ -235,6 +237,7 @@ define(function (require) {
                     ]
                 };
                 F.emit('data', { 'modules': modules });
+                F.emit('data', { 'games': [] });
 
                 F.on('ready', function() {
                     done();

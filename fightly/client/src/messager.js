@@ -36,6 +36,9 @@ define(function () {
             if (typeof args[i] === 'object') {
                 params.push(args[i].id);
             }
+            else {
+                params.push(args[i]);
+            }
         }
 
         return {

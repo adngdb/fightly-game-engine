@@ -231,3 +231,26 @@ exports['join-game'] = function (test) {
 
     test.done();
 }
+
+exports['test joining an existing game from a client event works'] = function (test) {
+    var myGE = new GameEngine(config.core);
+    myGE.init();
+
+    var g = myGE.createGame(client);
+    test.equal(g.players.length, 1);
+
+    var message = {
+        'action': {
+            'module': 'core',
+            'name': 'joinGame',
+            'args': [g.id],
+        },
+        'client': client
+    };
+
+    myGE.emit('actionReceive', message);
+
+    test.equal(g.players.length, 2);
+
+    test.done();
+}

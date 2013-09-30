@@ -41,7 +41,7 @@ function Client(id, socket, emitter) {
  * @param msg: JavaScript object (will be changed to JSON)
  */
 Client.prototype.send = function(msg) {
-    util.log('Sending ' + util.inspect(msg));
+    //util.log('Sending ' + util.inspect(msg));
     msg = JSON.stringify(msg);
     this.socket.send(msg);
 };
@@ -51,6 +51,7 @@ Client.prototype.send = function(msg) {
  * @param msg: message receiced
  */
 Client.prototype.receiveAction = function(action) {
+    //util.log('Received action ' + util.inspect(action));
     var message = {
         "action": action,
         "client": this

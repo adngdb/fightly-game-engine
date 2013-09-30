@@ -29,7 +29,7 @@ function GameEngine(config) {
     events.EventEmitter.call(this);
 
     this.config = config;
-    this.games = [];
+    this.games = {};
 
     // As every new Game object needs to be passed the actions and components,
     // we cache them in those variables to avoid reloading them from files.
@@ -85,7 +85,7 @@ GameEngine.prototype._initEventsListeners = function() {
         }
         else if (module === 'core' && action === 'joinGame') {
             // This is a special case handled by this game engine
-            self.joinGame(args[0], client);
+            self.joinGame(params[0], client);
         }
         else {
             var game = this.games[params[0]];
@@ -100,7 +100,6 @@ GameEngine.prototype._initEventsListeners = function() {
     });
 
     this.on('dataReceive', function (message) {
-        //util.log('GameEngine received data request: ' + message);
         var data = message.data;
         var client = message.client;
 
@@ -112,8 +111,13 @@ GameEngine.prototype._initEventsListeners = function() {
         }
         else if (data === 'games') {
             // The client is asking for the list of all existing games
+            var games = [];
+            for (var g in this.games) {
+                games.push(this.games[g]);
+            }
+
             client.send({
-                'games': this.games
+                'games': games
             });
         }
     });
