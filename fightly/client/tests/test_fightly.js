@@ -148,7 +148,7 @@ define(function (require) {
                     });
 
                     // components
-                    expect(F.getComponentsList()).to.deep.equal(['obj', 'Game', 'Player']);
+                    expect(F.getComponentsList().sort()).to.deep.equal(['obj', 'Game', 'Player'].sort());
 
                     done();
                 });
