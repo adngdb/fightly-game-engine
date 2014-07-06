@@ -23,6 +23,10 @@ define([
         cem.ComponentEntityManager.call(this);
         am.ActionManager.call(this);
 
+        // The engine should not be used until `this.ready` is true. A `ready`
+        // event is emitted when it becomes ready to use.
+        this.ready = false;
+
         this.config = config;
 
         // create network connection
@@ -77,10 +81,12 @@ define([
         // We received the list of games.
         this.on('gamesData', function (games) {
             self.games = games;
+            self.emit('gamesUpdated')
 
             gamesLoaded = true;
-            if (modulesLoaded) {
-                this.emit('ready');
+            if (modulesLoaded && !self.ready) {
+                self.ready = true;
+                self.emit('ready');
             }
         });
 
@@ -89,7 +95,7 @@ define([
             self.identity = identity;
 
             // This also means that we have joined a game!
-            this.emit('gameJoined');
+            self.emit('gameJoined');
         });
 
         // We received new data for an entity.
@@ -101,8 +107,9 @@ define([
 
         this.on('modulesLoaded', function () {
             modulesLoaded = true;
-            if (gamesLoaded) {
-                this.emit('ready');
+            if (gamesLoaded && !self.ready) {
+                self.ready = true;
+                self.emit('ready');
             }
         });
     };
@@ -186,6 +193,14 @@ define([
                 entity[p] = newEntity[p];
             }
         }
+    };
+
+    Fightly.prototype.refreshGames = function () {
+        this.server.data('games');
+    };
+
+    Fightly.prototype.refreshModules = function () {
+        this.server.data('modules');
     };
 
     return Fightly;
