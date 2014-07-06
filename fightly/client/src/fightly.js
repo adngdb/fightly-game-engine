@@ -49,9 +49,6 @@ define([
     // Make it an event emitter / listener
     microevent.mixin(Fightly);
 
-    Fightly.prototype.init = function () {
-    };
-
     Fightly.prototype.listen = function () {
         var self = this;
 

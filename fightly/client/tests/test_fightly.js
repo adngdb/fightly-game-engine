@@ -70,7 +70,6 @@ define(function (require) {
                 var F = new fightly(config);
                 var count = 0;
 
-                F.init();
 
                 // mock the server's data() method to increase counter
                 F.server.data = function () {
@@ -88,7 +87,6 @@ define(function (require) {
                 var F = new fightly(config);
                 var data = [];
 
-                F.init();
 
                 // mock the engine's loadModules() method to increase counter
                 F.loadModules = function (d) {
@@ -106,7 +104,6 @@ define(function (require) {
 
             it('should be able to receive an identity', function () {
                 var F = new fightly(config);
-                F.init();
 
                 F.emit('data', {identity: {id: 42}});
                 expect(F.identity).to.exist;
@@ -117,7 +114,6 @@ define(function (require) {
         describe('#loadModules()', function () {
             it('should load modules', function (done) {
                 var F = new fightly(config);
-                F.init();
 
                 var modules = {
                     core: [
@@ -158,7 +154,6 @@ define(function (require) {
         describe('#updateEntity()', function () {
             it('should create a new entity', function (done) {
                 var F = new fightly(config);
-                F.init();
 
                 var modules = {
                     core: [
@@ -190,7 +185,6 @@ define(function (require) {
 
             it('should update the values of an entity', function (done) {
                 var F = new fightly(config);
-                F.init();
 
                 var modules = {
                     core: [
@@ -227,7 +221,6 @@ define(function (require) {
         describe('events', function () {
             it('should emit the "ready" event', function (done) {
                 var F = new fightly(config);
-                F.init();
 
                 var modules = {
                     core: [
