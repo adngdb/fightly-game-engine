@@ -78,13 +78,14 @@ define([
         // We received the list of games.
         this.on('gamesData', function (games) {
             self.games = games;
-            self.emit('gamesUpdated')
 
             gamesLoaded = true;
             if (modulesLoaded && !self.ready) {
                 self.ready = true;
                 self.emit('ready');
             }
+
+            self.emit('gamesUpdated');
         });
 
         // We received our own identity.

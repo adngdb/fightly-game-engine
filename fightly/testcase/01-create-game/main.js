@@ -17,7 +17,7 @@ require(['fightly', 'config/config'], function (Fightly, config) {
             if (game) {
                 $('#games-list').append(
                     $('<li>')
-                        .append($('<span>', {text: game.id}))
+                        .append($('<span>', {text: game.id + ' - '}))
                         .append($('<span>', {text: game.players}))
                         .append($('<button>', {text: 'Join', id: game.id})
                             .data('game-id', game.id)

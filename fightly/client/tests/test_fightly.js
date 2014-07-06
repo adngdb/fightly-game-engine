@@ -236,6 +236,39 @@ define(function (require) {
                     done();
                 });
             });
+
+            it('should emit the "ready" event only once', function (done) {
+                var F = new fightly(config);
+                var readyCount = 0;
+                var gamesCount = 0;
+
+                var modules = {
+                    core: [
+                        'actions.js',
+                        'game.js',
+                        'player.js',
+                    ]
+                };
+
+                F.on('ready', function() {
+                    readyCount++;
+                    F.emit('data', { 'games': [] });
+                });
+
+                F.on('gamesUpdated', function() {
+                    gamesCount++;
+                    if (gamesCount === 3) {
+                        expect(readyCount).to.equal(1);
+                        done();
+                    }
+                    else if (gamesCount === 2) {
+                        F.emit('data', { 'games': [] });
+                    }
+                });
+
+                F.emit('data', { 'modules': modules });
+                F.emit('data', { 'games': [] });
+            });
         });
     });
 });
