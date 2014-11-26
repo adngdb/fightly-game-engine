@@ -65,9 +65,9 @@ That will create ``fightly/client/fightly.js`` which is a compiled version of th
 
 In ``main.js``:
 ```javascript
-require(['fightly'], function (fightly) {
+require(['fightly'], function (Fightly) {
     var config = {};
-    var F = new fightly(config);
+    var F = new Fightly(config);
     F.init();
 });
 ```
