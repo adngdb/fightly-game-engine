@@ -7,7 +7,7 @@
  *
  **********************************************************************/
 
-define(['lib/socket.io'], function (socket) {
+define(['socketio'], function (io) {
     "use strict";
 
     /**
@@ -27,10 +27,7 @@ define(['lib/socket.io'], function (socket) {
     ComManager.prototype = {
 
         init: function() {
-            var socket = io.connect(
-                this.config.host,
-                { port: this.config.port }
-            );
+            var socket = io('http://localhost:8091');
 
             socket.on('connect_failed', function () {
                 console.log('ERROR - Connection to the server failed');

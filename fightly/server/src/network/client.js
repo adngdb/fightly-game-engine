@@ -16,12 +16,12 @@ var util = require('util');
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
-function Client(id, socket, emitter) {
+function Client(id, socket, listener) {
     var self = this;
 
     this.id = id;
     this.socket = socket;
-    this.emitter = emitter;
+    this.listener = listener;
 
     this.socket.on('disconnect', function() {
         self.disconnect.apply(self, arguments);
@@ -33,7 +33,7 @@ function Client(id, socket, emitter) {
         self.receiveData.apply(self, arguments);
     });
 
-    this.emitter.emit('newPlayer', this);
+    this.listener.emit('newPlayer', this);
 };
 
 /**
@@ -56,7 +56,7 @@ Client.prototype.receiveAction = function(action) {
         "action": action,
         "client": this
     };
-    this.emitter.emit('actionReceive', message);
+    this.listener.emit('actionReceive', message);
 };
 
 /**
@@ -68,7 +68,7 @@ Client.prototype.receiveData = function(data) {
         "data": data,
         "client": this
     };
-    this.emitter.emit('dataReceive', message);
+    this.listener.emit('dataReceive', message);
 };
 
 /**
@@ -76,7 +76,7 @@ Client.prototype.receiveData = function(data) {
  *
  */
 Client.prototype.disconnect = function() {
-    this.emitter.emit('clientDisconnect', this);
+    this.listener.emit('clientDisconnect', this);
 };
 
 Client.prototype.toJSON = function () {

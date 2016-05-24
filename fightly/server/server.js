@@ -7,8 +7,8 @@
 
 var config = require('config');
 
-var network = require('./lib/network/com-manager'),
-    GameEngine = require('./lib/game-engine');
+var network = require('./src/network/com-manager'),
+    GameEngine = require('./src/game-engine');
 
 var engine = new GameEngine(config),
     server = new network.ComManager(engine);

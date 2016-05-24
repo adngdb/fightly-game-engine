@@ -10,7 +10,7 @@ var util = require('util');
 var path = require('path');
 var config = require('config');
 
-var GameEngine = require('../lib/game-engine');
+var GameEngine = require('../src/game-engine');
 
 var client = { send: function () {} };
 

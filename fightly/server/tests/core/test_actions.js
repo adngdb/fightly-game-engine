@@ -10,7 +10,7 @@ var path = require('path'),
     util = require('util'),
     config = require('config');
 
-var GameEngine = require('../../lib/game-engine');
+var GameEngine = require('../../src/game-engine');
 
 
 exports['next-turn'] = function (test) {

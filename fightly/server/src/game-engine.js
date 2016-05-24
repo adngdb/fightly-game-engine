@@ -54,7 +54,8 @@ GameEngine.prototype.init = function() {
 
     // Load modules' actions and components
     modules = this._getModulesList(pathToModules);
-    this._loadModulesComponents(modules)._loadModulesActions(modules);
+    this._loadModulesComponents(modules);
+    this._loadModulesActions(modules);
 
     // Listen to events
     this._initEventsListeners();
@@ -68,10 +69,8 @@ GameEngine.prototype.init = function() {
  * @return this.
  */
 GameEngine.prototype._initEventsListeners = function() {
-    var self = this;
-
     // Execute an action
-    this.on('actionReceive', function (data) {
+    this.on('actionReceive', (data) => {
         var client = data.client;
         var module = data.action.module;
         var action = data.action.name;
@@ -81,11 +80,11 @@ GameEngine.prototype._initEventsListeners = function() {
         if (module === 'core' && action === 'createGame') {
             // This is a special case handled by this game engine, as only
             // the game engine can create a new game.
-            self.createGame(client);
+            this.createGame(client);
         }
         else if (module === 'core' && action === 'joinGame') {
             // This is a special case handled by this game engine
-            self.joinGame(params[0], client);
+            this.joinGame(params[0], client);
         }
         else {
             var game = this.games[params[0]];
@@ -99,7 +98,7 @@ GameEngine.prototype._initEventsListeners = function() {
         }
     });
 
-    this.on('dataReceive', function (message) {
+    this.on('dataReceive', (message) => {
         var data = message.data;
         var client = message.client;
 

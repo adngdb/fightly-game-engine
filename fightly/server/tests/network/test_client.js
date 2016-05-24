@@ -9,7 +9,7 @@
 var util = require('util')
     , events = require('events');
 
-var client = require('../../lib/network/client');
+var client = require('../../src/network/client');
 
 // Mocking the Socket class
 var Socket = function() {

@@ -7,7 +7,7 @@
  *
  *****************************************************************************/
 
-var Game = require('../lib/game');
+var Game = require('../src/game');
 
 exports['test inheritance works'] = function (test) {
     var game = new Game(0);
