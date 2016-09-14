@@ -7,10 +7,13 @@
  *
  *****************************************************************************/
 
+(function (module) {
+"use strict";
+
 var util = require('util');
 var events = require('events');
+var EntityManager = require('ensy');
 
-var cem = require('../../vendor/component-entity/component-entity-manager');
 var am = require('../../vendor/action-manager/action-manager');
 
 /**
@@ -19,47 +22,45 @@ var am = require('../../vendor/action-manager/action-manager');
  * @author Adrian Gaudebert - adrian@gaudebert.fr
  * @constructor
  */
-function Game(id) {
-    this.id = id;
-    this.players = [];
+class Game extends events.EventEmitter {
+    constructor(id) {
+        super();
 
-    cem.ComponentEntityManager.call(this);
-    am.ActionManager.call(this);
-    events.EventEmitter.call(this);
+        this.id = id;
+        this.clients = [];
 
-    this._initEventsListeners();
+        this.manager = new EntityManager(this);
+        this.actions = new am.ActionManager();
+
+        this._initEventsListeners();
+    }
+
+    /**
+     * Create bindings for all events the game engine can handle.
+     *
+     * @return this.
+     */
+    _initEventsListeners() {
+        this.on('entityComponentUpdated', (entity, componentData) => {
+            for (var i = this.clients.length - 1; i >= 0; i--) {
+                // TODO: Send the component data as well.
+                this.clients[i].send({data: entity});
+            };
+        });
+    }
+
+    addClient(playerEntity, client) {
+        this.clients.push(client);
+    }
+
+    toJSON() {
+        return {
+            'id': this.id,
+            'players': this.clients.length,
+        };
+    }
 }
 
-util.inherits(Game, cem.ComponentEntityManager);
-util.inherits(Game, am.ActionManager);
-util.inherits(Game, events.EventEmitter);
-
-/**
- * Create bindings for all events the game engine can handle.
- *
- * @return this.
- */
-Game.prototype._initEventsListeners = function() {
-    var self = this;
-
-    this.on('entityChanged', function (object) {
-        var entity = object.entity;
-
-        for (var i = this.players.length - 1; i >= 0; i--) {
-            this.players[i]._client.send({data: entity});
-        };
-    });
-};
-
-Game.prototype.addPlayer = function (player) {
-    this.players.push(player);
-};
-
-Game.prototype.toJSON = function () {
-    return {
-        'id': this.id,
-        'players': this.players.length,
-    };
-};
-
 module.exports = Game;
+
+})(module);

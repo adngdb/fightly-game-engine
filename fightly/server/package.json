@@ -2,11 +2,12 @@
     "name": "FightlyGameEngine",
     "version": "0.0.2",
     "dependencies": {
-        "socket.io": "=1.4.6",
-        "config": "1.20.4",
-        "amdefine": ">=1.0.0"
+        "amdefine": "=1.0.0",
+        "config": "=1.20.4",
+        "ensy": "=1.2.0",
+        "socket.io": "=1.4.6"
     },
     "devDependencies": {
-        "nodeunit": "0.9.1"
+        "nodeunit": "=0.9.1"
     }
 }

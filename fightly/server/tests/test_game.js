@@ -13,13 +13,12 @@ exports['test inheritance works'] = function (test) {
     var game = new Game(0);
 
     // ComponentEntityManager
-    test.equal(typeof game.get, 'function');
-    test.equal(typeof game.addComponent, 'function');
-    test.equal(typeof game.createEntity, 'function');
+    test.equal(typeof game.manager.addComponent, 'function');
+    test.equal(typeof game.manager.createEntity, 'function');
 
     // ActionManager
-    test.equal(typeof game.addActions, 'function');
-    test.equal(typeof game.actions, 'object');
+    test.equal(typeof game.actions.addActions, 'function');
+    test.equal(typeof game.actions.actions, 'object');
 
     // EventEmitter
     test.equal(typeof game.addListener, 'function');
@@ -29,42 +28,42 @@ exports['test inheritance works'] = function (test) {
 
 exports['test a new entity can be created'] = function (test) {
     var game = new Game(0);
-    game.c('Player', {});
+    game.manager.addComponent('Player', {});
 
-    var player = game.e('Player');
-    test.ok(player);
+    var player = game.manager.createEntity(['Player']);
+    test.ok(player === 0);
 
     test.done();
 }
 
-exports['test an `entityChanged` event sends a message to all clients'] = function (test) {
+exports['test an `entityComponentUpdated` event sends a message to all clients'] = function (test) {
     var game = new Game(0);
-    game.c('Player', {});
+    game.manager.addComponent('Player', {});
 
     var count = 0;
     function send() {
         count++;
     }
 
-    var p1 = game.e('Player');
-    p1._client = {
+    var p1 = game.manager.createEntity(['Player']);
+    var c1 = {
         'send': send
     }
-    game.addPlayer(p1);
+    game.addClient(p1, c1);
 
-    var p2 = game.e('Player');
-    p2._client = {
+    var p2 = game.manager.createEntity(['Player']);
+    var c2 = {
         'send': send
     }
-    game.addPlayer(p2);
+    game.addClient(p2, c2);
 
-    var p3 = game.e('Player');
-    p3._client = {
+    var p3 = game.manager.createEntity(['Player']);
+    var c3 = {
         'send': send
     }
-    game.addPlayer(p3);
+    game.addClient(p3, c3);
 
-    game.emit('entityChanged', {entity: {}});
+    game.emit('entityComponentUpdated', 0, {});
     test.equal(count, 3);
 
     test.done();

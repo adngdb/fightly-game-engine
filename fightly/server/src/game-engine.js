@@ -94,7 +94,7 @@ GameEngine.prototype._initEventsListeners = function() {
                 args.push(game.get(params[i]));
             }
 
-            game.actions[module][action].apply(null, args);
+            game.actions.actions[module][action].apply(null, args);
         }
     });
 
@@ -276,10 +276,10 @@ GameEngine.prototype.createGame = function(client) {
 
     // Copy actions and components
     for (var a in this.rawActions) {
-        newGame.addActions(a, this.rawActions[a]);
+        newGame.actions.addActions(a, this.rawActions[a]);
     }
     for (var c in this.rawComponents) {
-        newGame.c(c, this.rawComponents[c]);
+        newGame.manager.addComponent(c, this.rawComponents[c]);
     };
 
     return this.joinGame(newId, client);
@@ -294,13 +294,10 @@ GameEngine.prototype.joinGame = function(gameId, client) {
     var game = this.games[gameId];
 
     // Create a new player associated to the current client
-    var player = game.e('Player');
-    player._client = client;
-    client.send({identity: player});
+    var playerEntity = game.manager.createEntity(['Player']);
+    game.addClient(playerEntity, client);
 
-    game.addPlayer(player);
-    player.game = game;
-
+    client.send({identity: playerEntity});
     return game;
 };
 

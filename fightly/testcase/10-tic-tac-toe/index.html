@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fightly TicTacToe</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <section id="loading">
+            <p>Loading... </p>
+            <p><img src="img/loader.gif" alt="loading... " /></p>
+        </section>
+
+        <section id="start">
+            <button>Play</button>
+        </section>
+
+        <section id="waiting">
+            <p>Waiting for an opponent... </p>
+            <p><img src="img/loader.gif" alt="loading... " /></p>
+        </section>
+
+        <section id="game">
+            <header>
+                <p id="player-status">Your turn</p>
+            </header>
+
+            <div>
+                <div id="cell-0-0"></div>
+                <div id="cell-0-1"></div>
+                <div id="cell-0-2"></div>
+            </div>
+            <div>
+                <div id="cell-1-0"></div>
+                <div id="cell-1-1"></div>
+                <div id="cell-1-2"></div>
+            </div>
+            <div>
+                <div id="cell-2-0"></div>
+                <div id="cell-2-1"></div>
+                <div id="cell-2-2"></div>
+            </div>
+        </section>
+
+        <script src="../shared/lib/jquery.js"></script>
+        <script src="../../client/lib/require.js" data-main="main.js"></script>
+    </body>
+</html>
